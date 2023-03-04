@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g id="vuesax_bulk_task-square" data-name="vuesax/bulk/task-square" transform="translate(-494 -317.97)">
+    <g id="task-square">
+      <path id="Vector" d="M14.19,0H5.81C2.17,0,0,2.17,0,5.81v8.38C0,17.83,2.17,20,5.81,20h8.38C17.83,20,20,17.83,20,14.19V5.81C20,2.17,17.83,0,14.19,0Z" transform="translate(494 317.97)" fill="currentColor" opacity="0.4"/>
+      <path id="Vector-2" data-name="Vector" d="M6.75.75A.749.749,0,0,1,6,1.5H.75A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0H6A.749.749,0,0,1,6.75.75Z" transform="translate(503.56 324.09)" fill="currentColor"/>
+      <path id="Vector-3" data-name="Vector" d="M4.285,1.277l-2.25,2.25a.742.742,0,0,1-.53.22.725.725,0,0,1-.53-.22l-.75-.75a.737.737,0,0,1,0-1.06.754.754,0,0,1,1.06,0l.22.22L3.225.218a.75.75,0,1,1,1.06,1.06Z" transform="translate(497.685 322.592)" fill="currentColor"/>
+      <path id="Vector-4" data-name="Vector" d="M6.75.75A.749.749,0,0,1,6,1.5H.75A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0H6A.749.749,0,0,1,6.75.75Z" transform="translate(503.56 331.09)" fill="currentColor"/>
+      <path id="Vector-5" data-name="Vector" d="M4.285,1.277l-2.25,2.25a.742.742,0,0,1-.53.22.725.725,0,0,1-.53-.22l-.75-.75a.737.737,0,0,1,0-1.06.754.754,0,0,1,1.06,0l.22.22L3.225.218a.75.75,0,1,1,1.06,1.06Z" transform="translate(497.685 329.592)" fill="currentColor"/>
+    </g>
+  </g>
+</svg>

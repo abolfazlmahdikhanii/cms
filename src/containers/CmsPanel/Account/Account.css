@@ -1,0 +1,84 @@
+.account-container{
+   margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.form-control {
+
+    display: flex;
+    align-items: center;
+    background-color: #374151;
+    border: 1px solid #475569;
+    padding: 1.2rem 2rem;
+    gap: 1.3rem;
+    border-radius: .5rem;
+
+}
+.col-grid{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1.5rem;
+}
+.form-control__row {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+}
+
+.form-control--email {
+
+
+    align-items: center;
+    justify-content: space-between;
+
+
+}
+
+.form-control__txt {
+    font-size: 1.5rem;
+    position: relative;
+    white-space: nowrap;
+    padding-left: 1.8rem;
+    text-transform: capitalize;
+    border-left: 2px solid rgb(209, 213, 219);
+
+}
+
+.form-control__input, .form-control__input--2 {
+    all: unset;
+    width: 100%;
+    font: inherit;
+    color: #fff;
+    box-sizing: border-box;
+
+}
+
+.form-control__input::placeholder {
+    font-size: 1.3rem;
+    text-transform: capitalize;
+}
+
+.form-err {
+    font-size: 1.1rem;
+    color: #f65;
+    margin: .5rem .8rem;
+    display: none;
+}
+
+.active-input {
+    display: block;
+}
+
+.btn-action{
+    background-color: #4f46e5;
+    transition: all .3s;
+    margin-top: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-action:hover{
+    background-color: #6366f1;
+}

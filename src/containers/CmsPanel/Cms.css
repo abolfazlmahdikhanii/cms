@@ -1,0 +1,24 @@
+.cms{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns:  25rem 1fr;
+    overflow: hidden;
+    background-color: var(--bg-dark-primary);
+}
+
+
+
+.main-panel{
+
+    background-color: var(--bg-dark-secondry);
+    height: 90vh;
+    overflow-y: scroll;
+    border-top-right-radius: 2rem;
+    padding: 4rem 3.7rem;
+    
+
+}
+.main-panel::-webkit-scrollbar{
+    display: none;
+}

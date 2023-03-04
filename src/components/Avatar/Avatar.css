@@ -1,0 +1,27 @@
+.avatar-img{
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    object-fit: cover;
+}
+.avatar-container{
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+.lbl-avatar{
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    font-size: 1.4rem;
+    color: #818cf8;
+    cursor: pointer;
+}
+.lbl-avatar__svg{
+    display: grid;
+    place-items: center;
+}
+.visually-hidden{
+    display: none;
+}

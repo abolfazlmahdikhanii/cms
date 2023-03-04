@@ -1,0 +1,17 @@
+.show-drowp-down {
+
+    display: block;
+}
+.drowp-down-status__list{
+    display: flex;
+    flex-direction: column;
+}
+.drowp-down__txt {
+    all: unset;
+    padding: 1.5rem 1.2rem;
+    cursor: pointer;
+}
+
+.profile-item:not(:last-child) .drowp-down__txt {
+    border-bottom: 1px solid #475569;
+}

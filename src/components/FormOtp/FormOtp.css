@@ -1,0 +1,72 @@
+.otp-grid {
+    width: 90%;
+    display: grid;
+
+
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+
+    
+
+
+}
+
+.otp {
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    gap: 1.8rem;
+    direction: ltr;
+
+}
+
+.input-otp {
+    text-align: center;
+   
+    width: 100% !important;
+    height: 100% !important;
+    margin-right: 0 !important;
+}
+
+.input-otp:invalid {
+    border: 1px solid;
+}
+
+.otp-container {
+
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 2.4rem;
+
+}
+
+.auth-form__form--2 {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    margin-top: 1rem;
+}
+.btn-resend{
+    all:unset;
+    font: inherit;
+    font-size: 1.2rem;
+    color: #93c5fd;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.resend-time{
+    font: "inherit";
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+    margin-top: 3rem;
+    color: #9ca3af;
+}

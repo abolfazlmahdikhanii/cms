@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="vuesax_bulk_note-favorite" data-name="vuesax/bulk/note-favorite" transform="translate(-108 -380)">
+    <g id="note-favorite">
+      <path id="Vector" d="M0,0H24V24H0Z" transform="translate(108 380)" fill="none" opacity="0"/>
+      <g id="Group">
+        <path id="Vector-2" data-name="Vector" d="M.75,4.5A.755.755,0,0,1,0,3.75v-3A.755.755,0,0,1,.75,0,.755.755,0,0,1,1.5.75v3A.755.755,0,0,1,.75,4.5Z" transform="translate(114.25 381.25)" fill="currentColor"/>
+      </g>
+      <g id="Group-2" data-name="Group">
+        <path id="Vector-3" data-name="Vector" d="M.75,4.5A.755.755,0,0,1,0,3.75v-3A.755.755,0,0,1,.75,0,.755.755,0,0,1,1.5.75v3A.755.755,0,0,1,.75,4.5Z" transform="translate(122.25 381.25)" fill="currentColor"/>
+      </g>
+      <path id="Vector-4" data-name="Vector" d="M18,5v8.5c0,3-1.5,5-5,5H5c-3.5,0-5-2-5-5V5C0,2,1.5,0,5,0h8C16.5,0,18,2,18,5Z" transform="translate(110 383.5)" fill="currentColor" opacity="0.4"/>
+      <g id="Group-3" data-name="Group">
+        <path id="Vector-5" data-name="Vector" d="M6.75,1.5h-6A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0h6A.755.755,0,0,1,7.5.75.755.755,0,0,1,6.75,1.5Z" transform="translate(114.25 390.25)" fill="currentColor"/>
+      </g>
+      <g id="Group-4" data-name="Group">
+        <path id="Vector-6" data-name="Vector" d="M3.75,1.5h-3A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0h3A.755.755,0,0,1,4.5.75.755.755,0,0,1,3.75,1.5Z" transform="translate(114.25 395.25)" fill="currentColor"/>
+      </g>
+      <path id="Vector-7" data-name="Vector" d="M8.5,1.13a5.228,5.228,0,0,0-6.53.03A5.211,5.211,0,0,0,.76,7.95,5.265,5.265,0,0,0,2.18,9.5,5.2,5.2,0,0,0,8.7,9.19,4.64,4.64,0,0,0,9.74,7.95a5.176,5.176,0,0,0,.76-2.7A5.23,5.23,0,0,0,8.5,1.13ZM5.25,7.75a2.5,2.5,0,0,0-2.5-2.5,2.5,2.5,0,0,0,2.5-2.5,2.5,2.5,0,0,0,2.5,2.5A2.5,2.5,0,0,0,5.25,7.75Z" transform="translate(120.5 392.5)" fill="#292d32"/>
+    </g>
+  </g>
+</svg>

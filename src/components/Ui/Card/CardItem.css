@@ -1,0 +1,34 @@
+.card{
+    display: flex;
+    gap: 1.7rem;
+    padding: 0 2.2rem;
+    cursor: pointer;
+
+}
+.card-icon{
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 1.2rem;
+  display: grid;
+  place-items: center;
+
+}
+
+.card-info{
+display: flex;
+flex-direction: column;
+gap: .4rem;
+}
+.card-info__title,
+.card-info__sub-title{
+    font-family: "yekan",sans-serif;
+}
+.card-info__title{
+
+    font-size: 1.8rem;
+    color: rgba(182,190,205,1);
+}
+.card-info__sub-title{
+font-size: 2.5rem;
+font-weight: bold;
+}

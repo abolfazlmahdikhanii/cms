@@ -1,0 +1,11 @@
+.navigation{
+    background-color: var(--bg-dark-primary);
+    padding: 2rem 1.5rem;
+    border-radius: .5rem;
+}
+@media (prefers-color-scheme: light) {
+    .navigation{
+        background-color: var(--bg-light-primary);
+
+    }
+}

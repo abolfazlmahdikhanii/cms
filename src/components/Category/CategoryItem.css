@@ -1,0 +1,31 @@
+.category-item{
+    display: flex;
+    height: 13.5rem;
+    width: 14rem;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1rem;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+    gap: 0.8rem;
+    overflow: hidden;
+    border-radius:1rem;
+   
+}
+.category-item--icon{
+    display: flex;
+    height: 75%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    --tw-text-opacity:  1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    border-radius: 0.75rem 0.75rem 60%;
+   
+}
+.category-item--title{
+font-size: 1.5rem;
+}

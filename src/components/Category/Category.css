@@ -1,0 +1,16 @@
+.category {
+    width: 95%;
+    z-index: 4;
+    position: relative;
+    margin: -5.4rem auto 0 auto;
+
+}
+
+.category-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: .9rem;
+    flex-wrap: wrap;
+    padding: 1rem 4rem;
+}

@@ -4,7 +4,7 @@ import BlogItem from "./BlogsItem";
 
 const Blogs=({blogs})=>{
     return(
-       <div>
+       <div className="blogs-content">
          {/* {
             blogs.map((item)=>{
                 return(

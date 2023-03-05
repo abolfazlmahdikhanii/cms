@@ -52,6 +52,7 @@ body {
   font-size: 1.6rem;
   font-weight: 400;
   direction: rtl;
+  background-color: rgb(14, 35, 56);
   background-image: linear-gradient(to top, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .15), hsla(0, 0%, 100%, 0));
 
 }

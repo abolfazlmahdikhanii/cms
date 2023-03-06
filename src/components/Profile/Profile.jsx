@@ -24,10 +24,14 @@ const Profile=(props)=>{
             const {data,error}=await supabase.auth.getUser()
             if(error) throw error
             const {user}=data
-           setUserProfile(data)
+            
+            
+           setUserProfile(user)
            setEmail(user.email);
            
        
+        
+           
      
         }
         catch(error){
@@ -43,7 +47,7 @@ const Profile=(props)=>{
     return(
        <>
          {
-            userProfile?
+            userProfile?.user||userProfile?.email?
             <div className="profile-login" 
             // on={() => setShowMenu(false)}
             ref={wrapperRef}

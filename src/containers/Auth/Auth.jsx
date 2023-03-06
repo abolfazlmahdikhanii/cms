@@ -42,7 +42,7 @@ const Auth = () => {
             setLoading(false);
         }
     };
-    const submitOtpHandler = (e) => {
+    const submitOtpHandler =async (e) => {
         e.preventDefault();
         const formData = [];
         const inputs = [e.target.elements];
@@ -55,17 +55,6 @@ const Auth = () => {
         const newToken = formData.join('');
         console.log(newToken);
         setToken(newToken);
-
-        varifyOtp();
-
-
-    };
-    const changePageHandler = () => {
-        setPage(true);
-
-    };
-
-    const varifyOtp = async () => {
         try {
 
             setLoading(true);
@@ -85,6 +74,7 @@ const Auth = () => {
 
         }
         catch (error) {
+           
             console.log(error.message);
 
 
@@ -92,6 +82,17 @@ const Auth = () => {
         finally {
             setLoading(false);
         }
+    
+
+
+    };
+    const changePageHandler = () => {
+        setPage(true);
+
+    };
+
+    const varifyOtp = async (token) => {
+       
     };
 
 

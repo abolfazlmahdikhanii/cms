@@ -1,29 +1,37 @@
-.profile-login{
+.profile-login {
   position: relative;
-}
-.profile,.btn-profile{
-  height: 100%;
-    text-decoration: none;
-    color: var(--color-secondry-light);
-    display: flex;
-  align-items: center;
-    gap: 1.2rem;
-    padding: .8rem 2.1rem;
-    border-radius: .7rem;
-    border:1px solid var(--bg-dark-tertiary);
-    background-color: var(--bg-dark-tertiary);
-    transition: all .3s;
-    
-}
-.profile:hover{
-    background-color: var(--bg-dark-hover);
+
 }
 
-.btn-profile{
+.profile-login .btn-profile {
+  height: 100%;
+}
+
+.profile, .btn-profile {
+
+  text-decoration: none;
+  color: var(--color-secondry-light);
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: .8rem 2.1rem;
+  border-radius: .7rem;
+  border: 1px solid var(--bg-dark-tertiary);
+  background-color: var(--bg-dark-tertiary);
+  transition: all .3s;
+
+}
+
+.profile:hover {
+  background-color: var(--bg-dark-hover);
+}
+
+.btn-profile {
   gap: .5rem;
   padding: .8rem 1.2rem;
 }
-.btn-profile:hover{
+
+.btn-profile:hover {
 
   background-color: #6366f1;
 }

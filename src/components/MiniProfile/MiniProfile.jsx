@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import "./MiniProfile.css";
 import profileIcon from "../../assets/profile.svg";
 import useSignOut from "../../hooks/useSignOut";
-
+import { supabase } from "../../superbase";
 
 
 const MiniProfile = (props) => {
 
+  
 
     return (
         <div className={`mini-profile-box ${props.show ? 'show-profile' : ''}`}>
@@ -109,7 +110,7 @@ const MiniProfile = (props) => {
                     </Link>
                 </li>
                 <li className="profile-item">
-                    <div className="profile-item__link" onClick={useSignOut}>
+                    <div className="profile-item__link" onClick={()=>supabase.auth.signOut()}>
                         <p className="mini-profile__svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                 <g id="vuesax_outline_task-square" data-name="vuesax/outline/task-square" transform="translate(-492 -316)">

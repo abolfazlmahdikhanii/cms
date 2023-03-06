@@ -10,7 +10,7 @@ const FormOtp = (props) => {
     const renderButton = (buttonProps) => {
         return (
             <p {...buttonProps}>
-                {buttonProps.remainingTime !== 0 ? ` ${buttonProps.remainingTime} ثانیه مانده برای دریافت کد مجدد` : <button className="btn-resend">دریافت کد مجدد</button>}
+                {buttonProps.remainingtime !== 0 ? ` ${buttonProps.remainingTime} ثانیه مانده برای دریافت کد مجدد` : <button className="btn-resend">دریافت کد مجدد</button>}
             </p>
         );
     };

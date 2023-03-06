@@ -5,6 +5,7 @@ import Category from "../../components/Category/Category";
 import Header from "../../components/Header/Header";
 import Slider from "../../components/Slider/Slider";
 import Wrapper from "../../hoc/Wrapper";
+import Aside from "../../components/Aside/Aside";
 
 
 const Home = () => {
@@ -33,7 +34,9 @@ const Home = () => {
                     <Blogs />
                 </main>
 
-                <aside className="blog-aside"></aside>
+                <aside className="blog-aside">
+                    <Aside/>
+                </aside>
             </section>
 
         </Wrapper>

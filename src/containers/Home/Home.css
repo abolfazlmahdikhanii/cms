@@ -3,7 +3,8 @@
     padding: 2rem 3rem;
     margin-top: 4rem;
     display: grid;
-    grid-template-columns: 1fr 35rem;
+    grid-template-columns: 1fr 39rem;
+    gap: 3.5rem;
 }
 
 .blog-list--title {

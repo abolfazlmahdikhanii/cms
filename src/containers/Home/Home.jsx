@@ -35,7 +35,8 @@ const Home = () => {
                 </main>
 
                 <aside className="blog-aside">
-                    <Aside/>
+                    <Aside type="viewst"/>
+                    <Aside type="controversial"/>
                 </aside>
             </section>
 

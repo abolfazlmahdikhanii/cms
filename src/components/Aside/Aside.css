@@ -8,8 +8,16 @@
     padding: .5rem .6rem;
     display: grid;
     place-items: center;
-    background-color: #ec4899;
+
     border-radius: 1rem;
+}
+
+.aside-icon__viewst {
+    background-color: #ec4899;
+}
+
+.aside-icon__controversial {
+    background-color: #f97316;
 }
 
 .aside-title__title {
@@ -28,15 +36,16 @@
 }
 
 .aside-item {
-    padding: 1.2rem;
+    padding: 1.2rem 0;
     display: flex;
     gap: 1.7rem;
     overflow: hidden;
     cursor: pointer;
-   
+
 }
-.aside-item:not(:last-child){
-     border-bottom: 1px solid #374151;
+
+.aside-item:not(:last-child) {
+    border-bottom: 1px solid #374151;
 }
 
 .aside-item--img {

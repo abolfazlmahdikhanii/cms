@@ -11,7 +11,9 @@ import Aside from "../../components/Aside/Aside";
 const Home = () => {
     return (
         <Wrapper>
-            <Header />
+            <Header >
+
+            </Header>
 
             <Slider />
             <Category />
@@ -35,8 +37,8 @@ const Home = () => {
                 </main>
 
                 <aside className="blog-aside">
-                    <Aside type="viewst"/>
-                    <Aside type="controversial"/>
+                    <Aside type="viewst" />
+                    <Aside type="controversial" />
                 </aside>
             </section>
 

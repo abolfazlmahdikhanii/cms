@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,useCallback} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import './Cms.css';
 import Wrapper from "../../hoc/Wrapper.jsx";
 import Navigation from "../../components/Navigation/Navigation.jsx";
@@ -11,7 +11,7 @@ import { supabase } from "../../superbase";
 import Account from "./Account/Account";
 
 
-const Cms = ({session}) => {
+const Cms = ({ session }) => {
     const [userData, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userName, setUserName] = useState("");
@@ -19,50 +19,61 @@ const Cms = ({session}) => {
     const [lastName, setLastName] = useState("");
     const [avatarUrl, setAvatarUrl] = useState(null);
 
+    const [date,setDate]=useState(null)
+    useEffect(()=>{
+        const now=new Date();
+        const formatDate=new Intl.DateTimeFormat("fa",{
+            day: "numeric",
+            year: "numeric",
+            month: "long",
+            weekday: "long",
 
-    useEffect(() => {
+        }).format(now)
+        setDate(formatDate)
+   
+   
 
 
         showUserName();
 
-  
+
     }, []);
 
-    const showUserName = useCallback(async() => {
-      
+    const showUserName = useCallback(async () => {
 
-            try {
-    
 
-                const { user } = session;
-    
-      setLoading(false)
-    
-                let { data, error, status } = await supabase
-                    .from("profiles")
-                    .select(`username,firstName,lastName,avatar_url`)
-                    .eq('id', user.id)
-                    .single();
-                
-    
-                if (error && status !== 406) {
-                    throw error;
-                }
-                if (data) {
-                    setUserName(data.username);
-                    setFirstName(data.firstName);
-                    setLastName(data.lastName);
-                    setAvatarUrl(data.avatar_url);
-                }
+        try {
+
+
+            const { user } = session;
+
+            setLoading(false);
+
+            let { data, error, status } = await supabase
+                .from("profiles")
+                .select(`username,firstName,lastName,avatar_url`)
+                .eq('id', user.id)
+                .single();
+
+
+            if (error && status !== 406) {
+                throw error;
             }
-            catch(error){
-                setLoading(true)
-                console.log(error);
-                
+            if (data) {
+                setUserName(data.username);
+                setFirstName(data.firstName);
+                setLastName(data.lastName);
+                setAvatarUrl(data.avatar_url);
             }
-        
+        }
+        catch (error) {
+            setLoading(true);
+            console.log(error);
+
+        }
+
     }, []);
-    
+
     const getSession = async () => {
         try {
             const { data, error } = await supabase.auth.getUser();
@@ -76,7 +87,7 @@ const Cms = ({session}) => {
 
         }
     };
-  
+
 
     return (
         <Wrapper>
@@ -88,7 +99,15 @@ const Cms = ({session}) => {
                         <Navigation />
 
                         <section className="center-panel">
-                            <Header user={userName} fullName={firstName + lastName}/>
+                            <Header  fullName={firstName + lastName}>
+                                <p className="header-right__title  header-right__txt">
+                                    {userName} عزیز; خوش آمدی. 👋
+                                </p>
+                                <i className="header-right__border"></i>
+                                <p className="header-right__date header-right__txt">
+                                    {date}
+                                </p>
+                            </Header>
 
 
                             <main className="main-panel">

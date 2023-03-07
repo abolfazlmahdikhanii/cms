@@ -3,7 +3,7 @@ import {supabase} from "../../superbase.jsx";
 import Loader from "../Ui/Loader/Loader.jsx";
 import "./Uploader.css"
 
-const Uploader=({url,size,onUpload})=>{
+const Uploader=({url,size,onUpload,id})=>{
     const [blogUrl, setBlogUrl] = useState(null)
     const [uploading, setUploading] = useState(false)
     useEffect(() => {
@@ -70,12 +70,13 @@ const Uploader=({url,size,onUpload})=>{
             ) : (
                 <>
 
-                <label className="file-upload__lbl" htmlFor="single">
+                <label className="file-upload__lbl" htmlFor={`single${id}`}>
 
                         <input
                             className="file-upload__input"
                             type="file"
-                            id="single"
+                            multiple
+                            id={`single${id}`}
                             accept="image/*"
                             onChange={(e)=>uploadBlogImg(e)}
                             disabled={uploading}

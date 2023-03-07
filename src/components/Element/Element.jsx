@@ -3,7 +3,7 @@ import Avatar from "../Avatar/Avatar";
 import Uploader from "../Uploader/Uploader";
 import "./Element.css"
 
-const Element = ({type,change,url}) => {
+const Element = ({type,change,url,id}) => {
     const [values, setValues] = useState({
         "title":'',
         "paragraph":'',
@@ -38,10 +38,10 @@ e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
     let element=null
     switch (type) {
         case "img":
-              element=<Uploader url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
+              element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
             break
         case "imgCover":
-              element=<Uploader url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
+              element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
             break
         case "title":
             element=<input autoFocus type="text" className="title content__input" value={values.title} onChange={(e)=>{changeValueHandler(e,"title")}}  />

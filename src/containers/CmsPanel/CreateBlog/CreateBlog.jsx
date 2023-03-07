@@ -9,6 +9,7 @@ const CreateBlog = (props) => {
     const [element, setElement] = useState([]);
     const [img, setImg] = useState([]);
     const [status, setStatus] = useState("draft");
+    const [title, setTitle] = useState("");
     const [showMenu, setshowMenu] = useState(false);
     const [content, setContent] = useState([]);
     const [tag, setTag] = useState([]);
@@ -17,12 +18,15 @@ const CreateBlog = (props) => {
     const [type, setType] = useState("");
     const data = [];
 
+   
+    
     const formHandler = (e) => {
         e.preventDefault();
     };
     const submitFormHandler = async (e) => {
         e.preventDefault();
 
+        const {user}=props.user
         for (const item of element) {
             if (item.value !== "" && 'value' in item) {
 
@@ -50,12 +54,19 @@ const CreateBlog = (props) => {
 
         setContent(unique);
 
+      
+        
 
-        const { error } = await supabase.from("blogs").insert({ post_content: content, post_status: status, post_author: props.user.id, post_tags: tag, comment_status: commentStatus, post_type: type });
+        try {
+            const { error } = await supabase.from("blogs").insert({post_title:title, post_content: content, post_status: status, post_author:user.id,post_tags: tag, comment_status: commentStatus, post_type: type });
 
         if (error) {
-            console.log(error);
+            throw error
 
+        }
+        } catch (error) {
+            console.log(error);
+            
         }
     };
     const submitFormTagHanlder = (e) => {
@@ -137,7 +148,10 @@ const CreateBlog = (props) => {
             <div action="#" className="form-blog" >
 
                 <Box>
-                    <input type="text" placeholder="عنوان مقاله را وارد نمایید" className="form-control__input form-control__input-title" />
+                    <input type="text" placeholder="عنوان مقاله را وارد نمایید" className="form-control__input form-control__input-title"
+                     onChange={(e)=>setTitle(e.target.value)}
+                     value={title}
+                    />
                 </Box>
 
                 {/* <Box>
@@ -247,7 +261,7 @@ const CreateBlog = (props) => {
                                 element.map((item, i) => {
 
                                     return (
-                                        <Element type={item.name} key={i} change={(e) => changeInputValueHandler(e, item.id, item.name)} />
+                                        <Element type={item.name} key={i} id={item.id} change={(e) => changeInputValueHandler(e, item.id, item.name)} />
                                     );
                                 })
                             }

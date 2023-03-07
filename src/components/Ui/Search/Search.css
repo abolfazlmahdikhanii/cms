@@ -1,0 +1,18 @@
+.form-control--search {
+
+    display: flex;
+    align-items: center;
+    background-color: #374151;
+
+    padding: .9rem 1.3rem;
+    gap: 1.3rem;
+    border-radius: .7rem;
+    width: 60rem;
+
+}
+
+.form-control--search__icon {
+    display: grid;
+    place-items: center;
+    color: #6b7280;
+}

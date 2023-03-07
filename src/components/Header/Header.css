@@ -1,4 +1,4 @@
-.header{
+.header {
     width: 100%;
     background-color: var(--bg-dark-primary);
     padding: 2.6rem 3.5rem;
@@ -6,29 +6,35 @@
     align-items: center;
     justify-content: space-between;
 }
-.header-left{
+
+.header-left {
     display: flex;
     align-items: stretch;
     gap: 1.5rem;
 }
 
-.header-right{
+.header-right {
     display: flex;
     align-items: center;
+    gap: 2rem;
 }
-.header-right__date{
+
+.header-right__date {
     font-size: 1.4rem;
     color: var(--color-secondry-light);
 
 }
-.header-right__border{
+
+.header-right__border {
 
     height: 2.4rem;
-    border-left: 1px solid rgba(152,163,184,0.3);;
+    border-left: 1px solid rgba(152, 163, 184, 0.3);
+    ;
     display: flex;
     margin: 0 2rem;
 }
-.header-right__title{
+
+.header-right__title {
     font-family: 'yekan', sans-serif;
     text-transform: lowercase;
     font-size: 2.2rem;

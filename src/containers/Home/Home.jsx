@@ -6,13 +6,15 @@ import Header from "../../components/Header/Header";
 import Slider from "../../components/Slider/Slider";
 import Wrapper from "../../hoc/Wrapper";
 import Aside from "../../components/Aside/Aside";
+import Search from "../../components/Ui/Search/Search";
 
 
 const Home = () => {
     return (
         <Wrapper>
             <Header >
-
+               <h1>digiblog</h1>
+               <Search/>
             </Header>
 
             <Slider />

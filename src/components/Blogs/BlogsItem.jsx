@@ -8,7 +8,7 @@ const BlogItem = (props) => {
   
    
   return (
-    <Link to={`/${props.id}`} className="blog-content" >
+    <Link to={`/article/${props.id}`} className="blog-content" >
       {/* img */}
       <div className="blog-content--img" dangerouslySetInnerHTML={{__html:props.img}}>
       

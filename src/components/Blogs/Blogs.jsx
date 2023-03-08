@@ -4,6 +4,7 @@ import BlogItem from "./BlogsItem";
 import { supabase } from "../../superbase";
 import useTranslatorCategory from "../../hooks/useTranslatetorCategory";
 import { useNavigate } from "react-router-dom";
+import useRelativeTime from "../../hooks/useRelativeTime";
 
 const Blogs=({blogs})=>{
     const [img, setImg] = useState([]);
@@ -14,10 +15,12 @@ const Blogs=({blogs})=>{
     const translator=useTranslatorCategory
     const [paragraph, setParagraph] = useState([]);
     const history=useNavigate()
+    const timeFormat=useRelativeTime
     useEffect(() => {
       
-        if (imgSrc) downloadImage(imgSrc);
+      
         filterPosts(blogs)
+        if (imgSrc) downloadImage(imgSrc);
         
     }, [blogs,imgSrc]);
     const downloadImage = async(path) => {
@@ -27,8 +30,10 @@ const Blogs=({blogs})=>{
             if (error) throw error;
 
         
+            const url= URL.createObjectURL(data)
+           console.log(url);
            
-            setAvatarUrl(data);
+            setAvatarUrl(url);
         }
         catch (error) {
             console.log(error.message);
@@ -87,19 +92,7 @@ const Blogs=({blogs})=>{
         
         setImgSrc(author?.avatar_url)
     }
-    const relativeTimeFormat=(date)=>{
-       
-        
-        const calcDates = (date1, date2) =>
-        Math.round(Math.abs(date1 - date2) / (1000 * 60 * 60 * 24));
-    
-      const dayPassed = calcDates(+new Date().getTime(), +new Date(date).getTime());
-     
-    
-    
-    
-      return new Intl.RelativeTimeFormat("fa").format(-dayPassed,"days");
-    }
+ 
 
     return(
        <div className="blogs-content">
@@ -129,7 +122,7 @@ const Blogs=({blogs})=>{
                       avatar={avatarUrl}
                       paragraphs={paragraph}
                       rate={item.post_rate}
-                      date={relativeTimeFormat(item.post_date)}
+                      date={timeFormat(item.post_date)}
                       
                     />
                 )

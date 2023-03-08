@@ -1,0 +1,47 @@
+.blog-post{
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+}
+.post-cover{
+    width: 100%;
+    height: 45rem;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    margin-bottom: 2rem;
+}
+.post-cover img{
+    object-fit: cover;
+}
+.post__title{
+font-family: "yekan",sans-serif;
+font-size: 2.6rem;
+padding: .5rem 1rem;
+}
+.post-row{
+display: flex;
+align-items: center;
+gap: 4rem;
+margin-top: 2.4rem;
+padding: .5rem 1rem;
+}
+.post-content--box{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem  1.5rem;
+}
+.post-content--box img{
+    width: 100%;
+    height: 45rem;
+    object-fit: cover;
+    border-radius: 1.2rem;
+    margin-bottom: 1rem;
+    background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
+    background-position: center;
+}
+.post-content--box p{
+    line-height: 2;
+    color: #cbd5e1;
+    font-size: 1.6rem;
+}

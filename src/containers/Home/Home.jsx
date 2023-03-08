@@ -31,7 +31,7 @@ const Home = () => {
       
       <Routes>
         <Route path="/" element={<Layout/>}/>
-        <Route path="/:id" element={<Post/>}/>
+        <Route path="/article/:id" element={<Post/>}/>
       </Routes>
       
         </Wrapper>

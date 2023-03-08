@@ -99,7 +99,7 @@ const Cms = ({ session }) => {
                         <Navigation />
 
                         <section className="center-panel">
-                            <Header  fullName={firstName + lastName}>
+                            <Header  fullName={`${firstName} ${lastName}`}>
                                 <p className="header-right__title  header-right__txt">
                                     {userName} عزیز; خوش آمدی. 👋
                                 </p>

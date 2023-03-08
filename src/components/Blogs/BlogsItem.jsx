@@ -1,29 +1,37 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import "./BlogsItem.css";
+import { Link } from "react-router-dom";
 
-const BlogItem = () => {
+const BlogItem = (props) => {
+  
+  
+  
+   
   return (
-    <section className="blog-content">
+    <Link to={`/${props.id}`} className="blog-content" >
       {/* img */}
-      <div className="blog-content--img">
-        <img src="../../../src/assets/bg-slider.jpg" alt="" className="blog-content__img" />
+      <div className="blog-content--img" dangerouslySetInnerHTML={{__html:props.img}}>
+      
       </div>
       {/* info */}
       <div className="blog-content--info">
         {/* title */}
-        <h3>گارمین از اولین ساعت‌های هوشمند مجهز به نمایشگر AMOLED خود رونمایی کرد</h3>
+        <h3> {props.title}</h3>
         {/* dis */}
         <div className="blog-content--dis">
           <p className="blog-content__dis-txt">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است
+             {props.paragraphs.map((value,i) => {
+               return(
+                <span key={i} dangerouslySetInnerHTML={{ __html:value}}></span>
+               )
+             })}
           </p>
           <div className="blog-content--detail">
             {/* author */}
             <div className="blog-content--detail-author">
               <div className="detail-author--profile">
-                <img src="../../../src/assets/profile.svg" alt="profile-icon" className="detail-author--profile__img" />
-                <p className="detail-author--profile__txt"> احمد فرهمند</p>
+                <img src={props.avatar?props.avatar:'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
+                <p className="detail-author--profile__txt">{props.fullName}</p>
               </div>
               <div className="detail-author--fav">
                 <button className="blog-content__btn blog-comment__btn">
@@ -48,7 +56,7 @@ const BlogItem = () => {
                     </svg>
 
                   </p>
-                  <p className="blog-content__btn-txt">4</p>
+                  <p className="blog-content__btn-txt">{props.rate}</p>
                 </button>
                 <button className="blog-content__btn blog-save__btn">
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 24 24">
@@ -79,7 +87,7 @@ const BlogItem = () => {
                   </svg>
 
                 </p>
-                <p>فناوری</p>
+                <p>{props.category}</p>
               </div>
               <div className="blog-content--date">
                 <p className="blog-content--category__category-icon">
@@ -94,13 +102,13 @@ const BlogItem = () => {
                   </svg>
 
                 </p>
-                <p>1 روز قبل</p>
+                <p>{props.date}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </Link>
   );
 };
 

@@ -3,3 +3,22 @@
     flex-direction: column;
     gap: 1.5rem;
 }
+
+.blog-list--title {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    margin-bottom: 3.5rem;
+}
+
+.blog-list--title__icon {
+    display: grid;
+    place-items: center;
+    color: #6366f1;
+}
+
+.blog-list--title__txt {
+    font-size: 3.5rem;
+    font-family: "yekan", sans-serif;
+}

@@ -12,10 +12,12 @@
     overflow: hidden;
 }
 
-.blog-content__img {
+.blog-content--img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
+    background-position: center;
 }
 
 .blog-content--info {

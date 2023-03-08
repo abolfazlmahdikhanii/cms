@@ -66,7 +66,7 @@ const Post=({blogs})=>{
 
     };
     return(
-        <div dangerouslySetInnerHTML={{__html:content}}>
+        <div dangerouslySetInnerHTML={{__html:content.join('')}}>
 
         </div>
     )

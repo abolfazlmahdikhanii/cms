@@ -14,7 +14,7 @@ const Blogs=({blogs})=>{
     const [avatarUrl, setAvatarUrl] = useState()
     const translator=useTranslatorCategory
     const [paragraph, setParagraph] = useState([]);
-    const history=useNavigate()
+ 
     const timeFormat=useRelativeTime
     useEffect(() => {
       
@@ -23,17 +23,17 @@ const Blogs=({blogs})=>{
         if (imgSrc) downloadImage(imgSrc);
         
     }, [blogs,imgSrc]);
-    const downloadImage = async(path) => {
+    const downloadImage =async (path) => {
 
         try {
-            const { data,error } =await supabase.storage.from('avatar').download(path);
+            const { data,error } =await supabase.storage.from('avatar').createSignedUrl(path,60);
             if (error) throw error;
 
         
-            const url= URL.createObjectURL(data)
-           console.log(url);
+        //     const url= URL.createObjectURL(data)
+        //    console.log(url);
            
-            setAvatarUrl(url);
+            setAvatarUrl(data);
         }
         catch (error) {
             console.log(error.message);

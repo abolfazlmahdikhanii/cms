@@ -1,6 +1,10 @@
 @font-face {
   font-family: "yekan";
-  src: url("./assets/fonts/Yekan Boom.woff2")
+  src: url("./assets/fonts/Yekan.woff")
+}
+@font-face {
+  font-family: "shabnam";
+  src: url("./assets/fonts/Shabnam-FD.woff2")
 }
 
 :root {
@@ -48,7 +52,7 @@ html {
 }
 
 body {
-  font-family: 'Vazir FD', sans-serif;
+  font-family: 'shabnam', sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
   direction: rtl;

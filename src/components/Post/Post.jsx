@@ -21,7 +21,7 @@ const Post = ({ blogs }) => {
         getBlogData();
         filterPosts(blogContent);
 
-    }, [blogs, blogContent]);
+    }, [blogs,blogContent]);
     const getBlogData = async () => {
         try {
 
@@ -35,7 +35,7 @@ const Post = ({ blogs }) => {
                     avatar_url
                 )`)
                 .eq("id", match?.id);
-
+             
             if (error) {
 
                 throw error;
@@ -63,6 +63,12 @@ const Post = ({ blogs }) => {
 
             }
         });
+
+        const imgIndex = data.findIndex((item) => item.includes("img"));
+        
+        if (imgIndex === -1) return;
+        data.splice(imgIndex, 1);
+
 
         setContent(data);
 

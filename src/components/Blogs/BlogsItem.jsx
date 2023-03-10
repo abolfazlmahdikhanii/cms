@@ -8,7 +8,7 @@ const BlogItem = (props) => {
   
    
   return (
-    <Link to={`/article/${props.id}`} className="blog-content" >
+    <section className="blog-content" >
       {/* img */}
       <div className="blog-content--img" dangerouslySetInnerHTML={{__html:props.img}}>
       
@@ -16,7 +16,9 @@ const BlogItem = (props) => {
       {/* info */}
       <div className="blog-content--info">
         {/* title */}
+        <Link  to={`/article/${props.id}`}>
         <h3> {props.title}</h3>
+        </Link>
         {/* dis */}
         <div className="blog-content--dis">
           <p className="blog-content__dis-txt">
@@ -108,7 +110,7 @@ const BlogItem = (props) => {
           </div>
         </div>
       </div>
-    </Link>
+    </section>
   );
 };
 

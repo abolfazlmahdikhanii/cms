@@ -28,6 +28,8 @@
     gap: 1.5rem;
     padding: 0 .7rem;
     margin-bottom: 2.5rem;
+    position: sticky;
+    top: 0;
 
 }
 

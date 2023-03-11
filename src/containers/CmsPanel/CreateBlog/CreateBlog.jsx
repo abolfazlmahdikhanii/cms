@@ -30,6 +30,13 @@ const CreateBlog = (props) => {
         for (const item of element) {
             if (item.value !== "" && 'value' in item) {
 
+                if (item.name === "title") {
+                    data.push({
+                        id: item.id,
+                        style: {},
+                        contentTag: `<h2 className="title-posts">${item.value}</h2>`
+                    });
+                }
                 if (item.name === "txt") {
                     data.push({
                         id: item.id,
@@ -41,7 +48,7 @@ const CreateBlog = (props) => {
                     data.push({
                         id: item.id,
                         style: {},
-                        contentTag: `<img src=https://tfqvcxqiufqbgkqiovtd.supabase.co/storage/v1/object/uploads/${item.value}>`
+                        contentTag: `<img loading='lazy' src='https://uqaecciafxzyxmeysbkq.supabase.co/storage/v1/object/public/uploads/${item.value}'>`
                     });
                 }
             }
@@ -175,6 +182,22 @@ const CreateBlog = (props) => {
                                     </g>
                                 </svg>
                                 <p className="btn-item__txt">افزودن تصویر</p>
+                            </div>
+                            <div className="btn-item" onClick={() => changElementHandler("title")}>
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <g id="vuesax_outline_document-text" data-name="vuesax/outline/document-text" transform="translate(-172 -188)">
+                                        <g id="document-text">
+                                            <path id="Vector" d="M13.75,21.5h-6C2.32,21.5,0,19.18,0,13.75v-6C0,2.32,2.32,0,7.75,0h5a.755.755,0,0,1,.75.75.755.755,0,0,1-.75.75h-5C3.14,1.5,1.5,3.14,1.5,7.75v6C1.5,18.36,3.14,20,7.75,20h6C18.36,20,20,18.36,20,13.75v-5a.75.75,0,0,1,1.5,0v5C21.5,19.18,19.18,21.5,13.75,21.5Z" transform="translate(173.25 189.25)" fill="currentColor" />
+                                            <path id="Vector-2" data-name="Vector" d="M8.75,9.5h-4C1.33,9.5,0,8.169,0,4.749v-4A.741.741,0,0,1,.46.059a.757.757,0,0,1,.82.16l8,8A.751.751,0,0,1,8.75,9.5ZM1.5,2.559v2.19C1.5,7.329,2.17,8,4.75,8H6.94Z" transform="translate(185.25 189.251)" fill="currentColor" />
+                                            <path id="Vector-3" data-name="Vector" d="M6.75,1.5h-6A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0h6A.755.755,0,0,1,7.5.75.755.755,0,0,1,6.75,1.5Z" transform="translate(178.25 200.25)" fill="currentColor" />
+                                            <path id="Vector-4" data-name="Vector" d="M4.75,1.5h-4A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0h4A.755.755,0,0,1,5.5.75.755.755,0,0,1,4.75,1.5Z" transform="translate(178.25 204.25)" fill="currentColor" />
+                                            <path id="Vector-5" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(172 188)" fill="none" opacity="0" />
+                                        </g>
+                                    </g>
+                                </svg>
+
+                                <p className="btn-item__txt">افزودن عنوان</p>
                             </div>
                             <div className="btn-item" onClick={() => changElementHandler("txt")}>
 

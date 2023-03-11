@@ -28,7 +28,7 @@ const Post = ({ blogs }) => {
 
             let { data: blog, error } = await supabase
                 .from('blogs')
-                .select(`id,post_date,post_title,post_content,post_rate,post_comment,post_type
+                .select(`id,post_date,post_title,post_content,post_comment,post_type
                 ,post_author(
                     firstName,
                     lastName,

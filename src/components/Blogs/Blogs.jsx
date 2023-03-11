@@ -14,15 +14,88 @@ const Blogs=({blogs})=>{
     const [avatarUrl, setAvatarUrl] = useState()
     const translator=useTranslatorCategory
     const [paragraph, setParagraph] = useState([]);
+    const [users,setUser]=useState(null)
+    const [isUser,setIsUser]=useState(false)
+   
+    
  
     const timeFormat=useRelativeTime
     useEffect(() => {
       
       
         filterPosts(blogs)
-        if (imgSrc) downloadImage(imgSrc);
+        checkExistUser()
         
-    }, [blogs,imgSrc]);
+       
+        
+    }, [blogs]);
+
+    const updateBlogRate=async(id)=>{
+        
+          try {
+        if(isUser){
+            const {user}=users
+           const {err}=await supabase.from('vote')
+           .insert({blog_id:id,user_id:user?.id,posetive_vote:true})
+           
+           
+           if(err)throw err
+
+           
+           
+        }         
+          } catch (error) {
+              console.log(error);
+              
+          }
+
+      }
+    const removeBlogRate=async(id)=>{
+        
+          try {
+        if(isUser){
+            const {user}=users
+           const {err}=await supabase.from('vote')
+           .delete()
+           .eq("blog_id",id)
+           
+           
+           if(err)throw err
+
+           
+           
+        }         
+          } catch (error) {
+              console.log(error);
+              
+          }
+
+      }
+    
+      const checkExistUser=async()=>{
+          try{
+              const {data,err}=await supabase.auth.getUser()
+              if(err) throw err
+               
+              setUser(data)
+               
+               
+              if(!data){
+                  alert("please login")
+                  setIsUser(false)
+              }
+              else{
+                  setIsUser(true)
+              }
+          }
+          catch(err){
+              console.log(err);
+              
+          }
+      }
+
+
+
     const downloadImage =async (path) => {
 
         try {
@@ -59,19 +132,6 @@ const Blogs=({blogs})=>{
         const imgFilterd = posts.filter(item => item.includes("img"));
 
         setImg(imgFilterd[0]);
- 
-    //     const div = document.createElement('div')
-    //     div.innerHTML =img
-    //     const imgs = div.querySelector('img')
-    //     const url=imgs?.src
-    
-    //    const newUrl=url?.split('/');
-    //    const lastNewUrl=newUrl
- 
-       
-    //     setImageUrl(lastNewUrl[lastNewUrl.length-1])
-
-
     };
     const filtetPargraph =(posts) => {
         const paragraphFilterd = posts.filter(item => item.includes("<p"));
@@ -110,20 +170,21 @@ const Blogs=({blogs})=>{
            </div>
          {
             blogs.map((item)=>{
-                const {firstName,lastName}=item.post_author
+                const {firstName,lastName}=item?.post_author
                 return(
                     <BlogItem
-                      key={item.id}
-                      id={item.id}
-                      title={item.post_title}
-                      category={translator(item.post_type)}
+                      key={item?.id}
+                      id={item?.id}
+                      title={item?.post_title}
+                      category={translator(item?.post_type)}
                       img={img}
                       fullName={`${firstName} ${lastName}`}
                       avatar={avatarUrl}
                       paragraphs={paragraph}
-                      rate={item.post_rate}
-                      date={timeFormat(item.post_date)}
-                      
+                      userId={users?.user?.id}
+                      date={timeFormat(item?.post_date)}
+                      clickRate={()=>updateBlogRate(item?.id)}
+                      removeRate={()=>removeBlogRate(item.id)}
                     />
                 )
             })

@@ -182,3 +182,7 @@
     font-size: 1.3rem;
     color: #d1d5db;
 }
+.active-like.blog-like__btn:hover svg{
+  fill: #fff;
+  stroke: #fff;
+}

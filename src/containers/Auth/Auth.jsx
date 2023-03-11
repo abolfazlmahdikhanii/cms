@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 const Auth = () => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
+    const [pass, setPass] = useState("12345678");
     const [token, setToken] = useState("");
     const [error, setError] = useState(false);
     const [page, setPage] = useState(false);
@@ -26,9 +27,7 @@ const Auth = () => {
     const sendMailVarification = async () => {
         try {
             setLoading(true);
-            const { data, error } = await supabase.auth.signInWithOtp({
-                email
-            });
+            const { data, error } = await supabase.auth.signInWithOtp({email})
             if (error) throw error;
             changePageHandler();
             console.log(data);
@@ -44,22 +43,22 @@ const Auth = () => {
     };
     const submitOtpHandler =async (e) => {
         e.preventDefault();
-        const formData = [];
-        const inputs = [e.target.elements];
-        const newInputs = [...inputs[0]];
-        newInputs.pop();
-        for (const item of newInputs) {
-
-            formData.push(item.value);
-        }
-        const newToken = formData.join('');
-        console.log(newToken);
-        setToken(newToken);
+     
         try {
-
+            const formData = [];
+            const inputs = [e.target.elements];
+            const newInputs = [...inputs[0]];
+            newInputs.pop();
+            for (const item of newInputs) {
+    
+                formData.push(item.value);
+            }
+            const newToken = formData.join('');
+          
+            setToken(newToken);
             setLoading(true);
             const { data, error } = await supabase.auth.verifyOtp({
-                email, token, type: 'magiclink'
+                email,token:newToken,type:'magiclink'
             });
             if (error) throw error;
 
@@ -91,9 +90,9 @@ const Auth = () => {
 
     };
 
-    const varifyOtp = async (token) => {
+    // const varifyOtp = async (token) => {
        
-    };
+    // };
 
 
     const setEmailHandler = (e) => {

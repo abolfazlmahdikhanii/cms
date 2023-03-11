@@ -1,12 +1,62 @@
 import React,{useState,useEffect} from "react";
 import "./BlogsItem.css";
 import { Link } from "react-router-dom";
+import { supabase } from "../../superbase";
 
 const BlogItem = (props) => {
+  const [activeLike,setActiveLike]=useState(null)
+  const [totalRate,setTotalRate]=useState(null)
+  const [vote,setVote]=useState(null)
+  useEffect(() => {
+    getTotalRate(props.id)
+    checkUserLike()
+  }, [vote]);
   
-  
-  
-   
+  const getTotalRate=async (id)=>{
+    try{
+        const {data,err}=await supabase.from("vote")
+        .select("*",{count:"exact"})
+        .eq("blog_id",id)
+        
+        if(err) throw err
+
+        
+        
+          
+        setVote(data)
+
+        setTotalRate(data.length)
+    
+    }
+    catch(err){
+        console.log(err);
+        
+    }
+  }
+   const checkUserLike=()=>{
+    const findUserLiked= vote?.some((item) => {
+      return item?.blog_id===props?.id && item?.user_id===props?.userId
+     })
+   if(findUserLiked) setActiveLike(true)
+   else setActiveLike(false)
+     
+   }
+   let activeLikeIcon=null
+   if(activeLike){
+    activeLikeIcon=<svg width="13" height="13" fill="currentColor"  viewBox="0 0 13 11" xmlns="http://www.w3.org/2000/svg">
+    <path  d="M3.95035 1.229C4.81955 1.229 5.61243 1.66166 6.21284 2.15457C6.81326 1.66166 7.60614 1.229 8.47534 1.229C10.3497 1.229 11.8691 2.62275 11.8691 4.34192C11.8691 7.80824 7.92382 9.82702 6.62321 10.3984C6.36123 10.5134 6.06445 10.5134 5.80248 10.3984C4.50187 9.827 0.556602 7.80816 0.556602 4.34184C0.556602 2.62267 2.07603 1.229 3.95035 1.229Z" stroke="#E81C4D" strokeWidth="0.761705"></path>
+      </svg>
+   }
+   else{
+    activeLikeIcon=  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24">
+    <g id="vuesax_outline_heart" data-name="vuesax/outline/heart" transform="translate(-236 -188)">
+      <g id="heart">
+        <path id="Vector" d="M10.75,19.3a2.589,2.589,0,0,1-.86-.13C6.07,17.86,0,13.21,0,6.34A6.329,6.329,0,0,1,6.31,0a6.214,6.214,0,0,1,4.44,1.84A6.214,6.214,0,0,1,15.19,0,6.336,6.336,0,0,1,21.5,6.34c0,6.88-6.07,11.52-9.89,12.83A2.589,2.589,0,0,1,10.75,19.3ZM6.31,1.5A4.831,4.831,0,0,0,1.5,6.34c0,6.83,6.57,10.63,8.88,11.42a1.585,1.585,0,0,0,.75,0c2.3-.79,8.88-4.58,8.88-11.42A4.831,4.831,0,0,0,15.2,1.5a4.751,4.751,0,0,0-3.84,1.94.774.774,0,0,1-1.2,0A4.77,4.77,0,0,0,6.31,1.5Z" transform="translate(237.25 190.35)" fill="currentColor" strokeWidth="0.960719" />
+        <path id="Vector-2" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(236 188)" fill="currentColor" opacity="0" strokeWidth="0.960719" />
+      </g>
+    </g>
+  </svg>
+   }
   return (
     <section className="blog-content" >
       {/* img */}
@@ -46,19 +96,12 @@ const BlogItem = (props) => {
                   </p>
                   <p className="blog-content__btn-txt">4</p>
                 </button>
-                <button className="blog-content__btn blog-like__btn">
+                <button className={`blog-content__btn blog-like__btn ${activeLike?'active-like':''}`} onClick={!activeLike?props.clickRate:props.removeRate}>
                   <p className="blog-content__btn-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24">
-                      <g id="vuesax_outline_heart" data-name="vuesax/outline/heart" transform="translate(-236 -188)">
-                        <g id="heart">
-                          <path id="Vector" d="M10.75,19.3a2.589,2.589,0,0,1-.86-.13C6.07,17.86,0,13.21,0,6.34A6.329,6.329,0,0,1,6.31,0a6.214,6.214,0,0,1,4.44,1.84A6.214,6.214,0,0,1,15.19,0,6.336,6.336,0,0,1,21.5,6.34c0,6.88-6.07,11.52-9.89,12.83A2.589,2.589,0,0,1,10.75,19.3ZM6.31,1.5A4.831,4.831,0,0,0,1.5,6.34c0,6.83,6.57,10.63,8.88,11.42a1.585,1.585,0,0,0,.75,0c2.3-.79,8.88-4.58,8.88-11.42A4.831,4.831,0,0,0,15.2,1.5a4.751,4.751,0,0,0-3.84,1.94.774.774,0,0,1-1.2,0A4.77,4.77,0,0,0,6.31,1.5Z" transform="translate(237.25 190.35)" fill="currentColor" strokeWidth="0.960719" />
-                          <path id="Vector-2" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(236 188)" fill="currentColor" opacity="0" strokeWidth="0.960719" />
-                        </g>
-                      </g>
-                    </svg>
+                  {activeLikeIcon}
 
                   </p>
-                  <p className="blog-content__btn-txt">{props.rate}</p>
+                  <p className="blog-content__btn-txt">{totalRate}</p>
                 </button>
                 <button className="blog-content__btn blog-save__btn">
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 24 24">

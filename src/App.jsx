@@ -29,7 +29,7 @@ function App() {
     <div className="App">
         <Router>
           <Routes>
-          <Route path="/*" element={<Home/>}/>
+          <Route path="/*" element={<Home session={session}/>}/>
           <Route path="/auth" element={<Auth/>}/>
             <Route path="/panel/*" element={login} />
           </Routes>

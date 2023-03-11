@@ -19,7 +19,7 @@ const MiniProfile = (props) => {
                         <img src={profileIcon} alt="profile" className="mini-profile__img" />
                     </div>
                     <div className="mini-profile__account-info">
-                        <p className="mini-profile__txt">{props.fullName ? props.fullName : props.email}</p>
+                        <p className="mini-profile__txt">{props?.fullName===null ? props.email : props.fullName}</p>
                         <p className="mini-profile__svg">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mini-profile__svg-2">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />

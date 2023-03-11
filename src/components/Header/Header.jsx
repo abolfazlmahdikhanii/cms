@@ -13,7 +13,7 @@ const Header=(props)=>{
 
             <div className="header-left">
                 <ThemButton/>
-                <Profile fullName={props.fullName}/>
+                <Profile fullName={props?.fullName}/>
             </div>
         </div>
     )

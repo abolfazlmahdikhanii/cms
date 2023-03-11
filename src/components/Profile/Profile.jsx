@@ -25,11 +25,13 @@ const Profile=(props)=>{
             if(error) throw error
             const {user}=data
             
-            
+             
+               
            setUserProfile(user)
-           setEmail(user.email);
+           setEmail(user?.email);
            
-       
+           
+            
         
            
      
@@ -66,7 +68,7 @@ const Profile=(props)=>{
 
             <TiArrowSortedDown/>
         </button>
-        <MiniProfile show={showMenu}  email={email} fullName={props.fullName} />
+        <MiniProfile show={showMenu}  email={email} fullName={props?.fullName} />
             </div>
         :
         <Link to="/auth" className="profile">

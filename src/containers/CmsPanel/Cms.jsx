@@ -21,6 +21,9 @@ const Cms = ({ session }) => {
 
     const [date,setDate]=useState(null)
     useEffect(()=>{
+
+
+        showUserName();
         const now=new Date();
         const formatDate=new Intl.DateTimeFormat("fa",{
             day: "numeric",
@@ -33,9 +36,9 @@ const Cms = ({ session }) => {
    
    
 
-
-        showUserName();
-
+   
+        
+        
 
     }, []);
 
@@ -52,7 +55,7 @@ const Cms = ({ session }) => {
             let { data, error, status } = await supabase
                 .from("profiles")
                 .select(`username,firstName,lastName,avatar_url`)
-                .eq('id', user.id)
+                .eq('id', user?.id)
                 .single();
 
 
@@ -60,10 +63,12 @@ const Cms = ({ session }) => {
                 throw error;
             }
             if (data) {
-                setUserName(data.username);
-                setFirstName(data.firstName);
-                setLastName(data.lastName);
-                setAvatarUrl(data.avatar_url);
+               
+                
+                setUserName(data?.username);
+                setFirstName(data?.firstName);
+                setLastName(data?.lastName);
+                setAvatarUrl(data?.avatar_url);
             }
         }
         catch (error) {
@@ -101,7 +106,7 @@ const Cms = ({ session }) => {
                         <section className="center-panel">
                             <Header  fullName={`${firstName} ${lastName}`}>
                                 <p className="header-right__title  header-right__txt">
-                                    {userName} عزیز; خوش آمدی. 👋
+                                    {userName||session?.user?.email} عزیز; خوش آمدی. 👋
                                 </p>
                                 <i className="header-right__border"></i>
                                 <p className="header-right__date header-right__txt">

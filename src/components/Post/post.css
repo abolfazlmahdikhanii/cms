@@ -34,12 +34,18 @@ padding: .5rem 1rem;
 .post-content--box img{
 
     max-width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 50rem;
+    object-fit: contain;
     border-radius: 1.2rem;
     margin-bottom: 1rem;
+   
     background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
     background-position: center;
+}
+.post-content--box h2{
+ font-family: "yekan",sans-serif;
+ font-size: 2.6rem;
+ margin-top: 1.3rem;
 }
 .post-content--box p{
     line-height: 2;

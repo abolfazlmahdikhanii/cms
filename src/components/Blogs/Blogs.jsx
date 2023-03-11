@@ -99,14 +99,14 @@ const Blogs=({blogs})=>{
     const downloadImage =async (path) => {
 
         try {
-            const { data,error } =await supabase.storage.from('avatar').createSignedUrl(path,60);
+            const { data,error } =await supabase.storage.from('avatar').download(path);
             if (error) throw error;
 
         
-        //     const url= URL.createObjectURL(data)
-        //    console.log(url);
+            const url= URL.createObjectURL(data)
+           console.log(url);
            
-            setAvatarUrl(data);
+            setAvatarUrl(url);
         }
         catch (error) {
             console.log(error.message);

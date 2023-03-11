@@ -30,6 +30,7 @@
     margin-bottom: 2.5rem;
     position: sticky;
     top: 0;
+    z-index: 40;
 
 }
 

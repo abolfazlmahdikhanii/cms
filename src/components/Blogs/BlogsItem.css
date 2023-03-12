@@ -147,7 +147,7 @@
     color: rgba(63, 108, 175, 1)
 }
 
-.blog-save__btn:hover {
+.blog-save__btn:hover, .save--active {
     background-color: rgba(63, 108, 175, 1);
     stroke: #fff;
 }
@@ -182,7 +182,8 @@
     font-size: 1.3rem;
     color: #d1d5db;
 }
-.active-like.blog-like__btn:hover svg{
-  fill: #fff;
-  stroke: #fff;
+
+.active-like.blog-like__btn:hover svg {
+    fill: #fff;
+    stroke: #fff;
 }

@@ -1,16 +1,21 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect, useCallback} from "react";
 import "./BlogsItem.css";
 import { Link } from "react-router-dom";
 import { supabase } from "../../superbase";
+import useRelativeTime from "../../hooks/useRelativeTime";
 
 const BlogItem = (props) => {
-  const [activeLike,setActiveLike]=useState(null)
+  const [activeLike,setActiveLike]=useState(false)
   const [totalRate,setTotalRate]=useState(null)
   const [vote,setVote]=useState(null)
+
+  const timeFormat=useRelativeTime
   useEffect(() => {
-    getTotalRate(props.id)
+    getTotalRate(props?.id)
     checkUserLike()
-  }, [vote]);
+
+    
+  }, [props,vote]);
   
   const getTotalRate=async (id)=>{
     try{
@@ -82,7 +87,7 @@ const BlogItem = (props) => {
             {/* author */}
             <div className="blog-content--detail-author">
               <div className="detail-author--profile">
-                <img src={props.avatar?props.avatar:'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
+                <img src={props.avatar&&'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
                 <p className="detail-author--profile__txt">{props.fullName}</p>
               </div>
               <div className="detail-author--fav">
@@ -96,7 +101,7 @@ const BlogItem = (props) => {
                   </p>
                   <p className="blog-content__btn-txt">4</p>
                 </button>
-                <button className={`blog-content__btn blog-like__btn ${activeLike?'active-like':''}`} onClick={!activeLike?props.clickRate:props.removeRate}>
+                <button className={`blog-content__btn blog-like__btn ${activeLike?'active-like':''}`} onClick={props.clickRate}>
                   <p className="blog-content__btn-icon">
                   {activeLikeIcon}
 
@@ -147,7 +152,7 @@ const BlogItem = (props) => {
                   </svg>
 
                 </p>
-                <p>{props.date}</p>
+                <p>{timeFormat(props.date)}</p>
               </div>
             </div>
           </div>

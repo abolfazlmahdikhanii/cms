@@ -35,6 +35,18 @@ const Blogs = ({ blogs }) => {
             setClick(false);
         }
     };
+    const handleSaveClick = (id) => {
+
+        if (!click) {
+            removeBlogRate(id);
+            setClick(true);
+        }
+        else {
+            updateBlogRate(id);
+            setClick(false);
+        }
+    };
+
     const updateBlogRate = async (id) => {
 
         try {
@@ -112,6 +124,41 @@ const Blogs = ({ blogs }) => {
             setLoading(true);
         }
     };
+   const removeSaveBlog=async (id)=>{
+    try {
+        setLoading(true);
+        if (isUser) {
+            const { user } = users;
+            console.log(user);
+            
+            const { err } = await supabase.from('save')
+                .delete()
+                .eq("blog_id",id )
+                .eq("user_id",user?.id)
+           
+                
+               
+
+
+
+
+            if (err) throw err;
+
+      
+            
+
+
+        }
+    } catch (error) {
+        setLoading(false);
+        console.log(error);
+
+    }
+
+    finally {
+        setLoading(true);
+    }
+   }
     const checkExistUser = async () => {
         try {
             const { data, err } = await supabase.auth.getUser();
@@ -210,8 +257,8 @@ const Blogs = ({ blogs }) => {
                             userId={users?.user?.id}
                             date={item?.post_date}
                             clickRate={() => handleClick(item?.id)}
-                            clickSave={() => saveBlogHandler(item.id)}
-                        
+                            clickSave={() => saveBlogHandler(item?.id)}
+                            removeSave={()=>removeSaveBlog(item?.id)}
 
                         />
                     );

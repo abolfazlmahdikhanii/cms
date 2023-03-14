@@ -12,6 +12,7 @@ import { supabase } from "../../superbase";
 const Home = ({session}) => {
     const[firstName,setFirstName]=useState("")
     const[lastName,setLastName]=useState("")
+
     const[avatarUrl,setAvatarUrl]=useState(null)
 
     useEffect(()=>{
@@ -37,6 +38,7 @@ const Home = ({session}) => {
                
                 
  
+
                 setFirstName(data?.firstName);
                 setLastName(data?.lastName);
                 setAvatarUrl(data?.avatar_url);

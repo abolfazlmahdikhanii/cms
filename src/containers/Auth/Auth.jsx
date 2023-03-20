@@ -2,45 +2,55 @@ import React, { useState } from "react";
 import "./Auth.css";
 
 import Loader from "../../components/Ui/Loader/Loader.jsx";
-import { supabase } from "../../superbase.jsx";
+
+import { useSendVerificationEmail } from "@nhost/react";
+
+// import { supabase } from "../../superbase.jsx";
 import FormLogin from "../../components/FormLogin/FormLogin";
 import FormOtp from "../../components/FormOtp/FormOtp";
 import { useNavigate } from "react-router-dom";
 
-const Auth = () => {
+
+
+
+  
+const Auth = ({nhost}) => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [pass, setPass] = useState("12345678");
     const [token, setToken] = useState("");
-    const [error, setError] = useState(false);
+    const [err, setError] = useState("");
+
     const [page, setPage] = useState(false);
-
+   
     const navigate = useNavigate();
-
+    const { sendEmail, isLoading, isSent, isError, error } =
+    useSendVerificationEmail();
 
 
     const submitLoginHandler = (e) => {
         e.preventDefault();
-        sendMailVarification();
+         sendEmail(email)
+        changePageHandler()
 
     };
-    const sendMailVarification = async () => {
-        try {
-            setLoading(true);
-            const { data, error } = await supabase.auth.signInWithOtp({email})
-            if (error) throw error;
-            changePageHandler();
-            console.log(data);
+    // const sendMailVarification = async () => {
+    //     try {
+           
+    //    await nhost.auth.signIn({email})
+          
+    //         changePageHandler();
+    //         console.log(data);
 
-        }
-        catch (error) {
-            alert(error);
+    //     }
+    //     catch (error) {
+    //         alert(error);
 
-        }
-        finally {
-            setLoading(false);
-        }
-    };
+    //     }
+    //     finally {
+    //         setLoading(false);
+    //     }
+    // };
     const submitOtpHandler =async (e) => {
         e.preventDefault();
      
@@ -57,13 +67,11 @@ const Auth = () => {
           
             setToken(newToken);
             setLoading(true);
-            const { data, error } = await supabase.auth.verifyOtp({
-                email,token:newToken,type:'magiclink'
-            });
-            if (error) throw error;
+            await sendOtp(token)
+           
 
 
-            navigate('/panel');
+      if(isSent)   navigate('/panel');
 
 
 
@@ -106,7 +114,7 @@ const Auth = () => {
 
 
             <div className="auth-box">
-                {loading ? <Loader show={loading} /> :
+                {isLoading ? <Loader show={isLoading} /> :
                     <div className="auth-form" >
 
 
@@ -115,7 +123,7 @@ const Auth = () => {
                         {!page ?
                             <FormLogin
                                 submitLogin={submitLoginHandler}
-                                error={error}
+                                error={err}
                                 email={email}
                                 emailValidHandler={emailValidHandler}
                                 setEmailHandler={setEmailHandler}
@@ -123,7 +131,7 @@ const Auth = () => {
                             : <FormOtp
                                 email={email}
                                 submitOtp={submitOtpHandler}
-                                resendOtp={sendMailVarification} />}
+                                resendOtp={submitLoginHandler} />}
 
                     </div>
                 }

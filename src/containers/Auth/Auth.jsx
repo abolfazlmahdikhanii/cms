@@ -3,9 +3,8 @@ import "./Auth.css";
 
 import Loader from "../../components/Ui/Loader/Loader.jsx";
 
-import { useSendVerificationEmail } from "@nhost/react";
 
-// import { supabase } from "../../superbase.jsx";
+import { supabase } from "../../superbase.jsx";
 import FormLogin from "../../components/FormLogin/FormLogin";
 import FormOtp from "../../components/FormOtp/FormOtp";
 import { useNavigate } from "react-router-dom";
@@ -17,44 +16,49 @@ import { useNavigate } from "react-router-dom";
 const Auth = ({nhost}) => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
-    const [pass, setPass] = useState("12345678");
+    
     const [token, setToken] = useState("");
     const [err, setError] = useState("");
 
     const [page, setPage] = useState(false);
    
     const navigate = useNavigate();
-    const { sendEmail, isLoading, isSent, isError, error } =
-    useSendVerificationEmail();
+
+
+
 
 
     const submitLoginHandler = (e) => {
         e.preventDefault();
-         sendEmail(email)
-        changePageHandler()
-
+        sendMailVarification()
+      
+      
     };
-    // const sendMailVarification = async () => {
-    //     try {
+    const sendMailVarification = async () => {
+        try {
+            setLoading(true)
            
-    //    await nhost.auth.signIn({email})
+         const {data,error} =await supabase.auth.signInWithOtp({email})
           
-    //         changePageHandler();
-    //         console.log(data);
 
-    //     }
-    //     catch (error) {
-    //         alert(error);
+             if(error) throw error
+            changePageHandler();
+            console.log(data);
 
-    //     }
-    //     finally {
-    //         setLoading(false);
-    //     }
-    // };
+        }
+        catch (error) {
+            alert(error);
+
+        }
+        finally {
+            setLoading(false);
+        }
+    };
     const submitOtpHandler =async (e) => {
         e.preventDefault();
      
         try {
+            setLoading(true)
             const formData = [];
             const inputs = [e.target.elements];
             const newInputs = [...inputs[0]];
@@ -67,11 +71,17 @@ const Auth = ({nhost}) => {
           
             setToken(newToken);
             setLoading(true);
-            await sendOtp(token)
+             
+
+            const {data,error}=await supabase.auth.verifyOtp({
+                email,token:newToken,type:"magiclink"
+            })
            
 
 
-      if(isSent)   navigate('/panel');
+      if(error) throw error  
+      
+      navigate('/panel');
 
 
 
@@ -106,6 +116,7 @@ const Auth = ({nhost}) => {
     const setEmailHandler = (e) => {
         setEmail(e.target.value);
     };
+  
     const emailValidHandler = (e) => {
         e.target.value === "" ? setError(true) : setError(false);
     };
@@ -114,7 +125,7 @@ const Auth = ({nhost}) => {
 
 
             <div className="auth-box">
-                {isLoading ? <Loader show={isLoading} /> :
+                {loading ? <Loader show={loading} /> :
                     <div className="auth-form" >
 
 
@@ -125,13 +136,15 @@ const Auth = ({nhost}) => {
                                 submitLogin={submitLoginHandler}
                                 error={err}
                                 email={email}
+                                
                                 emailValidHandler={emailValidHandler}
                                 setEmailHandler={setEmailHandler}
+                             
                             />
                             : <FormOtp
                                 email={email}
                                 submitOtp={submitOtpHandler}
-                                resendOtp={submitLoginHandler} />}
+                                resendOtp={sendMailVarification} />}
 
                     </div>
                 }

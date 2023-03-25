@@ -74,7 +74,7 @@ const Auth = ({nhost}) => {
              
 
             const {data,error}=await supabase.auth.verifyOtp({
-                email,token:newToken,type:"magiclink"
+                email,token:newToken,type:"signup"
             })
            
 

@@ -54,6 +54,18 @@ const Auth = ({nhost}) => {
             setLoading(false);
         }
     };
+    const checkEmailExist=async(emails)=>{
+        try {
+            const {data,err}=supabase.from('profiles').select('(email)').eq('email',emails)
+            if(err) throw err
+            return true
+
+        } catch (error) {
+            console.log(error);
+            return false
+            
+        }
+    }
     const submitOtpHandler =async (e) => {
         e.preventDefault();
      
@@ -71,17 +83,24 @@ const Auth = ({nhost}) => {
           
             setToken(newToken);
             setLoading(true);
-             
 
-            const {data,error}=await supabase.auth.verifyOtp({
-                email,token:newToken,type:"signup"
-            })
            
 
+                const {data,error}=await supabase.auth.verifyOtp({
+                    email,token:newToken,type:`${checkEmailExist(email)?'magiclink':'signup'}`
+                })
+               
+    
+    
+          if(error) throw error  
+          
+          navigate('/panel');
+            
+          
+            
+             
 
-      if(error) throw error  
-      
-      navigate('/panel');
+
 
 
 

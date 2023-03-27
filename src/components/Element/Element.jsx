@@ -1,9 +1,11 @@
 import React,{useState} from "react";
 import Avatar from "../Avatar/Avatar";
+import UploadModal from "../Ui/UploadModal/UploadModal";
 import Uploader from "../Uploader/Uploader";
 import "./Element.css"
 
 const Element = ({type,change,url,id}) => {
+    const [show,setShow]=useState(false)
     const [values, setValues] = useState({
         "title":'',
         "paragraph":'',
@@ -38,7 +40,13 @@ e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
     let element=null
     switch (type) {
         case "img":
-              element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
+            //   element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
+            element=<img
+            src={`https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
+            className="blog-img"
+            style={{ height: '31rem', width: "100%",objectFit:"cover" }}
+            onClick={()=>setShow(true)}
+        />
             break
         case "imgCover":
               element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
@@ -61,6 +69,7 @@ e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
 
     return (
         <div>
+            <UploadModal show={show} close={!show}/>
             {element}
         </div>
     );

@@ -22,7 +22,7 @@ function App() {
             setSession(session)
            
         })
-    }, [session]);
+    }, []);
 
    
 

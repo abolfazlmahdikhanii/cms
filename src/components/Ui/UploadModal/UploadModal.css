@@ -5,4 +5,19 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 400;
+    overflow: hidden;
+}
+
+.modal-upload--url{
+    padding: 1rem;
+}
+.modal-upload--url__row{
+display: grid;
+grid-template-columns: 30rem 1fr;
+gap: 3rem;
+}
+.modal-upload__form{
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
 }

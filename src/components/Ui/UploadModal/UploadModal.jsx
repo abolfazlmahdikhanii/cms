@@ -5,7 +5,7 @@ import Backdrop from "../Backdrop/Backdrop";
 import Box from "../Box/Box";
 
 const UploadModal = (props) => {
-
+ 
     return (
         <Wrapper>
 
@@ -26,7 +26,7 @@ const UploadModal = (props) => {
                     <section className="modal-upload--url">
                         <div className="modal-upload--url__row">
                             <div className="modal-upload__form">
-                                <div className="form-control">
+                                <div className="form-control form-control--modal">
                                     <p className="form-control__txt">آدرس عکس</p>
                                     <input
                                         className="form-control__input"
@@ -47,8 +47,21 @@ const UploadModal = (props) => {
                                         type="url"
                                     />
                                 </div>
+                                <div className="nav-btn">
+                                    <button className="btn-action btn-item">اپلود</button>
+                                    <button className="btn-action btn-item">پیش نمایش</button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <img
+                                    src={`https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
+                                    className="blog-img"
+                                    style={{ height: '31rem', width: "100%", objectFit: "cover" }}
+                                    alt="" />
                             </div>
                         </div>
+
                     </section>
                 </Box>
             </section>

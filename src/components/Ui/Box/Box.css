@@ -1,9 +1,12 @@
-.box{
+.box {
     padding: 2.8rem 2rem;
     background-color: var(--bg-dark-primary);
     border-radius: 1.2rem;
+
     /* width: fit-content; */
 }
-.box-category{
+
+.box-category {
     background-color: #1e293b;
 }
+

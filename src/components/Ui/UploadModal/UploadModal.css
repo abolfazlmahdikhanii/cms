@@ -6,18 +6,34 @@
     transform: translate(-50%, -50%);
     z-index: 400;
     overflow: hidden;
+
 }
 
-.modal-upload--url{
+.modal-upload--url {
     padding: 1rem;
+    display: none;
 }
-.modal-upload--url__row{
-display: grid;
-grid-template-columns: 30rem 1fr;
-gap: 3rem;
+
+.modal-upload--url__row {
+    display: grid;
+    grid-template-columns: 30rem 1fr;
+    gap: 3rem;
 }
-.modal-upload__form{
-display: flex;
-flex-direction: column;
-gap: 1.5rem;
+.modal-upload--url__row-2 {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    gap: 3rem;
+}
+
+.modal-upload__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modal-upload--show {
+    display: block;
+}
+.tab-modal--active{
+    background-color: #6366f1;
 }

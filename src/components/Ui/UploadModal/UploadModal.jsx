@@ -1,12 +1,14 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "./UploadModal.css";
 import Wrapper from "../../../hoc/Wrapper";
 import Backdrop from "../Backdrop/Backdrop";
 import Box from "../Box/Box";
+import Uploader from "../../Uploader/Uploader";
 
 const UploadModal = (props) => {
     const [url, setUrl] = useState("");
     const [imgSrc, setImgSrc] = useState("");
+    const [tab, setTab] = useState('url');
 
     return (
         <Wrapper>
@@ -17,15 +19,15 @@ const UploadModal = (props) => {
             <section className="modal-upload" >
                 <Box modal={true}>
                     <div className="nav-btn">
-                        <div className="btn-item">
+                        <div className={`btn-item ${tab==='url'?'tab-modal--active':''}`} onClick={() => setTab('url')}>
                             افزودن با آدرس
                         </div>
-                        <div className="btn-item">
+                        <div className={`btn-item ${tab==='file'?'tab-modal--active':''}`} onClick={() => setTab('file')}>
                             افزودن فایل
                         </div>
                     </div>
                     {/* image with url */}
-                    <section className="modal-upload--url">
+                    <section className={`modal-upload--url ${tab === 'url' ? 'modal-upload--show' : ''}`}>
                         <div className="modal-upload--url__row">
                             <div className="modal-upload__form">
                                 <div className="form-control form-control--modal">
@@ -63,6 +65,37 @@ const UploadModal = (props) => {
                                     className="blog-img"
                                     style={{ height: '31rem', width: "100%", objectFit: "cover" }}
                                     alt="" />
+                            </div>
+                        </div>
+
+                    </section>
+                    {/* image with file */}
+                    <section className={`modal-upload--url ${tab === 'file' ? 'modal-upload--show' : ''}`}>
+                        <div className="modal-upload--url__row-2">
+                            <div className="modal-upload__form">
+
+                                <div className="form-control">
+                                    <p className="form-control__txt">طول عکس</p>
+                                    <input
+                                        className="form-control__input"
+                                        type="url"
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <p className="form-control__txt">عرض عکس</p>
+                                    <input
+                                        className="form-control__input"
+                                        type="url"
+                                    />
+                                </div>
+                                <div className="nav-btn">
+                                    <button className="btn-action btn-item">اپلود</button>
+                                 
+                                </div>
+                            </div>
+
+                            <div>
+                                <Uploader />
                             </div>
                         </div>
 

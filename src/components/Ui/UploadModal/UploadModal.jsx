@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./UploadModal.css";
 import Wrapper from "../../../hoc/Wrapper";
 import Backdrop from "../Backdrop/Backdrop";
@@ -10,6 +10,14 @@ const UploadModal = (props) => {
     const [imgSrc, setImgSrc] = useState("");
     const [tab, setTab] = useState('url');
 
+    useEffect(()=>{
+       setImgSrc("")
+    },[])
+
+    const submitHandler = () => {
+        props.changeUrl(imgSrc);
+    };
+
     return (
         <Wrapper>
 
@@ -19,10 +27,16 @@ const UploadModal = (props) => {
             <section className="modal-upload" >
                 <Box modal={true}>
                     <div className="nav-btn">
-                        <div className={`btn-item ${tab==='url'?'tab-modal--active':''}`} onClick={() => setTab('url')}>
+                        <div className={`btn-item ${tab === 'url' ? 'tab-modal--active' : ''}`} onClick={() => {
+                            setTab('url');
+                            setImgSrc("");
+                        }}>
                             افزودن با آدرس
                         </div>
-                        <div className={`btn-item ${tab==='file'?'tab-modal--active':''}`} onClick={() => setTab('file')}>
+                        <div className={`btn-item ${tab === 'file' ? 'tab-modal--active' : ''}`} onClick={() => {
+                            setTab('file');
+                            setImgSrc("");
+                        }}>
                             افزودن فایل
                         </div>
                     </div>
@@ -54,7 +68,7 @@ const UploadModal = (props) => {
                                     />
                                 </div>
                                 <div className="nav-btn">
-                                    <button className="btn-action btn-item">اپلود</button>
+                                    <button className="btn-action btn-item" onClick={submitHandler}>اپلود</button>
                                     <button className="btn-action btn-item" onClick={() => setImgSrc(url)}>پیش نمایش</button>
                                 </div>
                             </div>
@@ -89,13 +103,13 @@ const UploadModal = (props) => {
                                     />
                                 </div>
                                 <div className="nav-btn">
-                                    <button className="btn-action btn-item">اپلود</button>
-                                 
+                                    <button className="btn-action btn-item" onClick={submitHandler}>اپلود</button>
+
                                 </div>
                             </div>
 
                             <div>
-                                <Uploader />
+                                <Uploader url={imgSrc} onUpload={(imgSrc) => setImgSrc(imgSrc)} />
                             </div>
                         </div>
 

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import Avatar from "../Avatar/Avatar";
 import UploadModal from "../Ui/UploadModal/UploadModal";
 import Uploader from "../Uploader/Uploader";
@@ -6,13 +6,16 @@ import "./Element.css"
 
 const Element = ({type,change,url,id}) => {
     const [show,setShow]=useState(false)
+    const [src,setSrc]=useState("")
+   
     const [values, setValues] = useState({
         "title":'',
         "paragraph":'',
         "link":'',
         "imgSrc":''
     });
-
+  
+  
     const changeValueHandler=(e,el)=>{
 
       const elements={...values}
@@ -27,6 +30,7 @@ const Element = ({type,change,url,id}) => {
       
       elements[el]=url
       setValues(elements)
+      setSrc(url)
       change(url)
     console.log(url);
     
@@ -42,7 +46,8 @@ e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
         case "img":
             //   element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
             element=<img
-            src={`https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
+            id={id}
+            src={`https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${src}`}
             className="blog-img"
             style={{ height: '31rem', width: "100%",objectFit:"cover" }}
             onClick={()=>setShow(true)}
@@ -69,7 +74,12 @@ e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
 
     return (
         <div>
-            <UploadModal show={show} close={!show}/>
+            <UploadModal 
+            show={show} 
+            close={!show}
+            url={values.imgSrc} 
+            changeUrl={(url)=>changeSrcHandler(url,"img")}
+            />
             {element}
         </div>
     );

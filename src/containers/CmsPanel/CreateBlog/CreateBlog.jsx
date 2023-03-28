@@ -48,7 +48,7 @@ const CreateBlog = (props) => {
                     data.push({
                         id: item.id,
                         style: {},
-                        contentTag: `<img loading='lazy' src='https://uqaecciafxzyxmeysbkq.supabase.co/storage/v1/object/public/uploads/${item.value}'>`
+                        contentTag: `<img loading='lazy' src='https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${item.value}'>`
                     });
                 }
             }

@@ -45,11 +45,20 @@ const CreateBlog = (props) => {
                     });
                 }
                 if (item.name === "img") {
+                  if(item.value.includes("https")||item.value.includes("http")){
+                    data.push({
+                        id: item.id,
+                        style: {},
+                        contentTag: `<img loading='lazy' src='${item.value}'>`
+                    });
+                  }
+                  else{
                     data.push({
                         id: item.id,
                         style: {},
                         contentTag: `<img loading='lazy' src='https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${item.value}'>`
                     });
+                  }
                 }
             }
 

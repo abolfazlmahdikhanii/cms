@@ -116,7 +116,7 @@ const BlogItem = (props) => {
             <div className="blog-content--detail-author">
               <div className="detail-author--profile">
                 <img src={props.avatar&&'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
-                <p className="detail-author--profile__txt">{props.fullName}</p>
+                <p className="detail-author--profile__txt">{props.fullName??props.email}</p>
               </div>
               <div className="detail-author--fav">
                 <button className="blog-content__btn blog-comment__btn">

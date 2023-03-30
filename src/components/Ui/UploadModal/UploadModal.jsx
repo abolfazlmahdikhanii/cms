@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./UploadModal.css";
 import Wrapper from "../../../hoc/Wrapper";
 import Backdrop from "../Backdrop/Backdrop";
@@ -8,14 +8,16 @@ import Uploader from "../../Uploader/Uploader";
 const UploadModal = (props) => {
     const [url, setUrl] = useState("");
     const [imgSrc, setImgSrc] = useState("");
+    const [width, setWidth] = useState("");
+    const [height, setHeight] = useState("");
     const [tab, setTab] = useState('url');
 
-    useEffect(()=>{
-       setImgSrc("")
-    },[])
+    useEffect(() => {
+        setImgSrc("");
+    }, []);
 
     const submitHandler = () => {
-        props.changeUrl(imgSrc);
+        props.changeUrl(imgSrc, width, height);
     };
 
     return (
@@ -24,7 +26,7 @@ const UploadModal = (props) => {
 
             <Backdrop show={props.show} close={props.close} />
 
-            <section className={`modal-upload ${!props.show?'modal-upload--hidden':''}`} >
+            <section className={`modal-upload ${!props.show ? 'modal-upload--hidden' : ''}`} >
                 <Box modal={true}>
                     <div className="nav-btn">
                         <div className={`btn-item ${tab === 'url' ? 'tab-modal--active' : ''}`} onClick={() => {
@@ -57,14 +59,20 @@ const UploadModal = (props) => {
                                     <p className="form-control__txt">طول عکس</p>
                                     <input
                                         className="form-control__input"
-                                        type="url"
+                                        type="number"
+                                        placeholder="1024px"
+                                        value={height}
+                                        onChange={(e) => setHeight(e.target.value)}
                                     />
                                 </div>
                                 <div className="form-control">
                                     <p className="form-control__txt">عرض عکس</p>
                                     <input
                                         className="form-control__input"
-                                        type="url"
+                                        type="number"
+                                        value={width}
+                                        onChange={(e) => setWidth(e.target.value)}
+                                        placeholder="100%"
                                     />
                                 </div>
                                 <div className="nav-btn">
@@ -92,14 +100,20 @@ const UploadModal = (props) => {
                                     <p className="form-control__txt">طول عکس</p>
                                     <input
                                         className="form-control__input"
-                                        type="url"
+                                        type="number"
+                                        placeholder="1024px"
+                                        value={height}
+                                        onChange={(e) => setHeight(e.target.value)}
                                     />
                                 </div>
                                 <div className="form-control">
                                     <p className="form-control__txt">عرض عکس</p>
                                     <input
                                         className="form-control__input"
-                                        type="url"
+                                        type="number"
+                                        placeholder="100%"
+                                        value={width}
+                                        onChange={(e) => setWidth(e.target.value)}
                                     />
                                 </div>
                                 <div className="nav-btn">

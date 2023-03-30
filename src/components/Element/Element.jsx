@@ -24,11 +24,15 @@ const Element = ({type,change,url,id}) => {
       setValues(elements)
       change(e)
     }
-    const changeSrcHandler=(url,el)=>{
+    const changeSrcHandler=(url,w,h,el)=>{
 
       const elements={...values}
       
-      elements[el]=url
+      elements[el]={
+        src:url,
+        width:`${w}%`,
+        height:`${h}px`
+      }
       setValues(elements)
       setSrc(url)
       change(url)

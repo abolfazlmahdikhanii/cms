@@ -24,7 +24,7 @@
 
     display: flex;
     align-items: center;
-
+    flex-wrap: wrap;
     gap: 1.5rem;
     padding: 0 .7rem;
     margin-bottom: 2.5rem;
@@ -202,9 +202,11 @@
     transition: all .3s;
 
 }
-.option-control__tag-txt{
+
+.option-control__tag-txt {
     padding: .8rem 1.2rem;
 }
+
 .option-control-row {
 
     display: flex;

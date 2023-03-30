@@ -76,7 +76,7 @@ e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
         <div>
             <UploadModal 
             show={show} 
-            close={!show}
+            close={()=>setShow(false)}
             url={values.imgSrc} 
             changeUrl={(url)=>changeSrcHandler(url,"img")}
             />

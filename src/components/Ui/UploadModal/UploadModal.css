@@ -6,7 +6,13 @@
     transform: translate(-50%, -50%);
     z-index: 400;
     overflow: hidden;
+    transition: all .3s;
 
+}
+
+.modal-upload--hidden {
+    opacity: 0;
+    transform: scale(.5rem);
 }
 
 .modal-upload--url {
@@ -19,6 +25,7 @@
     grid-template-columns: 30rem 1fr;
     gap: 3rem;
 }
+
 .modal-upload--url__row-2 {
     display: grid;
     grid-template-columns: 20rem 1fr;
@@ -34,6 +41,7 @@
 .modal-upload--show {
     display: block;
 }
-.tab-modal--active{
+
+.tab-modal--active {
     background-color: #6366f1;
 }

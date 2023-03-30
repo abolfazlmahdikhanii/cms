@@ -24,7 +24,7 @@ const UploadModal = (props) => {
 
             <Backdrop show={props.show} close={props.close} />
 
-            <section className="modal-upload" >
+            <section className={`modal-upload ${!props.show?'modal-upload--hidden':''}`} >
                 <Box modal={true}>
                     <div className="nav-btn">
                         <div className={`btn-item ${tab === 'url' ? 'tab-modal--active' : ''}`} onClick={() => {

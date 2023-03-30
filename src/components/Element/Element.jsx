@@ -40,6 +40,14 @@ e.target.style.height=""
 e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
     }
     
+let pic=null
+
+    if(src.includes("https")||src.includes("http")){
+        pic=src
+    }
+    else{
+        pic=src?`https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${src}`:"https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png"
+    }
 
     let element=null
     switch (type) {
@@ -47,7 +55,7 @@ e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
             //   element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
             element=<img
             id={id}
-            src={`https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${src}`}
+            src={pic}
             className="blog-img"
             style={{ height: '31rem', width: "100%",objectFit:"cover" }}
             onClick={()=>setShow(true)}

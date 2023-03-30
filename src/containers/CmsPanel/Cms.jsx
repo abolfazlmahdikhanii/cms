@@ -9,6 +9,7 @@ import CreateBlog from "./CreateBlog/CreateBlog";
 import Loader from "../../components/Ui/Loader/Loader";
 import { supabase } from "../../superbase";
 import Account from "./Account/Account";
+import BlogList from "./BlogList/BlogList";
 
 
 const Cms = ({ session }) => {
@@ -120,6 +121,7 @@ const Cms = ({ session }) => {
                                     <Route path="/" element={<Dashboard />} />
                                     <Route path="account" element={<Account key={session.user.id} session={session} />} />
                                     <Route path="create-blog" element={<CreateBlog user={session} userName={userName} fullName={firstName + lastName} />} />
+                                    <Route path="blog-list" element={<BlogList/>} />
                                 </Routes>
                             </main>
                         </section>

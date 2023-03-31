@@ -3,25 +3,29 @@ import './BlogList.css';
 import Box from "../../../components/Ui/Box/Box";
 import { supabase } from "../../../superbase";
 import useFilterPargraph from "../../../hooks/useFilterParagraph";
+import useRelativeTime from "../../../hooks/useRelativeTime";
 
 
 const BlogList = ({ session }) => {
 
     const [blogs, setBlogs] = useState([]);
-    const filterParagraph=useFilterPargraph
-    useEffect(()=>{
-      getUserBlogs()
-    },[session])
+    const filterParagraph = useFilterPargraph;
+    const relativeTime=useRelativeTime
+    useEffect(() => {
+        getUserBlogs();
+    }, [session]);
 
     const getUserBlogs = async () => {
         try {
             const { user } = session;
-            const { data, error } = await supabase.from("blogs").select("post_title,post_content,post_date,id").eq("post_author", user?.id);
+            const { data, error } = await supabase.from("blogs").select("post_title,post_content,post_date,id")
+            .eq("post_author", user?.id)
+            .eq("post_status","share");
 
             if (error) throw error;
 
-            console.log(data);
-            
+   
+
             setBlogs(data);
 
         } catch (error) {
@@ -38,12 +42,12 @@ const BlogList = ({ session }) => {
                             <div className="blog-list--row" >
                                 <div className="blog-list--info">
                                     <h2 className="blog-list__title">{item.post_title}</h2>
-                                    <p className="blog-list__dis">{filterParagraph(item?.post_content)}</p>
+                                    <div className="blog-list__dis" dangerouslySetInnerHTML={{ __html: filterParagraph(item?.post_content) }}></div>
 
                                 </div>
                                 <div className="blog-list--action">
                                     <div>
-                                        <p className="blog-list--date">اخرین تغییر : 2 روز پیش</p>
+                                        <p className="blog-list--date">اخرین تغییر :  {relativeTime(item.post_date)}</p>
                                     </div>
                                     <div className="blog-list--btn-action">
                                         <button className="btn-item btn-edit">
@@ -82,7 +86,7 @@ const BlogList = ({ session }) => {
                     );
                 })
             }
-        </div>
+        </div >
     );
 };
 export default BlogList;

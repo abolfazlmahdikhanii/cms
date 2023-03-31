@@ -69,9 +69,7 @@ transition: all .3s;
     font-size: 1.4rem;
 }
 .btn-remove{
-background-color: transparent;
-border: 1px solid #ef4444;
-color: #ef4444;
+
 }
 .btn-remove:hover{
     background-color: #ef4444;

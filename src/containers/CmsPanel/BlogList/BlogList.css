@@ -1,7 +1,82 @@
-.blog-list--row {}
+.blog-list--row {
+    display: flex;
+    max-width: 90rem;
+    /* align-items: baseline; */
+    gap: 2rem;
+    padding:1rem 0 ;
+    overflow: hidden;
+}
 
-.blog-list--info {}
+.blog-list--info {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-left: 2px dashed #4b5563;
+    padding: 0 1.5rem;
+}
 
-.blog-list__title {}
+.blog-list__title {
+    font-family: 'yekan',sans-serif;
+    font-size: 2.7rem;
+    line-height: 1.6;
+    color: #fff;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
-.blog-list__dis {}
+.blog-list__dis {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 2;
+    -webkit-box-orient: vertical;
+}
+.blog-list--action{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.blog-list--date{
+font-size: 1.6rem;
+color: #d1d5db;
+}
+.btn-flex{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.blog-list--btn-action{
+    display: flex;
+    
+    gap: 1rem;
+    width: max-content;
+    overflow: hidden;
+}
+.btn-edit{
+background-color: #f59e0b;
+border: 1px solid #f59e0b;
+transition: all .3s;
+}
+.btn-edit:hover{
+    background-color: transparent;
+    color: #f59e0b;
+}
+.btn-edit p{
+    font-size: 1.4rem;
+}
+.btn-remove{
+background-color: transparent;
+border: 1px solid #ef4444;
+color: #ef4444;
+}
+.btn-remove:hover{
+    background-color: #ef4444;
+    color: #fff;
+}
+.btn-remove p{
+    font-size: 1.4rem;
+}

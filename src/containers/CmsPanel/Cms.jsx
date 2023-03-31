@@ -121,7 +121,7 @@ const Cms = ({ session }) => {
                                     <Route path="/" element={<Dashboard />} />
                                     <Route path="account" element={<Account key={session.user.id} session={session} />} />
                                     <Route path="create-blog" element={<CreateBlog user={session} userName={userName} fullName={firstName + lastName} />} />
-                                    <Route path="blog-list" element={<BlogList/>} />
+                                    <Route path="blog-list" element={<BlogList session={session}/>} />
                                 </Routes>
                             </main>
                         </section>

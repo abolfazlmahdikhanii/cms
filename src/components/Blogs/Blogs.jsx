@@ -5,6 +5,8 @@ import { supabase } from "../../superbase";
 import useTranslatorCategory from "../../hooks/useTranslatetorCategory";
 import { useNavigate } from "react-router-dom";
 import Loader from "../Ui/Loader/Loader";
+import useFilterPargraph from "../../hooks/useFilterParagraph";
+import useFilterImage from "../../hooks/useFilterImage";
 
 
 const Blogs = ({ blogs }) => {
@@ -17,6 +19,8 @@ const Blogs = ({ blogs }) => {
     const [click, setClick] = useState(false);
    
 
+    const filterParagraph=useFilterPargraph
+    const filterImage=useFilterImage
 
     useEffect(() => {
         if (avatarUrl) downloadImage(avatarUrl);
@@ -196,29 +200,9 @@ const Blogs = ({ blogs }) => {
             console.log(error.message);
         }
     };
-    const filterPosts = (array) => {
-        let data = [];
-        array.forEach(blog => {
-
-            data.push(blog.contentTag);
-
-        });
-
-        return data;
-
-
-    };
-    const filterImage = (posts) => {
-        const blogPost = filterPosts(posts);
-        const imgFilterd = blogPost.filter(item => item.includes("img"));
-
-        return imgFilterd[0];
-    };
-    const filtetPargraph = (posts) => {
-        const blogPost = filterPosts(posts);
-        const paragraphFilterd = blogPost.filter(item => item.includes("<p"));
-        return paragraphFilterd;
-    };
+  
+   
+  
 
 
 
@@ -253,7 +237,7 @@ const Blogs = ({ blogs }) => {
                             img={filterImage(item?.post_content)}
                             fullName={`${firstName} ${lastName}`}
                             avatar={() => setAvatarUrl(avatar_url)}
-                            paragraphs={filtetPargraph(item?.post_content)}
+                            paragraphs={filterParagraph(item?.post_content)}
                             userId={users?.user?.id}
                             date={item?.post_date}
                             clickRate={() => handleClick(item?.id)}

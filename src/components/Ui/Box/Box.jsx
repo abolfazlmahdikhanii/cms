@@ -1,10 +1,10 @@
 import React from "react";
 import "./Box.css"
 
-const Box=(props)=>{
+const Box=({type,key,children,modal})=>{
     return(
-        <div className={`box ${props.type&&props.type==="category"?"box-category":''} ${props.modal?'box--modal':''}`}>
-            {props.children}
+        <div   key={key}  className={`box ${type&&type==="category"?"box-category":''} ${modal?'box--modal':''}`}>
+            {children}
         </div>
     )
 }

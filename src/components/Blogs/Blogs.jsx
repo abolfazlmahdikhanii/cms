@@ -57,6 +57,8 @@ const Blogs = ({ blogs }) => {
             setLoading(true);
             if (isUser) {
                 const { user } = users;
+                console.log(user);
+                
                 const { err } = await supabase.from('vote')
                     .insert({ blog_id: id, user_id: user?.id, posetive_vote: true });
 

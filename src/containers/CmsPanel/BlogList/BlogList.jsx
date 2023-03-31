@@ -42,7 +42,7 @@ const BlogList = ({ session }) => {
                             <div className="blog-list--row" >
                                 <div className="blog-list--info">
                                     <h2 className="blog-list__title">{item.post_title}</h2>
-                                    <div className="blog-list__dis" dangerouslySetInnerHTML={{ __html: filterParagraph(item?.post_content) }}></div>
+                                    <div className="blog-list__dis" dangerouslySetInnerHTML={{ __html: filterParagraph(item?.post_content).join("") }}></div>
 
                                 </div>
                                 <div className="blog-list--action">

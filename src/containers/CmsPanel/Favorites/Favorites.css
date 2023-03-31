@@ -1,0 +1,4 @@
+.fav-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(35rem,1fr));
+}

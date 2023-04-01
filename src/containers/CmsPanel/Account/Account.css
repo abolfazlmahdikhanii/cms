@@ -21,6 +21,16 @@
     grid-template-columns: repeat(2,1fr);
     gap: 1.5rem;
 }
+.col-grid--2{
+    display: grid;
+    grid-template-columns: 1fr 40rem;
+    gap: 1.5rem;
+}
+.col-grid--3{
+    display: grid;
+    grid-template-columns:  40rem 1fr;
+    gap: 1.5rem;
+}
 .form-control__row {
     display: flex;
     align-items: center;
@@ -30,6 +40,7 @@
 .form-control--email {
 
 
+    column-span: 2;
     align-items: center;
     justify-content: space-between;
 
@@ -46,7 +57,7 @@
 
 }
 
-.form-control__input, .form-control__input--2 {
+.form-control__input, .form-control__input--2,input {
     all: unset;
     width: 100%;
     font: inherit;
@@ -54,7 +65,15 @@
     box-sizing: border-box;
 
 }
-
+.form-control__txt-area{
+    height: 10rem;
+}
+.form-control__row--2{
+    direction: ltr;
+}
+.form-control__row-txt{
+    font-size: 1.5rem;
+}
 .form-control__input::placeholder {
     font-size: 1.3rem;
     text-transform: capitalize;
@@ -81,4 +100,15 @@
 }
 .btn-action:hover{
     background-color: #6366f1;
+}
+.account-subtitle__txt{
+    font-family: 'yekan',sans-serif;
+   margin-top: 2rem;
+    font-size: 2.8rem;
+}
+.from-control__select{
+  
+    appearance: none;
+    background-color: #334155;
+    padding: 0 1.2rem;
 }

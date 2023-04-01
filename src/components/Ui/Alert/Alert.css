@@ -7,7 +7,7 @@
     align-items: center;
     gap: 1.8rem;
 
-    background-image: linear-gradient(to left bottom, rgb(17, 24, 39), rgb(75, 85, 99));
+    background-image: linear-gradient(to top right , rgb(17, 24, 39), rgb(51, 65, 85));
     color: #e5e7eb;
 
 }

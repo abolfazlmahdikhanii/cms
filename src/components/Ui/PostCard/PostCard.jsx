@@ -27,7 +27,7 @@ const PostCard = (props) => {
         <div className="post-card">
             <div className="post-card--img">
                 <div className="post-card--img__img" dangerouslySetInnerHTML={{__html:props?.img}}></div>
-                <div className="post-card--btn">
+                <div className="post-card--btn" onClick={props.click}>
                     {icon}
                 </div>
             </div>

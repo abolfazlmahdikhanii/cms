@@ -29,6 +29,41 @@ const Saves=({session})=>{
             
         }
     }
+    const removeSaveBlog=async (id)=>{
+        try {
+          
+          
+                const { user } = session;
+                console.log(user);
+                
+                const { err } = await supabase.from('save')
+                    .delete()
+                    .eq("blog_id",id )
+                    .eq("user_id",user?.id)
+               
+                    
+                   
+    
+    
+    
+    
+                if (err) throw err;
+    
+          
+                
+    
+
+            
+        } catch (error) {
+        
+            console.log(error);
+    
+        }
+    
+        finally {
+         
+        }
+       }
     return(
        <div className="fav-grid">
          {
@@ -45,7 +80,7 @@ const Saves=({session})=>{
                      firstName={firstName}
                      lastName={lastName}
                      img={filterImage(post_content)}
-
+                        click={()=>removeSaveBlog(id)}
                     />
                 )
             })

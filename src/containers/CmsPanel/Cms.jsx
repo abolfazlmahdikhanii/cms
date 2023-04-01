@@ -52,7 +52,7 @@ const Cms = ({ session }) => {
 
 
 
-    }, []);
+    }, [userName, firstName, lastName]);
 
     const checkUser = () => {
         if (!userName || !firstName || !lastName) {
@@ -62,7 +62,7 @@ const Cms = ({ session }) => {
         }
         else {
 
-            setShowAlert(false)
+            setShowAlert(false);
         }
 
     };

@@ -36,7 +36,7 @@ const Account = ({ session }) => {
 
             let { data, error, status } = await supabase
                 .from("profiles")
-                .select(`username,firstName,lastName,avatar_url`)
+                .select(`username,firstName,lastName,avatar_url,gender,bio,birthDay`)
                 .eq('id', user.id)
                 .single();
             if (error && status !== 406) {
@@ -48,6 +48,9 @@ const Account = ({ session }) => {
                 setFirstName(data.firstName);
                 setLastName(data.lastName);
                 setAvatarUrl(data.avatar_url);
+                setGender(data.gender);
+                setBirthDay(data.birthDay);
+                setBio(data.bio);
             }
         }
         catch (error) {
@@ -229,10 +232,10 @@ const Account = ({ session }) => {
                             <div>
                                 <div className="form-control">
                                     <p className="form-control__txt">تاریخ تولد</p>
-                                    <DatePicker round="x2" accentColor="#4f46e5" value={birthDay} onChange={(e) => {
+                                    <DatePicker round="x2" accentColor="#4f46e5" locale="fa"    onChange={(e) => {
 
                                         setBirthDay(e.value);
-
+                                      
                                     }} />
                                 </div>
                             </div>

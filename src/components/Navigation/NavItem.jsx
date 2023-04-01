@@ -68,6 +68,46 @@ const NavItem = () => {
                     <p className="nav-item__txt">لیست بلاگ</p>
                 </NavLink>
             </li>
+
+            <li className="nav">
+
+                <NavLink to="/panel/favorites" end className="nav-item" activeclassname="active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                        <g id="vuesax_bulk_lovely" data-name="vuesax/bulk/lovely" transform="translate(-748 -252)">
+                            <g id="lovely">
+                                <path id="Vector" d="M0,0H24V24H0Z" transform="translate(748 252)" fill="none" opacity="0" />
+                                <path id="Vector-2" data-name="Vector" d="M17.86,4.99c0,.15,0,.3-.01.44a4.527,4.527,0,0,0-4.53.86,4.43,4.43,0,0,0-2.98-1.14A4.477,4.477,0,0,0,5.88,9.64a8.7,8.7,0,0,0,2.78,6.24,1.058,1.058,0,0,1-.28-.06C5.79,14.93,0,11.25,0,4.99a4.958,4.958,0,0,1,8.93-3,4.958,4.958,0,0,1,8.93,3Z" transform="translate(750 255.1)" fill="currentColor" opacity="0.4" />
+                                <path id="Vector-3" data-name="Vector" d="M8.58,0A3.31,3.31,0,0,0,5.94,1.32,3.3,3.3,0,0,0,0,3.32,6.148,6.148,0,0,0,.31,5.28a8.951,8.951,0,0,0,5.26,5.23,1.33,1.33,0,0,0,.74,0,8.951,8.951,0,0,0,5.26-5.23,6.24,6.24,0,0,0,.31-1.96A3.308,3.308,0,0,0,8.58,0Z" transform="translate(757.42 261.59)" fill="currentColor" />
+                            </g>
+                        </g>
+                    </svg>
+
+
+
+                    <p className="nav-item__txt">مورد علاقه ها</p>
+                </NavLink>
+
+            </li>
+            <li className="nav">
+
+                <NavLink to="/panel/saved-post" end className="nav-item" activeclassname="active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                        <g id="vuesax_bulk_save-2" data-name="vuesax/bulk/save-2" transform="translate(-556 -190)">
+                            <g id="save-2">
+                                <path id="Vector" d="M0,0H24V24H0Z" transform="translate(556 190)" fill="none" opacity="0" />
+                                <path id="Vector-2" data-name="Vector" d="M10.89,0H3.11A3.12,3.12,0,0,0,0,3.11V14.47c0,1.45,1.04,2.07,2.31,1.36l3.93-2.19a1.738,1.738,0,0,1,1.51,0l3.93,2.19c1.27.71,2.31.09,2.31-1.36V3.11A3.1,3.1,0,0,0,10.89,0Z" transform="translate(558 195.88)" fill="currentColor" opacity="0.4" />
+                                <path id="Vector-3" data-name="Vector" d="M14,3.11V14.47c0,1.45-1.04,2.06-2.31,1.36L8,13.77V6.99A3.12,3.12,0,0,0,4.89,3.88H0V3.11A3.12,3.12,0,0,1,3.11,0h7.78A3.12,3.12,0,0,1,14,3.11Z" transform="translate(564 192)" fill="currentColor" />
+                            </g>
+                        </g>
+                    </svg>
+
+
+
+
+                    <p className="nav-item__txt">ذخیره شده ها</p>
+                </NavLink>
+
+            </li>
             <li className="nav">
 
                 <NavLink to="/panel/account" end className="nav-item" activeclassname="active">
@@ -85,7 +125,6 @@ const NavItem = () => {
                     <p className="nav-item__txt"> حساب کاربری </p>
                 </NavLink>
             </li>
-
         </ul>
 
     );

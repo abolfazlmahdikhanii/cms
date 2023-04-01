@@ -53,7 +53,7 @@ const MiniProfile = (props) => {
                     </Link>
                 </li>
                 <li className="profile-item">
-                    <Link to="panel/favotites" className="profile-item__link">
+                    <Link to="/panel/favorites" className="profile-item__link">
                         <p className="mini-profile__svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                 <g id="vuesax_outline_heart" data-name="vuesax/outline/heart" transform="translate(-236 -188)">
@@ -89,7 +89,7 @@ const MiniProfile = (props) => {
                     </div>
                 </li>
                 <li className="profile-item">
-                    <Link to="panel/saved-post" className="profile-item__link">
+                    <Link to="/panel/saved-post" className="profile-item__link">
                         <p className="mini-profile__svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                 <g id="vuesax_outline_save-2" data-name="vuesax/outline/save-2" transform="translate(-556 -190)">

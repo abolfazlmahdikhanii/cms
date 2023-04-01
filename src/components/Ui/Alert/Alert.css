@@ -1,0 +1,45 @@
+.alert-message {
+    padding: 1.8rem 2.5rem;
+    border-radius: 1rem;
+    width: 100%;
+    margin: 0 auto 3rem auto;
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+
+    background-image: linear-gradient(to left bottom, rgb(17, 24, 39), rgb(75, 85, 99));
+    color: #e5e7eb;
+
+}
+
+.alert-message--hidden {
+    display: none;
+}
+
+.warning {
+    background-color: rgba(202, 138, 4, .5);
+    border: 1px solid #eab308;
+    color: #ffda6a;
+}
+
+.alert-message p {
+    font-size: 1.5rem;
+}
+
+.alert-message p a {
+    text-decoration: underline;
+    margin-right: .6rem;
+    color: #60a5fa;
+}
+
+.alert-icon {
+    width: 3.8rem;
+    height: 3.5rem;
+    border-radius: .8rem;
+    display: grid;
+    place-items: center;
+}
+
+.alert-icon--fill-info {
+    background-color: #f59e0b;
+}

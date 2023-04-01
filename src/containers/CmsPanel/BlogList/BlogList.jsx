@@ -4,13 +4,16 @@ import Box from "../../../components/Ui/Box/Box";
 import { supabase } from "../../../superbase";
 import useFilterPargraph from "../../../hooks/useFilterParagraph";
 import useRelativeTime from "../../../hooks/useRelativeTime";
+import AlertDialog from "../../../components/Ui/AlertDialog/AlertDialog";
 
 
 const BlogList = ({ session }) => {
 
     const [blogs, setBlogs] = useState([]);
+    const [showAlert, setShowAlert] = useState(false);
+    const [blogId, setBlogId] = useState(null);
     const filterParagraph = useFilterPargraph;
-    const relativeTime=useRelativeTime
+    const relativeTime = useRelativeTime;
     useEffect(() => {
         getUserBlogs();
     }, [session]);
@@ -19,12 +22,12 @@ const BlogList = ({ session }) => {
         try {
             const { user } = session;
             const { data, error } = await supabase.from("blogs").select("post_title,post_content,post_date,id")
-            .eq("post_author", user?.id)
-            .eq("post_status","share");
+                .eq("post_author", user?.id)
+                .eq("post_status", "share");
 
             if (error) throw error;
 
-   
+
 
             setBlogs(data);
 
@@ -32,6 +35,11 @@ const BlogList = ({ session }) => {
             console.log(error);
 
         }
+    };
+    const removeBlogHandler = (id) => {
+
+        setShowAlert(true);
+        setBlogId(id);
     };
     return (
         <div>
@@ -65,7 +73,7 @@ const BlogList = ({ session }) => {
 
                                             <p>ویرایش</p>
                                         </button>
-                                        <button className="btn-item btn-remove">
+                                        <button className="btn-item btn-remove" onClick={() => removeBlogHandler(item?.id)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                                                 <g id="trash" transform="translate(-108 -188)">
                                                     <path id="Vector" d="M18.754,2.016h-.08a78.776,78.776,0,0,0-15.8-.2l-2.04.2A.755.755,0,0,1,0,1.336a.745.745,0,0,1,.67-.82l2.04-.2a81.144,81.144,0,0,1,16.11.2.751.751,0,0,1,.67.82A.741.741,0,0,1,18.754,2.016Z" transform="translate(110.246 192.714)" fill="currentColor" />
@@ -86,6 +94,8 @@ const BlogList = ({ session }) => {
                     );
                 })
             }
+
+            <AlertDialog show={showAlert} close={() => setShowAlert(false)} id={blogId} session={session }/>
         </div >
     );
 };

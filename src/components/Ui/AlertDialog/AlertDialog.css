@@ -1,0 +1,74 @@
+.modal-upload {
+    width: 45%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 400;
+    overflow: hidden;
+    transition: all .3s;
+    opacity: 1;
+  
+}
+.alert-dialog--hidden{
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+}
+
+.dialog-title__title {
+
+    font-size: 2.3rem;
+    font-weight: 800;
+    padding-bottom: 1.5rem;
+
+}
+
+.dialog-body {
+
+    margin-top: 1rem;
+    border-top: 1px solid #4b5563;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.dialog-dis__dis {
+    padding: 2.5rem 0.6rem;
+    font-size: 1.4rem;
+    line-height: 1.7;
+    color: #d1d5db;
+}
+
+.dialog-btns {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    align-self: flex-end;
+}
+.outline-btn {
+    background-color: transparent;
+    border: 1px solid transparent;
+    transition: all .3s;
+}
+.outline-btn--cancel {
+    border-color: #94a3b8;
+    color: #94a3b8;
+}
+
+
+
+.outline-btn--remove {
+    border-color: #e11d48;
+    color: #e11d48;
+}
+
+.outline-btn--remove:hover {
+
+    background-color: #e11d48;
+    color: #fff;
+}
+.outline-btn--cancel:hover {
+
+    background-color: #94a3b8;
+    color: #fff;
+}

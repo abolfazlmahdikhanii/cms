@@ -62,6 +62,7 @@ const Cms = ({ session }) => {
         }
         else {
 
+            setShowAlert(false)
         }
 
     };

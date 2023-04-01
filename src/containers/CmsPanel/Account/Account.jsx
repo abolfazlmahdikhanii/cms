@@ -14,7 +14,13 @@ const Account = ({ session }) => {
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
     const [avatar_url, setAvatarUrl] = useState(null);
-    const [error, setError] = useState(false);
+    const [bio, setBio] = useState("");
+    const [gender, setGender] = useState("");
+    const [birthDay, setBirthDay] = useState("");
+    const [errorFirstName, setErrorFirstName] = useState(false);
+    const [errorlastName, setErrorLastName] = useState(false);
+    const [errorUserName, setErrorUserName] = useState(false);
+    const [errorBio, setErrorBio] = useState(false);
 
 
     useEffect(() => {
@@ -63,6 +69,9 @@ const Account = ({ session }) => {
                 username,
                 firstName: firstName,
                 lastName: lastName,
+                gender: gender,
+                birthDay: birthDay,
+                bio: bio,
                 avatar_url,
                 updated_at: new Date(),
             };
@@ -79,24 +88,24 @@ const Account = ({ session }) => {
     };
 
 
-    const validInputHandler = (e) => {
+    const validInputHandler = (e, errType) => {
 
 
 
         if (e.target.value === "") {
-            setError(true);
+            errType(true);
 
         }
         else {
-            setError(false);
+            errType(false);
         }
     };
-    const validInputPersianHandler = (e) => {
+    const validInputPersianHandler = (e, errType) => {
         const persianRegex = /^[\u0600-\u06FF\s]+$/;
         if (!e.target.value.match(persianRegex)) {
-            setError(true);
+            errType(true);
         }
-        else setError(false);
+        else errType(false);
     };
     return (
 
@@ -113,7 +122,7 @@ const Account = ({ session }) => {
                         url={avatar_url}
                         onUpload={(url) => {
                             setAvatarUrl(url);
-                            updateProfile({ username, firstName, lastName, avatar_url: url });
+                            updateProfile({ username, firstName, lastName, avatar_url: url, bio, gender, birthDay });
                         }}
                     />
                     <div className="account-container">
@@ -126,13 +135,13 @@ const Account = ({ session }) => {
                                         type="text"
                                         value={firstName || ''}
                                         onChange={(e) => {
-                                            validInputHandler(e);
-                                            validInputPersianHandler(e);
+                                            validInputHandler(e, setErrorFirstName);
+                                            validInputPersianHandler(e, setErrorFirstName);
                                             setFirstName(e.target.value);
                                         }}
                                     />
                                 </div>
-                                <p className={`form-err ${error ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
+                                <p className={`form-err ${errorFirstName ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
                             </div>
                             <div>
                                 <div className="form-control">
@@ -142,13 +151,13 @@ const Account = ({ session }) => {
                                         type="text"
                                         value={lastName || ''}
                                         onChange={(e) => {
-                                            validInputHandler(e);
-                                            validInputPersianHandler(e);
+                                            validInputHandler(e, setErrorLastName);
+                                            validInputPersianHandler(e, setErrorLastName);
                                             setLastName(e.target.value);
                                         }}
                                     />
                                 </div>
-                                <p className={`form-err ${error ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
+                                <p className={`form-err ${errorlastName ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
                             </div>
                         </div>
 
@@ -177,14 +186,14 @@ const Account = ({ session }) => {
                                             type="text"
                                             value={username || ''}
                                             onChange={(e) => {
-                                                validInputHandler(e);
+                                                validInputHandler(e, setErrorUserName);
 
                                                 setUsername(e.target.value);
                                             }}
                                         />
                                     </div>
                                 </div>
-                                <p className={`form-err ${error ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
+                                <p className={`form-err ${errorUserName ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
                             </div>
                         </div>
 
@@ -197,15 +206,17 @@ const Account = ({ session }) => {
                                     <select
                                         className=" from-control__select form-control__input"
                                         type="text"
-                                        value={username || ''}
+                                        value={gender || ''}
+                                        onChange={(e) => {
 
+
+                                            setGender(e.target.value);
+                                        }}
                                     >
-                                        <option > دسته بندی  را انتخاب نمایید</option>
-                                        <option value="tech">فناوری</option>
-                                        <option value="health">سلامت و زیبایی</option>
-                                        <option value="art">فرهنگ و هنر</option>
-                                        <option value="life-style">سبک زندگی</option>
-                                        <option value="game">بازی و سرگرمی</option>
+                                        <option > انتخاب نمایید</option>
+                                        <option value="man">مرد</option>
+                                        <option value="woman">زن</option>
+
 
 
                                     </select>
@@ -213,12 +224,16 @@ const Account = ({ session }) => {
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </div>
-                                <p className={`form-err ${error ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
+                                
                             </div>
                             <div>
                                 <div className="form-control">
                                     <p className="form-control__txt">تاریخ تولد</p>
-                                    <DatePicker round="x4" />
+                                    <DatePicker round="x2" accentColor="#4f46e5" value={birthDay} onChange={(e) => {
+
+                                        setBirthDay(e.value);
+
+                                    }} />
                                 </div>
                             </div>
 
@@ -230,15 +245,15 @@ const Account = ({ session }) => {
                                 <textarea
                                     className="form-control__input form-control__txt-area"
                                     type="text"
-                                    value={username || ''}
+                                    value={bio || ''}
                                     onChange={(e) => {
-                                        validInputHandler(e);
+                                        validInputHandler(e, setErrorBio);
 
-                                        setUsername(e.target.value);
+                                        setBio(e.target.value);
                                     }}
                                 ></textarea>
                             </div>
-                            <p className={`form-err ${error ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
+                            <p className={`form-err ${errorBio ? 'active-input' : ''}`}>فیلد مورد نظر را تکمیل کنید</p>
                         </div>
                     </div>
                     <div>

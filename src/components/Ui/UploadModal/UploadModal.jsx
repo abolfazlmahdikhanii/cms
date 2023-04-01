@@ -18,6 +18,7 @@ const UploadModal = (props) => {
 
     const submitHandler = () => {
         props.changeUrl(imgSrc, width, height);
+        props.close()
     };
 
     return (

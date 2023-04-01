@@ -36,7 +36,7 @@ setBlogId(props?.id)
 
             <Backdrop show={props.show} />
 
-            <section className={`modal-upload ${!props.show ? 'alert-dialog--hidden' : ''}`} >
+            <section className={`alert-dialog ${!props.show ? 'alert-dialog--hidden' : ''}`} >
                 <Box modal={true} >
                   <h4 className="dialog-title__title">حذف پست</h4>
                   <div className="dialog-body">

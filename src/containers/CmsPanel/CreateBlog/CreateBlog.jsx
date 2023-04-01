@@ -18,6 +18,17 @@ const CreateBlog = (props) => {
     const [type, setType] = useState("");
     const data = [];
 
+
+    // useEffect(()=>{
+       
+    // },[])
+
+    // const getData=async()=>{
+
+
+
+    // }
+
    
     
     const formHandler = (e) => {
@@ -74,12 +85,11 @@ const CreateBlog = (props) => {
         
 
         try {
-            const { error } = await supabase.from("blogs").insert({post_title:title, post_content: content, post_status: status, post_author:user.id,post_tags: tag, comment_status: commentStatus, post_type: type });
+            const { error } = await supabase.from("blogs").insert({post_title:title, post_content:unique, post_status: status, post_author:user.id,post_tags: tag, comment_status: commentStatus, post_type: type });
 
-        if (error) {
-            throw error
+        if (error)  throw error
 
-        }
+        setContent([])
         } catch (error) {
             console.log(error);
             

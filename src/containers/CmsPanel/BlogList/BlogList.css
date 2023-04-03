@@ -78,3 +78,32 @@ transition: all .3s;
 .btn-remove p{
     font-size: 1.4rem;
 }
+.blog-list--tab{
+
+    margin-bottom: 3rem;
+    padding:0 1rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #475569;
+    gap: 1rem;
+   
+}
+.blog-list__tab{
+    color: #d1d5db;
+    padding: 1.5rem 3rem;
+    border-radius: 1.2rem;
+    transition: all .3s;
+}
+.blog-list__tab:hover{
+ background-color: rgba(51, 65, 85,0.5);
+}
+.blog-list__tab.active{
+    background-color: #334155;
+    color: #a5b4fc;
+    outline:  2px solid #334155;
+    outline-offset: 2px;
+ 
+}
+.blog-list__tab.active:hover{
+    background-color: rgba(51, 65, 85,1);
+   }

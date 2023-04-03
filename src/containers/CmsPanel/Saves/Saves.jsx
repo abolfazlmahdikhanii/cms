@@ -4,9 +4,11 @@ import { supabase } from "../../../superbase";
 import './Saves.css'
 import useTranslatorCategory from "../../../hooks/useTranslatetorCategory";
 import useFilterImage from "../../../hooks/useFilterImage";
+import Loader from "../../../components/Ui/Loader/Loader";
 
 const Saves=({session})=>{
     const [favBlogs,setFavBlogs]=useState([])
+    const [loading, setLoading] = useState(false);
     const translatorCategory=useTranslatorCategory
     const filterImage=useFilterImage
     useEffect(()=>{
@@ -15,6 +17,7 @@ const Saves=({session})=>{
     },[])
     const getSavessBlog=async()=>{
         try {
+            setLoading(true)
             const {user}=session
             const {data,error}=await supabase.from("save").select("user_id(avatar_url,firstName,lastName),blog_id(id,post_title,post_type,post_content)").eq("user_id",user?.id)
 
@@ -25,14 +28,19 @@ const Saves=({session})=>{
             setFavBlogs(data)
 
         } catch (error) {
+            setLoading(false)
             console.log(error);
             
+        }
+        finally{
+            setLoading(false)
         }
     }
     const removeSaveBlog=async (id)=>{
         try {
           
           
+            setLoading(true)
                 const { user } = session;
                 console.log(user);
                 
@@ -55,17 +63,18 @@ const Saves=({session})=>{
 
             
         } catch (error) {
-        
+        setLoading(false)
             console.log(error);
     
         }
     
         finally {
-         
+            setLoading(false)
         }
        }
     return(
        <div className="fav-grid">
+        <Loader show={loading}/>
          {
             favBlogs.map((item)=>{
                 const{id,post_title,post_type,post_content}=item?.blog_id

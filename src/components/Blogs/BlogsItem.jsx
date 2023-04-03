@@ -136,7 +136,7 @@ const BlogItem = (props) => {
                   </p>
                   <p className="blog-content__btn-txt">{totalRate}</p>
                 </button>
-                <button className={`blog-content__btn blog-save__btn ${isSave?'save--active':''}`} onClick={!isSave?props.clickSave:props.removeSave}>
+                <button className={`blog-content__btn blog-save__btn ${isSave?'save--active':''}`} onClick={props.clickSave}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 24 24">
                     <g id="archive" transform="translate(-172 -190)">
                       <path id="Vector" d="M3.5,1.985a8.878,8.878,0,0,1-3.01-.53.749.749,0,0,1-.45-.96.764.764,0,0,1,.97-.45A7.373,7.373,0,0,0,6,.045a.75.75,0,1,1,.51,1.41A8.878,8.878,0,0,1,3.5,1.985Z" transform="translate(180.495 198.295)" fill="currentColor" />

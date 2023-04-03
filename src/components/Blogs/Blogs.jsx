@@ -17,6 +17,7 @@ const Blogs = ({ blogs }) => {
     const [isUser, setIsUser] = useState(false);
     const [loading, setLoading] = useState(false);
     const [click, setClick] = useState(false);
+    const [clickSave, setClickSave] = useState(false);
    
 
     const filterParagraph=useFilterPargraph
@@ -41,13 +42,13 @@ const Blogs = ({ blogs }) => {
     };
     const handleSaveClick = (id) => {
 
-        if (!click) {
-            removeBlogRate(id);
-            setClick(true);
+        if (!clickSave) {
+            removeSaveBlog(id);
+            setClickSave(true);
         }
         else {
-            updateBlogRate(id);
-            setClick(false);
+            saveBlogHandler(id);
+            setClickSave(false);
         }
     };
 
@@ -243,8 +244,8 @@ const Blogs = ({ blogs }) => {
                             userId={users?.user?.id}
                             date={item?.post_date}
                             clickRate={() => handleClick(item?.id)}
-                            clickSave={() => saveBlogHandler(item?.id)}
-                            removeSave={()=>removeSaveBlog(item?.id)}
+                            clickSave={() => handleSaveClick(item?.id)}
+                            
 
                         />
                     );

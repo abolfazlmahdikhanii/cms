@@ -14,7 +14,7 @@ const MiniProfile = (props) => {
     return (
         <div className={`mini-profile-box ${props.show ? 'show-profile' : ''}`}>
             <div className="profile-item">
-                <Link className="mini-profile__account ">
+                <Link to="/panel" className="mini-profile__account ">
                     <div>
                         <img src={profileIcon} alt="profile" className="mini-profile__img" />
                     </div>

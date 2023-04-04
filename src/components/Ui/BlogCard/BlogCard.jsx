@@ -1,9 +1,10 @@
 import React from "react";
-import Box from "../Box/Box";
+import "./BlogCard.css"
+
 
 const BlogCard=({content,title,date,remove})=>{
     return(
-   <Box>
+   <div className="blog-card">
          <div className="blog-list--row" >
         <div className="blog-list--info">
             <h2 className="blog-list__title">{title}</h2>
@@ -47,7 +48,7 @@ const BlogCard=({content,title,date,remove})=>{
             </div>
         </div>
     </div>
-   </Box>
+   </div>
     )
 }
 

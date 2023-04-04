@@ -1,0 +1,11 @@
+.blog-card {
+    margin-bottom: 2rem;
+
+    padding: 2.8rem 2rem;
+    background-color: var(--bg-dark-primary);
+    border-radius: 1.2rem;
+
+
+    width: fit-content;
+
+}

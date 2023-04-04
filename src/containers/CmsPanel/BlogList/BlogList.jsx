@@ -16,8 +16,6 @@ const BlogList = ({ session }) => {
     const [loading, setLoading] = useState(false);
     const [blogType, setBlogType] = useState("share");
 
-    const link = ["/", "shared-post"];
-    const link2 = ["/", "draft"];
 
     useEffect(() => {
         getUserBlogs(blogType);
@@ -36,7 +34,7 @@ const BlogList = ({ session }) => {
 
 
             setBlogs(data);
-            console.log(data);
+         
 
 
         } catch (error) {
@@ -54,22 +52,20 @@ const BlogList = ({ session }) => {
 
             {/* tab */}
             <div className="blog-list--tab">
-                <NavLink to="draft" end className="blog-list__tab " activeClassName="active" onClick={() => setBlogType("draft")}>پیش نویس ها</NavLink>
-                <NavLink to={link && "shared-post"}
-                    end
-                    
-
-                    className="blog-list__tab  "
-                    activeClassName="active"
-                    onClick={() => setBlogType("share")}>پست های منتشر شده</NavLink>
+                <div className={`blog-list__tab ${blogType === "draft" ? 'active' : ''}`} onClick={() => setBlogType("draft")}>پیش نویس ها</div>
+                <div
+                    className={`blog-list__tab ${blogType === "share" ? 'active' : ''}`}
+                    onClick={() => setBlogType("share")}>پست های منتشر شده</div>
             </div>
             <Loader show={loading} />
 
-            <Routes>
-                <Route path="/" element={<ShareList blogs={blogs} session={session} />} />
-                <Route path="shared-post" element={<ShareList blogs={blogs} session={session} />} />
-                <Route path="draft" element={<DraftList blogs={blogs} session={session} />} />
-            </Routes>
+            <ShareList blogs={blogs} session={session} show={blogType} />
+            <DraftList blogs={blogs} session={session} show={blogType} />
+
+
+
+
+
 
 
 

@@ -3,7 +3,7 @@
     max-width: 90rem;
     /* align-items: baseline; */
     gap: 2rem;
-    padding:1rem 0 ;
+    padding: 1rem 0;
     overflow: hidden;
 }
 
@@ -17,8 +17,8 @@
 }
 
 .blog-list__title {
-    font-family: 'yekan',sans-serif;
-    font-size: 2.7rem;
+    font-family: 'yekan', sans-serif;
+    font-size: 2.5rem;
     line-height: 1.6;
     color: #fff;
     text-overflow: ellipsis;
@@ -33,77 +33,100 @@
     text-overflow: ellipsis;
     line-height: 2;
     -webkit-box-orient: vertical;
+    font-size: 1.3rem;
 }
-.blog-list--action{
+
+.blog-list--action {
     width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
-.blog-list--date{
-font-size: 1.6rem;
-color: #d1d5db;
+
+.blog-list--date {
+    font-size: 1.6rem;
+    color: #d1d5db;
 }
-.btn-flex{
+
+.btn-flex {
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: .7rem;
 }
-.blog-list--btn-action{
+
+.blog-list--btn-action {
     display: flex;
-    
+
     gap: 1rem;
     width: max-content;
     overflow: hidden;
 }
-.btn-edit{
-background-color: #f59e0b;
-border: 1px solid #f59e0b;
-transition: all .3s;
+
+.btn-edit {
+    background-color: #f59e0b;
+    border: 1px solid #f59e0b;
+    transition: all .3s;
 }
-.btn-edit:hover{
+
+.btn-edit:hover {
     background-color: transparent;
     color: #f59e0b;
 }
-.btn-edit p{
+
+.btn-edit p {
     font-size: 1.4rem;
 }
-.btn-remove{
 
-}
-.btn-remove:hover{
+.btn-remove {}
+
+.btn-remove:hover {
     background-color: #ef4444;
     color: #fff;
 }
-.btn-remove p{
+
+.btn-remove p {
     font-size: 1.4rem;
 }
-.blog-list--tab{
+
+.blog-list--tab {
 
     margin-bottom: 3rem;
-    padding:0 1rem 1rem 1rem;
+    padding: 0 1rem 1rem 1rem;
     display: flex;
     align-items: center;
     border-bottom: 2px solid #475569;
     gap: 1rem;
-   
+
 }
-.blog-list__tab{
+
+.blog-list__tab {
     color: #d1d5db;
     padding: 1.5rem 3rem;
     border-radius: 1.2rem;
     transition: all .3s;
+    cursor: pointer;
 }
-.blog-list__tab:hover{
- background-color: rgba(51, 65, 85,0.5);
+
+.blog-list__tab:hover {
+    background-color: rgba(51, 65, 85, 0.5);
 }
-.blog-list__tab.active{
+
+.blog-list__tab.active {
     background-color: #334155;
     color: #a5b4fc;
-    outline:  2px solid #334155;
+    outline: 2px solid #334155;
     outline-offset: 2px;
- 
+
 }
-.blog-list__tab.active:hover{
-    background-color: rgba(51, 65, 85,1);
-   }
+
+.blog-list__tab.active:hover {
+    background-color: rgba(51, 65, 85, 1);
+}
+
+.active-container {
+    display: block;
+}
+
+.diactive-container {
+    display: none;
+}

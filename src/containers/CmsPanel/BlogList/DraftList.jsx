@@ -4,18 +4,24 @@ import useRelativeTime from "../../../hooks/useRelativeTime";
 import AlertDialog from "../../../components/Ui/AlertDialog/AlertDialog";
 import BlogCard from "../../../components/Ui/BlogCard/BlogCard";
 
-const DraftList = ({ blogs,session }) => {
+const DraftList = ({ blogs,session,show }) => {
     const [showAlert, setShowAlert] = useState(false);
     const [blogId, setBlogId] = useState(null);
     const filterParagraph = useFilterPargraph;
     const relativeTime = useRelativeTime;
+    let cls="diactive-container"
     const removeBlogHandler = (id) => {
 
         setShowAlert(true);
         setBlogId(id);
     };
+    if(show==="draft"){
+
+        cls="active-container"
+    }
+
     return (
-        <div>
+        <div className={cls}>
             {
                 blogs?.map((item) => {
                     return (

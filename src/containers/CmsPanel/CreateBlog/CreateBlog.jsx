@@ -7,6 +7,7 @@ import StatusBlogMenu from "../../../components/StatusBlogMenu/StatusBlogMenu";
 
 const CreateBlog = (props) => {
     const [element, setElement] = useState([]);
+    const [tab, setTab] = useState("category");
     const [img, setImg] = useState([]);
     const [status, setStatus] = useState("draft");
     const [title, setTitle] = useState("");
@@ -20,7 +21,7 @@ const CreateBlog = (props) => {
 
 
     // useEffect(()=>{
-       
+
     // },[])
 
     // const getData=async()=>{
@@ -29,15 +30,15 @@ const CreateBlog = (props) => {
 
     // }
 
-   
-    
+
+
     const formHandler = (e) => {
         e.preventDefault();
     };
     const submitFormHandler = async (e) => {
         e.preventDefault();
 
-        const {user}=props.user
+        const { user } = props.user;
         for (const item of element) {
             if (item.value !== "" && 'value' in item) {
 
@@ -56,20 +57,20 @@ const CreateBlog = (props) => {
                     });
                 }
                 if (item.name === "img") {
-                  if(item.value.includes("https")||item.value.includes("http")){
-                    data.push({
-                        id: item.id,
-                        style: {},
-                        contentTag: `<img loading='lazy' src='${item.value}'>`
-                    });
-                  }
-                  else{
-                    data.push({
-                        id: item.id,
-                        style: {},
-                        contentTag: `<img loading='lazy' src='https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${item.value}'>`
-                    });
-                  }
+                    if (item.value.includes("https") || item.value.includes("http")) {
+                        data.push({
+                            id: item.id,
+                            style: {},
+                            contentTag: `<img loading='lazy' src='${item.value}'>`
+                        });
+                    }
+                    else {
+                        data.push({
+                            id: item.id,
+                            style: {},
+                            contentTag: `<img loading='lazy' src='https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${item.value}'>`
+                        });
+                    }
                 }
             }
 
@@ -81,18 +82,18 @@ const CreateBlog = (props) => {
 
         setContent(unique);
 
-      
-        
+
+
 
         try {
-            const { error } = await supabase.from("blogs").insert({post_title:title, post_content:unique, post_status: status, post_author:user.id,post_tags: tag, comment_status: commentStatus, post_type: type });
+            const { error } = await supabase.from("blogs").insert({ post_title: title, post_content: unique, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type });
 
-        if (error)  throw error
+            if (error) throw error;
 
-        setContent([])
+            setContent([]);
         } catch (error) {
             console.log(error);
-            
+
         }
     };
     const submitFormTagHanlder = (e) => {
@@ -175,8 +176,8 @@ const CreateBlog = (props) => {
 
                 <Box>
                     <input type="text" placeholder="عنوان مقاله را وارد نمایید" className="form-control__input form-control__input-title"
-                     onChange={(e)=>setTitle(e.target.value)}
-                     value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        value={title}
                     />
                 </Box>
 
@@ -315,9 +316,15 @@ const CreateBlog = (props) => {
                 </Box>
 
                 <div className="creat-blog__option">
-                    <Box>
 
-                        <div className="option-control ">
+                    <Box>
+                        {/* tab */}
+                        <div className="blog-list--tab">
+                            <div className={`blog-list__tab ${tab==="category"?"active":""}`} onClick={()=>setTab("category")} >دسته بندی</div>
+                            <div className={`blog-list__tab ${tab==="tag"?"active":""}`} onClick={()=>setTab("tag")}>برچسب</div>
+                            <div className={`blog-list__tab ${tab==="comment"?"active":""}`} onClick={()=>setTab("comment")}>وضعیت کامنت</div>
+                        </div>
+                        <div className={`option-control ${tab==="category"?"option-control--active":""}` }>
                             <p>دسته بندی</p>
                             <div className="option-control-select">
 
@@ -337,7 +344,7 @@ const CreateBlog = (props) => {
 
 
                         </div>
-                        <div className="option-control">
+                        <div className={`option-control ${tab==="tag"?"option-control--active":""}` }>
                             <p>برچسب</p>
                             <div className="option-control_tag">
                                 <div className="option-control_tag-box">
@@ -372,7 +379,7 @@ const CreateBlog = (props) => {
                                 </form>
                             </div>
                         </div>
-                        <div className="option-control">
+                        <div className={`option-control ${tab==="comment"?"option-control--active":""}` }>
                             <p>وضعیت کامنت </p>
                             <label htmlFor="switch-chk" className="option-control__switch">
                                 <input type="checkbox" className="option-control__switch-chk" id="switch-chk" onChange={(e) => changeStatusHandler(e)} />

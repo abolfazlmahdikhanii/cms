@@ -105,14 +105,20 @@
 
 }
 
-.creat-blog__option {}
+.creat-blog__option {
+    padding-bottom: 2rem;
+}
 
 .option-control {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 1.3rem;
     padding: 0 .6rem;
     margin-bottom: 2rem;
+}
+
+.option-control--active {
+    display: flex;
 }
 
 .option-control__switch {

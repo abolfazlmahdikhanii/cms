@@ -1,34 +1,131 @@
 import React, { useState, useEffect } from "react";
+import sanitizeHtml from 'sanitize-html';
+
 import "./Create-blog.css";
 import Box from "../../../components/Ui/Box/Box";
 import Element from "../../../components/Element/Element.jsx";
 import { supabase } from "../../../superbase";
 import StatusBlogMenu from "../../../components/StatusBlogMenu/StatusBlogMenu";
+import Loader from "../../../components/Ui/Loader/Loader";
+import { useParams } from "react-router-dom";
+
+
+
+
 
 const CreateBlog = (props) => {
+    const [loading, setLoading] = useState(false);
     const [element, setElement] = useState([]);
     const [tab, setTab] = useState("category");
     const [img, setImg] = useState([]);
     const [status, setStatus] = useState("draft");
     const [title, setTitle] = useState("");
+
     const [showMenu, setshowMenu] = useState(false);
     const [content, setContent] = useState([]);
     const [tag, setTag] = useState([]);
     const [tagContent, setTagContent] = useState("");
     const [commentStatus, setCommentStatus] = useState(true);
     const [type, setType] = useState("");
+
     const data = [];
+    const newData = [];
 
 
-    // useEffect(()=>{
+    const match = useParams();
 
-    // },[])
+    useEffect(() => {
+        if (match?.id) {
+            getBLogData(match?.id);
+        }
+    }, []);
 
-    // const getData=async()=>{
+
+    const getBLogData = async (id) => {
+        try {
+            const { data, err } = await supabase.from("blogs").select(" post_title,post_content, post_status,  post_tags, comment_status, post_type")
+                .eq("id", id)
+                .single();
+
+            if (err) throw err;
+            console.log(data);
+            setTitle(data.post_title);
+            setTag(data.post_tags);
+            setStatus(data.post_status);
+            setType(data.post_type);
+            setCommentStatus(data.comment_status);
+            splitContent(data.post_content);
+
+        }
+        catch (err) {
+            console.log(err);
+
+        }
+    };
+
+    const removeTag = (str) => {
+        if ((str === null) || (str === ''))
+            return false;
+        else
+            str = str.toString();
+        console.log(str.replace(/(<([^>]+)>)/ig, ''));
+
+        return str.replace(/(<([^>]+)>)/ig, '');
+    };
+    const removeImgTag = (str) => {
+        const clean = sanitizeHtml(str, {
+            allowedTags: ['img'],
 
 
 
-    // }
+        });
+        const newStr = clean.split(" ").find((item) => item.includes("src=")).slice(5, -1);
+        console.log(newStr);
+
+        return newStr;
+
+
+
+    };
+    const splitContent = (arr) => {
+        for (const item of arr) {
+
+
+            console.log(item);
+
+            if (item.contentTag.includes("<h2")) {
+                newData.push({
+                    id: item.id,
+                    name: "title",
+                    value: removeTag(item.contentTag)
+                });
+            }
+            if (item.contentTag.includes("<p")) {
+                newData.push({
+                    id: item.id,
+                    name: "txt",
+                    value: removeTag(item.contentTag)
+                });
+            }
+            if (item.contentTag.includes("<img")) {
+
+
+                newData.push({
+                    id: item.id,
+                    name: "img",
+                    value: removeImgTag(item.contentTag)
+                });
+
+
+            }
+
+
+        }
+        setElement(newData);
+    };
+
+
+
 
 
 
@@ -37,6 +134,8 @@ const CreateBlog = (props) => {
     };
     const submitFormHandler = async (e) => {
         e.preventDefault();
+
+
 
         const { user } = props.user;
         for (const item of element) {
@@ -91,6 +190,7 @@ const CreateBlog = (props) => {
             if (error) throw error;
 
             setContent([]);
+
         } catch (error) {
             console.log(error);
 
@@ -172,6 +272,7 @@ const CreateBlog = (props) => {
     };
     return (
         <>
+            <Loader show={loading} />
             <div action="#" className="form-blog" >
 
                 <Box>
@@ -181,10 +282,7 @@ const CreateBlog = (props) => {
                     />
                 </Box>
 
-                {/* <Box>
-                    <textarea  placeholder="توضیحات مقاله را وارد نمایید" 
-                    className="content__input content__input--2 paragraph  " ></textarea>
-                </Box> */}
+
 
                 <Box>
                     <section className="container-blog">
@@ -303,8 +401,10 @@ const CreateBlog = (props) => {
                             {
                                 element.map((item, i) => {
 
+
+
                                     return (
-                                        <Element type={item.name} key={i} id={item.id} change={(e) => changeInputValueHandler(e, item.id, item.name)} />
+                                        <Element value={item?.value} type={item.name} key={i} id={item.id} change={(e) => changeInputValueHandler(e, item.id, item.name)} />
                                     );
                                 })
                             }
@@ -320,15 +420,15 @@ const CreateBlog = (props) => {
                     <Box>
                         {/* tab */}
                         <div className="blog-list--tab">
-                            <div className={`blog-list__tab ${tab==="category"?"active":""}`} onClick={()=>setTab("category")} >دسته بندی</div>
-                            <div className={`blog-list__tab ${tab==="tag"?"active":""}`} onClick={()=>setTab("tag")}>برچسب</div>
-                            <div className={`blog-list__tab ${tab==="comment"?"active":""}`} onClick={()=>setTab("comment")}>وضعیت کامنت</div>
+                            <div className={`blog-list__tab ${tab === "category" ? "active" : ""}`} onClick={() => setTab("category")} >دسته بندی</div>
+                            <div className={`blog-list__tab ${tab === "tag" ? "active" : ""}`} onClick={() => setTab("tag")}>برچسب</div>
+                            <div className={`blog-list__tab ${tab === "comment" ? "active" : ""}`} onClick={() => setTab("comment")}>وضعیت کامنت</div>
                         </div>
-                        <div className={`option-control ${tab==="category"?"option-control--active":""}` }>
+                        <div className={`option-control ${tab === "category" ? "option-control--active" : ""}`}>
                             <p>دسته بندی</p>
                             <div className="option-control-select">
 
-                                <select name="" id="" className="option-control__select" onChange={(e) => setType(e.target.value)
+                                <select name="" id="" className="option-control__select" value={type} onChange={(e) => setType(e.target.value)
                                 }>
                                     <option > دسته بندی  را انتخاب نمایید</option>
                                     <option value="tech">فناوری</option>
@@ -344,7 +444,7 @@ const CreateBlog = (props) => {
 
 
                         </div>
-                        <div className={`option-control ${tab==="tag"?"option-control--active":""}` }>
+                        <div className={`option-control ${tab === "tag" ? "option-control--active" : ""}`}>
                             <p>برچسب</p>
                             <div className="option-control_tag">
                                 <div className="option-control_tag-box">
@@ -379,7 +479,7 @@ const CreateBlog = (props) => {
                                 </form>
                             </div>
                         </div>
-                        <div className={`option-control ${tab==="comment"?"option-control--active":""}` }>
+                        <div className={`option-control ${tab === "comment" ? "option-control--active" : ""}`}>
                             <p>وضعیت کامنت </p>
                             <label htmlFor="switch-chk" className="option-control__switch">
                                 <input type="checkbox" className="option-control__switch-chk" id="switch-chk" onChange={(e) => changeStatusHandler(e)} />

@@ -1,13 +1,19 @@
 import React from "react";
-import "./Navigation.css"
+import "./Navigation.css";
 import NavItem from "./NavItem.jsx";
+import logo from "../../assets/logo.svg";
 
 
-const Navigation=(props)=>{
+const Navigation = (props) => {
     return (
         <div className="navigation">
-           <NavItem/>
+            <div className="logo">
+
+                <img src={logo} alt="" />
+
+            </div>
+            <NavItem />
         </div>
-    )
-}
-export default Navigation
+    );
+};
+export default Navigation;

@@ -3,6 +3,9 @@
     padding: 2rem 1.5rem;
     border-radius: .5rem;
 }
+.logo{
+padding:0 .5rem 2rem .5rem;
+}
 @media (prefers-color-scheme: light) {
     .navigation{
         background-color: var(--bg-light-primary);

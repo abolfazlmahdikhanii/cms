@@ -4,7 +4,7 @@ import UploadModal from "../Ui/UploadModal/UploadModal";
 import Uploader from "../Uploader/Uploader";
 import "./Element.css"
 
-const Element = ({type,change,url,id}) => {
+const Element = ({type,change,url,id,value}) => {
     const [show,setShow]=useState(false)
     const [src,setSrc]=useState("")
    
@@ -59,7 +59,7 @@ let pic=null
             //   element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
             element=<img
             id={id}
-            src={pic}
+            src={value||pic}
             className="blog-img"
             style={{ height: '31rem', width: "100%",objectFit:"cover" }}
             onClick={()=>setShow(true)}
@@ -69,14 +69,14 @@ let pic=null
               element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
             break
         case "title":
-            element=<input autoFocus type="text" className="title content__input" value={values.title} onChange={(e)=>{changeValueHandler(e,"title")}}  />
+            element=<input autoFocus type="text" className="title content__input" value={value||values.title} onChange={(e)=>{changeValueHandler(e,"title")}}  />
             break;
         case "txt":
-            element=<textarea autoFocus className="paragraph content__input" onInput={textAreaHeight} value={values.paragraph} onChange={(e)=>{changeValueHandler(e,"paragraph")}} ></textarea>
+            element=<textarea autoFocus className="paragraph content__input" onInput={textAreaHeight} value={value||values.paragraph} onChange={(e)=>{changeValueHandler(e,"paragraph")}} ></textarea>
 
             break;
         case "link":
-            element=<input autoFocus type="text" className="link content__input" value={values.link} onChange={(e)=>{changeValueHandler(e,"link")}}  />
+            element=<input autoFocus type="text" className="link content__input" value={value||values.link} onChange={(e)=>{changeValueHandler(e,"link")}}  />
         default:
             // element=<input type="text" className="title" value={paragraph} onChange={(e)=>setParagraph(e.target.value)} />
             break;

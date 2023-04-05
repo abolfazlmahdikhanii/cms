@@ -30,6 +30,7 @@ const ShareList = ({ blogs,session,show }) => {
 
                         <BlogCard
                             key={item?.id}
+                            id={item?.id}
                             title={item?.post_title}
                             date={relativeTime(item?.post_date)}
                             content={filterParagraph(item?.post_content).join("")}

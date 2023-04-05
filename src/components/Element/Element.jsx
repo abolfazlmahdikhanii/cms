@@ -46,12 +46,28 @@ e.target.style.height = Math.max(e.target.scrollHeight, 100) + "px";
     
 let pic=null
 
+   const imgSrc=(str)=>{
+
+    if(str!==null){
+    
+        if(str.includes("https")||str.includes("http")){
+            return str
+        }
+        else{
+            
+          return str?`https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${str}`:"https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png"
+        }
+    }
+   }
+    
     if(src.includes("https")||src.includes("http")){
         pic=src
     }
     else{
+        
         pic=src?`https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${src}`:"https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png"
     }
+
 
     let element=null
     switch (type) {
@@ -59,7 +75,7 @@ let pic=null
             //   element=<Uploader id={id} url={values.imgSrc} size={320} onUpload={(url)=>changeSrcHandler(url,"imgSrc")}/>
             element=<img
             id={id}
-            src={value||pic}
+            src={imgSrc(value)||pic}
             className="blog-img"
             style={{ height: '31rem', width: "100%",objectFit:"cover" }}
             onClick={()=>setShow(true)}

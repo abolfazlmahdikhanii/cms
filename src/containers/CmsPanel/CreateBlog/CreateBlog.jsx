@@ -7,7 +7,7 @@ import Element from "../../../components/Element/Element.jsx";
 import { supabase } from "../../../superbase";
 import StatusBlogMenu from "../../../components/StatusBlogMenu/StatusBlogMenu";
 import Loader from "../../../components/Ui/Loader/Loader";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 
 
@@ -33,33 +33,58 @@ const CreateBlog = (props) => {
 
 
     const match = useParams();
+    const history = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
+
+      
+
+       
+        
         if (match?.id) {
             getBLogData(match?.id);
         }
-    }, []);
+       
+        return(()=>{
+            setElement([])
+            setTitle("")
+            setTag([])
+            setType("")
+            setContent([])
+        })
+
+
+
+
+
+    }, [history.pathname]);
 
 
     const getBLogData = async (id) => {
         try {
+            setLoading(true);
+
             const { data, err } = await supabase.from("blogs").select(" post_title,post_content, post_status,  post_tags, comment_status, post_type")
-                .eq("id", id)
-                .single();
+                .eq("id", id).single();
+
 
             if (err) throw err;
-            console.log(data);
+
             setTitle(data.post_title);
             setTag(data.post_tags);
             setStatus(data.post_status);
             setType(data.post_type);
             setCommentStatus(data.comment_status);
-            splitContent(data.post_content);
+            splitContent(data?.post_content);
 
         }
         catch (err) {
             console.log(err);
-
+            setLoading(false);
+        }
+        finally {
+            setLoading(false);
         }
     };
 
@@ -68,7 +93,7 @@ const CreateBlog = (props) => {
             return false;
         else
             str = str.toString();
-        console.log(str.replace(/(<([^>]+)>)/ig, ''));
+
 
         return str.replace(/(<([^>]+)>)/ig, '');
     };
@@ -91,7 +116,7 @@ const CreateBlog = (props) => {
         for (const item of arr) {
 
 
-            console.log(item);
+           
 
             if (item.contentTag.includes("<h2")) {
                 newData.push({
@@ -132,12 +157,14 @@ const CreateBlog = (props) => {
     const formHandler = (e) => {
         e.preventDefault();
     };
+
+
     const submitFormHandler = async (e) => {
         e.preventDefault();
 
 
 
-        const { user } = props.user;
+
         for (const item of element) {
             if (item.value !== "" && 'value' in item) {
 
@@ -177,14 +204,26 @@ const CreateBlog = (props) => {
 
 
 
-        const unique = [...new Set(data.map(item => item))];
-
-        setContent(unique);
 
 
+        if (match?.id) {
+            updateBlogData(match?.id, data);
+        }
+        else {
+            setBlogData();
+        }
 
 
+
+
+    };
+    const setBlogData = async () => {
         try {
+            setLoading(true);
+            const unique = [...new Set(data.map(item => item))];
+
+            setContent(unique);
+            const { user } = props.user;
             const { error } = await supabase.from("blogs").insert({ post_title: title, post_content: unique, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type });
 
             if (error) throw error;
@@ -193,7 +232,35 @@ const CreateBlog = (props) => {
 
         } catch (error) {
             console.log(error);
+            setLoading(false);
+        }
+        finally {
+            setLoading(false);
+        }
+    };
+    const updateBlogData = async (id, arr) => {
+        try {
+            setLoading(true);
+            const unique = [...new Set(arr.map(item => item))];
 
+            console.log(unique);
+
+            setContent(unique);
+            const { user } = props.user;
+            const { data, error } = await supabase.from("blogs").update({ post_title: title, post_content: unique, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type }).eq("id", id);
+
+            if (error) throw error;
+
+            console.log(data);
+
+
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+
+        }
+        finally {
+            setLoading(false);
         }
     };
     const submitFormTagHanlder = (e) => {

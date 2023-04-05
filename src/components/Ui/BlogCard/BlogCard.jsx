@@ -1,8 +1,9 @@
 import React from "react";
 import "./BlogCard.css"
+import { Link } from "react-router-dom";
 
 
-const BlogCard=({content,title,date,remove})=>{
+const BlogCard=({content,title,date,remove,id})=>{
     return(
    <div className="blog-card">
          <div className="blog-list--row" >
@@ -16,7 +17,7 @@ const BlogCard=({content,title,date,remove})=>{
                 <p className="blog-list--date">اخرین تغییر :  {date}</p>
             </div>
             <div className="blog-list--btn-action">
-                <button className="btn-item btn-edit">
+                <Link to={`/panel/edit/${id}`} className="btn-item btn-edit">
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                         <g id="vuesax_outline_edit" data-name="vuesax/outline/edit" transform="translate(-620 -252)">
@@ -30,7 +31,7 @@ const BlogCard=({content,title,date,remove})=>{
                     </svg>
 
                     <p>ویرایش</p>
-                </button>
+                </Link>
                 <button className="btn-item btn-remove" onClick={remove}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                         <g id="trash" transform="translate(-108 -188)">

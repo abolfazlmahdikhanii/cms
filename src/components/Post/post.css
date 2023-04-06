@@ -220,3 +220,20 @@
     margin-top:1rem;
     padding: 2rem 1.2rem;
 }
+.comment-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    margin-bottom: 2.4rem;
+}
+.comment-title__title{
+    font-family: "yekan",sans-serif;
+    font-size: 2.7rem;
+    color: #fff;
+    font-weight: 700;
+   
+}
+.btn-action--comment{
+    margin-top: 0 !important;
+}

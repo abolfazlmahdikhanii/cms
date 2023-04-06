@@ -7,6 +7,10 @@ import Box from "../../components/Ui/Box/Box";
 import useTranslatorCategory from "../../hooks/useTranslatetorCategory";
 import Aside from "../Aside/Aside";
 import Loader from "../Ui/Loader/Loader";
+import PostCard from "../Ui/PostCard/PostCard";
+import useFilterImage from "../../hooks/useFilterImage";
+
+
 
 
 const Post = ({ blogs, session }) => {
@@ -16,13 +20,16 @@ const Post = ({ blogs, session }) => {
     const [blogContent, setBlogContent] = useState([]);
     const [user, setUser] = useState(null);
     const [scroll, setScroll] = useState(0);
+    const [sameBlog, setSameBlog] = useState([]);
 
     const match = useParams();
 
     const timeFormat = useRelativeTime;
     const translator = useTranslatorCategory;
+    const filterImage = useFilterImage;
     useEffect(() => {
         getBlogData();
+        getSameBlogs();
 
         setUser(session);
 
@@ -60,6 +67,44 @@ const Post = ({ blogs, session }) => {
 
             setBlogContent(blog);
             filterPosts(blog);
+
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+
+        }
+        finally {
+            setLoading(false);
+        }
+
+    };
+    const getSameBlogs = async () => {
+        try {
+
+
+            setLoading(true);
+            let { data: blog, error } = await supabase
+                .from('blogs')
+                .select(`id,post_date,post_title,post_type,post_content
+                ,post_author(
+                    firstName,
+                    lastName,
+                    avatar_url
+                )`)
+                .eq("post_type", blogContent[0]?.post_type)
+                .limit(3);
+
+
+
+            if (error) {
+
+                throw error;
+            };
+
+            blog.splice(0, 1);
+
+            setSameBlog(blog);
+
 
         } catch (error) {
             setLoading(false);
@@ -118,7 +163,7 @@ const Post = ({ blogs, session }) => {
                     <div className="post-cover">
                         <img src="../../../src/assets/bg-slider.jpg" alt="" loading="lazy" />
                     </div>
-
+                    {/* info */}
                     <Box>
                         <h2 className="post__title">{blogContent[0]?.post_title}</h2>
                         <div className="post-row">
@@ -160,7 +205,7 @@ const Post = ({ blogs, session }) => {
                             </div>
                         </div>
                     </Box>
-
+                    {/* content */}
                     <Box>
                         <div className="post-content--box" dangerouslySetInnerHTML={{ __html: content.join('') }}></div>
 
@@ -169,9 +214,9 @@ const Post = ({ blogs, session }) => {
                                 {
                                     blogContent[0]?.post_tags.map((item, i) => {
                                         return (
-                                            <div class="tag-items" key={i}>
+                                            <div className="tag-items" key={i}>
                                                 <p>#</p>
-                                                <p class="tag-txt">{item}</p>
+                                                <p className="tag-txt">{item}</p>
                                             </div>
                                         );
                                     })
@@ -179,13 +224,52 @@ const Post = ({ blogs, session }) => {
                             </div>
                         </div>
                     </Box>
-
+                    {/* same blog */}
                     <section>
                         <div className="blog-title--wrapper">
                             <h3 className="blog-list--title__txt">پست های مشابه</h3>
                         </div>
+
+                        <div>
+                            {
+                                sameBlog.map((item) => {
+                                    const { id, post_title, post_type, post_content } = item;
+                                    const { avatar_url, firstName, lastName } = item;
+                                    return (
+                                        <PostCard
+                                            key={id}
+
+                                            title={post_title}
+                                            category={translator(post_type)}
+                                            avatar={avatar_url}
+                                            firstName={firstName}
+                                            lastName={lastName}
+                                            img={filterImage(post_content)}
+
+
+                                        />
+                                    );
+                                })
+                            }
+                        </div>
                     </section>
 
+                    {/* cooment */}
+                    <Box>
+                        <div className="comment-title">
+                            <h3 className="comment-title__title">دیدگاه و پرسش</h3>
+                            <button className="btn-item btn-action btn-action--comment">
+                                افزودن دیدگاه و پرسش جدید
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={18} height={18}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+
+                            </button>
+                        </div>
+                        <div>
+                            
+                        </div>
+                    </Box>
                 </main>
 
                 <aside className="blog-aside">

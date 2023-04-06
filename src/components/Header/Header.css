@@ -1,7 +1,7 @@
 .header {
     width: 100%;
     background-color: var(--bg-dark-primary);
-    padding: 2.6rem 3.5rem;
+    padding: 2.6rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

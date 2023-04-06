@@ -41,14 +41,14 @@ const CreateBlog = (props) => {
       
 
        
-        
+       
         if (match?.id) {
             getBLogData(match?.id);
         }
        
         return(()=>{
             setElement([])
-            setTitle("")
+        //     setTitle("")
             setTag([])
             setType("")
             setContent([])
@@ -58,7 +58,7 @@ const CreateBlog = (props) => {
 
 
 
-    }, [history.pathname]);
+    }, [history.pathname,title]);
 
 
     const getBLogData = async (id) => {
@@ -66,7 +66,8 @@ const CreateBlog = (props) => {
             setLoading(true);
 
             const { data, err } = await supabase.from("blogs").select(" post_title,post_content, post_status,  post_tags, comment_status, post_type")
-                .eq("id", id).single();
+                .eq("id", id)
+                .single()
 
 
             if (err) throw err;
@@ -105,7 +106,7 @@ const CreateBlog = (props) => {
 
         });
         const newStr = clean.split(" ").find((item) => item.includes("src=")).slice(5, -1);
-        console.log(newStr);
+        
 
         return newStr;
 
@@ -146,7 +147,10 @@ const CreateBlog = (props) => {
 
 
         }
-        setElement(newData);
+        const unique = [...new Set(newData.map(item => item))];
+        console.log(unique);
+        
+        setElement(unique);
     };
 
 

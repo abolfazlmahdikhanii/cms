@@ -1,60 +1,70 @@
-.blog-post{
+.blog-post {
     display: flex;
     flex-direction: column;
     gap: 2.2rem;
 }
-.post-cover{
+
+.post-cover {
     width: 100%;
     height: 45rem;
     overflow: hidden;
     border-radius: 1.2rem;
     margin-bottom: 2rem;
 }
-.post-cover img{
+
+.post-cover img {
     object-fit: cover;
 }
-.post__title{
-font-family: "yekan",sans-serif;
-font-size: 2.6rem;
-padding: .5rem 1rem;
+
+.post__title {
+    font-family: "yekan", sans-serif;
+    font-size: 2.6rem;
+    padding: .5rem 1rem;
 }
-.post-row{
-display: flex;
-align-items: center;
-gap: 4rem;
-margin-top: 2.4rem;
-padding: .5rem 1rem;
+
+.post-row {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 2.4rem;
+    padding: .5rem 1rem;
 }
-.post-content--box{
+
+.post-content--box {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem  1.5rem;
+    padding: 2rem 1.5rem;
+
 }
-.post-content--box img{
+
+.post-content--box img {
 
     max-width: 100%;
     height: 50rem;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 1.2rem;
     margin-bottom: 1rem;
-   
+
     background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
     background-position: center;
 }
-.post-content--box h2{
- font-family: "yekan",sans-serif;
- font-size: 2.6rem;
- margin-top: 1.3rem;
+
+.post-content--box h2 {
+    font-family: "yekan", sans-serif;
+    font-size: 2.6rem;
+    margin-top: 1.3rem;
 }
-.post-content--box p{
+
+.post-content--box p {
     line-height: 2;
     color: #cbd5e1;
     font-size: 1.6rem;
 }
-.register-box{
+
+.register-box {
     width: 100%;
-    padding: 2.4rem ;
+    padding: 2.4rem;
     border: 2px solid #334155;
     border-radius: 1.2rem;
     display: flex;
@@ -62,28 +72,33 @@ padding: .5rem 1rem;
     align-items: center;
     text-align: center;
     overflow: hidden;
-  
-}
-.register-box__title{
-color: #fff;
-font-size: 2rem;
-font-weight: bold;
-margin-bottom: 1.8rem;
-}
-.register-box__dis{
-font-size: 1.4rem;
-line-height: 2;
-color: #9ca3af;
 
 }
-.btn-link{
+
+.register-box__title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.8rem;
+}
+
+.register-box__dis {
+    font-size: 1.4rem;
+    line-height: 2;
+    color: #9ca3af;
+
+}
+
+.btn-link {
     width: -webkit-fill-available;
 }
-.author-profile{
+
+.author-profile {
     display: flex;
     gap: 2rem;
 }
-.author-profile--photo{
+
+.author-profile--photo {
     width: 5.5rem;
     height: 5.5rem;
     border-radius: 50%;
@@ -92,32 +107,45 @@ color: #9ca3af;
     transition: all .3s;
     cursor: pointer;
 }
-.author-profile--photo:hover img{
+
+.author-profile--photo:hover img {
     transform: scale(1.2);
 }
-.author-profile--photo img{
+
+.author-profile--photo img {
     object-fit: cover;
     width: 100%;
     height: 100%;
     transition: all .3s;
 }
-.author-profile--info{
-    
-}
-.author-prfile__fullName{
-    font-family: "yekan",sans-serif;
-    font-size: 2.3rem;
-    margin-bottom: 1.4rem;
+
+.author-profile--info {}
+
+.author-prfile__fullName {
+    font-family: "yekan", sans-serif;
+    font-size: 2.2rem;
+
     transition: all .3s;
     cursor: pointer;
 }
-.author-prfile__fullName:hover{
+
+.author-prfile__fullName:hover {
     color: #818cf8;
 }
-.author-prfile__dis{}
-.btn-follow{
+
+.author-prfile__dis {
+    padding: 0.3rem 0 2rem 0;
+    margin-bottom: .3rem;
+    font-size: 1.3rem;
+    color: #9ca3af;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-follow {
     all: unset;
-    font:inherit;
+    font: inherit;
     padding: .5rem 2rem;
     font-size: 1.2rem;
     color: #fff;
@@ -127,22 +155,68 @@ color: #9ca3af;
     border: 1px solid transparent;
     transition: all .3s;
 }
-.btn-follow:hover{
+
+.btn-follow:hover {
     border-color: #6366f1;
     background-color: transparent;
     color: #6366f1;
 }
-.share-post{
+
+.share-post {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.social{
+
+.social {
     display: flex;
     align-items: center;
     gap: 1.2rem;
 }
-.social p{
+
+.social p {
     display: grid;
     place-items: center;
+}
+
+.progresMainWrapper {
+    background-color: transparent;
+    height: .2rem;
+    position: sticky;
+    top: 0;
+    right: 0;
+    z-index: 400;
+    width: 100%;
+}
+
+.progresMainStyle {
+    height: .2rem;
+    background-image: linear-gradient(292.9deg, rgba(254, 105, 241, 1) 28.8%, rgba(182, 44, 248, 1) 70.4%);
+    width: 0;
+}
+.post-footer{
+    margin-top: 2.5rem;
+    padding: 3rem 0.7rem;
+    border-top: 1px solid #334155;
+}
+.tag-items {
+    width: fit-content;
+    padding: .8rem 1.7rem;
+    background-color: #334155;
+    border-radius: .7rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    cursor: pointer;
+}
+
+.tag-lists {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.3rem;
+}
+.blog-title--wrapper{
+    margin-top:1rem;
+    padding: 2rem 1.2rem;
 }

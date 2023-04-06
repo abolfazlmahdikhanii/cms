@@ -7,6 +7,7 @@ import { Route, Router, Routes } from "react-router-dom";
 import Post from "../../components/Post/Post";
 import Layout from "./Layout";
 import { supabase } from "../../superbase";
+import logo from "../../assets/logo.svg"
 
 
 const Home = ({session}) => {
@@ -58,13 +59,14 @@ const Home = ({session}) => {
     return (
         <Wrapper>
             <Header fullName={`${firstName} ${lastName}`}>
-                <h1>digiblog</h1>
+
+              <img src={logo} alt="" />
                 <Search />
             </Header>
       
       <Routes>
         <Route path="/" element={<Layout/>}/>
-        <Route path="/article/:id" element={<Post/>}/>
+        <Route path="/article/:id" element={<Post session={session}/>}/>
       </Routes>
       
         </Wrapper>

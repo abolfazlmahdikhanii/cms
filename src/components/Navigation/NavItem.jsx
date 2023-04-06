@@ -52,7 +52,7 @@ const NavItem = () => {
             </li>
             <li className="nav">
 
-                <NavLink to="/panel/blog-list/"  className="nav-item" activeclassname="active" >
+                <NavLink to="/panel/blog-list"  className="nav-item" activeclassname="active" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                         <g id="vuesax_bulk_task-square" data-name="vuesax/bulk/task-square" transform="translate(-494 -317.97)">
                             <g id="task-square">

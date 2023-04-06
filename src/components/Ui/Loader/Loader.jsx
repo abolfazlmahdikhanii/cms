@@ -3,6 +3,7 @@ import "./Loader.css"
 import Wrapper from "../../../hoc/Wrapper";
 import Backdrop from "../Backdrop/Backdrop";
 import { ThreeDots } from 'react-loader-spinner';
+import logo from "../../../assets/logo.svg"
 
 const Loader = (props) => {
 
@@ -13,7 +14,9 @@ const Loader = (props) => {
             <Backdrop show={props.show} />
 
             <div className={`loader-box ${!props.show ? 'loader--hidden' : ''}`}>
-                <p className="brand-name">digimag</p>
+               <div>
+               <img src={logo} alt="" />
+               </div>
 
                 <ThreeDots
                     height="45"

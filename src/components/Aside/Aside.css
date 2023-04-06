@@ -23,7 +23,7 @@
 .aside-title__title {
     font-family: "yekan", sans-serif;
     color: #fff;
-    font-size: 2.7rem;
+    font-size: 2.4rem;
     font-weight: bold;
 }
 
@@ -67,9 +67,9 @@
 
 .aside-item--title__title {
     width: 100%;
-    font-size: 2rem;
-    line-height: 1.6;
-    font-family: "yekan", sans-serif;
+    font-size: 1.4rem;
+    line-height: 1.7;
+   
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

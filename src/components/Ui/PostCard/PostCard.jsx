@@ -10,7 +10,7 @@ const PostCard = (props) => {
         </svg>;
     }
 
-    else {
+    else if (props?.type === "save") {
         icon = <svg xmlns="http://www.w3.org/2000/svg" fill="#0673fc" width="23" height="23" viewBox="0 0 24 24">
         <g id="vuesax_outline_archive" data-name="vuesax/outline/archive" transform="translate(-172 -190)">
           <g id="archive">
@@ -23,11 +23,14 @@ const PostCard = (props) => {
       </svg>
       
     }
+    else{
+        icon=null
+    }
     return (
         <div className="post-card">
             <div className="post-card--img">
                 <div className="post-card--img__img" dangerouslySetInnerHTML={{__html:props?.img}}></div>
-                <div className="post-card--btn" onClick={props.click}>
+                <div className="post-card--btn" style={!icon?{display:"none"}:{display:"grid"}} onClick={props.click}>
                     {icon}
                 </div>
             </div>

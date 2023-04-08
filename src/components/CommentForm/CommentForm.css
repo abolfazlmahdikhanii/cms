@@ -1,0 +1,22 @@
+.form-comment {
+    display: none;
+}
+
+.form-coment--active {
+    display: block;
+}
+
+.form-comment--body {
+    padding: 2rem 0;
+}
+
+.comment-submit__btn {
+    margin-top: 3rem;
+}
+
+.form-comment__input {
+    font: inherit;
+    outline: none;
+    height: 24rem !important;
+    width: 100% !important;
+}

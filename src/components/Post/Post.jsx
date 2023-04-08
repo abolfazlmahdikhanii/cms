@@ -9,6 +9,8 @@ import Aside from "../Aside/Aside";
 import Loader from "../Ui/Loader/Loader";
 import PostCard from "../Ui/PostCard/PostCard";
 import useFilterImage from "../../hooks/useFilterImage";
+import Comment from "../Comment/Comment";
+import CommentForm from "../CommentForm/CommentForm";
 
 
 
@@ -21,6 +23,12 @@ const Post = ({ blogs, session }) => {
     const [user, setUser] = useState(null);
     const [scroll, setScroll] = useState(0);
     const [sameBlog, setSameBlog] = useState([]);
+    const [comment, setComment] = useState([]);
+    const [showForm, setShowForm] = useState(false);
+    const [activeComment, setActiveComment] = useState(null);
+    const rootComment = comment.filter((item) => item.parent_id === null);
+
+
 
     const match = useParams();
 
@@ -30,6 +38,7 @@ const Post = ({ blogs, session }) => {
     useEffect(() => {
         getBlogData();
         getSameBlogs();
+        getComments();
 
         setUser(session);
 
@@ -115,6 +124,42 @@ const Post = ({ blogs, session }) => {
             setLoading(false);
         }
 
+    };
+    const getComments = async () => {
+        try {
+
+            const { data, error } = await supabase.from("comment")
+                .select("id,created_at,user_id(id,avatar_url,username,firstName,lastName),blog_id,parent_id,body")
+                .eq("blog_id", match?.id);
+
+            if (error) throw error;
+
+            setComment(data);
+
+            console.log(data);
+
+        }
+        catch (e) {
+            console.log(e);
+
+        }
+    };
+    const addComment = async (text, parentId = null) => {
+        try {
+
+            const { err } = await supabase.from("comment")
+                .insert({ user_id: user?.user?.id, blog_id: match?.id, parent_id: parentId, body: text });
+
+            if (err) throw err;
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+    };
+    const getReplyComment = (commentId) => {
+        return comment.filter((item) => item.parent_id === commentId);
     };
     const filterPosts = (array) => {
         let data = [];
@@ -258,7 +303,7 @@ const Post = ({ blogs, session }) => {
                     <Box>
                         <div className="comment-title">
                             <h3 className="comment-title__title">دیدگاه و پرسش</h3>
-                            <button className="btn-item btn-action btn-action--comment">
+                            <button className="btn-item btn-action btn-action--comment" onClick={() => setShowForm(true)}>
                                 افزودن دیدگاه و پرسش جدید
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={18} height={18}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -266,8 +311,28 @@ const Post = ({ blogs, session }) => {
 
                             </button>
                         </div>
-                        <div>
-                            
+                        <CommentForm handleSubmit={addComment} submitLabel="ارسال پیام" show={showForm} />
+                        <div className="post-comment">
+                            {
+                                rootComment.map((item) => {
+                                    return (
+                                        <div className="post-comment--wrapper"  key={item.id}>
+                                            <Comment
+                                               
+                                                comment={item}
+
+                                                parentId={item?.id}
+                                                replies={getReplyComment(item?.id)}
+                                                currentUserId={user?.user?.id}
+                                                activeComment={activeComment}
+                                                setActiveComment={setActiveComment}
+                                                addComment={addComment}
+                                                getReply={getReplyComment}
+                                            />
+                                        </div>
+                                    );
+                                })
+                            }
                         </div>
                     </Box>
                 </main>
@@ -334,7 +399,7 @@ const Post = ({ blogs, session }) => {
                         </div>
                     </Box>
                 </aside>
-            </div>
+            </div >
         </>
     );
 };

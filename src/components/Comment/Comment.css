@@ -1,0 +1,90 @@
+.comment-box {
+    margin-top: 2rem;
+    padding: 2.5rem;
+    background-color: #2c3849;
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+  
+
+}
+
+
+
+.comment-box--header {
+    display: flex;
+
+    justify-content: space-between;
+    border-bottom: 1px solid #475569;
+}
+
+.comment-profile--info {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    padding-bottom: 2.2rem;
+}
+
+.comment-prfile__fullName {
+    font-family: "yekan", sans-serif;
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.comment-date {
+    font-size: 1.4rem;
+
+
+}
+
+.comment-box--btns {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.btn-reply {
+    height: 2rem;
+}
+
+.btn-reply p {
+    font-size: 1.3rem;
+}
+
+.comment--txt__txt {
+    padding: 3rem 0.6rem;
+    font-size: 1.7rem;
+    line-height: 2;
+    word-break: break-word;
+    word-spacing: .11rem;
+    color: #f9fafb;
+}
+
+.replies-comment {
+    position: relative;
+
+   
+}
+
+.replies-wrapper {
+   
+position: relative;
+
+}
+
+.reply-form--comment {
+    margin-right: 1.5rem;
+}
+/* .comment-box::before {
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    right: 25px;
+    top: -21px;
+    width: 3px;
+    background-color: #f9fafb;
+
+} */

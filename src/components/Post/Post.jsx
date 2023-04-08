@@ -311,14 +311,14 @@ const Post = ({ blogs, session }) => {
 
                             </button>
                         </div>
-                        <CommentForm handleSubmit={addComment} submitLabel="ارسال پیام" show={showForm} />
+                        <CommentForm handleSubmit={addComment} submitLabel="ارسال پیام"  userId={session} />
                         <div className="post-comment">
                             {
                                 rootComment.map((item) => {
                                     return (
-                                        <div className="post-comment--wrapper"  key={item.id}>
+                                        <div className="post-comment--wrapper" key={item.id}>
                                             <Comment
-                                               
+
                                                 comment={item}
 
                                                 parentId={item?.id}
@@ -328,6 +328,7 @@ const Post = ({ blogs, session }) => {
                                                 setActiveComment={setActiveComment}
                                                 addComment={addComment}
                                                 getReply={getReplyComment}
+                                                session={session}
                                             />
                                         </div>
                                     );

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import './CommentForm.css';
 
-const CommentForm = ({ handleSubmit, submitLabel, show = false }) => {
+const CommentForm = ({ handleSubmit, submitLabel, show = false, user ,editValue = null }) => {
     const [text, setText] = useState("");
-    // const [active, setActive] = useState(false);
-    let active = show;
+    const [active, setActive] = useState(show);
+
     const onSubmit = (e) => {
         e.preventDefault();
 
         handleSubmit(text);
-        active = false;
+        setActive(prev => !prev);
     };
     return (
         <div className={`form-comment ${active ? 'form-coment--active' : ''}`}>
@@ -22,8 +22,8 @@ const CommentForm = ({ handleSubmit, submitLabel, show = false }) => {
                             <img src="../../../src/assets/profile.svg" alt="" />
                         </div>
                         <div className="comment-profile--info">
-                            <p className="comment-prfile__fullName">ابوالفضل مهدیخانی</p>
-                            <p className="comment-date">4 روز پیش</p>
+                            <p className="comment-prfile__fullName">{user.firstName} {user.lastName}</p>
+                            <p className="comment-date">@{user.lastName}</p>
 
                         </div>
                     </div>
@@ -33,11 +33,12 @@ const CommentForm = ({ handleSubmit, submitLabel, show = false }) => {
 
                 <div className="form-comment--body">
                     <textarea className="form-control form-comment__input"
-                        value={text}
+                        value={editValue || text}
                         placeholder="متن مورد نظر را وارد نمایید ..."
                         onChange={(e) => setText(e.target.value)} />
 
                     <button className="btn-item btn-action comment-submit__btn">{submitLabel}</button>
+                    <button className="btn-item btn-action comment-submit__btn" onClick={() => setActive(false)}>انصراف</button>
 
                 </div>
 

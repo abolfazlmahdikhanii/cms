@@ -4,7 +4,7 @@ import Wrapper from "../../hoc/Wrapper";
 import CommentForm from "../CommentForm/CommentForm";
 import useRelativeTime from "../../hooks/useRelativeTime";
 
-const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComment, parentId, addComment, getReply, cls }) => {
+const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComment, parentId, addComment, getReply, session }) => {
 
 
     const { id, body, user_id, blog_id, create_at } = comment;
@@ -76,17 +76,32 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
 
             </section>
             <div className="reply-form--comment">
-                <CommentForm
-                    show={isReplying}
-                    submitLabel={isReplying ? 'پاسخ' : 'ویرایش'}
-                    handleSubmit={(text) => addComment(text, replyId)}
-                />
+                {
+                    isReplying &&
+                    <CommentForm
+
+                        submitLabel="ارسال پاسخ"
+                        handleSubmit={(text) => addComment(text, replyId)}
+                        userId={session}
+                    />
+
+                }
+                {
+                    isEditing &&
+                    <CommentForm
+
+                        submitLabel="ویرایش"
+                        handleSubmit={(text) => addComment(text, replyId)}
+                        userId={session}
+                        editValue={body}
+                    />
+                }
             </div>
             <div className="replies-comment">
                 {
                     replies.map((item, i) => {
                         return (
-                            <div className={`replies-wrapper `} style={{ marginRight:`${(i+1)*3}rem` }}>
+                            <div className={`replies-wrapper `} style={{ marginRight: `${(i + 1) * 3}rem` }}>
                                 <Comment
                                     key={item?.id}
                                     comment={item}

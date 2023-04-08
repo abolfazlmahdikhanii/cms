@@ -5,8 +5,8 @@
     border-radius: 1.2rem;
     display: flex;
     flex-direction: column;
-  
 
+    transition: all .3s;
 }
 
 
@@ -65,18 +65,19 @@
 .replies-comment {
     position: relative;
 
-   
+
 }
 
 .replies-wrapper {
-   
-position: relative;
+
+    position: relative;
 
 }
 
 .reply-form--comment {
     margin-right: 1.5rem;
 }
+
 /* .comment-box::before {
     content: "";
     display: block;

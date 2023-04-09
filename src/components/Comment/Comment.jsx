@@ -4,7 +4,7 @@ import Wrapper from "../../hoc/Wrapper";
 import CommentForm from "../CommentForm/CommentForm";
 import useRelativeTime from "../../hooks/useRelativeTime";
 
-const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComment, parentId, addComment, getReply, session }) => {
+const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComment, parentId, addComment, getReply }) => {
 
 
     const { id, body, user_id, blog_id, create_at } = comment;
@@ -14,9 +14,17 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
     const canDelete = currentUserId === user_id.id;
     const isReplying = activeComment && activeComment.type === "replying" && activeComment.id === id;
     const isEditing = activeComment && activeComment.type === "editing" && activeComment.id === id;
+
+    const [replying,setReplying]=useState(isReplying)
+    const [editing,setEditing]=useState(isEditing)
+
     const replyId = parentId ? parentId : id;
 
     const timeFormat = useRelativeTime;
+
+    useEffect(()=>{
+      
+    },[])
 
 
 
@@ -76,26 +84,28 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
 
             </section>
             <div className="reply-form--comment">
-                {
-                    isReplying &&
+             
                     <CommentForm
 
                         submitLabel="ارسال پاسخ"
                         handleSubmit={(text) => addComment(text, replyId)}
-                        userId={session}
+                       
+                        active={isReplying}
+                        setActive={setActiveComment}
                     />
 
-                }
-                {
-                    isEditing &&
+                
+             
                     <CommentForm
 
                         submitLabel="ویرایش"
                         handleSubmit={(text) => addComment(text, replyId)}
-                        userId={session}
+                     
                         editValue={body}
+                        active={isEditing}
+                        setActive={setActiveComment}
                     />
-                }
+                
             </div>
             <div className="replies-comment">
                 {

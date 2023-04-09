@@ -15,7 +15,7 @@ import CommentForm from "../CommentForm/CommentForm";
 
 
 
-const Post = ({ blogs, session }) => {
+const Post = ({ session }) => {
 
     const [content, setContent] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -40,8 +40,10 @@ const Post = ({ blogs, session }) => {
         getSameBlogs();
         getComments();
 
-        setUser(session);
+        
 
+        setUser(session);
+        document.title=blogContent[0]?.post_title??"دیجی بلاگ"
 
 
         window.addEventListener("scroll", ScrollHandler);
@@ -51,7 +53,7 @@ const Post = ({ blogs, session }) => {
         });
 
 
-    }, [blogs, session]);
+    }, [ session,blogContent[0]?.post_title]);
     const getBlogData = async () => {
         try {
 
@@ -75,7 +77,10 @@ const Post = ({ blogs, session }) => {
             };
 
             setBlogContent(blog);
+
             filterPosts(blog);
+
+  
 
         } catch (error) {
             setLoading(false);
@@ -128,6 +133,7 @@ const Post = ({ blogs, session }) => {
     const getComments = async () => {
         try {
 
+            setLoading(true)
             const { data, error } = await supabase.from("comment")
                 .select("id,created_at,user_id(id,avatar_url,username,firstName,lastName),blog_id,parent_id,body")
                 .eq("blog_id", match?.id);
@@ -141,12 +147,16 @@ const Post = ({ blogs, session }) => {
         }
         catch (e) {
             console.log(e);
-
+                setLoading(false)
+        }
+        finally{
+            setLoading(false)
         }
     };
     const addComment = async (text, parentId = null) => {
         if (text !== "") {
             try {
+               setLoading(true)
 
                 const { err } = await supabase.from("comment")
                     .insert({ user_id: user?.user?.id, blog_id: match?.id, parent_id: parentId, body: text });
@@ -157,8 +167,64 @@ const Post = ({ blogs, session }) => {
 
                 console.log(error);
 
+                setLoading(false)
             }
+            finally{
+                setLoading(false)
+            }
+            
+            
         }
+    };
+    const editComment = async (text,commentId) => {
+        if (text !== "") {
+            try {
+               setLoading(true)
+
+                const { err } = await supabase.from("comment")
+                    .update({ body: text })
+                    .eq("id",commentId)
+                    .select()
+
+                if (err) throw err;
+
+            } catch (error) {
+
+                console.log(error);
+
+                setLoading(false)
+            }
+            finally{
+                setLoading(false)
+            }
+            
+            
+        }
+    };
+    const removeComment = async (commentId) => {
+        
+            try {
+               setLoading(true)
+
+                const { err } = await supabase.from("comment")
+                    .delete()
+                    .eq("id",commentId)
+                    .select()
+
+                if (err) throw err;
+
+            } catch (error) {
+
+                console.log(error);
+
+                setLoading(false)
+            }
+            finally{
+                setLoading(false)
+            }
+            
+            
+        
     };
     const getReplyComment = (commentId) => {
         return comment.filter((item) => item.parent_id === commentId);
@@ -331,6 +397,8 @@ const Post = ({ blogs, session }) => {
                                                 activeComment={activeComment}
                                                 setActiveComment={setActiveComment}
                                                 addComment={addComment}
+                                                editComment={editComment}
+                                                removeComment={removeComment}
                                                 getReply={getReplyComment}
                                                 session={session}
                                             />

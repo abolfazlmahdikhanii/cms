@@ -244,9 +244,9 @@
     
 
 }
-.post-comment--wrapper:not(:first-child){
+/* .post-comment--wrapper:not(:first-child){
     margin-right: 3rem;
-}
+} */
 
 .comment-title__title {
     font-family: "yekan", sans-serif;

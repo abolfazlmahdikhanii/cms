@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import './CommentForm.css';
 import { supabase } from "../../superbase";
 
-const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) => {
+const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null, active,setActive }) => {
     const [text, setText] = useState("");
-    const [active, setActive] = useState(true);
+    // const [active, setActive] = useState(true);
     const [users, setUser] = useState(null);
 
 
@@ -12,13 +12,17 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) =>
 
     useEffect(() => {
         getCurrentUser();
+
     }, [userId, users]);
 
     const onSubmit = (e) => {
         e.preventDefault();
 
         handleSubmit(text);
-        setActive(false);
+
+        setActive(false)
+
+
     };
     const getCurrentUser = async () => {
         try {
@@ -31,7 +35,7 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) =>
             if (err) throw err;
 
             setUser(data);
-            console.log(data);
+
 
 
         } catch (error) {
@@ -41,7 +45,11 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) =>
     };
     const resetForm = (e) => {
         e.preventDefault();
-        setActive(false);
+
+        setActive(false)
+        
+
+
     };
     return (
         <div className={`form-comment ${active ? 'form-coment--active' : ''}`}>
@@ -71,7 +79,7 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) =>
 
                     <div className="btn-flex btn-comment-form">
                         <button className="btn-item btn-action comment-submit__btn">{submitLabel}</button>
-                        <input type="reset" className="btn-item  comment-cancel__btn" onClick={resetForm} value="انصراف"/>
+                        <input type="reset" className="btn-item  comment-cancel__btn" onClick={resetForm} value="انصراف" />
                     </div>
 
                 </div>

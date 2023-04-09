@@ -24,7 +24,8 @@ const Layout=()=>{
                 ,post_author(
                     firstName,
                     lastName,
-                    avatar_url
+                    avatar_url,
+                    username
                 )`);
 
             if (error) {

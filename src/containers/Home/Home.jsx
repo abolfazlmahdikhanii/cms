@@ -66,7 +66,7 @@ const Home = ({session}) => {
       
       <Routes>
         <Route path="/" element={<Layout/>}/>
-        <Route path="/article/:id" element={<Post session={session}/>}/>
+        <Route path="/article/:username/:id" element={<Post session={session}/>}/>
       </Routes>
       
         </Wrapper>

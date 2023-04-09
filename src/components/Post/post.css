@@ -259,3 +259,12 @@
 .btn-action--comment {
     margin-top: 0 !important;
 }
+.rate-post--box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem 2rem 3rem 2rem;
+    background-color: var(--bg-dark-secondry);
+    padding:1.8rem 2.3rem;
+    border-radius: 1.1rem;
+}

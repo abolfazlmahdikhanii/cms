@@ -11,6 +11,7 @@ import PostCard from "../Ui/PostCard/PostCard";
 import useFilterImage from "../../hooks/useFilterImage";
 import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
+import Star from "../Ui/Star/Star";
 
 
 
@@ -25,6 +26,7 @@ const Post = ({ session }) => {
     const [sameBlog, setSameBlog] = useState([]);
     const [comment, setComment] = useState([]);
     const [showForm, setShowForm] = useState(false);
+    const [star, setStar] = useState(0);
     const [activeComment, setActiveComment] = useState(null);
     const rootComment = comment.filter((item) => item.parent_id === null);
 
@@ -40,10 +42,10 @@ const Post = ({ session }) => {
         getSameBlogs();
         getComments();
 
-        
+
 
         setUser(session);
-        document.title=blogContent[0]?.post_title??"دیجی بلاگ"
+        document.title = blogContent[0]?.post_title ?? "دیجی بلاگ";
 
 
         window.addEventListener("scroll", ScrollHandler);
@@ -53,7 +55,7 @@ const Post = ({ session }) => {
         });
 
 
-    }, [ session,blogContent[0]?.post_title]);
+    }, [session, blogContent[0]?.post_title]);
     const getBlogData = async () => {
         try {
 
@@ -80,7 +82,7 @@ const Post = ({ session }) => {
 
             filterPosts(blog);
 
-  
+
 
         } catch (error) {
             setLoading(false);
@@ -133,7 +135,7 @@ const Post = ({ session }) => {
     const getComments = async () => {
         try {
 
-            setLoading(true)
+            setLoading(true);
             const { data, error } = await supabase.from("comment")
                 .select("id,created_at,user_id(id,avatar_url,username,firstName,lastName),blog_id,parent_id,body")
                 .eq("blog_id", match?.id);
@@ -147,16 +149,16 @@ const Post = ({ session }) => {
         }
         catch (e) {
             console.log(e);
-                setLoading(false)
+            setLoading(false);
         }
-        finally{
-            setLoading(false)
+        finally {
+            setLoading(false);
         }
     };
     const addComment = async (text, parentId = null) => {
         if (text !== "") {
             try {
-               setLoading(true)
+                setLoading(true);
 
                 const { err } = await supabase.from("comment")
                     .insert({ user_id: user?.user?.id, blog_id: match?.id, parent_id: parentId, body: text });
@@ -167,24 +169,24 @@ const Post = ({ session }) => {
 
                 console.log(error);
 
-                setLoading(false)
+                setLoading(false);
             }
-            finally{
-                setLoading(false)
+            finally {
+                setLoading(false);
             }
-            
-            
+
+
         }
     };
-    const editComment = async (text,commentId) => {
+    const editComment = async (text, commentId) => {
         if (text !== "") {
             try {
-               setLoading(true)
+                setLoading(true);
 
                 const { err } = await supabase.from("comment")
                     .update({ body: text })
-                    .eq("id",commentId)
-                    .select()
+                    .eq("id", commentId)
+                    .select();
 
                 if (err) throw err;
 
@@ -192,39 +194,54 @@ const Post = ({ session }) => {
 
                 console.log(error);
 
-                setLoading(false)
+                setLoading(false);
             }
-            finally{
-                setLoading(false)
+            finally {
+                setLoading(false);
             }
-            
-            
+
+
+        }
+    };
+    const addBlogRate = async (stars) => {
+        try {
+            const { data, err } = await supabase.from("blogs")
+                .update({ rate: stars })
+                .eq("id", match?.id);
+
+
+            if (err) throw err;
+
+        } catch (error) {
+
+            console.log(error);
+
         }
     };
     const removeComment = async (commentId) => {
-        
-            try {
-               setLoading(true)
 
-                const { err } = await supabase.from("comment")
-                    .delete()
-                    .eq("id",commentId)
-                    .select()
+        try {
+            setLoading(true);
 
-                if (err) throw err;
+            const { err } = await supabase.from("comment")
+                .delete()
+                .eq("id", commentId)
+                .select();
 
-            } catch (error) {
+            if (err) throw err;
 
-                console.log(error);
+        } catch (error) {
 
-                setLoading(false)
-            }
-            finally{
-                setLoading(false)
-            }
-            
-            
-        
+            console.log(error);
+
+            setLoading(false);
+        }
+        finally {
+            setLoading(false);
+        }
+
+
+
     };
     const getReplyComment = (commentId) => {
         return comment.filter((item) => item.parent_id === commentId);
@@ -260,6 +277,13 @@ const Post = ({ session }) => {
 
         const scrolled = (winScroll / height) * 100;
         setScroll(scrolled);
+    };
+    const rateHandler = (stars) => {
+
+        setStar(stars);
+        addBlogRate(stars);
+        console.log(stars);
+
     };
 
     return (
@@ -322,6 +346,13 @@ const Post = ({ session }) => {
                     <Box>
                         <div className="post-content--box" dangerouslySetInnerHTML={{ __html: content.join('') }}></div>
 
+                        <div className="rate-post--box">
+                            <div>
+                                <p>چه امتیازی برای این مقاله میدهید؟</p>
+                            </div>
+                            <Star star={star} setStar={rateHandler} />
+                        </div>
+
                         <div className="post-footer">
                             <div className="tag-lists">
                                 {
@@ -379,9 +410,9 @@ const Post = ({ session }) => {
 
                             </button>
                         </div>
-                       
-                            <CommentForm handleSubmit={addComment} submitLabel="ارسال پیام" userId={session} active={showForm} setActive={setShowForm}/>
-                        
+
+                        <CommentForm handleSubmit={addComment} submitLabel="ارسال پیام" userId={session} active={showForm} setActive={setShowForm} />
+
                         <div className="post-comment">
                             {
                                 rootComment.map((item) => {

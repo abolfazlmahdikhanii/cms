@@ -41,17 +41,17 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) =>
     };
     return (
         <div className={`form-comment ${active ? 'form-coment--active' : ''}`}>
-            <form onSubmit={onSubmit} className="comment-box">
+            <form onSubmit={onSubmit} className="comment-box comment-box--form">
 
                 <div className="comment-box--header">
                     {/* right */}
                     <div className="author-profile">
-                        <div className="author-profile--photo">
+                        <div className="author-profile--photo author-profile--comment-form">
                             <img src="../../../src/assets/profile.svg" alt="" />
                         </div>
                         <div className="comment-profile--info">
                             <p className="comment-prfile__fullName">{users?.firstName} {users?.lastName}</p>
-                            <p className="comment-date">@{users?.username}</p>
+                            <p className="comment-username">@{users?.username}</p>
 
                         </div>
                     </div>
@@ -65,9 +65,9 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) =>
                         placeholder="متن مورد نظر را وارد نمایید ..."
                         onChange={(e) => setText(e.target.value)} />
 
-                    <div className="btn-flex">
+                    <div className="btn-flex btn-comment-form">
                         <button className="btn-item btn-action comment-submit__btn">{submitLabel}</button>
-                        <button className="btn-item btn-action comment-submit__btn" onClick={() => setActive(false)}>انصراف</button>
+                        <button className="btn-item  comment-cancel__btn" onClick={() => setActive(false)}>انصراف</button>
                     </div>
 
                 </div>

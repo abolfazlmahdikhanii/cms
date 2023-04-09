@@ -2,6 +2,11 @@
     display: none;
 }
 
+.comment-box--form {
+    background-color: transparent;
+    border: 2px solid #334155
+}
+
 .form-coment--active {
     display: block;
 }
@@ -12,6 +17,25 @@
 
 .comment-submit__btn {
     margin-top: 3rem;
+
+}
+
+.btn-comment-form {
+    justify-content: end;
+    gap: 1.5rem;
+}
+
+.comment-cancel__btn {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 3rem;
+    background-color: transparent;
+    border: 1px solid #64748b;
+    transition: all .3s;
+}
+
+.comment-cancel__btn:hover {
+    background-color: #64748b;
 }
 
 .form-comment__input {
@@ -19,4 +43,14 @@
     outline: none;
     height: 24rem !important;
     width: 100% !important;
+}
+
+.author-profile--comment-form {
+    border: 4px solid #16a34a;
+}
+
+.comment-username {
+    direction: ltr;
+    text-align: right;
+
 }

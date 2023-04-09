@@ -39,6 +39,10 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) =>
 
         }
     };
+    const resetForm = (e) => {
+        e.preventDefault();
+        setActive(false);
+    };
     return (
         <div className={`form-comment ${active ? 'form-coment--active' : ''}`}>
             <form onSubmit={onSubmit} className="comment-box comment-box--form">
@@ -67,7 +71,7 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null }) =>
 
                     <div className="btn-flex btn-comment-form">
                         <button className="btn-item btn-action comment-submit__btn">{submitLabel}</button>
-                        <button className="btn-item  comment-cancel__btn" onClick={() => setActive(false)}>انصراف</button>
+                        <input type="reset" className="btn-item  comment-cancel__btn" onClick={resetForm} value="انصراف"/>
                     </div>
 
                 </div>

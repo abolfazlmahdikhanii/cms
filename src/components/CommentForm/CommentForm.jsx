@@ -3,7 +3,7 @@ import './CommentForm.css';
 import { supabase } from "../../superbase";
 
 const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null, active,setActive }) => {
-    const [text, setText] = useState("");
+    const [text, setText] = useState(editValue||"");
     // const [active, setActive] = useState(true);
     const [users, setUser] = useState([]);
 
@@ -13,7 +13,7 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null, acti
     useEffect(() => {
         getCurrentUser();
 
-    }, [userId, users]);
+    }, [userId]);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -75,7 +75,7 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null, acti
 
                 <div className="form-comment--body">
                     <textarea className="form-control form-comment__input"
-                        value={editValue || text}
+                        value={ text}
                         placeholder="متن مورد نظر را وارد نمایید ..."
                         onChange={(e) => setText(e.target.value)} />
 

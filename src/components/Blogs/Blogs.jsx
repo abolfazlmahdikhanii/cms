@@ -230,12 +230,13 @@ const Blogs = ({ blogs }) => {
 
             {
                 blogs.map((item) => {
-                    const { firstName, lastName, avatar_url } = item?.post_author;
+                    const { firstName, lastName, avatar_url,username } = item?.post_author;
                     return (
                         <BlogItem
                             key={item?.id}
                             id={item?.id}
                             title={item?.post_title}
+                            username={username}
                             category={translator(item?.post_type)}
                             img={filterImage(item?.post_content)}
                             fullName={`${firstName} ${lastName}`}

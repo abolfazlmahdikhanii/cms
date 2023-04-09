@@ -71,6 +71,7 @@ const BlogItem = (props) => {
      
    }
 
+  
 
 
 
@@ -99,7 +100,7 @@ const BlogItem = (props) => {
       {/* info */}
       <div className="blog-content--info">
         {/* title */}
-        <Link  to={`/article/${props.id}`}>
+        <Link  to={`/article/@${props.username}/${props.id}`}>
         <h3> {props.title}</h3>
         </Link>
         {/* dis */}

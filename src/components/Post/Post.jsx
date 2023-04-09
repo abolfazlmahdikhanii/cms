@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./post.css";
 import { Link, useParams } from "react-router-dom";
 import { supabase } from "../../superbase";
@@ -27,6 +28,7 @@ const Post = ({ session }) => {
     const [comment, setComment] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [star, setStar] = useState(0);
+    const [ip,setIp]=useState(null)
     const [activeComment, setActiveComment] = useState(null);
     const rootComment = comment.filter((item) => item.parent_id === null);
 
@@ -38,24 +40,34 @@ const Post = ({ session }) => {
     const translator = useTranslatorCategory;
     const filterImage = useFilterImage;
     useEffect(() => {
+        getUserIp()
+        setVisitor(ip)
         getBlogData();
         getSameBlogs();
         getComments();
-
-
-
         setUser(session);
         document.title = blogContent[0]?.post_title ?? "دیجی بلاگ";
-
-
         window.addEventListener("scroll", ScrollHandler);
-
         return (() => {
             window.removeEventListener("scroll", ScrollHandler);
         });
 
-
     }, [session, blogContent[0]?.post_title]);
+    const getUserIp = async () => {
+        const res = await axios.get("https://api.ipify.org/");
+        setIp(res.data);
+      };
+
+      const setVisitor=async(ip)=>{
+        try {
+            const {err}=await supabase.from("visitor").insert({blog_id:match?.id,user_ip:ip})
+            if(err) throw err
+        } catch (error) {
+            console.log(err);
+            
+        }
+      }
+
     const getBlogData = async () => {
         try {
 
@@ -63,14 +75,14 @@ const Post = ({ session }) => {
             setLoading(true);
             let { data: blog, error } = await supabase
                 .from('blogs')
-                .select(`id,post_date,post_title,post_content,post_tags,post_comment,post_type
+                .select(`id,post_date,post_title,post_content,post_tags,post_comment,post_type,rate
                 ,post_author(
                     firstName,
                     lastName,
                     avatar_url,
                     bio
                 )`)
-                .eq("id", match?.id);
+                .eq("id", match?.id)
 
 
             if (error) {
@@ -81,7 +93,10 @@ const Post = ({ session }) => {
             setBlogContent(blog);
 
             filterPosts(blog);
+            setStar(blog[0]?.rate)
 
+           
+            
 
 
         } catch (error) {

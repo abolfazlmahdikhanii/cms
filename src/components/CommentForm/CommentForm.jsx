@@ -5,7 +5,7 @@ import { supabase } from "../../superbase";
 const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null, active,setActive }) => {
     const [text, setText] = useState("");
     // const [active, setActive] = useState(true);
-    const [users, setUser] = useState(null);
+    const [users, setUser] = useState([]);
 
 
 
@@ -26,13 +26,15 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null, acti
     };
     const getCurrentUser = async () => {
         try {
-            const { user } = userId;
+            const {data:user,error} =await supabase.auth.getUser()
+  
+            
             const { data, err } = await supabase.from("profiles")
                 .select("username,firstName,lastName,avatar_url")
-                .eq("id", user?.id)
+                .eq("id", user?.user?.id)
                 .single();
 
-            if (err) throw err;
+            if (err || error) throw err;
 
             setUser(data);
 

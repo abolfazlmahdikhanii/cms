@@ -1,0 +1,26 @@
+.stars{
+    display: flex;
+
+    cursor: pointer;
+    text-align: left;
+    direction: ltr;
+}
+.stars span{
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  
+   
+}
+.stars svg{
+    fill: transparent;
+    stroke: #f59e0b;
+    transition: all .3s;
+}
+.stars svg:hover{
+    fill: #f59e0b;
+}
+.star--active svg {
+    fill: #f59e0b;
+
+}

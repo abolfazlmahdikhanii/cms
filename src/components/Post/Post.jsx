@@ -145,17 +145,19 @@ const Post = ({ blogs, session }) => {
         }
     };
     const addComment = async (text, parentId = null) => {
-        try {
+        if (text !== "") {
+            try {
 
-            const { err } = await supabase.from("comment")
-                .insert({ user_id: user?.user?.id, blog_id: match?.id, parent_id: parentId, body: text });
+                const { err } = await supabase.from("comment")
+                    .insert({ user_id: user?.user?.id, blog_id: match?.id, parent_id: parentId, body: text });
 
-            if (err) throw err;
+                if (err) throw err;
 
-        } catch (error) {
+            } catch (error) {
 
-            console.log(error);
+                console.log(error);
 
+            }
         }
     };
     const getReplyComment = (commentId) => {
@@ -312,7 +314,7 @@ const Post = ({ blogs, session }) => {
                             </button>
                         </div>
                         {
-                            showForm&&
+                            showForm &&
                             <CommentForm handleSubmit={addComment} submitLabel="ارسال پیام" userId={session} />
                         }
                         <div className="post-comment">

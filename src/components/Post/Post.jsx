@@ -311,7 +311,10 @@ const Post = ({ blogs, session }) => {
 
                             </button>
                         </div>
-                        <CommentForm handleSubmit={addComment} submitLabel="ارسال پیام"  userId={session} />
+                        {
+                            showForm&&
+                            <CommentForm handleSubmit={addComment} submitLabel="ارسال پیام" userId={session} />
+                        }
                         <div className="post-comment">
                             {
                                 rootComment.map((item) => {

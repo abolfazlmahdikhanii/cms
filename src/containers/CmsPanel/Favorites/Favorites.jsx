@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import {  toast } from 'react-toastify';
 import PostCard from "../../../components/Ui/PostCard/PostCard";
 import { supabase } from "../../../superbase";
 import './Favorites.css';
@@ -11,6 +12,13 @@ const Favorites = ({ session }) => {
     const [loading, setLoading] = useState(false);
     const translatorCategory = useTranslatorCategory;
     const filterImage = useFilterImage;
+    const toastOption={
+        position: "bottom-right",
+        autoClose:1000,
+         hideProgressBar: true,
+         theme:"colored",
+         style:{fontFamily:"shabnam,sans-serif"}
+    }
     useEffect(() => {
         getFavoritesBlog();
 
@@ -51,12 +59,15 @@ const Favorites = ({ session }) => {
 
                 if (err) throw err;
 
+                toast.success("با موفقیت از لیست مورد علاقه ها حذف شد",toastOption)
+
 
 
             
         } catch (error) {
             setLoading(false)
-            console.log(error);
+            toast.error("حذف پست از لیست مورد علاقه ها با مشکل مواجه شد",toastOption)
+
 
         }
 

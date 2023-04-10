@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import PostCard from "../../../components/Ui/PostCard/PostCard";
+import { toast } from 'react-toastify';
 import { supabase } from "../../../superbase";
 import './Saves.css'
 import useTranslatorCategory from "../../../hooks/useTranslatetorCategory";
@@ -11,6 +12,13 @@ const Saves=({session})=>{
     const [loading, setLoading] = useState(false);
     const translatorCategory=useTranslatorCategory
     const filterImage=useFilterImage
+    const toastOption={
+        position: "bottom-right",
+        autoClose:1000,
+         hideProgressBar: true,
+         theme:"colored",
+         style:{fontFamily:"shabnam,sans-serif"}
+    }
     useEffect(()=>{
      getSavessBlog()
 
@@ -56,7 +64,8 @@ const Saves=({session})=>{
     
     
                 if (err) throw err;
-    
+                toast.success("با موفقیت از لیست ذخیره شده ها حذف شد",toastOption)
+
           
                 
     
@@ -64,7 +73,8 @@ const Saves=({session})=>{
             
         } catch (error) {
         setLoading(false)
-            console.log(error);
+        toast.error("حذف پست از لیست ذخیره شد ها با مشکل مواجه شد",toastOption)
+
     
         }
     

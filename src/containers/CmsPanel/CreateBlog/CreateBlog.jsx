@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import sanitizeHtml from 'sanitize-html';
-
+import { toast } from 'react-toastify';
 import "./Create-blog.css";
 import Box from "../../../components/Ui/Box/Box";
 import Element from "../../../components/Element/Element.jsx";
@@ -30,7 +30,13 @@ const CreateBlog = (props) => {
 
     const data = [];
     const newData = [];
-
+    const toastOption={
+        position: "bottom-right",
+        autoClose:1000,
+         hideProgressBar: true,
+         theme:"colored",
+         style:{fontFamily:"shabnam,sans-serif"}
+    }
 
     const match = useParams();
     const history = useLocation();
@@ -228,14 +234,17 @@ const CreateBlog = (props) => {
 
             setContent(unique);
             const { user } = props.user;
+            if(!title||!unique)throw error
+            
             const { error } = await supabase.from("blogs").insert({ post_title: title, post_content: unique, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type });
 
             if (error) throw error;
-
+            toast.success("پست شما با موفقیت ایجاد شد ",toastOption)
             setContent([]);
 
         } catch (error) {
-            console.log(error);
+            toast.error("ایجاد پست جدید با مشکل مواجه شد",toastOption)
+
             setLoading(false);
         }
         finally {
@@ -255,12 +264,14 @@ const CreateBlog = (props) => {
 
             if (error) throw error;
 
-            console.log(data);
+            toast.success("پست شما با موفقیت ویرایش شد ",toastOption)
+
 
 
         } catch (error) {
             setLoading(false);
-            console.log(error);
+            toast.success("ویرایش پست شما با خطا مواجه شد",toastOption)
+
 
         }
         finally {

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import "./post.css";
 import { Link, useParams } from "react-router-dom";
 import { supabase } from "../../superbase";
@@ -20,6 +22,7 @@ import Star from "../Ui/Star/Star";
 const Post = ({ session }) => {
 
     const [content, setContent] = useState([]);
+    const [firstImage,setFirstImage]=useState("")
     const [loading, setLoading] = useState(false);
     const [blogContent, setBlogContent] = useState([]);
     const [user, setUser] = useState(null);
@@ -32,6 +35,13 @@ const Post = ({ session }) => {
     const [activeComment, setActiveComment] = useState(null);
     const rootComment = comment.filter((item) => item.parent_id === null);
 
+    const toastOption={
+        position: "bottom-right",
+        autoClose:1000,
+         hideProgressBar: true,
+         theme:"colored",
+         style:{fontFamily:"shabnam,sans-serif"}
+    }
 
 
     const match = useParams();
@@ -40,12 +50,15 @@ const Post = ({ session }) => {
     const translator = useTranslatorCategory;
     const filterImage = useFilterImage;
     useEffect(() => {
-        getUserIp()
-        setVisitor(ip)
-        getBlogData();
-        getSameBlogs();
-        getComments();
-        setUser(session);
+        Promise.all([
+            getUserIp(),
+            setVisitor(ip),
+            getBlogData(),
+            getSameBlogs(),
+            getComments(),
+            setUser(session)
+        ]
+        )
         document.title = blogContent[0]?.post_title ?? "دیجی بلاگ";
         window.addEventListener("scroll", ScrollHandler);
         return (() => {
@@ -180,10 +193,12 @@ const Post = ({ session }) => {
 
                 if (err) throw err;
 
+                toast.success("ثبت پیام با موفقیت انجام شد",toastOption)
+
+
             } catch (error) {
 
-                console.log(error);
-
+                toast.error("ثبت پیام با خطا مواجه شد",toastOption)
                 setLoading(false);
             }
             finally {
@@ -205,9 +220,13 @@ const Post = ({ session }) => {
 
                 if (err) throw err;
 
+                toast.success("ویرایش پیام شما با موفقیت انجام شد",toastOption)
+
             } catch (error) {
 
                 console.log(error);
+                toast.error("ویرایش پیام با مشکل مواجه شد لطفا دوباره امتحان کنید",toastOption)
+
 
                 setLoading(false);
             }
@@ -245,9 +264,13 @@ const Post = ({ session }) => {
 
             if (err) throw err;
 
+            toast.success("حذف پیام با موفقیت انجام شد",toastOption)
+
+
         } catch (error) {
 
-            console.log(error);
+            toast.error("حذف پیام با خطا مواجه شد",toastOption)
+
 
             setLoading(false);
         }
@@ -263,6 +286,7 @@ const Post = ({ session }) => {
     };
     const filterPosts = (array) => {
         let data = [];
+        let splicedImage=null
         const posts = array.map((item) => item.post_content);
         posts.forEach(blog => {
             for (let value of blog) {
@@ -275,7 +299,9 @@ const Post = ({ session }) => {
         const imgIndex = data.findIndex((item) => item.includes("img"));
 
         if (imgIndex === -1) return;
-        data.splice(imgIndex, 1);
+        splicedImage=data.splice(imgIndex, 1);
+        setFirstImage(splicedImage)
+
 
 
         setContent(data);
@@ -288,7 +314,9 @@ const Post = ({ session }) => {
     const ScrollHandler = () => {
         const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
 
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const height = document.querySelector(".post-content--box").scrollHeight - document.querySelector(".post-content--box").clientHeight;
+        
+        
 
         const scrolled = (winScroll / height) * 100;
         setScroll(scrolled);
@@ -312,8 +340,8 @@ const Post = ({ session }) => {
 
                 <main className="blog-list blog-post">
 
-                    <div className="post-cover">
-                        <img src="../../../src/assets/bg-slider.jpg" alt="" loading="lazy" />
+                    <div className="post-cover" dangerouslySetInnerHTML={{ __html: firstImage }}>
+                        
                     </div>
                     {/* info */}
                     <Box>
@@ -519,6 +547,8 @@ const Post = ({ session }) => {
                     </Box>
                 </aside>
             </div >
+
+            <ToastContainer rtl={true}/>
         </>
     );
 };

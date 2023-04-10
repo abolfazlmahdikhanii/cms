@@ -7,7 +7,7 @@ import useRelativeTime from "../../hooks/useRelativeTime";
 const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComment, parentId, addComment, getReply, editComment, removeComment }) => {
 
 
-    const { id, body, user_id, blog_id, create_at } = comment;
+    const { id, body, user_id, blog_id, created_at } = comment;
     const canReply = Boolean(currentUserId);
     const canLike = Boolean(currentUserId);
     const canEdit = currentUserId === user_id.id;
@@ -39,7 +39,7 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
                         </div>
                         <div className="comment-profile--info">
                             <p className="comment-prfile__fullName">{user_id?.firstName} {user_id?.lastName}</p>
-                            <p className="comment-date">{timeFormat(create_at)}</p>
+                            <p className="comment-date">{timeFormat(created_at)}</p>
 
                         </div>
                     </div>
@@ -94,9 +94,9 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
                     </div>
                 </div>
                 <div>
-                    <p className="comment--txt__txt">
+                    <pre className="comment--txt__txt">
                         {body}
-                    </p>
+                    </pre>
                 </div>
 
 

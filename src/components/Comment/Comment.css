@@ -54,6 +54,7 @@
 }
 
 .comment--txt__txt {
+    font: inherit;
     padding: 3rem 0.6rem;
     font-size: 1.5rem;
     line-height: 2;

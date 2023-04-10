@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 import './Account.css';
 import { MdVerifiedUser } from "react-icons/md";
 import { DatePicker } from "zaman";
@@ -21,7 +22,13 @@ const Account = ({ session }) => {
     const [errorlastName, setErrorLastName] = useState(false);
     const [errorUserName, setErrorUserName] = useState(false);
     const [errorBio, setErrorBio] = useState(false);
-
+    const toastOption={
+        position: "bottom-right",
+        autoClose:1000,
+         hideProgressBar: true,
+         theme:"colored",
+         style:{fontFamily:"shabnam,sans-serif"}
+    }
 
     useEffect(() => {
         getProfile();
@@ -80,9 +87,12 @@ const Account = ({ session }) => {
             };
             let { error } = await supabase.from("profiles").upsert(updates);
             if (error) throw error;
+            toast.success("ویرایش حساب کاربری با موفقیت انجام شد",toastOption)
+
         }
         catch (error) {
-            alert(error.message);
+            toast.error("ویرایش حساب کاربری با مشکل مواجه شده است",toastOption)
+
         }
         finally {
             setLoading(false);

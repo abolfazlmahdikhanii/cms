@@ -10,6 +10,8 @@ const useRelativeTime=(date=new Date())=>{
 
   const dayPassed = calcDates(+new Date().getTime(), +new Date(date).getTime());
 
+  if(dayPassed===0)return "امروز"
+  if(dayPassed<=1)return "دیروز"
 
  
 

@@ -4,8 +4,11 @@ import useRelativeTime from "../../../hooks/useRelativeTime";
 import AlertDialog from "../../../components/Ui/AlertDialog/AlertDialog";
 import BlogCard from "../../../components/Ui/BlogCard/BlogCard";
 
+
 const ShareList = ({ blogs,session,show }) => {
     const [showAlert, setShowAlert] = useState(false);
+    
+    
     const [blogId, setBlogId] = useState(null);
     const filterParagraph = useFilterPargraph;
     const relativeTime = useRelativeTime;
@@ -24,6 +27,7 @@ const ShareList = ({ blogs,session,show }) => {
     return (
         
         <div className={cls}>
+       
             {
                 blogs?.map((item) => {
                     return (
@@ -34,6 +38,7 @@ const ShareList = ({ blogs,session,show }) => {
                             title={item?.post_title}
                             date={relativeTime(item?.post_date)}
                             content={filterParagraph(item?.post_content).join("")}
+                    
                             remove={() => removeBlogHandler(item?.id)}
                         />
 

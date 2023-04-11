@@ -2,11 +2,14 @@ import React from "react"
 const useTranslatorCategory=(category)=>{
 
 switch (category) {
+    case "last-news":
+        return "آخرین مطالب"
+        break;
     case "tech":
         return "فناوری"
         break;
     case "health":
-        return "سلامت و زیبایی<"
+        return "سلامت و زیبایی"
         break;
     case "art":
         return "فرهنگ و هنر"

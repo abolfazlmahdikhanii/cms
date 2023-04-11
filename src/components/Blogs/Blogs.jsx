@@ -9,7 +9,8 @@ import useFilterPargraph from "../../hooks/useFilterParagraph";
 import useFilterImage from "../../hooks/useFilterImage";
 
 
-const Blogs = ({ blogs }) => {
+
+const Blogs = ({ blogs,category }) => {
     const [avatarUrl, setAvatarUrl] = useState();
     const translator = useTranslatorCategory;
     const [users, setUser] = useState(null);
@@ -22,6 +23,7 @@ const Blogs = ({ blogs }) => {
 
     const filterParagraph=useFilterPargraph
     const filterImage=useFilterImage
+ 
 
     useEffect(() => {
         if (avatarUrl) downloadImage(avatarUrl);
@@ -222,7 +224,7 @@ const Blogs = ({ blogs }) => {
                     </svg>
                 </div>
                 <div>
-                    <h3 className="blog-list--title__txt">آخرین مطالب</h3>
+                    <h3 className="blog-list--title__txt">{translator(category)}</h3>
                 </div>
             </div>
 

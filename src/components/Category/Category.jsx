@@ -8,7 +8,7 @@ import health from "../../assets/health.svg"
 import art from "../../assets/art.svg"
 import lifeStyle from "../../assets/life-style.svg"
 import game from "../../assets/game.svg"
-const Category=()=>{
+const Category=({category,setCategory})=>{
 
     const [categorItem,setCategoryItem]=useState([
         {
@@ -70,6 +70,8 @@ const Category=()=>{
                  return(
                     <CategoryItem
                     key={item.id}
+                    category={category}
+                    setCategory={setCategory}
                      {...item}
                     />
                  )

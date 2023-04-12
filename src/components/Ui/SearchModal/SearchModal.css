@@ -4,11 +4,12 @@
     position: relative;
     z-index: 400;
     overflow: hidden;
-    transition: all .3s;
+    transition: all .3s ease-in;
     padding:0.3rem 2rem;
     background-color: #374151;
     border-bottom-left-radius: 1.2rem;
     border-bottom-right-radius: 1.2rem;
+    height: 0;
    
 }
 
@@ -20,7 +21,7 @@
    
 }
 
-.alert-dialog--hidden {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
+.search-dialog--hidden {
+    height: 60rem;
+    overflow-y: scroll;
 }

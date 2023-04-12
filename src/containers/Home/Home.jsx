@@ -8,7 +8,6 @@ import Post from "../../components/Post/Post";
 import Layout from "./Layout";
 import { supabase } from "../../superbase";
 import logo from "../../assets/logo.svg"
-import { SerachModal } from "../../components/Ui/SearchModal/SerachModal";
 
 
 const Home = ({session}) => {
@@ -19,7 +18,6 @@ const Home = ({session}) => {
 
     const[avatarUrl,setAvatarUrl]=useState(null)
 
-    console.log(clickInput);
     
     useEffect(()=>{
 
@@ -57,6 +55,10 @@ const Home = ({session}) => {
         }
 
     };
+   const searchInputHandler=(e)=>{
+
+      
+    }
 
    
 
@@ -70,8 +72,9 @@ const Home = ({session}) => {
                   disable={clickInput}
                   setClickInput={setClickInput}
                   search={search}
+                  searchHandler={setSearch}
                 />
- 
+                
             </Header>
       
       <Routes>

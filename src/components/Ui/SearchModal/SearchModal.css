@@ -1,27 +1,40 @@
 .search-dialog {
     width: 100%;
 
-    position: relative;
+    position: absolute;
+    top: 5rem;
+    /* left: 0; */
+    right: 1rem;
+
     z-index: 400;
     overflow: hidden;
-    transition: all .3s ease-in;
-    padding:0.3rem 2rem;
+    transition: all .1s ease-in;
+    padding: 0 2rem;
     background-color: #374151;
     border-bottom-left-radius: 1.2rem;
     border-bottom-right-radius: 1.2rem;
-    height: 0;
-   
+    height: 100%;
+    flex-grow: 0;
+    opacity: 0;
+
+
 }
 
 .search-dialog--box {
 
     width: 100%;
-    border-top: 1px solid blue;
-    padding:2rem;
-   
+    border-top: 1px solid #64748b;
+    padding: 2rem;
+    background-color: #374151;
 }
 
 .search-dialog--hidden {
-    height: 60rem;
+    flex-grow: 1;
+    opacity: 1;
     overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.search-dialog--hidden::-webkit-scrollbar {
+    display: none;
 }

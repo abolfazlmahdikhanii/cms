@@ -1,31 +1,35 @@
-.search-wrapper{
-   
-    display: flex;
-    flex-direction: column;
+.search-wrapper {
+
+
     position: relative;
-   max-width: 60rem;
-   align-items: baseline;
+    max-width: 60rem;
+ 
+
+ 
 
 
 }
+
 .form-control--search {
 
     display: flex;
     align-items: center;
     background-color: #374151;
- position: relative;
+    position: relative;
     padding: 1.5rem 1.3rem;
     gap: 1.3rem;
     border-radius: .7rem;
     width: 60rem;
     margin-right: 1rem;
-   z-index: 400;
- 
+z-index: 400;
+
 }
-.form-control--search__active{
+
+.form-control--search__active {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
 }
+
 .form-control--search__icon {
     display: grid;
     place-items: center;

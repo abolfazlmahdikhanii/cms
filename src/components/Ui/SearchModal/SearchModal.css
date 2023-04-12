@@ -1,0 +1,26 @@
+.search-dialog {
+    width: 100%;
+
+    position: relative;
+    z-index: 400;
+    overflow: hidden;
+    transition: all .3s;
+    padding:0.3rem 2rem;
+    background-color: #374151;
+    border-bottom-left-radius: 1.2rem;
+    border-bottom-right-radius: 1.2rem;
+   
+}
+
+.search-dialog--box {
+
+    width: 100%;
+    border-top: 1px solid blue;
+    padding:2rem;
+   
+}
+
+.alert-dialog--hidden {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+}

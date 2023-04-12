@@ -8,14 +8,19 @@ import Post from "../../components/Post/Post";
 import Layout from "./Layout";
 import { supabase } from "../../superbase";
 import logo from "../../assets/logo.svg"
+import { SerachModal } from "../../components/Ui/SearchModal/SerachModal";
 
 
 const Home = ({session}) => {
     const[firstName,setFirstName]=useState("")
     const[lastName,setLastName]=useState("")
+    const[clickInput,setClickInput]=useState(false)
+    const[search,setSearch]=useState("")
 
     const[avatarUrl,setAvatarUrl]=useState(null)
 
+    console.log(clickInput);
+    
     useEffect(()=>{
 
       showUserName()
@@ -61,7 +66,12 @@ const Home = ({session}) => {
             <Header fullName={`${firstName} ${lastName}`}>
 
               <img src={logo} alt="" />
-                <Search />
+                <Search 
+                  disable={clickInput}
+                  setClickInput={setClickInput}
+                  search={search}
+                />
+ 
             </Header>
       
       <Routes>

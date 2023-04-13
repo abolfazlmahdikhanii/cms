@@ -45,16 +45,7 @@ const Aside = (props) => {
                 </div>
             </div>
             <ul className="aside-list">
-                <li className="aside-item">
-                    <div className="aside-item--img">
-                        <img src="../../../src/assets/bg-slider.jpg" alt="" className="aside-item--img__img" />
-                    </div>
-                    <div className="aside-item--title">
-                        <h3 className="aside-item--title__title">  یوبیسافت تعداد قابل توجهی از کارکنان خود را اخراج می‌کند
-
-                        </h3>
-                    </div>
-                </li>
+             
                 <li className="aside-item">
                     <div className="aside-item--img">
                         <img src="../../../src/assets/bg-slider.jpg" alt="" className="aside-item--img__img" />

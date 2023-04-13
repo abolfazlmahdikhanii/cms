@@ -2,7 +2,7 @@ import React from "react";
 import "./Search.css";
 import { SerachModal } from "../SearchModal/SerachModal";
 
-const Search = ({disable,setClickInput,search,searchHandler}) => {
+const Search = ({disable,setClickInput,search,searchHandler,findBlog}) => {
 
     return (
         <div className="search-wrapper">
@@ -16,7 +16,7 @@ const Search = ({disable,setClickInput,search,searchHandler}) => {
             <input type="text" className="form-control__input" placeholder="جستجو"
              value={search}
             disabled={!disable} 
-            onChange={(e)=>searchHandler(e.target.value)}
+            onChange={(e)=>searchHandler(e)}
             
             />
 
@@ -26,6 +26,7 @@ const Search = ({disable,setClickInput,search,searchHandler}) => {
             setClickInput(false)
             searchHandler("")
         
+            findBlog={findBlog}
         }}/>
         </div>
     );

@@ -15,6 +15,7 @@ const Home = ({session}) => {
     const[lastName,setLastName]=useState("")
     const[clickInput,setClickInput]=useState(false)
     const[search,setSearch]=useState("")
+    const[findBlog,setFindBlog]=useState([])
 
     const[avatarUrl,setAvatarUrl]=useState(null)
 
@@ -28,16 +29,16 @@ const Home = ({session}) => {
 
 
         try {
-            let { data, error, status } = await supabase
+        
+            let { data, error } = await supabase
                 .from("profiles")
                 .select(`firstName,lastName,avatar_url`)
-                .eq('id', session?.user?.id)
+                .eq('id',session?.user?.id)
                 .single();
 
 
-            if (error && status !== 406) {
-                throw error;
-            }
+            if (error)  throw error;
+            
           
                
                 
@@ -55,8 +56,23 @@ const Home = ({session}) => {
         }
 
     };
-   const searchInputHandler=(e)=>{
+   const searchInputHandler=async(e)=>{
+    try{
+      setSearch(e.target.value)
 
+      const {data,error}=await supabase.from("blogs")
+      .select("*")
+      .ilike("post_title",`%${search}%`)
+      if(error)throw error
+
+      setFindBlog(data)
+      console.log(data);
+      
+
+    }catch(err){
+      console.log(err);
+      
+    }
       
     }
 
@@ -72,7 +88,8 @@ const Home = ({session}) => {
                   disable={clickInput}
                   setClickInput={setClickInput}
                   search={search}
-                  searchHandler={setSearch}
+                  searchHandler={searchInputHandler}
+                  findBlog={findBlog}
                 />
                 
             </Header>

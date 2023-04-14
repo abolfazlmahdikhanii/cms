@@ -5,18 +5,24 @@ import Backdrop from "../Backdrop/Backdrop";
 import Box from "../Box/Box";
 import ItemList from "../ItemList/ItemList";
 
-export const SerachModal = ({ show, close, findBlog }) => {
+const SerachModal = ({ show, close, findBlog }) => {
     return (
         <Wrapper>
             <Backdrop show={show} close={close} />
             <section className={`search-dialog ${show ? "search-dialog--hidden" : ""}`} >
                 <div className="search-dialog--box">
                     {
-                        findBlog?.map((item) => {
+                        findBlog?.flatMap(( item) => {
+                      
+                            
                             return (
                                 <ItemList
                                     key={item?.id}
-                                    title={item?.title}
+                                    id={item?.id}
+                                    username={item?.post_author?.username}
+                                    title={item?.post_title}
+                                    content={item?.post_content}
+
                                 />
                             );
                         })
@@ -27,3 +33,5 @@ export const SerachModal = ({ show, close, findBlog }) => {
 
     );
 };
+
+export default SerachModal;

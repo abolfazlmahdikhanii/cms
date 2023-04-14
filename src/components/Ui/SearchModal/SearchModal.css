@@ -5,6 +5,7 @@
     top: 5rem;
     /* left: 0; */
     right: 1rem;
+ 
 
     z-index: 400;
     overflow: hidden;
@@ -23,13 +24,16 @@
 .search-dialog--box {
 
     width: 100%;
-    border-top: 1px solid #64748b;
+
     padding: 2rem;
     background-color: #374151;
+  
+
 }
 
 .search-dialog--hidden {
     flex-grow: 1;
+    height: 35rem;
     opacity: 1;
     overflow-y: scroll;
     scrollbar-width: none;

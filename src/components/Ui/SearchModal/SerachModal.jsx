@@ -22,6 +22,7 @@ const SerachModal = ({ show, close, findBlog }) => {
                                     username={item?.post_author?.username}
                                     title={item?.post_title}
                                     content={item?.post_content}
+                                    close={close}
 
                                 />
                             );

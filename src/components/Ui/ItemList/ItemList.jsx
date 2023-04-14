@@ -4,14 +4,14 @@ import useFilterImage from "../../../hooks/useFilterImage";
 import useFilterPargraph from "../../../hooks/useFilterParagraph";
 
 
-const ItemList = ({ title,id,username,content }) => {
+const ItemList = ({ title,id,username,content,close }) => {
 
     const filterImg = useFilterImage;
     const filterParagraph = useFilterPargraph;
 
 
     return (
-        <Link className="aside-item" to={`/article/@${username}/${id}/${title.split(" ").join("-")}`}>
+        <Link onClick={close} className="aside-item" to={`/article/@${username}/${id}/${title.split(" ").join("-")}`}>
             <div className="aside-item--img" dangerouslySetInnerHTML={{ __html: filterImg(content) }}>
 
             </div>

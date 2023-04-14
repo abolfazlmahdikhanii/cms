@@ -24,6 +24,7 @@ const Home = ({ session }) => {
   useEffect(() => {
 
     showUserName();
+    
   }, [session]);
 
   const showUserName = async () => {
@@ -92,6 +93,8 @@ const Home = ({ session }) => {
           search={search}
           searchHandler={searchInputHandler}
           findBlog={findBlog}
+          setFindBlog={setFindBlog}
+          setSearch={setSearch}
         />
      
       </Header>

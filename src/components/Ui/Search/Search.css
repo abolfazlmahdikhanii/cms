@@ -3,7 +3,7 @@
 
     position: relative;
     max-width: 60rem;
- 
+
 
  
 
@@ -23,11 +23,13 @@
     margin-right: 1rem;
 z-index: 400;
 
+
 }
 
 .form-control--search__active {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    border-bottom: 1px solid #64748b;
 }
 
 .form-control--search__icon {

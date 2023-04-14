@@ -1,11 +1,11 @@
 import React from "react";
 import "./Search.css";
-import { SerachModal } from "../SearchModal/SerachModal";
+import  SerachModal  from "../SearchModal/SerachModal";
 
 const Search = ({disable,setClickInput,search,searchHandler,findBlog}) => {
 
     return (
-        <div className="search-wrapper">
+        <div className="search-wrapper" >
         <div className={`form-control--search ${disable?'form-control--search__active':""}`} onClick={()=>setClickInput(true)}  >
             <div className="form-control--search__icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={18} height={18}>
@@ -13,7 +13,7 @@ const Search = ({disable,setClickInput,search,searchHandler,findBlog}) => {
                 </svg>
 
             </div>
-            <input type="text" className="form-control__input" placeholder="جستجو"
+            <input type="text" autoFocus  className="form-control__input" placeholder="جستجو"
              value={search}
             disabled={!disable} 
             onChange={(e)=>searchHandler(e)}
@@ -26,8 +26,10 @@ const Search = ({disable,setClickInput,search,searchHandler,findBlog}) => {
             setClickInput(false)
             searchHandler("")
         
-            findBlog={findBlog}
-        }}/>
+        
+        }}
+        findBlog={findBlog}
+        />
         </div>
     );
 };

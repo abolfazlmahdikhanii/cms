@@ -2,7 +2,7 @@ import React from "react";
 import "./Search.css";
 import  SerachModal  from "../SearchModal/SerachModal";
 
-const Search = ({disable,setClickInput,search,searchHandler,findBlog}) => {
+const Search = ({disable,setClickInput,search,searchHandler,findBlog,setFindBlog,setSearch}) => {
 
     return (
         <div className="search-wrapper" >
@@ -24,7 +24,8 @@ const Search = ({disable,setClickInput,search,searchHandler,findBlog}) => {
         </div>
         <SerachModal show={disable} close={()=>{
             setClickInput(false)
-            searchHandler("")
+            setSearch("")
+           setFindBlog(null)
         
         
         }}

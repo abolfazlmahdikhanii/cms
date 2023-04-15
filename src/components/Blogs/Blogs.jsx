@@ -24,6 +24,7 @@ const Blogs = ({ blogs,category }) => {
     const filterParagraph=useFilterPargraph
     const filterImage=useFilterImage
  
+    const categoryTitle=category?category:"last-news"
 
     useEffect(() => {
         if (avatarUrl) downloadImage(avatarUrl);
@@ -224,7 +225,7 @@ const Blogs = ({ blogs,category }) => {
                     </svg>
                 </div>
                 <div>
-                    <h3 className="blog-list--title__txt">{translator(category)}</h3>
+                    <h3 className="blog-list--title__txt">{translator(categoryTitle)}</h3>
                 </div>
             </div>
 

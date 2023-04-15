@@ -8,9 +8,9 @@ import health from "../../assets/health.svg"
 import art from "../../assets/art.svg"
 import lifeStyle from "../../assets/life-style.svg"
 import game from "../../assets/game.svg"
-const Category=({category,setCategory})=>{
+const Category=()=>{
 
-    const [categorItem,setCategoryItem]=useState([
+    const categorItem=[
         {
             id:crypto.randomUUID(),
             title:"آخرین مطالب",
@@ -59,7 +59,7 @@ const Category=({category,setCategory})=>{
             bgItem:"#6c78eb",
             bgIcon:"#7a86f6"
         },
-    ])
+    ]
     return(
         <div className="category">
             <Box type="category">
@@ -70,8 +70,6 @@ const Category=({category,setCategory})=>{
                  return(
                     <CategoryItem
                     key={item.id}
-                    category={category}
-                    setCategory={setCategory}
                      {...item}
                     />
                  )

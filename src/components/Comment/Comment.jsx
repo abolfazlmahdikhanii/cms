@@ -3,6 +3,8 @@ import "./Comment.css";
 import Wrapper from "../../hoc/Wrapper";
 import CommentForm from "../CommentForm/CommentForm";
 import useRelativeTime from "../../hooks/useRelativeTime";
+import { Link } from "react-router-dom";
+
 
 const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComment, parentId, addComment, getReply, editComment, removeComment }) => {
 
@@ -21,6 +23,7 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
     const replyId = parentId ? parentId : id;
 
     const timeFormat = useRelativeTime;
+
 
     useEffect(() => {
 
@@ -47,13 +50,19 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
 
                     <div className="comment-box--btns">
                         {!canReply &&
-                            <button className="blog-comment__btn blog-content__btn btn-reply" onClick={() => setActiveComment({ id: comment.id, type: "replying" })}>
+                            <Link to={currentUserId === undefined ? "/auth" : ""} className="blog-comment__btn blog-content__btn btn-reply" onClick={() =>
+                                currentUserId !== undefined ? setActiveComment({ id: comment.id, type: "replying" }) : null
+
+                            }>
+
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={15} height={15}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
                                 </svg>
 
                                 <p>پاسخ</p>
-                            </button>
+                            </Link>
+
+
                         }
                         {canEdit &&
                             <button className="blog-comment__btn blog-content__btn btn-reply" onClick={() => setActiveComment({ id: comment.id, type: "editing" })}>
@@ -73,13 +82,13 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
                             </button>
                         }
                         {!canLike &&
-                            <button className="blog-content__btn  blog-like__btn">
+                            <Link to={currentUserId === undefined ? "/auth" : ""} className="blog-content__btn  blog-like__btn">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.7} stroke="currentColor" width={18} height={18}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                 </svg>
                                 <p>0</p>
 
-                            </button>
+                            </Link>
                         }
                         {canDelete &&
                             <button className="blog-content__btn  blog-like__btn" onClick={() => removeComment(id)}>

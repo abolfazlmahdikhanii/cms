@@ -108,7 +108,9 @@ const Home = ({ session }) => {
       </Header>
 
       <Routes>
-        <Route path="/" element={<Layout />} />
+        <Route path="/*" element={<Layout />} />
+        <Route path="/category/:value" element={<Layout />} />
+       
         <Route path="/article/:username/:id/:title" element={<Post session={session} />} />
       </Routes>
 

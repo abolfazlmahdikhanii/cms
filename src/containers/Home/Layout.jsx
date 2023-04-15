@@ -1,61 +1,80 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Blogs from "../../components/Blogs/Blogs";
 import Category from "../../components/Category/Category";
 import Slider from "../../components/Slider/Slider";
 import Aside from "../../components/Aside/Aside";
 import { supabase } from "../../superbase";
 import Loader from "../../components/Ui/Loader/Loader";
+import { useParams } from "react-router-dom";
 
 const PAGE_SIZE = 10;
 
-const Layout=()=>{
+const Layout = () => {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [postContent, setPostContent] = useState([])
-    const [page, setPage] = useState(1)
-    const [category,setCategory]=useState("last-news")
-    const categoryList=["tech","game","art","life-style","health"]
+    const [postContent, setPostContent] = useState([]);
+    const [page, setPage] = useState(1);
+    const match = useParams();
+
+    const categoryList = ["art", "tech", "game", "health", "life-style"];
+
     useEffect(() => {
-        getBlogData()
+        getBlogData();
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
 
 
-    }, [category]);
+    }, []);
     const getBlogData = async () => {
         try {
-            console.log(category);
-            
+
+            let condition = match?.value;
+
+
+
             setLoading(true);
-      
+
             const offset = (page - 1) * PAGE_SIZE;
-            
-            let { data: blog, error } = await supabase
-                .from('blogs')
-                .select(`id,post_date,post_title,post_content,post_comment,post_type
-                ,post_author(
-                    firstName,
-                    lastName,
-                    avatar_url,
-                    username
-                )`)
-                // .range(offset,offset+PAGE_SIZE-1)
-                .eq(category!=="last-news"&&"post_type",category)
-      
-                    
-            
-            
+            if (condition) {
+                let { data: blog, error } = await supabase
+                    .from('blogs')
+                    .select(`id,post_date,post_title,post_content,post_comment,post_type
+            ,post_author(
+                firstName,
+                lastName,
+                avatar_url,
+                username
+            )`)
 
-            if (error)  throw error;
-        
+                    .eq("post_type", condition)
+                    .range(offset, offset + PAGE_SIZE - 1);
+                if (error) throw error;
+                setBlogs(blog);
+                setPage((prev) => prev + 1);
+            }
 
-          
-       
-            
+            else {
+                let { data: blog, error } = await supabase
+                    .from('blogs')
+                    .select(`id,post_date,post_title,post_content,post_comment,post_type
+            ,post_author(
+                firstName,
+                lastName,
+                avatar_url,
+                username
+            )`)
+
+                    .in("post_type", categoryList)
+                    .range(offset, offset + PAGE_SIZE - 1);
+                if (error) throw error;
+                console.log(blog);
+
+                setBlogs(blog);
+                setPage((prev) => prev + 1);
+            }
 
 
-            setBlogs(blog);
-            setPage((prev)=>prev+1)
+
 
 
         } catch (error) {
@@ -69,28 +88,28 @@ const Layout=()=>{
 
     };
 
-    const handleScroll=()=>{
-        if(window.innerHeight+document.documentElement.scrollHeight===document.documentElement.offsetHeight){
-            getBlogData()
+    const handleScroll = () => {
+        if (window.innerHeight + document.documentElement.scrollHeight === document.documentElement.offsetHeight) {
+            getBlogData();
         }
-    }
-   
-    return(
+    };
+
+    return (
         <>
-               {loading ?
+            {loading ?
                 <Loader show={loading} />
                 :
                 (
                     <div>
                         <Slider />
-                        <Category category={category} setCategory={setCategory}/>
+                        <Category />
 
 
                         <section className="main-container">
                             <main className="blog-list">
 
 
-                                <Blogs blogs={blogs} category={category} />
+                                <Blogs blogs={blogs} category={match?.value} />
 
                             </main>
 
@@ -103,7 +122,7 @@ const Layout=()=>{
                 )
             }
         </>
-    )
-}
+    );
+};
 
-export default Layout
+export default Layout;

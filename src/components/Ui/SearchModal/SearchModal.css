@@ -5,7 +5,7 @@
     top: 5rem;
     /* left: 0; */
     right: 1rem;
- 
+
 
     z-index: 4;
     overflow: hidden;
@@ -27,18 +27,32 @@
 
     padding: 2rem;
     background-color: #374151;
-  
+
 
 }
 
 .search-dialog--hidden {
     flex-grow: 1;
-    height: 35rem;
+    min-height: 12rem;
+    height: max-content;
     opacity: 1;
     overflow-y: scroll;
     scrollbar-width: none;
+
 }
 
 .search-dialog--hidden::-webkit-scrollbar {
     display: none;
+}
+
+.oval-loader {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    transform: translate(-40%, -40%);
+    width: 100%;
+    justify-content: center;
+    align-items: self-end;
+    height: 6rem;
+    z-index: 400;
 }

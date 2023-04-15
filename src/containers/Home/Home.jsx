@@ -15,6 +15,7 @@ const Home = ({ session }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [clickInput, setClickInput] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [findBlog, setFindBlog] = useState(null);
 
@@ -24,7 +25,7 @@ const Home = ({ session }) => {
   useEffect(() => {
 
     showUserName();
-    
+
   }, [session]);
 
   const showUserName = async () => {
@@ -34,7 +35,7 @@ const Home = ({ session }) => {
 
       let { data, error } = await supabase
         .from("profiles")
-        .select(`firstName,lastName,avatar_url`)
+        .select(`id,firstName,lastName,avatar_url`)
         .eq('id', session?.user?.id)
         .single();
 
@@ -60,21 +61,27 @@ const Home = ({ session }) => {
   };
   const searchInputHandler = async (e) => {
     try {
+
+      setLoading(true)
       setSearch(e.target.value);
 
       const { data, error } = await supabase.from("blogs")
         .select("id,post_title,post_content,post_type,post_author(username)")
-        .ilike("post_title", `%${search}%`)
-        
+        .ilike("post_title", `%${search}%`);
+
       if (error) throw error;
 
       setFindBlog(data);
-      console.log(data);
+
 
 
     } catch (err) {
+      setLoading(false)
       console.log(err);
 
+    }
+    finally{
+      setLoading(false)
     }
 
   };
@@ -95,8 +102,9 @@ const Home = ({ session }) => {
           findBlog={findBlog}
           setFindBlog={setFindBlog}
           setSearch={setSearch}
+          loading={loading}
         />
-     
+
       </Header>
 
       <Routes>

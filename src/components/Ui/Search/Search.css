@@ -4,8 +4,10 @@
     position: relative;
     max-width: 60rem;
 
+    display: flex;
+    flex-direction: column;
 
- 
+
 
 
 }
@@ -14,26 +16,41 @@
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: #374151;
     position: relative;
-    padding: 1.5rem 1.3rem;
+    padding: 1.3rem 1.8rem;
     gap: 1.3rem;
     border-radius: .7rem;
     width: 60rem;
     margin-right: 1rem;
-z-index: 4;
+   
 
 
 }
 
+.form-control--search__row {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+}
+
 .form-control--search__active {
+    z-index: 400;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     border-bottom: 1px solid #64748b;
+
+    
 }
 
 .form-control--search__icon {
     display: grid;
     place-items: center;
     color: #6b7280;
+}
+.form-control--search__remove {
+    display: grid;
+    place-items: center;
+    transition: all .3s;
 }

@@ -24,18 +24,21 @@ const Layout = () => {
         return () => window.removeEventListener("scroll", handleScroll);
 
 
-    }, []);
+    }, [match]);
     const getBlogData = async () => {
         try {
 
+
             let condition = match?.value;
 
+          
+            
 
 
             setLoading(true);
 
             const offset = (page - 1) * PAGE_SIZE;
-            if (condition) {
+            if (condition!==undefined) {
                 let { data: blog, error } = await supabase
                     .from('blogs')
                     .select(`id,post_date,post_title,post_content,post_comment,post_type
@@ -54,7 +57,7 @@ const Layout = () => {
             }
 
             else {
-                let { data: blog, error } = await supabase
+                let { data: blogs, error } = await supabase
                     .from('blogs')
                     .select(`id,post_date,post_title,post_content,post_comment,post_type
             ,post_author(
@@ -67,9 +70,9 @@ const Layout = () => {
                     .in("post_type", categoryList)
                     .range(offset, offset + PAGE_SIZE - 1);
                 if (error) throw error;
-                console.log(blog);
+                console.log(blogs);
 
-                setBlogs(blog);
+                setBlogs(blogs);
                 setPage((prev) => prev + 1);
             }
 
@@ -96,10 +99,10 @@ const Layout = () => {
 
     return (
         <>
-            {loading ?
+            
                 <Loader show={loading} />
-                :
-                (
+                
+                
                     <div>
                         <Slider />
                         <Category />
@@ -119,8 +122,8 @@ const Layout = () => {
                             </aside>
                         </section>
                     </div>
-                )
-            }
+                
+            
         </>
     );
 };

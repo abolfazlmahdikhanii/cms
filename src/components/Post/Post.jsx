@@ -502,7 +502,7 @@ const Post = ({ session }) => {
                     <Box>
                         <div className="author-profile">
                             <div className="author-profile--photo">
-                                <img src={'../../../src/assets/profile.svg'} alt="" />
+                                <img src={publicProfile(blogContent[0]?.post_author.avatar_url)||'../../../src/assets/profile.svg'} alt="" />
                             </div>
                             <div className="author-profile--info">
                                 <p className="author-prfile__fullName">

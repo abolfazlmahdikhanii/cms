@@ -31,14 +31,10 @@ const Layout = () => {
 
             let condition = match?.value;
 
-          
-            
-
-
             setLoading(true);
 
-            const offset = (page - 1) * PAGE_SIZE;
-            if (condition!==undefined) {
+            // const offset = (page - 1) * PAGE_SIZE;
+            if (condition !== undefined) {
                 let { data: blog, error } = await supabase
                     .from('blogs')
                     .select(`id,post_date,post_title,post_content,post_comment,post_type
@@ -49,8 +45,8 @@ const Layout = () => {
                 username
             )`)
 
-                    .eq("post_type", condition)
-                    .range(offset, offset + PAGE_SIZE - 1);
+                    .eq("post_type", condition);
+                // .range(offset, offset + PAGE_SIZE - 1);
                 if (error) throw error;
                 setBlogs(blog);
                 setPage((prev) => prev + 1);
@@ -67,8 +63,8 @@ const Layout = () => {
                 username
             )`)
 
-                    .in("post_type", categoryList)
-                    .range(offset, offset + PAGE_SIZE - 1);
+                    .in("post_type", categoryList);
+                // .range(offset, offset + PAGE_SIZE - 1);
                 if (error) throw error;
                 console.log(blogs);
 
@@ -99,31 +95,31 @@ const Layout = () => {
 
     return (
         <>
-            
-                <Loader show={loading} />
-                
-                
-                    <div>
-                        <Slider />
-                        <Category />
+
+            <Loader show={loading} />
 
 
-                        <section className="main-container">
-                            <main className="blog-list">
+            <div>
+                <Slider />
+                <Category />
 
 
-                                <Blogs blogs={blogs} category={match?.value} />
+                <section className="main-container">
+                    <main className="blog-list">
 
-                            </main>
 
-                            <aside className="blog-aside">
-                                <Aside type="viewst" />
-                                <Aside type="controversial" />
-                            </aside>
-                        </section>
-                    </div>
-                
-            
+                        <Blogs blogs={blogs} category={match?.value} />
+
+                    </main>
+
+                    <aside className="blog-aside">
+                        <Aside type="viewst" />
+                        <Aside type="controversial" />
+                    </aside>
+                </section>
+            </div>
+
+
         </>
     );
 };

@@ -3,6 +3,7 @@ import "./BlogsItem.css";
 import { Link } from "react-router-dom";
 import { supabase } from "../../superbase";
 import useRelativeTime from "../../hooks/useRelativeTime";
+import usePublicProfile from "../../hooks/usePublicProfile";
 
 const BlogItem = (props) => {
   const [activeLike,setActiveLike]=useState(false)
@@ -10,8 +11,10 @@ const BlogItem = (props) => {
   const [vote,setVote]=useState(null)
   const [save,setSave]=useState(null)
   const [isSave,setIsSave]=useState(false)
-
+  
+const publicProfile=usePublicProfile
   const timeFormat=useRelativeTime
+  
   useEffect(() => {
     getTotalRate(props?.id)
     checkUserLike()
@@ -116,7 +119,7 @@ const BlogItem = (props) => {
             {/* author */}
             <div className="blog-content--detail-author">
               <div className="detail-author--profile">
-                <img src={props.avatar&&'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
+                <img src={publicProfile(props?.avatar)||'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
                 <p className="detail-author--profile__txt">{props.fullName??props.email}</p>
               </div>
               <div className="detail-author--fav">

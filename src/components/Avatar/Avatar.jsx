@@ -2,26 +2,12 @@ import React, { useState, useEffect } from "react";
 import './Avatar.css'
 import { supabase } from "../../superbase.jsx";
 import profileIcon from "../../assets/profile.svg";
+import usePublicProfile from "../../hooks/usePublicProfile";
 const Avatar = ({ url, size, onUpload }) => {
     const [avatarUrl, setAvatarUrl] = useState(null);
     const [uploading, setUploading] = useState(false);
-    useEffect(() => {
-        if (url) downloadImage(url);
-    }, [url]);
-
-    const downloadImage = async (path) => {
-
-        try {
-            const { data, error } = await supabase.storage.from('avatars').download(path);
-            if (error) throw error;
-
-            const url = URL.createObjectURL(data);
-            setAvatarUrl(url);
-        }
-        catch (error) {
-            console.log(error.message);
-        }
-    };
+    const publicProfile=usePublicProfile
+  
     const uploadAvatar = async (event) => {
         event.preventDefault();
         try {
@@ -52,8 +38,8 @@ const Avatar = ({ url, size, onUpload }) => {
     return (
         <div style={{ width: size }} aria-live="polite" className="avatar-container">
             <img
-                src={avatarUrl ? avatarUrl :profileIcon}
-                alt={avatarUrl ? 'Avatar' : 'No image'}
+                src={url ? publicProfile(url) :profileIcon}
+                alt={url ? 'Avatar' : 'No image'}
                 className="avatar-img"
                 style={{ height: size, width: size }}
             />

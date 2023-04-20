@@ -10,8 +10,9 @@ import useFilterImage from "../../hooks/useFilterImage";
 
 
 
+
 const Blogs = ({ blogs,category }) => {
-    const [avatarUrl, setAvatarUrl] = useState();
+
     const translator = useTranslatorCategory;
     const [users, setUser] = useState(null);
 
@@ -23,11 +24,12 @@ const Blogs = ({ blogs,category }) => {
 
     const filterParagraph=useFilterPargraph
     const filterImage=useFilterImage
+    
  
     const categoryTitle=category?category:"last-news"
 
     useEffect(() => {
-        if (avatarUrl) downloadImage(avatarUrl);
+   
         checkExistUser();
 
     }, [blogs, click]);
@@ -190,22 +192,7 @@ const Blogs = ({ blogs,category }) => {
 
         }
     };
-    const downloadImage = async (path) => {
-
-        try {
-            const { data, error } = await supabase.storage.from('avatar').download(path);
-            if (error) throw error;
-
-
-            const url = URL.createObjectURL(data);
-            console.log(url);
-
-
-        }
-        catch (error) {
-            console.log(error.message);
-        }
-    };
+   
   
    
   
@@ -243,7 +230,7 @@ const Blogs = ({ blogs,category }) => {
                             category={translator(item?.post_type)}
                             img={filterImage(item?.post_content)}
                             fullName={`${firstName} ${lastName}`}
-                            avatar={() => setAvatarUrl(avatar_url)}
+                            avatar={avatar_url}
                             paragraphs={filterParagraph(item?.post_content)}
                             userId={users?.user?.id}
                             date={item?.post_date}

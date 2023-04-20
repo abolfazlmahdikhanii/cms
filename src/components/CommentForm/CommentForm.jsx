@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './CommentForm.css';
 import { supabase } from "../../superbase";
+import usePublicProfile from "../../hooks/usePublicProfile";
 
 const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null, active,setActive }) => {
     const [text, setText] = useState(editValue||"");
     // const [active, setActive] = useState(true);
     const [users, setUser] = useState([]);
-
+    const publicProfile=usePublicProfile
 
 
 
@@ -61,7 +62,7 @@ const CommentForm = ({ handleSubmit, submitLabel, userId, editValue = null, acti
                     {/* right */}
                     <div className="author-profile">
                         <div className="author-profile--photo author-profile--comment-form">
-                            <img src="../../../src/assets/profile.svg" alt="" />
+                            <img src={publicProfile(users?.avatar_url)||"../../../src/assets/profile.svg"} alt="" />
                         </div>
                         <div className="comment-profile--info">
                             <p className="comment-prfile__fullName">{users?.firstName} {users?.lastName}</p>

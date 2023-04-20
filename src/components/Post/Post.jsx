@@ -15,6 +15,7 @@ import useFilterImage from "../../hooks/useFilterImage";
 import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
 import Star from "../Ui/Star/Star";
+import usePublicProfile from "../../hooks/usePublicProfile";
 
 
 
@@ -49,6 +50,7 @@ const Post = ({ session }) => {
     const timeFormat = useRelativeTime;
     const translator = useTranslatorCategory;
     const filterImage = useFilterImage;
+    const publicProfile=usePublicProfile
     useEffect(() => {
         Promise.all([
             getUserIp(),
@@ -96,6 +98,7 @@ const Post = ({ session }) => {
                     bio
                 )`)
                 .eq("id", match?.id)
+                
 
 
             if (error) {
@@ -287,7 +290,7 @@ const Post = ({ session }) => {
     const filterPosts = (array) => {
         let data = [];
         let splicedImage=null
-        const posts = array.map((item) => item.post_content);
+        const posts = array.map((item) => item?.post_content);
         posts.forEach(blog => {
             for (let value of blog) {
                 data.push(value.contentTag);
@@ -348,7 +351,7 @@ const Post = ({ session }) => {
                         <h2 className="post__title">{blogContent[0]?.post_title}</h2>
                         <div className="post-row">
                             <div className="detail-author--profile">
-                                <img src={'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
+                                <img src={publicProfile(blogContent[0]?.post_author.avatar_url)||'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
                                 <p className="detail-author--profile__txt">{`${blogContent[0]?.post_author.firstName} ${blogContent[0]?.post_author.lastName}`}</p>
                             </div>
 

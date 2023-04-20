@@ -4,6 +4,7 @@ import Wrapper from "../../hoc/Wrapper";
 import CommentForm from "../CommentForm/CommentForm";
 import useRelativeTime from "../../hooks/useRelativeTime";
 import { Link } from "react-router-dom";
+import usePublicProfile from "../../hooks/usePublicProfile";
 
 
 const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComment, parentId, addComment, getReply, editComment, removeComment }) => {
@@ -23,11 +24,9 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
     const replyId = parentId ? parentId : id;
 
     const timeFormat = useRelativeTime;
+    const publicProfile=usePublicProfile
 
-
-    useEffect(() => {
-
-    }, []);
+   
 
 
 
@@ -38,7 +37,7 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
                     {/* right */}
                     <div className="author-profile">
                         <div className="author-profile--photo">
-                            <img src={user_id?.avatar_url && "../../../src/assets/profile.svg"} alt="" />
+                            <img src={publicProfile(user_id?.avatar_url) || "../../../src/assets/profile.svg"} alt="" />
                         </div>
                         <div className="comment-profile--info">
                             <p className="comment-prfile__fullName">{user_id?.firstName} {user_id?.lastName}</p>

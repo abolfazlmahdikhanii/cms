@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState ,useRef} from "react";
 import "./Home.css";
 import Header from "../../components/Header/Header";
 import Wrapper from "../../hoc/Wrapper";
@@ -11,20 +11,20 @@ import logo from "../../assets/logo.svg";
 
 
 
+
 const Home = ({ session }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [clickInput, setClickInput] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [search, setSearch] = useState("");
-  const [findBlog, setFindBlog] = useState(null);
+ 
 
   const [avatarUrl, setAvatarUrl] = useState(null);
+
 
 
   useEffect(() => {
 
     showUserName();
+
 
   }, [session]);
 
@@ -59,32 +59,6 @@ const Home = ({ session }) => {
     }
 
   };
-  const searchInputHandler = async (e) => {
-    try {
-
-      setLoading(true)
-      setSearch(e.target.value);
-
-      const { data, error } = await supabase.from("blogs")
-        .select("id,post_title,post_content,post_type,post_author(username)")
-        .ilike("post_title", `%${search}%`);
-
-      if (error) throw error;
-
-      setFindBlog(data);
-
-
-
-    } catch (err) {
-      setLoading(false)
-      console.log(err);
-
-    }
-    finally{
-      setLoading(false)
-    }
-
-  };
 
 
 
@@ -95,14 +69,7 @@ const Home = ({ session }) => {
 
         <img src={logo} alt="" />
         <Search
-          disable={clickInput}
-          setClickInput={setClickInput}
-          search={search}
-          searchHandler={searchInputHandler}
-          findBlog={findBlog}
-          setFindBlog={setFindBlog}
-          setSearch={setSearch}
-          loading={loading}
+      
         />
 
       </Header>

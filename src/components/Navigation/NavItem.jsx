@@ -24,7 +24,7 @@ const NavItem = () => {
                 </NavLink>
             </li>
             <li className="nav">
-                <NavLink to="/panel/create-blog" end className="nav-item" activeclassname="active" >
+                <NavLink to="/panel/create-blog" end replace className="nav-item" activeclassname="active" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <g id="vuesax_bulk_note-favorite" data-name="vuesax/bulk/note-favorite" transform="translate(-108 -380)">
                             <g id="note-favorite">

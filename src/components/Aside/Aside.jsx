@@ -2,10 +2,10 @@ import React from "react";
 import "./Aside.css";
 import Box from "../Ui/Box/Box";
 
-const Aside = (props) => {
+const Aside = ({ post, type }) => {
 
     let header = null;
-    switch (props.type) {
+    switch (type) {
         case "viewst":
 
             header =
@@ -36,26 +36,34 @@ const Aside = (props) => {
     return (
         <Box>
             <div className="aside-title">
-                <div className={`aside-icon  ${props.type==="viewst"?"aside-icon__viewst":"aside-icon__controversial"}`}>
+                <div className={`aside-icon  ${type === "viewst" ? "aside-icon__viewst" : "aside-icon__controversial"}`}>
                     {header}
 
                 </div>
                 <div>
-                    <p className="aside-title__title">{props.type === "viewst" ? "پر بازدیدترین ها" : "پربحث ترین ها"}</p>
+                    <p className="aside-title__title">{type === "viewst" ? "پر بازدیدترین ها" : "پربحث ترین ها"}</p>
                 </div>
             </div>
             <ul className="aside-list">
-             
-                <li className="aside-item">
-                    <div className="aside-item--img">
-                        <img src="../../../src/assets/bg-slider.jpg" alt="" className="aside-item--img__img" />
-                    </div>
-                    <div className="aside-item--title">
-                        <h3 className="aside-item--title__title">  یوبیسافت تعداد قابل توجهی از کارکنان خود را اخراج می‌کند
 
-                        </h3>
-                    </div>
-                </li>
+                {
+                    post?.map((item) => {
+                        console.log(item);
+                        
+                        return (
+                            <li className="aside-item">
+                                <div className="aside-item--img">
+                                    <img src="../../../src/assets/bg-slider.jpg" alt="" className="aside-item--img__img" />
+                                </div>
+                                <div className="aside-item--title">
+                                    <h3 className="aside-item--title__title">  یوبیسافت تعداد قابل توجهی از کارکنان خود را اخراج می‌کند
+
+                                    </h3>
+                                </div>
+                            </li>
+                        );
+                    })
+                }
             </ul>
         </Box>
     );

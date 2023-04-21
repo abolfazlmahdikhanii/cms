@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 
   
-const Auth = ({nhost}) => {
+const Auth = () => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     
@@ -95,18 +95,6 @@ const Auth = ({nhost}) => {
           if(error) throw error  
           
           navigate('/panel');
-            
-          
-            
-             
-
-
-
-
-
-
-
-
 
         }
         catch (error) {
@@ -127,9 +115,6 @@ const Auth = ({nhost}) => {
 
     };
 
-    // const varifyOtp = async (token) => {
-       
-    // };
 
 
     const setEmailHandler = (e) => {

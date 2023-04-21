@@ -6,7 +6,7 @@ import usePublicProfile from "../../hooks/usePublicProfile";
 const Avatar = ({ url, size, onUpload }) => {
     const [avatarUrl, setAvatarUrl] = useState(null);
     const [uploading, setUploading] = useState(false);
-    const publicProfile=usePublicProfile
+   
   
     const uploadAvatar = async (event) => {
         event.preventDefault();
@@ -38,7 +38,7 @@ const Avatar = ({ url, size, onUpload }) => {
     return (
         <div style={{ width: size }} aria-live="polite" className="avatar-container">
             <img
-                src={url ? publicProfile(url) :profileIcon}
+                src={url ? url :profileIcon}
                 alt={url ? 'Avatar' : 'No image'}
                 className="avatar-img"
                 style={{ height: size, width: size }}

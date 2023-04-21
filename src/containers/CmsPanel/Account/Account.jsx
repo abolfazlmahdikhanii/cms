@@ -8,6 +8,7 @@ import Avatar from "../../../components/Avatar/Avatar.jsx";
 import UserContextProvider from "../../../context/User.jsx";
 import Loader from "../../../components/Ui/Loader/Loader.jsx";
 import Box from "../../../components/Ui/Box/Box";
+import usePublicProfile from "../../../hooks/usePublicProfile";
 
 const Account = ({ session }) => {
     const [loading, setLoading] = useState(true);
@@ -22,6 +23,10 @@ const Account = ({ session }) => {
     const [errorlastName, setErrorLastName] = useState(false);
     const [errorUserName, setErrorUserName] = useState(false);
     const [errorBio, setErrorBio] = useState(false);
+
+    const publicProfile=usePublicProfile
+
+
     const toastOption={
         position: "bottom-right",
         autoClose:1000,
@@ -132,7 +137,7 @@ const Account = ({ session }) => {
 
                 <form onSubmit={updateProfile} className="form-widget">
                     <Avatar
-                        url={avatar_url}
+                        url={publicProfile(avatar_url)}
                         onUpload={(url) => {
                             setAvatarUrl(url);
                             updateProfile({ username, firstName, lastName, avatar_url: url, bio, gender, birthDay });
@@ -233,8 +238,8 @@ const Account = ({ session }) => {
 
 
                                     </select>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width={24} height={24}>
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" width={24} height={24}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </div>
                                 
@@ -242,7 +247,7 @@ const Account = ({ session }) => {
                             <div>
                                 <div className="form-control">
                                     <p className="form-control__txt">تاریخ تولد</p>
-                                    <DatePicker round="x2" accentColor="#4f46e5" locale="fa"    onChange={(e) => {
+                                    <DatePicker round="x2" accentColor="#4f46e5" locale="fa" onChange={(e) => {
 
                                         setBirthDay(e.value);
                                       

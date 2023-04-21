@@ -18,8 +18,9 @@ const Blogs = ({ blogs,category }) => {
 
     const [isUser, setIsUser] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [click, setClick] = useState(false);
-    const [clickSave, setClickSave] = useState(false);
+    const [like, setLike] = useState(false);
+    const [saved, setSaved] = useState(false);
+ 
    
 
     const filterParagraph=useFilterPargraph
@@ -32,145 +33,103 @@ const Blogs = ({ blogs,category }) => {
    
         checkExistUser();
 
-    }, [blogs, click]);
+    }, [blogs,like,saved]);
 
-    const handleClick = (id) => {
+    const handleClick =async (id) => {
+        if (!isUser) return false
 
-        if (!click) {
-            removeBlogRate(id);
-            setClick(true);
+        const {user}=users
+        const { data, error } = await supabase
+        .from('vote')
+        .select('*')
+        .eq('user_id', user?.id)
+        .eq('blog_id', id);
+  
+      if (error) {
+        console.error(error);
+        return;
+      }
+      if (data.length > 0) {
+        // User has already liked this post, so we should remove their like
+        const { error } = await supabase
+          .from('vote')
+          .delete()
+          .eq('user_id', user?.id)
+          .eq('blog_id', id);
+  
+        if (error) {
+          console.error(error);
+          return;
         }
-        else {
-            updateBlogRate(id);
-            setClick(false);
+  
+        setLike(false);
+      } else {
+        // User hasn't liked this post yet, so we should add their like
+        const { error } = await supabase
+          .from('vote')
+          .insert({
+            user_id:user?.id,
+            blog_id: id,
+          });
+  
+        if (error) {
+          console.error(error);
+          return;
         }
-    };
-    const handleSaveClick = (id) => {
-
-        if (!clickSave) {
-            removeSaveBlog(id);
-            setClickSave(true);
-        }
-        else {
-            saveBlogHandler(id);
-            setClickSave(false);
-        }
-    };
-
-    const updateBlogRate = async (id) => {
-
-        try {
-            setLoading(true);
-            if (isUser) {
-                const { user } = users;
-                console.log(user);
-                
-                const { err } = await supabase.from('vote')
-                    .insert({ blog_id: id, user_id: user?.id, posetive_vote: true });
-
-
-                if (err) throw err;
-
-
-
-            }
-        } catch (error) {
-            setLoading(false);
-            console.log(error);
-
-        }
-        finally {
-            setLoading(true);
-        }
-
-    };
-    const removeBlogRate = async (id) => {
-
-        try {
-            setLoading(true);
-            if (isUser) {
-                const { user } = users;
-                const { err } = await supabase.from('vote')
-                    .delete()
-                    .eq("blog_id", id);
-
-
-
-                if (err) throw err;
-
-
-
-            }
-        } catch (error) {
-            setLoading(false);
-            console.log(error);
-
-        }
-
-        finally {
-            setLoading(true);
-        }
-    };
-
-    const saveBlogHandler = async (id) => {
-        try {
-            setLoading(true);
-            if (isUser) {
-                const { user } = users;
-                const { err } = await supabase.from('save')
-                    .insert({ blog_id: id, user_id: user?.id });
-
-
-                if (err) throw err;
-
-
-             
-
-            }
-        } catch (error) {
-            setLoading(false);
-            console.log(error);
-
-        }
-        finally {
-            setLoading(true);
-        }
-    };
-   const removeSaveBlog=async (id)=>{
-    try {
-        setLoading(true);
-        if (isUser) {
-            const { user } = users;
-            console.log(user);
-            
-            const { err } = await supabase.from('save')
-                .delete()
-                .eq("blog_id",id )
-                .eq("user_id",user?.id)
-           
-                
-               
-
-
-
-
-            if (err) throw err;
-
+  
+        setLike(true);
+      }
       
-            
+    };
+    const handleSaveClick =async (id) => {
 
+        if (!isUser) return false
 
+        const {user}=users
+
+        const { data, error } = await supabase
+        .from('save')
+        .select('*')
+        .eq('user_id', user?.id)
+        .eq('blog_id', id);
+  
+      if (error) {
+        console.error(error);
+        return;
+      }
+      if (data.length > 0) {
+        // User has already liked this post, so we should remove their like
+        const { error } = await supabase
+          .from('save')
+          .delete()
+          .eq('user_id', user?.id)
+          .eq('blog_id', id);
+  
+        if (error) {
+          console.error(error);
+          return;
         }
-    } catch (error) {
-        setLoading(false);
-        console.log(error);
+  
+        setSaved(false);
+      } else {
+        // User hasn't liked this post yet, so we should add their like
+        const { error } = await supabase
+          .from('save')
+          .insert({
+            user_id:user?.id,
+            blog_id: id,
+          });
+  
+        if (error) {
+          console.error(error);
+          return;
+        }
+  
+        setSaved(true);
+      }
+    };
 
-    }
-
-    finally {
-        setLoading(true);
-    }
-   }
+   
     const checkExistUser = async () => {
         try {
             const { data, err } = await supabase.auth.getUser();
@@ -235,6 +194,8 @@ const Blogs = ({ blogs,category }) => {
                             userId={users?.user?.id}
                             date={item?.post_date}
                             clickRate={() => handleClick(item?.id)}
+                            like={like}
+                            saved={saved}
                             clickSave={() => handleSaveClick(item?.id)}
                             
 

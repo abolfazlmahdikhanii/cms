@@ -11,6 +11,7 @@ const PAGE_SIZE = 10;
 
 const Layout = () => {
     const [blogs, setBlogs] = useState([]);
+    const [mostVistorPost, setMostVistorPost] = useState([]);
     const [loading, setLoading] = useState(false);
     const [postContent, setPostContent] = useState([]);
     const [page, setPage] = useState(1);
@@ -20,6 +21,7 @@ const Layout = () => {
 
     useEffect(() => {
         getBlogData();
+        getMostVisitor();
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
 
@@ -66,7 +68,7 @@ const Layout = () => {
                     .in("post_type", categoryList);
                 // .range(offset, offset + PAGE_SIZE - 1);
                 if (error) throw error;
-                console.log(blogs);
+
 
                 setBlogs(blogs);
                 setPage((prev) => prev + 1);
@@ -87,6 +89,10 @@ const Layout = () => {
 
     };
 
+    const getMostVisitor = async () => {
+   
+      
+    };
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollHeight === document.documentElement.offsetHeight) {
             getBlogData();
@@ -113,7 +119,7 @@ const Layout = () => {
                     </main>
 
                     <aside className="blog-aside">
-                        <Aside type="viewst" />
+                        <Aside type="viewst" post={mostVistorPost} />
                         <Aside type="controversial" />
                     </aside>
                 </section>

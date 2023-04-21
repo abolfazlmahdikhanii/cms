@@ -17,7 +17,7 @@ const BlogCard=({content,title,date,remove,id})=>{
                 <p className="blog-list--date">اخرین تغییر :  {date}</p>
             </div>
             <div className="blog-list--btn-action">
-                <Link to={`/panel/edit/${id}`} className="btn-item btn-edit" replace >
+                <Link to={`/panel/edit/${id}`}  className="btn-item btn-edit" replace >
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
                         <g id="vuesax_outline_edit" data-name="vuesax/outline/edit" transform="translate(-620 -252)">

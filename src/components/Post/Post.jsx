@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import "./post.css";
 import { Link, useParams } from "react-router-dom";
 import { supabase } from "../../superbase";
@@ -23,7 +23,7 @@ import usePublicProfile from "../../hooks/usePublicProfile";
 const Post = ({ session }) => {
 
     const [content, setContent] = useState([]);
-    const [firstImage,setFirstImage]=useState("")
+    const [firstImage, setFirstImage] = useState("");
     const [loading, setLoading] = useState(false);
     const [blogContent, setBlogContent] = useState([]);
     const [user, setUser] = useState(null);
@@ -32,17 +32,17 @@ const Post = ({ session }) => {
     const [comment, setComment] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [star, setStar] = useState(0);
-    const [ip,setIp]=useState(null)
+    const [numVisit, setNumVisit] = useState(0);
     const [activeComment, setActiveComment] = useState(null);
     const rootComment = comment.filter((item) => item.parent_id === null);
 
-    const toastOption={
+    const toastOption = {
         position: "bottom-right",
-        autoClose:1000,
-         hideProgressBar: true,
-         theme:"colored",
-         style:{fontFamily:"shabnam,sans-serif"}
-    }
+        autoClose: 1000,
+        hideProgressBar: true,
+        theme: "colored",
+        style: { fontFamily: "shabnam,sans-serif" }
+    };
 
 
     const match = useParams();
@@ -50,38 +50,54 @@ const Post = ({ session }) => {
     const timeFormat = useRelativeTime;
     const translator = useTranslatorCategory;
     const filterImage = useFilterImage;
-    const publicProfile=usePublicProfile
+    const publicProfile = usePublicProfile;
     useEffect(() => {
         Promise.all([
-            getUserIp(),
-            setVisitor(ip),
+
+            setVisitor(),
             getBlogData(),
             getSameBlogs(),
             getComments(),
             setUser(session)
         ]
-        )
+        );
         document.title = blogContent[0]?.post_title ?? "دیجی بلاگ";
         window.addEventListener("scroll", ScrollHandler);
         return (() => {
             window.removeEventListener("scroll", ScrollHandler);
         });
 
-    }, [session, blogContent[0]?.post_title]);
-    const getUserIp = async () => {
-        const res = await axios.get("https://api.ipify.org/");
-        setIp(res.data);
-      };
+    }, [match,session, blogContent[0]?.post_title]);
 
-      const setVisitor=async(ip)=>{
+
+    const setVisitor = async () => {
         try {
-            const {err}=await supabase.from("visitor").insert({blog_id:match?.id,user_ip:ip})
-            if(err) throw err
+            const { data: numVisits, err } = await supabase
+                .from('visitor')
+                .select('num_visit')
+                .eq('blog_id', match?.id);
+            if (err) throw err;
+            if (numVisits?.length > 0) {
+                setNumVisit(numVisits[0].num_visit);
+            }
+
+            const { data, error } = await supabase
+                .from('visitor')
+                .upsert({ blog_id: match?.id, num_visit: numVisit + 1 })
+                .eq('blog_id', match.id);
+
+
+            if (error) throw error;
+
+
+            if (data?.length > 0) {
+                setNumVisit(data[0].num_visit);
+            }
         } catch (error) {
-            console.log(err);
-            
+            console.log(error);
+
         }
-      }
+    };
 
     const getBlogData = async () => {
         try {
@@ -97,8 +113,8 @@ const Post = ({ session }) => {
                     avatar_url,
                     bio
                 )`)
-                .eq("id", match?.id)
-                
+                .eq("id", match?.id);
+
 
 
             if (error) {
@@ -109,10 +125,10 @@ const Post = ({ session }) => {
             setBlogContent(blog);
 
             filterPosts(blog);
-            setStar(blog[0]?.rate)
+            setStar(blog[0]?.rate);
 
-           
-            
+
+
 
 
         } catch (error) {
@@ -196,12 +212,12 @@ const Post = ({ session }) => {
 
                 if (err) throw err;
 
-                toast.success("ثبت پیام با موفقیت انجام شد",toastOption)
+                toast.success("ثبت پیام با موفقیت انجام شد", toastOption);
 
 
             } catch (error) {
 
-                toast.error("ثبت پیام با خطا مواجه شد",toastOption)
+                toast.error("ثبت پیام با خطا مواجه شد", toastOption);
                 setLoading(false);
             }
             finally {
@@ -223,12 +239,12 @@ const Post = ({ session }) => {
 
                 if (err) throw err;
 
-                toast.success("ویرایش پیام شما با موفقیت انجام شد",toastOption)
+                toast.success("ویرایش پیام شما با موفقیت انجام شد", toastOption);
 
             } catch (error) {
 
                 console.log(error);
-                toast.error("ویرایش پیام با مشکل مواجه شد لطفا دوباره امتحان کنید",toastOption)
+                toast.error("ویرایش پیام با مشکل مواجه شد لطفا دوباره امتحان کنید", toastOption);
 
 
                 setLoading(false);
@@ -267,12 +283,12 @@ const Post = ({ session }) => {
 
             if (err) throw err;
 
-            toast.success("حذف پیام با موفقیت انجام شد",toastOption)
+            toast.success("حذف پیام با موفقیت انجام شد", toastOption);
 
 
         } catch (error) {
 
-            toast.error("حذف پیام با خطا مواجه شد",toastOption)
+            toast.error("حذف پیام با خطا مواجه شد", toastOption);
 
 
             setLoading(false);
@@ -289,7 +305,7 @@ const Post = ({ session }) => {
     };
     const filterPosts = (array) => {
         let data = [];
-        let splicedImage=null
+        let splicedImage = null;
         const posts = array.map((item) => item?.post_content);
         posts.forEach(blog => {
             for (let value of blog) {
@@ -302,8 +318,8 @@ const Post = ({ session }) => {
         const imgIndex = data.findIndex((item) => item.includes("img"));
 
         if (imgIndex === -1) return;
-        splicedImage=data.splice(imgIndex, 1);
-        setFirstImage(splicedImage)
+        splicedImage = data.splice(imgIndex, 1);
+        setFirstImage(splicedImage);
 
 
 
@@ -318,8 +334,8 @@ const Post = ({ session }) => {
         const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
 
         const height = document.querySelector(".post-content--box").scrollHeight - document.querySelector(".post-content--box").clientHeight;
-        
-        
+
+
 
         const scrolled = (winScroll / height) * 100;
         setScroll(scrolled);
@@ -344,14 +360,14 @@ const Post = ({ session }) => {
                 <main className="blog-list blog-post">
 
                     <div className="post-cover" dangerouslySetInnerHTML={{ __html: firstImage }}>
-                        
+
                     </div>
                     {/* info */}
                     <Box>
                         <h2 className="post__title">{blogContent[0]?.post_title}</h2>
                         <div className="post-row">
                             <div className="detail-author--profile">
-                                <img src={publicProfile(blogContent[0]?.post_author.avatar_url)||'../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
+                                <img src={publicProfile(blogContent[0]?.post_author.avatar_url) || '../../../src/assets/profile.svg'} alt="profile-icon" className="detail-author--profile__img" />
                                 <p className="detail-author--profile__txt">{`${blogContent[0]?.post_author.firstName} ${blogContent[0]?.post_author.lastName}`}</p>
                             </div>
 
@@ -502,7 +518,7 @@ const Post = ({ session }) => {
                     <Box>
                         <div className="author-profile">
                             <div className="author-profile--photo">
-                                <img src={publicProfile(blogContent[0]?.post_author.avatar_url)||'../../../src/assets/profile.svg'} alt="" />
+                                <img src={publicProfile(blogContent[0]?.post_author.avatar_url) || '../../../src/assets/profile.svg'} alt="" />
                             </div>
                             <div className="author-profile--info">
                                 <p className="author-prfile__fullName">
@@ -551,7 +567,7 @@ const Post = ({ session }) => {
                 </aside>
             </div >
 
-            <ToastContainer rtl={true}/>
+            <ToastContainer rtl={true} />
         </>
     );
 };

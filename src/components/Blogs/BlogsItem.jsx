@@ -7,8 +7,10 @@ import usePublicProfile from "../../hooks/usePublicProfile";
 
 const BlogItem = (props) => {
   const [activeLike,setActiveLike]=useState(false)
-  const [totalRate,setTotalRate]=useState(null)
-  const [vote,setVote]=useState(null)
+  const [totalRate,setTotalRate]=useState(0)
+  const [totalComment,setTotalComment]=useState(0)
+  const [vote,setVote]=useState([])
+  const [comment,setComment]=useState([])
   const [save,setSave]=useState(null)
   const [isSave,setIsSave]=useState(false)
   
@@ -16,29 +18,72 @@ const publicProfile=usePublicProfile
   const timeFormat=useRelativeTime
   
   useEffect(() => {
-    getTotalRate(props?.id)
-    checkUserLike()
+    getTotalRate()
+    getTotalComment()
+  
     getSaveItem(props?.id)
     checkUserSave()
     
-  }, [props,activeLike,isSave]);
+  }, [props,props?.like,props?.saved,activeLike,isSave]);
+
+  useEffect(() => {
+    calcTotalRate()
+    calcTotalComment()
+  checkUserLike()
+  }, [vote,comment]);
+
+
+  const getTotalComment=async()=>{
+    try{
+      const {data,err}=await supabase.from("comment")
+      .select("*")
+      .eq("blog_id",props?.id)
+      
+      if(err) throw err
+
+      setComment(data)
+    
+ 
+  }
+  catch(err){
+      console.log(err);
+      
+  }
+  }
   
-  const getTotalRate=async (id)=>{
+  const getTotalRate=async ()=>{
     try{
         const {data,err}=await supabase.from("vote")
-        .select("*",{count:"exact"})
-        .eq("blog_id",id)
+        .select("*")
+        .eq("blog_id",props?.id)
         
         if(err) throw err
 
         setVote(data)
-        setTotalRate(data.length)
-    
+      
+   
     }
     catch(err){
         console.log(err);
         
     }
+  }
+
+  const calcTotalRate=()=>{
+    const likesPerItem = {};
+    vote?.forEach(like => {
+      likesPerItem[like.blog_id] = (likesPerItem[like.blog_id] || 0) + 1;
+    });
+    const newTotalLikes = Object.values(likesPerItem).reduce((acc, val) => acc + val, 0);
+    setTotalRate(newTotalLikes);
+  }
+  const calcTotalComment=()=>{
+    const commentsPerItem = {};
+    comment?.forEach(comment => {
+      commentsPerItem[comment.blog_id] = (commentsPerItem[comment.blog_id] || 0) + 1;
+    });
+    const newTotalComment = Object.values(commentsPerItem).reduce((acc, val) => acc + val, 0);
+    setTotalComment(newTotalComment);
   }
   const getSaveItem=async (id)=>{
     try{
@@ -131,7 +176,7 @@ const publicProfile=usePublicProfile
                       <path d="M3.59465 6.5918H8.39825" stroke="#607496" strokeWidth="0.960719" strokeLinecap="round" strokeLinejoin="round"></path>
                     </svg>
                   </p>
-                  <p className="blog-content__btn-txt">4</p>
+                  <p className="blog-content__btn-txt">{totalComment}</p>
                 </button>
                 <button className={`blog-content__btn blog-like__btn ${activeLike?'active-like':''}`} onClick={props.clickRate}>
                   <p className="blog-content__btn-icon">

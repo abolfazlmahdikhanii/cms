@@ -446,7 +446,7 @@ const Post = ({ session }) => {
 
                     {/* cooment */}
                     <Box>
-                        <div className="comment-title">
+                        <div className="comment-title" id="comments">
                             <h3 className="comment-title__title">دیدگاه و پرسش</h3>
                             <button className="btn-item btn-action btn-action--comment" onClick={() => setShowForm(true)}>
                                 افزودن دیدگاه و پرسش جدید

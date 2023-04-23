@@ -1,8 +1,12 @@
 import React from "react";
 import "./Aside.css";
 import Box from "../Ui/Box/Box";
+import { Link } from "react-router-dom";
+import useFilterImage from "../../hooks/useFilterImage";
 
 const Aside = ({ post, type }) => {
+
+    const filterImg = useFilterImage;
 
     let header = null;
     switch (type) {
@@ -44,27 +48,30 @@ const Aside = ({ post, type }) => {
                     <p className="aside-title__title">{type === "viewst" ? "پر بازدیدترین ها" : "پربحث ترین ها"}</p>
                 </div>
             </div>
-            <ul className="aside-list">
+            <div className="aside-list">
 
                 {
                     post?.map((item) => {
-                        console.log(item);
-                        
+
+                        const { id, post_title, post_author, post_content } = item?.blog_id;
+
                         return (
-                            <li className="aside-item">
-                                <div className="aside-item--img">
-                                    <img src="../../../src/assets/bg-slider.jpg" alt="" className="aside-item--img__img" />
+                            <Link to={`article/@${post_author?.username}/${id}/${post_title.split(" ").join("-")}`} className="aside-item" key={id}>
+
+                                <div className="aside-item--img" dangerouslySetInnerHTML={{ __html: filterImg(post_content) }}>
+
                                 </div>
                                 <div className="aside-item--title">
-                                    <h3 className="aside-item--title__title">  یوبیسافت تعداد قابل توجهی از کارکنان خود را اخراج می‌کند
-
+                                    <h3 className="aside-item--title__title">
+                                        {post_title}
                                     </h3>
                                 </div>
-                            </li>
+                            </Link>
+
                         );
                     })
                 }
-            </ul>
+            </div>
         </Box>
     );
 };

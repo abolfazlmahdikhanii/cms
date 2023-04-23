@@ -91,7 +91,26 @@ const Layout = () => {
 
     const getMostVisitor = async () => {
    
+        const { data, error } = await supabase.from('visitor')
+        .select(`blog_id(
+            id,
+            post_title,
+            post_content,
+            post_author(
+                id,username
+            )
+            )`)
+        .order("num_visit",{ascending:false})
+        .limit(3)
+        
       
+      if (error) return console.error(error);
+      
+      setMostVistorPost(data)
+
+    
+  
+  
     };
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollHeight === document.documentElement.offsetHeight) {

@@ -5,6 +5,7 @@ import CommentForm from "../CommentForm/CommentForm";
 import useRelativeTime from "../../hooks/useRelativeTime";
 import { Link } from "react-router-dom";
 import usePublicProfile from "../../hooks/usePublicProfile";
+import { supabase } from "../../superbase";
 
 
 const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComment, parentId, addComment, getReply, editComment, removeComment }) => {
@@ -20,15 +21,109 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
 
     const [replying, setReplying] = useState(isReplying);
     const [editing, setEditing] = useState(isEditing);
+    const [commentLike, setCommentLike] = useState(false);
+    const [activeLike, setActiveLike] = useState(false);
+    const [voteComment, setVoteComment] = useState([]);
+    const [totalRate, setTotalRate] = useState(0);
 
     const replyId = parentId ? parentId : id;
 
     const timeFormat = useRelativeTime;
     const publicProfile=usePublicProfile
-
+    useEffect(() => {
+        getTotalRate()
+        calcTotalRate()
+        checkUserLike()
+      
+      
+    
+        
+      }, [voteComment]);
+    
+    const handleCommentClick =async (id) => {
+           if (!currentUserId) return false
    
-
-
+           const {user}=user
+           const { data, error } = await supabase
+           .from('vote_comment')
+           .select('*')
+           .eq('user_id', user?.id)
+           .eq('blog_id', match?.id)
+           .eq("comment_id",id)
+     
+         if (error) {
+           console.error(error);
+           return;
+         }
+         if (data.length > 0) {
+           // User has already liked this post, so we should remove their like
+           const { error } = await supabase
+             .from('vote_comment')
+             .delete()
+             .eq('user_id', user?.id)
+             .eq('blog_id', match?.id)
+             .eq("comment_id",id)
+     
+           if (error) {
+             console.error(error);
+             return;
+           }
+     
+           setCommentLike(false);
+         } else {
+           // User hasn't liked this post yet, so we should add their like
+           const { error } = await supabase
+             .from('vote_comment')
+             .insert({
+               user_id:user?.id,
+               blog_id: match?.id,
+               comment_id:id
+             });
+     
+           if (error) {
+             console.error(error);
+             return;
+           }
+     
+           setCommentLike(true);
+         }
+         
+       };
+       const getTotalRate=async ()=>{
+        try{
+            const {data,err}=await supabase.from("vote_comment")
+            .select("*")
+            .eq("blog_id",blog_id.id)
+            .eq("comment_id",id)
+            
+            if(err) throw err
+    
+            setVoteComment(data)
+          
+       
+        }
+        catch(err){
+            console.log(err);
+            
+        }
+      }
+    
+      const calcTotalRate=()=>{
+        const likesPerItem = {};
+        voteComment?.forEach(like => {
+          likesPerItem[like.comment_id] = (likesPerItem[like.comment_id] || 0) + 1;
+        });
+        const newTotalLikes = Object.values(likesPerItem).reduce((acc, val) => acc + val, 0);
+        setTotalRate(newTotalLikes);
+      }
+      const checkUserLike=()=>{
+        const findUserLiked= voteComment?.some((item) => {
+          return item?.comment_id===id && item?.user_id===currentUserId
+         })
+       if(findUserLiked) setActiveLike(true)
+       else setActiveLike(false)
+         
+       }
 
     return (
         <Wrapper>
@@ -81,11 +176,11 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
                             </button>
                         }
                         {!canLike &&
-                            <Link to={currentUserId === undefined ? "/auth" : ""} className="blog-content__btn  blog-like__btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.7} stroke="currentColor" width={18} height={18}>
+                            <Link to={currentUserId === undefined ? "/auth" : ""} className="blog-content__btn  blog-like__btn" onClick={()=>handleCommentClick(id)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.7} stroke={activeLike?"#f65":"currentColor"} width={18} height={18}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                                 </svg>
-                                <p>0</p>
+                                <p>{totalRate}</p>
 
                             </Link>
                         }

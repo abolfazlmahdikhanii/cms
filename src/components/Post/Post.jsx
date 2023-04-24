@@ -32,6 +32,7 @@ const Post = ({ session }) => {
     const [comment, setComment] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [star, setStar] = useState(0);
+  
     const [numVisit, setNumVisit] = useState(0);
     const [activeComment, setActiveComment] = useState(null);
     const rootComment = comment.filter((item) => item.parent_id === null);
@@ -58,7 +59,8 @@ const Post = ({ session }) => {
             getBlogData(),
             getSameBlogs(),
             getComments(),
-            setUser(session)
+            setUser(session),
+            getBlogRate()
         ]
         );
         document.title = blogContent[0]?.post_title ?? "دیجی بلاگ";
@@ -78,13 +80,13 @@ const Post = ({ session }) => {
                 .eq('blog_id', match?.id);
             if (err) throw err;
             if (numVisits?.length > 0) {
-                setNumVisit(numVisits[0].num_visit);
+                setNumVisit(numVisits[0]?.num_visit);
             }
 
             const { data, error } = await supabase
                 .from('visitor')
-                .upsert({ blog_id: match?.id, num_visit: numVisit + 1 })
-                .eq('blog_id', match.id);
+                .upsert({ blog_id: match?.id, num_visit: numVisit + 1 },{ignoreDuplicates:false})
+                .eq('blog_id', match?.id);
 
 
             if (error) throw error;
@@ -106,7 +108,7 @@ const Post = ({ session }) => {
             setLoading(true);
             let { data: blog, error } = await supabase
                 .from('blogs')
-                .select(`id,post_date,post_title,post_content,post_tags,post_comment,post_type,rate
+                .select(`id,post_date,post_title,post_content,post_tags,post_comment,post_type
                 ,post_author(
                     firstName,
                     lastName,
@@ -125,7 +127,7 @@ const Post = ({ session }) => {
             setBlogContent(blog);
 
             filterPosts(blog);
-            setStar(blog[0]?.rate);
+       
 
 
 
@@ -191,7 +193,7 @@ const Post = ({ session }) => {
 
             setComment(data);
 
-            console.log(data);
+          
 
         }
         catch (e) {
@@ -256,11 +258,33 @@ const Post = ({ session }) => {
 
         }
     };
+    const getBlogRate = async () => {
+        try {
+            const { data, err } = await supabase.from("rate")
+                .select("*")
+                .eq("blog_id", match?.id)
+                .eq("user_id",user?.user?.id)
+                .single()
+
+
+            if (err) throw err;
+
+            setStar(data?.rate_num)
+
+            
+            
+        } catch (error) {
+
+            console.log(error);
+
+        }
+    };
     const addBlogRate = async (stars) => {
         try {
-            const { data, err } = await supabase.from("blogs")
-                .update({ rate: stars })
-                .eq("id", match?.id);
+            const { data, err } = await supabase.from("rate")
+                .upsert({blog_id:match?.id,user_id:user?.user?.id, rate_num: stars })
+                .eq("blog_id", match?.id)
+                .eq("user_id",user?.user?.id)
 
 
             if (err) throw err;
@@ -344,10 +368,10 @@ const Post = ({ session }) => {
 
         setStar(stars);
         addBlogRate(stars);
-        console.log(stars);
+ 
 
     };
-
+   
     return (
         <>
             <div className="progresMainWrapper">
@@ -494,6 +518,7 @@ const Post = ({ session }) => {
                                                 removeComment={removeComment}
                                                 getReply={getReplyComment}
                                                 session={session}
+                                               
                                             />
                                         </div>
                                     );

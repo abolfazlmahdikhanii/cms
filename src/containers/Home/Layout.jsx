@@ -100,7 +100,7 @@ const Layout = () => {
                 id,username
             )
             )`)
-        .order("num_visit",{ascending:false})
+        .order("blog_id",{ascending:false})
         .limit(3)
         
       

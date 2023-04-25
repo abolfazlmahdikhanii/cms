@@ -32,7 +32,8 @@ const Post = ({ session }) => {
     const [comment, setComment] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [star, setStar] = useState(0);
-  
+    const [ip,setIp]=useState(null)
+    const [existIp,setExistIp]=useState(null)
     const [numVisit, setNumVisit] = useState(0);
     const [activeComment, setActiveComment] = useState(null);
     const rootComment = comment.filter((item) => item.parent_id === null);
@@ -54,8 +55,9 @@ const Post = ({ session }) => {
     const publicProfile = usePublicProfile;
     useEffect(() => {
         Promise.all([
-
-            setVisitor(),
+            getUserIp(),
+            checkExistIp(),
+            setVisitor(ip),
             getBlogData(),
             getSameBlogs(),
             getComments(),
@@ -71,29 +73,33 @@ const Post = ({ session }) => {
 
     }, [match,session, blogContent[0]?.post_title]);
 
-
-    const setVisitor = async () => {
+    const getUserIp = async () => {
+        const res = await axios.get("https://api.ipify.org/");
+        setIp(res.data);
+      };
+      const checkExistIp=async ()=>{
         try {
-            const { data: numVisits, err } = await supabase
-                .from('visitor')
-                .select('num_visit')
-                .eq('blog_id', match?.id);
+            const {data,error}=await supabase.from("visitor").select("*")
+            .eq("blog_id",match.id)
+
+            if(error) throw error
+
+            setExistIp(data)
+        } catch (error) {
+            
+        }
+      }
+      const filterExistIp=(ip)=>{
+        return existIp?.filter((item)=>item?.user_ip===ip)
+      }
+    const setVisitor = async (ip) => {
+        try {
+
+            if(!filterExistIp(ip)) {
+
+            const {err}=await supabase.from("visitor").insert({blog_id:match?.id,user_ip:ip})
+
             if (err) throw err;
-            if (numVisits?.length > 0) {
-                setNumVisit(numVisits[0]?.num_visit);
-            }
-
-            const { data, error } = await supabase
-                .from('visitor')
-                .upsert({ blog_id: match?.id, num_visit: numVisit + 1 },{ignoreDuplicates:false})
-                .eq('blog_id', match?.id);
-
-
-            if (error) throw error;
-
-
-            if (data?.length > 0) {
-                setNumVisit(data[0].num_visit);
             }
         } catch (error) {
             console.log(error);

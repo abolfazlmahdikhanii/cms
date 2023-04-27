@@ -1,8 +1,11 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./CategoryItem.css";
+import Loader from "../Ui/Loader/Loader";
 
-const CategoryItem = ({icon,title,bgIcon,bgItem,value,category,setCategory}) => {
+const CategoryItem = ({icon,title,bgIcon,bgItem,activeItem,value,category,setCategory}) => {
+  
     return (
+    
         <div className="category-item" style={{backgroundColor:bgItem}}>
             <div className="category-item--icon" style={{backgroundColor:bgIcon}}>
                 <p>

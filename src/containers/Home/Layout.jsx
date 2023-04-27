@@ -20,10 +20,15 @@ const Layout = () => {
     const categoryList = ["art", "tech", "game", "health", "life-style"];
 
     useEffect(() => {
-        getBlogData();
+     
         getMostVisitor();
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
+
+
+    }, []);
+    useEffect(() => {
+        getBlogData();
 
 
     }, [match]);
@@ -100,18 +105,34 @@ const Layout = () => {
                 id,username
             )
             )`)
-        .order("blog_id",{ascending:false})
-        .limit(3)
+        
+        
         
       
       if (error) return console.error(error);
+
+   
       
       setMostVistorPost(data)
 
-    
+      filterMostVisitor(mostVistorPost)
+            
   
   
     };
+    const filterMostVisitor=(mostVistorPost)=>{
+    //    let size=0
+    //    const newArr=[]
+    //    const arr=mostVistorPost.filter((item)=>item.blog_id.id===item.blog_id.id)
+    //     size=arr.length
+    //     newArr.push({post:[...new Set(arr.blog_id)],size:size})
+
+      
+    
+    //    console.log(newArr);
+       
+        
+    }
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollHeight === document.documentElement.offsetHeight) {
             getBlogData();
@@ -138,7 +159,7 @@ const Layout = () => {
                     </main>
 
                     <aside className="blog-aside">
-                        <Aside type="viewst" post={mostVistorPost} />
+                        {/* <Aside type="viewst" post={mostVistorPost} /> */}
                         <Aside type="controversial" />
                     </aside>
                 </section>

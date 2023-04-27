@@ -4,7 +4,11 @@
     gap: 2.2rem;
     background-color: var(--bg-dark-primary);
     border-radius: 1.2rem;
+    transition: all .3s;
+
 }
+
+
 
 .blog-content--img {
     flex-basis: 30%;

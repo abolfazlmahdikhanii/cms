@@ -17,7 +17,7 @@ const Home = ({ session }) => {
   const [lastName, setLastName] = useState("");
  
 
-  const [avatarUrl, setAvatarUrl] = useState(null);
+  const [avatarUrl, setAvatarUrl] = useState("");
 
 
 
@@ -26,14 +26,15 @@ const Home = ({ session }) => {
     showUserName();
 
 
-  }, [session]);
+  }, []);
 
   const showUserName = async () => {
 
 
     try {
+      
 
-      let { data, error } = await supabase
+      const  { data, error } = await supabase
         .from("profiles")
         .select(`id,firstName,lastName,avatar_url`)
         .eq('id', session?.user?.id)

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Category.css";
 import Box from "../Ui/Box/Box";
 import CategoryItem from "./CategoryItem";
@@ -8,9 +8,10 @@ import health from "../../assets/health.svg";
 import art from "../../assets/art.svg";
 import lifeStyle from "../../assets/life-style.svg";
 import game from "../../assets/game.svg";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const Category = () => {
 
+    const [activeItem,setActiveItem]=useState(false)
     const categorItem = [
         {
             id: crypto.randomUUID(),
@@ -61,6 +62,7 @@ const Category = () => {
             bgIcon: "#7a86f6"
         },
     ];
+   
     return (
         <div className="category">
             <Box type="category">
@@ -69,12 +71,14 @@ const Category = () => {
                     {
                         categorItem.map((item) => {
                             return (
-                                <Link key={item.id} to={`/category/${item?.value === "last-news" ? "" : item?.value}`}>
+                                <NavLink className="category-box--item" replace end  key={item.id} to={`/category/${item?.value === "last-news" ? "" : item?.value}`}  activeclassname="active"
+                                data-color={item.bgItem}
+                                >
                                     <CategoryItem
-
+                                        
                                         {...item}
                                     />
-                                </Link>
+                                </NavLink>
                             );
                         })
                     }

@@ -287,13 +287,35 @@ const Post = ({ session }) => {
     };
     const addBlogRate = async (stars) => {
         try {
+
+            const { data:rates, error } = await supabase.from("rate")
+            .select("blog_id(id),user_id(id)")
+            .eq("blog_id", match?.id)
+                .eq("user_id",user?.user?.id)
+                .single()
+            
+            if(error)throw error
+
+            if(rates.blog_id?.id!==match?.id&&rates.user_id?.id!==user?.user?.id) {
+
+    
             const { data, err } = await supabase.from("rate")
-                .upsert({blog_id:match?.id,user_id:user?.user?.id, rate_num: stars })
+                .insert({blog_id:match?.id,user_id:user?.user?.id, rate_num: stars })
                 .eq("blog_id", match?.id)
                 .eq("user_id",user?.user?.id)
 
 
             if (err) throw err;
+            }
+            else{
+                const { data, err } = await supabase.from("rate")
+                .update({ rate_num: stars })
+                .eq("blog_id", match?.id)
+                .eq("user_id",user?.user?.id)
+
+
+            if (err) throw err;
+            }
 
         } catch (error) {
 

@@ -2,7 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    
 }
+
+
 
 .blog-list--title {
     display: flex;

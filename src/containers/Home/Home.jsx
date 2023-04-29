@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState ,useRef} from "react";
+import React, { useCallback, useEffect, useState ,useRef,lazy,Suspense} from "react";
 import "./Home.css";
 import Header from "../../components/Header/Header";
 import Wrapper from "../../hoc/Wrapper";
@@ -8,6 +8,7 @@ import Post from "../../components/Post/Post";
 import Layout from "./Layout";
 import { supabase } from "../../superbase";
 import logo from "../../assets/logo.svg";
+import UserPage from "../UserPage/UserPage";
 
 
 
@@ -23,7 +24,7 @@ const Home = ({ session }) => {
 
   useEffect(() => {
 
-    showUserName();
+    // showUserName();
 
 
   }, []);
@@ -79,7 +80,10 @@ const Home = ({ session }) => {
         <Route path="/*" element={<Layout  />} />
         <Route path="/category/:value" element={<Layout />} />
        
-        <Route path="/article/:username/:id/:title" element={<Post session={session} />} />
+      
+      <Route path="/article/:username/:id/:title" element={<Post session={session} />} />
+      <Route path="/:username" element={<UserPage/>} />
+  
       </Routes>
 
     </Wrapper>

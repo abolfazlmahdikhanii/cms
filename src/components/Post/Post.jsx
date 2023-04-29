@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,lazy } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -36,6 +36,7 @@ const Post = ({ session }) => {
     const [existIp,setExistIp]=useState(null)
     const [numVisit, setNumVisit] = useState(0);
     const [activeComment, setActiveComment] = useState(null);
+    const [rate, setRates] = useState(null);
     const rootComment = comment.filter((item) => item.parent_id === null);
 
     const toastOption = {
@@ -119,7 +120,8 @@ const Post = ({ session }) => {
                     firstName,
                     lastName,
                     avatar_url,
-                    bio
+                    bio,
+                    username
                 )`)
                 .eq("id", match?.id);
 
@@ -160,7 +162,8 @@ const Post = ({ session }) => {
                 ,post_author(
                     firstName,
                     lastName,
-                    avatar_url
+                    avatar_url,
+                    username
                 )`)
                 .eq("post_type", blogContent[0]?.post_type)
                 .limit(3);
@@ -276,7 +279,7 @@ const Post = ({ session }) => {
             if (err) throw err;
 
             setStar(data?.rate_num)
-
+            setRates(data)
             
             
         } catch (error) {
@@ -288,15 +291,9 @@ const Post = ({ session }) => {
     const addBlogRate = async (stars) => {
         try {
 
-            const { data:rates, error } = await supabase.from("rate")
-            .select("blog_id(id),user_id(id)")
-            .eq("blog_id", match?.id)
-                .eq("user_id",user?.user?.id)
-                .single()
-            
-            if(error)throw error
+           
 
-            if(rates.blog_id?.id!==match?.id&&rates.user_id?.id!==user?.user?.id) {
+            if(rate.blog_id?.id!==match?.id&&rate.user_id?.id!==user?.user?.id) {
 
     
             const { data, err } = await supabase.from("rate")
@@ -574,9 +571,9 @@ const Post = ({ session }) => {
                                 <img src={publicProfile(blogContent[0]?.post_author.avatar_url) || '../../../src/assets/profile.svg'} alt="" />
                             </div>
                             <div className="author-profile--info">
-                                <p className="author-prfile__fullName">
+                                <Link to={`/${blogContent[0]?.post_author.username}`} className="author-prfile__fullName">
                                     {`${blogContent[0]?.post_author.firstName} ${blogContent[0]?.post_author.lastName}`}
-                                </p>
+                                </Link>
                                 <p className="author-prfile__dis">
                                     {blogContent[0]?.post_author?.bio}
                                 </p>

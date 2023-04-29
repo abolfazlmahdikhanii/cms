@@ -38,7 +38,8 @@ function App() {
           <Routes>
           <Route path="/*" element={<Home session={session}/>}/>
           <Route path="/auth" element={<Auth/>}/>
-            <Route path="/panel/*" element={login} />
+          <Route path="/panel/*" element={login} />
+         
           </Routes>
         </Router>
      

@@ -33,7 +33,7 @@ const Blogs = ({ blogs,category }) => {
    
         checkExistUser();
 
-    }, [blogs,like,saved]);
+    }, [like,saved]);
 
     const handleClick =async (id) => {
         if (!isUser) return false

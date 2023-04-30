@@ -1,28 +1,33 @@
 .user-container {
     width: 90%;
     margin: 0 auto 0 auto;
-    padding: 6rem 0
+    padding: 6rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 .user-info--banner {
     width: 100%;
     height: 30rem;
-  
-    
+
+
     padding: 0 1rem;
     overflow: hidden;
 }
-.user-info--banner img{
+
+.user-info--banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: .8rem;
 }
+
 .user-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding:0 3.5rem;
+    padding: 0 3.5rem;
 }
 
 .user-info--wrapper {
@@ -32,16 +37,83 @@
 }
 
 .user-info--img {
-    margin-top: -10rem;
-    width: 18rem;
-    height: 18rem;
+    margin-top: -9rem;
+    width: 20rem;
+    height: 20rem;
     background-color: #fff;
-    border-radius: 2rem;
+    border-radius: 50%;
     overflow: hidden;
-    padding: 1rem;
+    padding: .7rem;
 }
-.user-info--img img{
- width: 100%;
- height: 100%;
- object-fit: cover;
+
+.user-info--img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-info--info {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.user-info__name {
+    font-family: "yekan", sans-serif;
+    font-size: 3.2rem;
+}
+
+.user-info__user {
+    font-size: 1.7rem;
+}
+
+.btn-big {
+    padding: 1.5rem 4rem;
+    font-size: 1.8rem;
+}
+
+.activity-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.5rem 3.5rem;
+    margin: 1rem auto;
+    border-bottom: 1px solid #334155;
+    width: 95%;
+
+}
+
+.follower-row {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.follower {
+    font-size: 2rem;
+}
+
+.follow-num {
+    font-family: "yekan", sans-serif;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    margin-left: .6rem;
+}
+
+.user-tabs {
+    display: flex;
+    align-items: center;
+    gap: 3.3rem;
+    padding: 1rem 3.5rem;
+}
+
+.user-tabs__tab {
+    font-size: 2rem;
+    color: #fff;
+    transition: all .3s;
+}
+
+.user-tabs__tab:hover,.user-tabs__tab.active {
+    color: #60a5fa;
 }

@@ -21,7 +21,7 @@
     /*background-color:#102945 ;*/
     color: rgba(81,182,255,1);
 }
-.active{
+.nav-item.active{
     background-color:#102945 ;
     color: rgba(81,182,255,1);
 }

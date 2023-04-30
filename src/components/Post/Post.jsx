@@ -571,7 +571,7 @@ const Post = ({ session }) => {
                                 <img src={publicProfile(blogContent[0]?.post_author.avatar_url) || '../../../src/assets/profile.svg'} alt="" />
                             </div>
                             <div className="author-profile--info">
-                                <Link to={`/${blogContent[0]?.post_author.username}`} className="author-prfile__fullName">
+                                <Link to={`/@${blogContent[0]?.post_author.username}`} className="author-prfile__fullName">
                                     {`${blogContent[0]?.post_author.firstName} ${blogContent[0]?.post_author.lastName}`}
                                 </Link>
                                 <p className="author-prfile__dis">

@@ -1,7 +1,8 @@
 import React from "react";
 import "./UserPage.css";
 import Box from "../../components/Ui/Box/Box";
-import { NavLink } from "react-router-dom";
+import { NavLink, Route, Routes } from "react-router-dom";
+import AboutUser from "./AboutUser/AboutUser";
 
 const UserPage = () => {
   return (
@@ -36,14 +37,16 @@ const UserPage = () => {
         </section>
         {/* tabs */}
         <section className="user-tabs">
-          <NavLink className="user-tabs__tab" activeClassName="active">درباره من</NavLink>
-          <NavLink className="user-tabs__tab" activeClassName="active">مقالات</NavLink>
+          <NavLink to="" end className="user-tabs__tab" activeClassName="active">درباره من</NavLink>
+          <NavLink to="articles" end className="user-tabs__tab" activeClassName="active">مقالات</NavLink>
         </section>
       </Box>
 
-      <Box>
+      <Routes>
+        <Route path="/" element={<AboutUser />} />
+        <Route path="/articles" element={<AboutUser />} />
+      </Routes>
 
-      </Box>
 
     </div>
   );

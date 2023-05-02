@@ -3,6 +3,7 @@ import "./UserPage.css";
 import Box from "../../components/Ui/Box/Box";
 import { NavLink, Route, Routes } from "react-router-dom";
 import AboutUser from "./AboutUser/AboutUser";
+import Articles from "./Articles/Articles";
 
 const UserPage = () => {
   return (
@@ -44,7 +45,7 @@ const UserPage = () => {
 
       <Routes>
         <Route path="/" element={<AboutUser />} />
-        <Route path="/articles" element={<AboutUser />} />
+        <Route path="/articles" element={<Articles />} />
       </Routes>
 
 

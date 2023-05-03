@@ -19,7 +19,7 @@ const UserPage = () => {
   useEffect(() => {
     getUserAbout();
     getUserBlogs();
-  }, [match,userBlogs]);
+  }, [match]);
 
 
   const getUserAbout = async () => {

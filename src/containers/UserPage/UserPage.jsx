@@ -1,11 +1,65 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./UserPage.css";
 import Box from "../../components/Ui/Box/Box";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes, useParams } from "react-router-dom";
 import AboutUser from "./AboutUser/AboutUser";
 import Articles from "./Articles/Articles";
+import { supabase } from "../../superbase";
+import usePublicProfile from "../../hooks/usePublicProfile";
 
 const UserPage = () => {
+  const [about, setAbout] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [userBlogs, setUserBlogs] = useState([]);
+  
+
+  const match = useParams();
+  const publicProfile = usePublicProfile;
+
+  useEffect(() => {
+    getUserAbout();
+    getUserBlogs();
+  }, [match,userBlogs]);
+
+
+  const getUserAbout = async () => {
+    try {
+
+
+      const { data, err } = await supabase.from("profiles")
+        .select("*")
+        .eq("username", match?.username.slice(1))
+        .single();
+
+      if (err) throw err;
+
+
+      setUserData(data);
+      setAbout(data?.bio);
+
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  };
+  const getUserBlogs = async () => {
+    try {
+
+
+      const { data: blogs, err } = await supabase.from("blogs")
+        .select("*,post_author(username,firstName,lastName,avatar_url)")
+        .eq("post_author(id)", userData?.id);
+
+      if (err) throw err;
+      setUserBlogs(blogs);
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  };
+
   return (
     <div className="user-container">
       {/* header Profile */}
@@ -17,11 +71,11 @@ const UserPage = () => {
         <section className="user-info">
           <div className="user-info--wrapper">
             <div className="user-info--img">
-              <img src="../../../src/assets/profile.svg" alt="" />
+              <img src={publicProfile(userData?.avatar_url) || "../../../src/assets/profile.svg"} alt="" />
             </div>
             <div className="user-info--info">
-              <h4 className="user-info__name">ابوالفضل مهدیخانی</h4>
-              <p className="user-info__user">@abolfazmk</p>
+              <h4 className="user-info__name">{userData?.firstName} {userData?.lastName}</h4>
+              <p className="user-info__user" >@{userData?.username}</p>
             </div>
           </div>
           {/* button */}
@@ -44,8 +98,8 @@ const UserPage = () => {
       </Box>
 
       <Routes>
-        <Route path="/" element={<AboutUser />} />
-        <Route path="/articles" element={<Articles />} />
+        <Route path="/" element={<AboutUser about={about} />} />
+        <Route path="/articles" element={<Articles blogs={userBlogs} />} />
       </Routes>
 
 

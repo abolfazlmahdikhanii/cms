@@ -2,7 +2,8 @@ import React from "react";
 import "./Articles.css";
 import PostCard from "../../../components/Ui/PostCard/PostCard"
 
-const Articles = () => {
+const Articles = ({blogs}) => {
+
   return (
     <div>
       <div className="blog-list--title">
@@ -19,7 +20,23 @@ const Articles = () => {
       </div>
 
       <div>
-      <PostCard/>
+         {
+          blogs?.map((item)=>{
+           const  {firstName,lastName,avatar_url}=item?.post_author
+            return(
+            
+              <PostCard
+                img={item?.post_content}
+                title={item?.post_title}
+                category={item?.post_type}
+                firstName={firstName}
+                lastName={lastName}
+                avatar={avatar_url}
+      
+              />
+            )
+          })
+         }
       </div>
 
     </div>

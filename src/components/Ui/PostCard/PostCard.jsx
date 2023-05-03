@@ -1,16 +1,19 @@
 import React from "react";
 import "./PostCard.css";
+import useFilterImage from "../../../hooks/useFilterImage"
+import useTranslatetorCategory from "../../../hooks/useTranslatetorCategory"
 
-
-const PostCard = (props) => {
+const PostCard = ({img,title,firstName,lastName,click,type=null,category}) => {
+    const filterImg=useFilterImage
+    const translatorCategory=useTranslatetorCategory
     let icon = null;
-    if (props?.type === "fav") {
+    if (type === "fav") {
         icon = <svg width="23" height="23" fill="#E81C4D" viewBox="0 0 13 11" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.95035 1.229C4.81955 1.229 5.61243 1.66166 6.21284 2.15457C6.81326 1.66166 7.60614 1.229 8.47534 1.229C10.3497 1.229 11.8691 2.62275 11.8691 4.34192C11.8691 7.80824 7.92382 9.82702 6.62321 10.3984C6.36123 10.5134 6.06445 10.5134 5.80248 10.3984C4.50187 9.827 0.556602 7.80816 0.556602 4.34184C0.556602 2.62267 2.07603 1.229 3.95035 1.229Z" stroke="#E81C4D" strokeWidth="0.761705"></path>
         </svg>;
     }
 
-    else if (props?.type === "save") {
+    else if (type === "save") {
         icon = <svg xmlns="http://www.w3.org/2000/svg" fill="#0673fc" width="23" height="23" viewBox="0 0 24 24">
         <g id="vuesax_outline_archive" data-name="vuesax/outline/archive" transform="translate(-172 -190)">
           <g id="archive">
@@ -29,17 +32,17 @@ const PostCard = (props) => {
     return (
         <div className="post-card">
             <div className="post-card--img">
-                <div className="post-card--img__img" dangerouslySetInnerHTML={{__html:props?.img}}></div>
-                <div className="post-card--btn" style={!icon?{display:"none"}:{display:"grid"}} onClick={props.click}>
+                <div className="post-card--img__img" dangerouslySetInnerHTML={{__html:filterImg(img)}}></div>
+                <div className="post-card--btn" style={!icon?{display:"none"}:{display:"grid"}} onClick={click}>
                     {icon}
                 </div>
             </div>
             <div className="post-card--dis">
-                <h3 className="post-card--dis__title">{props?.title}</h3>
+                <h3 className="post-card--dis__title">{title}</h3>
                 <div className="post-card--author">
                     <div className="detail-author--profile">
                         <img src="../../../src/assets/profile.svg" alt="profile-icon" className="detail-author--profile__img" />
-                        <p className="detail-author--profile__txt">{props?.firstName} {props?.lastName} </p>
+                        <p className="detail-author--profile__txt">{firstName} {lastName} </p>
                     </div>
                     <div className="blog-content--category__category">
                         <p className="blog-content--category__category-icon">
@@ -48,7 +51,7 @@ const PostCard = (props) => {
                             </g>
                             </svg>
                         </p>
-                        <p>{props.category}</p>
+                        <p>{translatorCategory(category)}</p>
                     </div>
                 </div>
 

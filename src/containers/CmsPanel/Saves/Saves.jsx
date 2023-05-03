@@ -94,11 +94,11 @@ const Saves=({session})=>{
                     key={id}
                     type="save"
                      title={post_title}
-                     category={translatorCategory(post_type)}
+                     category={post_type}
                      avatar={avatar_url}
                      firstName={firstName}
                      lastName={lastName}
-                     img={filterImage(post_content)}
+                     img={post_content}
                         click={()=>removeSaveBlog(id)}
                     />
                 )

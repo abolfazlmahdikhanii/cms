@@ -26,6 +26,7 @@ const Articles = ({blogs}) => {
             return(
             
               <PostCard
+              key={item.id}
                 img={item?.post_content}
                 title={item?.post_title}
                 category={item?.post_type}

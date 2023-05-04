@@ -7,11 +7,15 @@ import Articles from "./Articles/Articles";
 import { supabase } from "../../superbase";
 import usePublicProfile from "../../hooks/usePublicProfile";
 
-const UserPage = () => {
-  const [about, setAbout] = useState(null);
+const UserPage = ({ session }) => {
+
   const [userData, setUserData] = useState(null);
   const [userBlogs, setUserBlogs] = useState([]);
-  
+  const [isFollow, setIsFollow] = useState(false);
+  const [followList, setFollowList] = useState([]);
+  const [totalFllower, setTotalFollower] = useState(0);
+  const [totalFllowed, setTotalFollowed] = useState(0);
+
 
   const match = useParams();
   const publicProfile = usePublicProfile;
@@ -19,9 +23,21 @@ const UserPage = () => {
   useEffect(() => {
     getUserAbout();
     getUserBlogs();
-  }, [match]);
+    checkFollowUser(userData?.id);
+    getFollowList(userData?.id);
+  }, [session, match.username, isFollow]);
 
+  // if author follow =>unfollow  else=>follow
+  const clickFollowHanlder = (id = userData?.id) => {
 
+    if (isFollow) {
+      unfollowHandler(id);
+
+    }
+    else {
+      followHandler(id);
+    }
+  };
   const getUserAbout = async () => {
     try {
 
@@ -35,7 +51,7 @@ const UserPage = () => {
 
 
       setUserData(data);
-      setAbout(data?.bio);
+
 
 
     } catch (error) {
@@ -48,8 +64,8 @@ const UserPage = () => {
 
 
       const { data: blogs, err } = await supabase.from("blogs")
-        .select("*,post_author(username,firstName,lastName,avatar_url)")
-        .eq("post_author(id)", userData?.id);
+        .select("*,post_author(id,username,firstName,lastName,avatar_url)")
+        .eq("post_author", userData?.id);
 
       if (err) throw err;
       setUserBlogs(blogs);
@@ -58,6 +74,86 @@ const UserPage = () => {
       console.log(error);
 
     }
+  };
+
+  const followHandler = async (id) => {
+
+    try {
+
+      const { err } = await supabase.from("follow_list")
+        .insert({ user_follow: id, user_follower: session?.user?.id });
+      if (err) throw err;
+    } catch (error) {
+      console.log(error);
+
+    }
+  };
+  const getFollowList = async (id = userData?.id) => {
+    try {
+      const { data, err } = await supabase.from("follow_list")
+        .select(`user_follow(
+         id,
+         username,
+         firstName,
+         lastName,
+         avatar_url
+      ),
+      user_follower(
+        id,
+        username,
+        firstName,
+        lastName,
+        avatar_url
+      )`)
+        .eq("user_follow", id);
+
+      if (err) throw err;
+      setFollowList(data);
+      filterFollower(data);
+    }
+    catch (err) {
+      console.log(err);
+
+    }
+  };
+
+  const checkFollowUser = async (id) => {
+    try {
+
+      const { data, err } = await supabase.from("follow_list")
+        .select("*")
+        .eq("user_follow", id)
+        .eq("user_follower", session?.user?.id);
+      if (err) throw err;
+
+      if (data?.length > 0) setIsFollow(true);
+
+    } catch (error) {
+      console.log(error);
+
+    }
+  };
+  const unfollowHandler = async (id) => {
+    const { data, err } = await supabase.from("follow_list")
+      .delete()
+      .eq("user_follow", id)
+      .eq("user_follower", session?.user?.id);
+
+    if (err) throw err;
+    setIsFollow(false);
+
+
+  };
+
+  const filterFollower = (followArr) => {
+    const filterdFollower = [];
+    for (const item of followArr) {
+      filterdFollower.push(item.user_follower);
+
+    }
+    setTotalFollower(filterdFollower?.length);
+    console.log(filterdFollower);
+
   };
 
   return (
@@ -80,13 +176,15 @@ const UserPage = () => {
           </div>
           {/* button */}
           <div>
-            <button className="btn btn-follow btn-item btn-big">دنبال کردن</button>
+            <button className={`btn btn-item btn-big btn-follow ${isFollow && "btn-followed"}`}
+              onClick={() => clickFollowHanlder(userData?.id)}
+            >{isFollow ? "دنبال نکردن" : "دنبال کردن"}</button>
           </div>
         </section>
         {/* follower */}
         <section className="activity-info">
           <div className="follower-row">
-            <p className="follower"><span className="follow-num">266</span> دنبال کننده</p>
+            <p className="follower"><span className="follow-num">{totalFllower}</span> دنبال کننده</p>
             <p className="follower"><span className="follow-num">0</span> دنبال شده</p>
           </div>
         </section>
@@ -98,7 +196,7 @@ const UserPage = () => {
       </Box>
 
       <Routes>
-        <Route path="/" element={<AboutUser about={about} />} />
+        <Route path="/" element={<AboutUser about={userData?.bio} />} />
         <Route path="/articles" element={<Articles blogs={userBlogs} />} />
       </Routes>
 

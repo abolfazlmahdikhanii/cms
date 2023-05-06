@@ -1,0 +1,23 @@
+.modal-follow {
+    width: 33%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all .3s;
+    height: 51vh;
+   z-index: 700;
+}
+
+.blog-list__tab {
+
+    font-size: 1.7rem;
+}
+
+.follow-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 1rem;
+}

@@ -6,6 +6,7 @@ import AboutUser from "./AboutUser/AboutUser";
 import Articles from "./Articles/Articles";
 import { supabase } from "../../superbase";
 import usePublicProfile from "../../hooks/usePublicProfile";
+import ModalFollow from "../../components/Ui/ModalFollow/ModalFollow";
 
 const UserPage = ({ session }) => {
 
@@ -13,8 +14,9 @@ const UserPage = ({ session }) => {
   const [userBlogs, setUserBlogs] = useState([]);
   const [isFollow, setIsFollow] = useState(false);
   const [followList, setFollowList] = useState([]);
+  const [followingList, setFollowingList] = useState([]);
   const [totalFllower, setTotalFollower] = useState(0);
-  const [totalFllowed, setTotalFollowed] = useState(0);
+  const [totalFllowing, setTotalFollowing] = useState(0);
 
 
   const match = useParams();
@@ -24,8 +26,9 @@ const UserPage = ({ session }) => {
     getUserAbout();
     getUserBlogs();
     checkFollowUser(userData?.id);
-    getFollowList(userData?.id);
-  }, [session, match.username, isFollow]);
+    getFollowerList(userData?.id); 
+    getFollowingList(userData?.id); 
+  }, [session, match.username, isFollow,totalFllower,totalFllowing]);
 
   // if author follow =>unfollow  else=>follow
   const clickFollowHanlder = (id = userData?.id) => {
@@ -88,7 +91,28 @@ const UserPage = ({ session }) => {
 
     }
   };
-  const getFollowList = async (id = userData?.id) => {
+  const getFollowerList = async (id = userData?.id) => {
+    try {
+      const { data, err } = await supabase.from("follow_list")
+        .select(`user_follower(
+         id,
+         username,
+         firstName,
+         lastName,
+         avatar_url
+      )`)
+        .eq("user_follow", id);
+
+      if (err) throw err;
+      setFollowList(data);
+      setTotalFollower(data?.length);
+    }
+    catch (err) {
+      console.log(err);
+
+    }
+  };
+  const getFollowingList = async (id = userData?.id) => {
     try {
       const { data, err } = await supabase.from("follow_list")
         .select(`user_follow(
@@ -97,19 +121,12 @@ const UserPage = ({ session }) => {
          firstName,
          lastName,
          avatar_url
-      ),
-      user_follower(
-        id,
-        username,
-        firstName,
-        lastName,
-        avatar_url
       )`)
-        .eq("user_follow", id);
+        .eq("user_follower", id);
 
       if (err) throw err;
-      setFollowList(data);
-      filterFollower(data);
+      setFollowingList(data);
+      setTotalFollowing(data?.length);
     }
     catch (err) {
       console.log(err);
@@ -145,16 +162,7 @@ const UserPage = ({ session }) => {
 
   };
 
-  const filterFollower = (followArr) => {
-    const filterdFollower = [];
-    for (const item of followArr) {
-      filterdFollower.push(item.user_follower);
 
-    }
-    setTotalFollower(filterdFollower?.length);
-    console.log(filterdFollower);
-
-  };
 
   return (
     <div className="user-container">
@@ -185,8 +193,9 @@ const UserPage = ({ session }) => {
         <section className="activity-info">
           <div className="follower-row">
             <p className="follower"><span className="follow-num">{totalFllower}</span> دنبال کننده</p>
-            <p className="follower"><span className="follow-num">0</span> دنبال شده</p>
+            <p className="follower"><span className="follow-num">{totalFllowing}</span> دنبال شده</p>
           </div>
+          <ModalFollow/>
         </section>
         {/* tabs */}
         <section className="user-tabs">

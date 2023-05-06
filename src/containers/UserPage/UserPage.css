@@ -40,16 +40,18 @@
     margin-top: -9rem;
     width: 20rem;
     height: 20rem;
-    background-color: #fff;
+   
     border-radius: 50%;
     overflow: hidden;
-    padding: .7rem;
+   
+    border: 8px solid #fff;
 }
 
 .user-info--img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .user-info--info {

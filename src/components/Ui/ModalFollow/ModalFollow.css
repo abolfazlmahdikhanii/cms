@@ -3,12 +3,21 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     transition: all .3s;
-    height: 51vh;
-   z-index: 700;
-}
+    height: 80%;
+    min-height: 32rem;
+    max-height: 42rem;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 400;
+    overflow: hidden;
 
+    opacity: 1;
+;
+}
+.modal-follow--hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
 .blog-list__tab {
 
     font-size: 1.7rem;
@@ -20,4 +29,19 @@
     justify-content: space-around;
     border-bottom: 1px solid #374151;
     padding-bottom: 1rem;
+}
+
+.follow-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 0;
+    height: 85%;
+    max-height: 35rem;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.follow-body::-webkit-scrollbar {
+    display: none;
 }

@@ -7,9 +7,10 @@ import Articles from "./Articles/Articles";
 import { supabase } from "../../superbase";
 import usePublicProfile from "../../hooks/usePublicProfile";
 import ModalFollow from "../../components/Ui/ModalFollow/ModalFollow";
+import Loader from "../../components/Ui/Loader/Loader";
 
 const UserPage = ({ session }) => {
-
+  const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
   const [userBlogs, setUserBlogs] = useState([]);
   const [isFollow, setIsFollow] = useState(false);
@@ -17,6 +18,8 @@ const UserPage = ({ session }) => {
   const [followingList, setFollowingList] = useState([]);
   const [totalFllower, setTotalFollower] = useState(0);
   const [totalFllowing, setTotalFollowing] = useState(0);
+  const [activeTab, setActiveTab] = useState("follower");
+  const [showModal, setShowModal] = useState(false);
 
 
   const match = useParams();
@@ -26,9 +29,9 @@ const UserPage = ({ session }) => {
     getUserAbout();
     getUserBlogs();
     checkFollowUser(userData?.id);
-    getFollowerList(userData?.id); 
-    getFollowingList(userData?.id); 
-  }, [session, match.username, isFollow,totalFllower,totalFllowing]);
+    getFollowerList(userData?.id);
+    getFollowingList(userData?.id);
+  }, [session, match.username, isFollow, totalFllower, totalFllowing]);
 
   // if author follow =>unfollow  else=>follow
   const clickFollowHanlder = (id = userData?.id) => {
@@ -45,6 +48,7 @@ const UserPage = ({ session }) => {
     try {
 
 
+      setLoading(true);
       const { data, err } = await supabase.from("profiles")
         .select("*")
         .eq("username", match?.username.slice(1))
@@ -58,14 +62,18 @@ const UserPage = ({ session }) => {
 
 
     } catch (error) {
+      setLoading(false);
       console.log(error);
 
+    }
+    finally {
+      setLoading(false);
     }
   };
   const getUserBlogs = async () => {
     try {
 
-
+      setLoading(true);
       const { data: blogs, err } = await supabase.from("blogs")
         .select("*,post_author(id,username,firstName,lastName,avatar_url)")
         .eq("post_author", userData?.id);
@@ -74,25 +82,34 @@ const UserPage = ({ session }) => {
       setUserBlogs(blogs);
 
     } catch (error) {
+      setLoading(false);
       console.log(error);
 
+    }
+    finally {
+      setLoading(false);
     }
   };
 
   const followHandler = async (id) => {
 
     try {
-
+      setLoading(true);
       const { err } = await supabase.from("follow_list")
         .insert({ user_follow: id, user_follower: session?.user?.id });
       if (err) throw err;
     } catch (error) {
+      setLoading(false);
       console.log(error);
 
+    }
+    finally {
+      setLoading(false);
     }
   };
   const getFollowerList = async (id = userData?.id) => {
     try {
+
       const { data, err } = await supabase.from("follow_list")
         .select(`user_follower(
          id,
@@ -108,12 +125,15 @@ const UserPage = ({ session }) => {
       setTotalFollower(data?.length);
     }
     catch (err) {
+      ;
       console.log(err);
 
     }
+
   };
   const getFollowingList = async (id = userData?.id) => {
     try {
+
       const { data, err } = await supabase.from("follow_list")
         .select(`user_follow(
          id,
@@ -129,9 +149,11 @@ const UserPage = ({ session }) => {
       setTotalFollowing(data?.length);
     }
     catch (err) {
+
       console.log(err);
 
     }
+
   };
 
   const checkFollowUser = async (id) => {
@@ -151,13 +173,23 @@ const UserPage = ({ session }) => {
     }
   };
   const unfollowHandler = async (id) => {
-    const { data, err } = await supabase.from("follow_list")
-      .delete()
-      .eq("user_follow", id)
-      .eq("user_follower", session?.user?.id);
+    try {
+      setLoading(true);
+      const { data, err } = await supabase.from("follow_list")
+        .delete()
+        .eq("user_follow", id)
+        .eq("user_follower", session?.user?.id);
 
-    if (err) throw err;
-    setIsFollow(false);
+      if (err) throw err;
+      setIsFollow(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+
+    }
+    finally {
+      setLoading(false);
+    }
 
 
   };
@@ -166,6 +198,8 @@ const UserPage = ({ session }) => {
 
   return (
     <div className="user-container">
+
+      <Loader show={loading} />
       {/* header Profile */}
       <Box>
         {/* banner */}
@@ -192,15 +226,24 @@ const UserPage = ({ session }) => {
         {/* follower */}
         <section className="activity-info">
           <div className="follower-row">
-            <p className="follower"><span className="follow-num">{totalFllower}</span> دنبال کننده</p>
-            <p className="follower"><span className="follow-num">{totalFllowing}</span> دنبال شده</p>
+            <p className="follower" onClick={() => {
+              setShowModal(true);
+              setActiveTab("follower");
+            }}>
+              <span className="follow-num">{totalFllower}</span> دنبال کننده</p>
+            <p className="follower"
+              onClick={() => {
+                setShowModal(true);
+                setActiveTab("following");
+              }}
+            ><span className="follow-num">{totalFllowing}</span> دنبال شده</p>
           </div>
-          <ModalFollow/>
+
         </section>
         {/* tabs */}
         <section className="user-tabs">
-          <NavLink to="" end className="user-tabs__tab" activeClassName="active">درباره من</NavLink>
-          <NavLink to="articles" end className="user-tabs__tab" activeClassName="active">مقالات</NavLink>
+          <NavLink to="" end className="user-tabs__tab" activeclassname="active">درباره من</NavLink>
+          <NavLink to="articles" end className="user-tabs__tab" activeclassname="active">مقالات</NavLink>
         </section>
       </Box>
 
@@ -209,7 +252,13 @@ const UserPage = ({ session }) => {
         <Route path="/articles" element={<Articles blogs={userBlogs} />} />
       </Routes>
 
-
+      <ModalFollow
+        followes={activeTab === "follower" ? followList : followingList}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        show={showModal}
+        close={() => setShowModal(false)}
+      />
     </div>
   );
 };

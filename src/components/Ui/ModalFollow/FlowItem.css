@@ -1,0 +1,38 @@
+.follow-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.6rem;
+}
+
+.follow-item--row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.follow-item--img {}
+
+.follow-info {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+}
+
+.follow-name {
+    font-family: "yekan", sans-serif;
+    font-size: 1.7rem;
+    font-weight: bold;
+    width: 15rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+.follow-username {
+    font-size: 1.4rem;
+    color: #d1d5db;
+    direction: ltr;
+    text-align: right;
+}

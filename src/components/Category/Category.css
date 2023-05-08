@@ -1,16 +1,39 @@
 .category {
-    width: 95%;
-    
+    width: 100%;
+
     position: relative;
     margin: -5.4rem auto 0 auto;
-
 }
 
 .category-container {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    gap: .9rem;
-    flex-wrap: wrap;
-    padding: 1rem 4rem;
+
+    gap: 2rem;
+
+    padding: 1rem 2rem;
+    overflow-x: auto;
+    scroll-snap-align: center;
+    transition: all .3s;
+    scrollbar-width: none;
+}
+
+.category-container::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (min-width:760px) {
+
+    .category {
+        width: 95%;
+    }
+
+    .category-container {
+
+        justify-content: space-evenly;
+        gap: .9rem;
+
+        padding: 1rem 4rem;
+
+    }
 }

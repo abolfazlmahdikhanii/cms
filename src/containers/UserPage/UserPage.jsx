@@ -8,7 +8,7 @@ import { supabase } from "../../superbase";
 import usePublicProfile from "../../hooks/usePublicProfile";
 import ModalFollow from "../../components/Ui/ModalFollow/ModalFollow";
 import Loader from "../../components/Ui/Loader/Loader";
-import bannerImg from "../../../src/assets/08.-Violet-Blue.jpg"
+import bannerImg from "../../../src/assets/—Pngtree—shading background abstract colorful background_938007"
 
 const UserPage = ({ session }) => {
   const [loading, setLoading] = useState(false);

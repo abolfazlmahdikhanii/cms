@@ -82,7 +82,7 @@ const Home = ({ session }) => {
        
       
       <Route path="/article/:username/:id/:title" element={<Post session={session} />} />
-      <Route path="/:username/*" element={<UserPage session={session}/>} />
+
   
       </Routes>
 

@@ -1,19 +1,31 @@
 .blog-content {
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 1.5rem;
     display: flex;
     gap: 2.2rem;
     background-color: var(--bg-dark-primary);
     border-radius: 1.2rem;
     transition: all .3s;
-
+    flex-direction: column;
 }
 
+@media screen and (min-width:760px) {
+    .blog-content {
 
+        flex-direction: row;
+        padding: 1.5rem 2rem;
+
+
+    }
+}
 
 .blog-content--img {
+
     flex-basis: 30%;
     border-radius: .7rem;
     overflow: hidden;
+    
+    max-height: 30rem;
+   
 }
 
 .blog-content--img img {
@@ -22,6 +34,7 @@
     object-fit: cover;
     background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
     background-position: center;
+    border-radius: .7rem;
 }
 
 .blog-content--info {

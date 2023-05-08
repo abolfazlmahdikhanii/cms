@@ -69,7 +69,7 @@ const Home = ({ session }) => {
     <Wrapper>
       <Header fullName={`${firstName} ${lastName}`}>
 
-        <img src={logo} alt="" />
+        <img src={logo} alt="logo" className="main-logo" />
         <Search
       
         />
@@ -79,7 +79,7 @@ const Home = ({ session }) => {
       <Routes>
         <Route path="/*" element={<Layout  />} />
         <Route path="/category/:value" element={<Layout />} />
-       
+        <Route path="/:username/*" element={<UserPage session={session}/>} />
       
       <Route path="/article/:username/:id/:title" element={<Post session={session} />} />
 

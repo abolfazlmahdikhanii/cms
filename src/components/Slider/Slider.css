@@ -1,14 +1,18 @@
 .slider {
     height: 50.3rem;
-    padding: .2rem 1.2rem;
+    padding: 0 0.8;
     display: flex;
-
+    flex-direction: column;
     position: relative;
     background-color: #000;
+    overflow: hidden;
+    position: relative;
 }
 
+
+
 .slider-img {
-    flex-basis: 60%;
+    flex-basis: 100%;
     height: 100%;
 }
 
@@ -19,16 +23,21 @@
 }
 
 .slider-info {
-    flex-basis: 40%;
+   height: 27rem;
     display: flex;
     flex-direction: column;
 
     padding: 4rem 2.4rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .4);
 }
 
 .slider-info__title {
     font-family: "yekan", sans-serif;
-    font-size: 4rem;
+    font-size: 2.3rem;
     font-weight: 700;
     color: #fff;
     font-variation-settings: "wght"700;
@@ -37,11 +46,14 @@
 
 }
 
+
+
 .slider-info__dis {
     font-size: 1.8rem;
     color: #d1d5db;
     margin-bottom: 2.6rem;
     line-height: 1.8;
+    display: none;
 }
 
 .slider-info--detail {
@@ -51,14 +63,16 @@
     gap: 2.2rem;
     font-size: 1.3rem;
     position: relative;
+    justify-content: flex-end;
+  
 }
 
 .slider-info--detail::before {
     content: "";
     position: absolute;
-    right: 0;
+    left: 20rem;
     height: 2.2rem;
-    width: 1rem;
+    width: .8rem;
     background-color: #4f46e5;
     display: inline-block;
     border-radius: .3rem;
@@ -88,4 +102,55 @@
     display: inline-block;
     background-color: #f3f4f6;
 
+}
+@media screen and (min-width:760px) {
+    .slider-info__title {
+        font-size:3rem;
+    }
+}
+@media screen and (min-width:900px) {
+    .slider-info{
+     height: 24rem;
+    }
+}
+@media screen and (min-width:1136px) {
+    .slider {
+        height: 50.3rem;
+        padding: .2rem 1.2rem;
+
+        flex-direction: row;
+    }
+
+    .slider-img {
+        flex-basis: 60%;
+        height: 100%;
+    }
+    .slider-info__title {
+        font-size: 4rem;
+    }
+
+    .slider-info {
+        height: auto;
+        position: static;
+        flex-basis: 40%;
+        display: flex;
+        flex-direction: column;
+
+        padding: 4rem 2.4rem;
+    }
+
+    .slider-info__dis {
+        display: block;
+    }
+    .slider-info--detail {
+       justify-content: unset;
+      
+    }
+    
+    .slider-info--detail::before {
+    
+        right: 0;
+        left: unset;
+    
+    }
 }

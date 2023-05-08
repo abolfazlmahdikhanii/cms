@@ -8,7 +8,7 @@ import Auth from "./containers/Auth/Auth.jsx";
 
 import {supabase} from "./superbase.jsx";
 import Home from './containers/Home/Home';
-import UserPage from './containers/UserPage/UserPage';
+
 
 
 
@@ -39,7 +39,7 @@ function App() {
           <Route path="/*" element={<Home session={session}/>}/>
           <Route path="/auth" element={<Auth/>}/>
           <Route path="/panel/*" element={login} />
-          <Route path="/:username/*" element={<UserPage session={session}/>} />
+         
           </Routes>
         </Router>
      

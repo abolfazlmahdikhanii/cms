@@ -1,9 +1,9 @@
 .main-container {
     width: 100%;
-    padding: 2rem 3rem;
+    padding: 2rem 1rem;
     margin-top: 4rem;
     display: grid;
-    grid-template-columns: 1fr 39rem;
+    grid-template-columns: 1fr;
     gap: 3.5rem;
     overflow: hidden;
 }
@@ -15,11 +15,43 @@
 
 
 .blog-aside {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 2rem;
 }
 
 h1 {
     color: #6366f1;
+}
+
+.main-logo {
+
+ 
+    width: fit-content;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media screen and (min-width:940px) {
+    .main-container {
+
+
+        grid-template-columns: 1fr 35rem;
+        padding: 2rem 3rem;
+    }
+
+    .blog-aside {
+        display: flex;
+
+    }
+}
+
+@media screen and (min-width:940px) {
+    .main-container {
+
+
+        grid-template-columns: 1fr 39rem;
+
+    }
+
 }

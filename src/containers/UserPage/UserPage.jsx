@@ -32,7 +32,7 @@ const UserPage = ({ session }) => {
     checkFollowUser(userData?.id);
     getFollowerList(userData?.id);
     getFollowingList(userData?.id);
-  }, [session, match.username, isFollow, totalFllower, totalFllowing]);
+  }, [session, match, isFollow, totalFllower, totalFllowing]);
 
   // if author follow =>unfollow  else=>follow
   const clickFollowHanlder = (id = userData?.id) => {

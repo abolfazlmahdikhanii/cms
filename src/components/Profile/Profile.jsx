@@ -82,7 +82,7 @@ const Profile=(props)=>{
             </g>
         </svg>
 
-        <p>حساب کاربری</p>
+        <p className="profile__txt">حساب کاربری</p>
         </Link>
          }
        </>

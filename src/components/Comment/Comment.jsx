@@ -130,7 +130,7 @@ const Comment = ({ comment, replies, currentUserId, activeComment, setActiveComm
             <section className={`comment-box `}  >
                 <div className="comment-box--header">
                     {/* right */}
-                    <div className="author-profile">
+                    <div className="author-profile--2">
                         <div className="author-profile--photo">
                             <img src={publicProfile(user_id?.avatar_url) || "../../../src/assets/profile.svg"} alt="" />
                         </div>

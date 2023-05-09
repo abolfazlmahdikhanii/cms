@@ -1,4 +1,4 @@
-import React, { useEffect, useState,lazy } from "react";
+import React, { useEffect, useState, lazy } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +16,7 @@ import Comment from "../Comment/Comment";
 import CommentForm from "../CommentForm/CommentForm";
 import Star from "../Ui/Star/Star";
 import usePublicProfile from "../../hooks/usePublicProfile";
+import AuthorProfile from "../AuthorProfile/AuthorProfile";
 
 
 
@@ -32,8 +33,8 @@ const Post = ({ session }) => {
     const [comment, setComment] = useState([]);
     const [showForm, setShowForm] = useState(false);
     const [star, setStar] = useState(0);
-    const [ip,setIp]=useState(null)
-    const [existIp,setExistIp]=useState(null)
+    const [ip, setIp] = useState(null);
+    const [existIp, setExistIp] = useState(null);
     const [numVisit, setNumVisit] = useState(0);
     const [activeComment, setActiveComment] = useState(null);
     const [rate, setRates] = useState(null);
@@ -72,35 +73,35 @@ const Post = ({ session }) => {
             window.removeEventListener("scroll", ScrollHandler);
         });
 
-    }, [match,session, blogContent[0]?.post_title]);
+    }, [match, session, blogContent[0]?.post_title]);
 
     const getUserIp = async () => {
         const res = await axios.get("https://api.ipify.org/");
         setIp(res.data);
-      };
-      const checkExistIp=async ()=>{
+    };
+    const checkExistIp = async () => {
         try {
-            const {data,error}=await supabase.from("visitor").select("*")
-            .eq("blog_id",match.id)
+            const { data, error } = await supabase.from("visitor").select("*")
+                .eq("blog_id", match.id);
 
-            if(error) throw error
+            if (error) throw error;
 
-            setExistIp(data)
+            setExistIp(data);
         } catch (error) {
-            
+
         }
-      }
-      const filterExistIp=(ip)=>{
-        return existIp?.filter((item)=>item?.user_ip===ip)
-      }
+    };
+    const filterExistIp = (ip) => {
+        return existIp?.filter((item) => item?.user_ip === ip);
+    };
     const setVisitor = async (ip) => {
         try {
 
-            if(!filterExistIp(ip)) {
+            if (!filterExistIp(ip)) {
 
-            const {err}=await supabase.from("visitor").insert({blog_id:match?.id,user_ip:ip})
+                const { err } = await supabase.from("visitor").insert({ blog_id: match?.id, user_ip: ip });
 
-            if (err) throw err;
+                if (err) throw err;
             }
         } catch (error) {
             console.log(error);
@@ -135,7 +136,7 @@ const Post = ({ session }) => {
             setBlogContent(blog);
 
             filterPosts(blog);
-       
+
 
 
 
@@ -202,7 +203,7 @@ const Post = ({ session }) => {
 
             setComment(data);
 
-          
+
 
         }
         catch (e) {
@@ -272,16 +273,16 @@ const Post = ({ session }) => {
             const { data, err } = await supabase.from("rate")
                 .select("*")
                 .eq("blog_id", match?.id)
-                .eq("user_id",user?.user?.id)
-                .single()
+                .eq("user_id", user?.user?.id)
+                .single();
 
 
             if (err) throw err;
 
-            setStar(data?.rate_num)
-            setRates(data)
-            
-            
+            setStar(data?.rate_num);
+            setRates(data);
+
+
         } catch (error) {
 
             console.log(error);
@@ -291,27 +292,27 @@ const Post = ({ session }) => {
     const addBlogRate = async (stars) => {
         try {
 
-           
-
-            if(rate.blog_id?.id!==match?.id&&rate.user_id?.id!==user?.user?.id) {
-
-    
-            const { data, err } = await supabase.from("rate")
-                .insert({blog_id:match?.id,user_id:user?.user?.id, rate_num: stars })
-                .eq("blog_id", match?.id)
-                .eq("user_id",user?.user?.id)
 
 
-            if (err) throw err;
-            }
-            else{
+            if (rate.blog_id?.id !== match?.id && rate.user_id?.id !== user?.user?.id) {
+
+
                 const { data, err } = await supabase.from("rate")
-                .update({ rate_num: stars })
-                .eq("blog_id", match?.id)
-                .eq("user_id",user?.user?.id)
+                    .insert({ blog_id: match?.id, user_id: user?.user?.id, rate_num: stars })
+                    .eq("blog_id", match?.id)
+                    .eq("user_id", user?.user?.id);
 
 
-            if (err) throw err;
+                if (err) throw err;
+            }
+            else {
+                const { data, err } = await supabase.from("rate")
+                    .update({ rate_num: stars })
+                    .eq("blog_id", match?.id)
+                    .eq("user_id", user?.user?.id);
+
+
+                if (err) throw err;
             }
 
         } catch (error) {
@@ -393,10 +394,10 @@ const Post = ({ session }) => {
 
         setStar(stars);
         addBlogRate(stars);
- 
+
 
     };
-   
+
     return (
         <>
             <div className="progresMainWrapper">
@@ -479,6 +480,18 @@ const Post = ({ session }) => {
                             </div>
                         </div>
                     </Box>
+                    {/* profile */}
+                    <Box>
+                        <AuthorProfile
+                            avatar_url={publicProfile(blogContent[0]?.post_author.avatar_url)}
+                            username={blogContent[0]?.post_author.username}
+                            firstName={blogContent[0]?.post_author.firstName}
+                            lastName={blogContent[0]?.post_author.lastName}
+                            bio={blogContent[0]?.post_author.bio}
+                            type="full"
+                        />
+                    </Box>
+
                     {/* same blog */}
                     <section>
                         <div className="blog-title--wrapper">
@@ -543,7 +556,7 @@ const Post = ({ session }) => {
                                                 removeComment={removeComment}
                                                 getReply={getReplyComment}
                                                 session={session}
-                                               
+
                                             />
                                         </div>
                                     );
@@ -566,20 +579,14 @@ const Post = ({ session }) => {
                     }
 
                     <Box>
-                        <div className="author-profile">
-                            <div className="author-profile--photo">
-                                <img src={publicProfile(blogContent[0]?.post_author.avatar_url) || '../../../src/assets/profile.svg'} alt="" />
-                            </div>
-                            <div className="author-profile--info">
-                                <Link to={`/@${blogContent[0]?.post_author.username}`} className="author-prfile__fullName">
-                                    {`${blogContent[0]?.post_author.firstName} ${blogContent[0]?.post_author.lastName}`}
-                                </Link>
-                                <p className="author-prfile__dis">
-                                    {blogContent[0]?.post_author?.bio}
-                                </p>
-                                <button className="btn-follow">دنبال کردن</button>
-                            </div>
-                        </div>
+                        <AuthorProfile
+                            avatar_url={publicProfile(blogContent[0]?.post_author.avatar_url)}
+                            username={blogContent[0]?.post_author.username}
+                            firstName={blogContent[0]?.post_author.firstName}
+                            lastName={blogContent[0]?.post_author.lastName}
+                            bio={blogContent[0]?.post_author.bio}
+                          
+                        />
                     </Box>
 
                     <Aside type="viewst" />

@@ -7,9 +7,9 @@ const Header=(props)=>{
    
     return(
         <div className="header">
-             <div className="header-right">
+             
                 {props.children}
-             </div>
+
 
             <div className="header-left">
                 <ThemButton/>

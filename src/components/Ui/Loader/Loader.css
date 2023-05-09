@@ -12,7 +12,13 @@
     background-color: var(--bg-dark-primary);
     border-radius: 1.2rem;
     transition: all .3s;
+    width: 65%;
+}
+@media screen and (min-width:760px) {
+    .loader-box{
     width: 20%;
+
+    }
 }
 
 .brand-name {

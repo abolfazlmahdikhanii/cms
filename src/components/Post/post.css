@@ -5,15 +5,18 @@
 }
 
 .post-cover {
-    width: 100%;
-    height: 45rem;
+    max-width: 100%;
+    height: auto;
     overflow: hidden;
     border-radius: 1.2rem;
     margin-bottom: 2rem;
 }
 
 .post-cover img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+
 }
 
 .post__title {
@@ -28,6 +31,7 @@
     gap: 4rem;
     margin-top: 2.4rem;
     padding: .5rem 1rem;
+    flex-wrap: wrap;
 }
 
 .post-content--box {
@@ -41,7 +45,7 @@
 .post-content--box img {
 
     max-width: 100%;
-    height: 50rem;
+    height: auto;
     object-fit: cover;
     border-radius: 1.2rem;
     margin-bottom: 1rem;
@@ -60,6 +64,7 @@
     line-height: 2;
     color: #cbd5e1;
     font-size: 1.6rem;
+    text-align: justify;
 }
 
 .register-box {
@@ -96,6 +101,9 @@
 .author-profile {
     display: flex;
     gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .author-profile--photo {
@@ -227,23 +235,26 @@
 .comment-title {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
     padding: 0 2.5rem;
     margin-bottom: 1rem;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .post-comment {
-    padding: 1rem 1.7rem;
+    padding: 1rem 0;
     position: relative;
 
 }
 
 .post-comment--wrapper {
     padding: 1.5rem 0;
- 
-    
+
+
 
 }
+
 /* .post-comment--wrapper:not(:first-child){
     margin-right: 3rem;
 } */
@@ -259,12 +270,45 @@
 .btn-action--comment {
     margin-top: 0 !important;
 }
-.rate-post--box{
+
+.rate-post--box {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+
     margin: 2rem 2rem 3rem 2rem;
     background-color: var(--bg-dark-secondry);
-    padding:1.8rem 2.3rem;
+    padding: 1.8rem 2.3rem;
     border-radius: 1.1rem;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+@media screen and (min-width:720px) {
+    .post-cover {
+        height: 45rem;
+    }
+
+    .author-profile {
+        flex-direction: row;
+        text-align: unset;
+        align-items: unset;
+    }
+
+    .author-profile--3 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 97%;
+    }
+
+    .rate-post--box, .comment-title {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: unset;
+    }
+
+    .post-comment {
+        padding: 1rem 1.7rem;
+    }
 }

@@ -1,7 +1,8 @@
 .comment-box {
     margin-top: 2rem;
-    padding: 2.5rem;
-    background-color: var(--bg-dark-secondry);;
+    padding: 2.5rem 1.5rem;
+    background-color: var(--bg-dark-secondry);
+    ;
     border-radius: 1.2rem;
     display: flex;
     flex-direction: column;
@@ -14,8 +15,9 @@
 .comment-box--header {
     display: flex;
 
-    justify-content: space-between;
+    flex-direction: column;
     border-bottom: 1px solid #334155;
+    padding-bottom: 1.2rem;
 }
 
 .comment-profile--info {
@@ -27,9 +29,12 @@
 
 .comment-prfile__fullName {
     font-family: "yekan", sans-serif;
-    font-size: 2.1rem;
+    font-size: 1.7rem;
     font-weight: 600;
     color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .comment-date {
@@ -41,8 +46,9 @@
 .comment-box--btns {
     display: flex;
     align-items: flex-start;
-    justify-content: flex-start;
+ 
     gap: 1rem;
+    justify-content: end;
 }
 
 .btn-reply {
@@ -55,12 +61,14 @@
 
 .comment--txt__txt {
     font: inherit;
-    padding: 3rem 0.6rem;
+    padding: 1.6rem 0.6rem;
     font-size: 1.5rem;
     line-height: 2;
     word-break: break-word;
     word-spacing: .11rem;
     color: #f9fafb;
+    white-space: pre-wrap;
+    overflow: hidden;
 }
 
 .replies-comment {
@@ -90,3 +98,29 @@
     background-color: #f9fafb;
 
 } */
+.author-profile--2{
+    display: flex;
+
+    flex-direction: row;
+    gap: 2.5rem;
+}
+@media screen and (min-width:720px) {
+    .comment-box{
+        padding: 2.5rem 2.5rem;
+    }
+    .comment-box--header{
+        flex-direction: row;
+        justify-content: space-between;
+        padding-bottom: 0;
+    }
+    
+    .comment-prfile__fullName{
+        font-size: 2.1rem;
+    }
+    .comment--txt__txt{
+        padding: 3rem .6rem;
+    }
+    .comment-box--btns{
+        justify-content: flex-start;
+    }
+}

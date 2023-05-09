@@ -68,11 +68,16 @@ const Home = ({ session }) => {
   return (
     <Wrapper>
       <Header fullName={`${firstName} ${lastName}`}>
-
+      <img src={logo} alt="logo" className="main-logo-sm" />
+         <div className="header--row">
+          
+        
         <img src={logo} alt="logo" className="main-logo" />
+        
         <Search
       
         />
+         </div>
 
       </Header>
 

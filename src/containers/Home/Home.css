@@ -32,19 +32,24 @@ h1 {
     object-fit: cover;
 
 }
-.main-logo-sm{
+
+.main-logo-sm {
     grid-column: 1/3;
     align-self: center;
 }
+
 .main-logo {
     display: none;
 }
+
 @media screen and (min-width:750px) {
     .header--row {
         display: flex;
         align-items: center;
         gap: .7rem;
+     
     }
+
     .main-logo {
         display: block;
     }
@@ -67,9 +72,14 @@ h1 {
 
     }
 
-   
+    .header--row {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        width: 100%;
+    }
 
-   
+
 }
 
 @media screen and (min-width:1020px) {

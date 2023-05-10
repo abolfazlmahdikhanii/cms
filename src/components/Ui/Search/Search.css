@@ -1,8 +1,8 @@
 .search-wrapper {
-
+    width: 100%;
 
     position: relative;
-    max-width: 60rem;
+    max-width: 40rem;
 
     display: flex;
     flex-direction: column;
@@ -54,4 +54,19 @@
     display: grid;
     place-items: center;
     transition: all .3s;
+}
+
+@media screen and (min-width:840px) {
+    .search-wrapper {
+  
+        max-width: 45rem;
+    }
+
+}
+@media screen and (min-width:960px) {
+    .search-wrapper {
+  
+        max-width: 60rem;
+    }
+
 }

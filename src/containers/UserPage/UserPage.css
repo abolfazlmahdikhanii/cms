@@ -1,7 +1,7 @@
 .user-container {
     width: 90%;
     margin: 0 auto 0 auto;
-    padding: 6rem 0;
+    padding: 3.5rem 0;
     display: flex;
     flex-direction: column;
     gap: 3rem;
@@ -9,7 +9,8 @@
 
 .user-info--banner {
     width: 100%;
-    height: 30rem;
+    height: auto;
+    max-height: 30rem;
 
 
     padding: 0 1rem;
@@ -25,9 +26,12 @@
 
 .user-info {
     display: flex;
+
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 3.5rem;
+
+    gap: 1.5rem;
+    padding: 0 1rem;
 }
 
 .user-info--wrapper {
@@ -37,13 +41,13 @@
 }
 
 .user-info--img {
-    margin-top: -9rem;
-    width: 20rem;
-    height: 20rem;
-   
+    margin-top: -4rem;
+    width: 10rem;
+    height: 10rem;
+
     border-radius: 50%;
     overflow: hidden;
-   
+
     border: 8px solid #fff;
 }
 
@@ -62,23 +66,27 @@
 
 .user-info__name {
     font-family: "yekan", sans-serif;
-    font-size: 3.2rem;
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
 }
 
 .user-info__user {
-    font-size: 1.7rem;
-    direction: ltr;
-    text-align: right;
+    font-size: 1.45rem;
+    line-height: 1.6rem;
+    text-align: center;
+    margin-bottom: 3rem;
+
 }
 
 .btn-big {
-    padding: 1.5rem 4rem;
-    font-size: 1.8rem;
+    padding: 1.2rem 3.2rem;
+    font-size: 1.6rem;
 }
 
 .btn-followed {
-    background-color:  #818cf8;
-   
+    background-color: #818cf8;
+
 }
 
 .activity-info {
@@ -99,12 +107,13 @@
 }
 
 .follower {
-    font-size: 2rem;
+    font-size: 1.7rem;
+    color: #94a3b8
 }
 
 .follow-num {
     font-family: "yekan", sans-serif;
-    font-size: 3rem;
+    font-size: 1.9rem;
     font-weight: bold;
     color: #fff;
     margin-left: .6rem;
@@ -125,4 +134,51 @@
 
 .user-tabs__tab:hover, .user-tabs__tab.active {
     color: #60a5fa;
+}
+
+@media screen and (min-width:850px) {
+    .user-container {
+        padding: 6rem 0;
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 3.5rem;
+    }
+
+    .user-info--img {
+        margin-top: -9rem;
+        width: 23rem;
+        height: 20rem;
+
+
+    }
+
+    .user-info__name {
+
+        font-size: 3.2rem;
+        margin-bottom: unset;
+    }
+
+    .user-info__user {
+        font-size: 1.7rem;
+        direction: ltr;
+        text-align: right;
+        margin-bottom: unset;
+    }
+
+    .btn-big {
+        padding: 1.5rem 4rem;
+        font-size: 1.8rem;
+    }
+
+    .follow-num {
+
+        font-size: 3rem;
+
+
+        margin-left: .6rem;
+    }
 }

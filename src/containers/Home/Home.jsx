@@ -3,7 +3,7 @@ import "./Home.css";
 import Header from "../../components/Header/Header";
 import Wrapper from "../../hoc/Wrapper";
 import Search from "../../components/Ui/Search/Search";
-import { Route, Router, Routes } from "react-router-dom";
+import { Link, Route, Router, Routes } from "react-router-dom";
 import Post from "../../components/Post/Post";
 import Layout from "./Layout";
 import { supabase } from "../../superbase";
@@ -68,12 +68,14 @@ const Home = ({ session }) => {
   return (
     <Wrapper>
       <Header fullName={`${firstName} ${lastName}`}>
-      <img src={logo} alt="logo" className="main-logo-sm" />
+       <Link to="/">
+       <img src={logo} alt="logo" className="main-logo-sm" />
+       </Link>
          <div className="header--row">
           
-        
+         <Link to="/">
         <img src={logo} alt="logo" className="main-logo" />
-        
+        </Link>
         <Search
       
         />

@@ -9,6 +9,7 @@ import usePublicProfile from "../../hooks/usePublicProfile";
 import ModalFollow from "../../components/Ui/ModalFollow/ModalFollow";
 import Loader from "../../components/Ui/Loader/Loader";
 import bannerImg from "../../../src/assets/—Pngtree—shading background abstract colorful background_938007.jpg"
+import AuthorProfile from "../../components/AuthorProfile/AuthorProfile";
 
 const UserPage = ({ session }) => {
   const [loading, setLoading] = useState(false);
@@ -208,7 +209,7 @@ const UserPage = ({ session }) => {
           <img src={bannerImg} alt="banner" loading="lazy"/>
         </div>
         <section className="user-info">
-          <div className="user-info--wrapper">
+          {/* <div className="user-info--wrapper">
             <div className="user-info--img">
               <img src={publicProfile(userData?.avatar_url) || "../../../src/assets/profile.svg"} alt="" />
             </div>
@@ -216,13 +217,23 @@ const UserPage = ({ session }) => {
               <h4 className="user-info__name">{userData?.firstName} {userData?.lastName}</h4>
               <p className="user-info__user" >@{userData?.username}</p>
             </div>
-          </div>
+          </div> */}
           {/* button */}
-          <div>
+          {/* <div>
             <button className={`btn btn-item btn-big btn-follow ${isFollow && "btn-followed"}`}
               onClick={() => clickFollowHanlder(userData?.id)}
             >{isFollow ? "دنبال نکردن" : "دنبال کردن"}</button>
-          </div>
+          </div> */}
+
+          <AuthorProfile
+          
+            username={userData?.username}
+             avatar_url={publicProfile(userData?.avatar_url)}
+            firstName={userData?.firstName}
+            lastName={userData?.lastName}
+            type="full"
+            cls="user-page"
+          />
         </section>
         {/* follower */}
         <section className="activity-info">

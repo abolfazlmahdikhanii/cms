@@ -25,3 +25,11 @@
     font-size: 3.5rem;
     font-family: "yekan", sans-serif;
 }
+
+@media (prefers-color-scheme: light) {
+    .blog-list--title__txt {
+       color:#334155
+     
+    }
+
+}

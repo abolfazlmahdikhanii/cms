@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const AuthorProfile = ({ avatar_url, username, firstName, lastName, bio, type = null, cls = null }) => {
     return (
 
-        <div className={`author-profile `}>
+        <div className={`author-profile ${type==="full"?"author-profile--wrapper":""} `}>
             <div className={`author-profile--photo ${cls === "user-page" ? "user-info--img" : ""}`}>
                 <img src={avatar_url || '../../../src/assets/profile.svg'} alt="" />
             </div>
@@ -18,7 +18,7 @@ const AuthorProfile = ({ avatar_url, username, firstName, lastName, bio, type = 
                         {cls === "user-page" ? `@${username}` : bio}
                     </p>
                 </div>
-                <button className={`btn-follow ${cls === "user-page" ? "btn-big" : ""}`}>دنبال کردن</button>
+                <button className={`btn-follow ${cls === "user-page" ? "btn-big" : ""} ${type === "full" ? "btn-medium" : ""}`}>دنبال کردن</button>
             </div>
         </div>
 

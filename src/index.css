@@ -2,6 +2,7 @@
   font-family: "yekan";
   src: url("./assets/fonts/Yekan.woff")
 }
+
 @font-face {
   font-family: "shabnam";
   src: url("./assets/fonts/Shabnam-FD.woff2")
@@ -34,8 +35,9 @@
   --color-secondry-dark: #64748b;
   --color-secondry-light: #e2e8f0;
 
-
-
+  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  --tw-shadow-color: rgb(229 231 235 / 0.5);
+  --tw-shadow: var(--tw-shadow-colored)
 }
 
 *,
@@ -64,7 +66,8 @@ body {
 ul {
   list-style: none;
 }
-a{
+
+a {
   text-decoration: none;
 }
 
@@ -72,9 +75,9 @@ a{
 
 
 @media (prefers-color-scheme: light) {
-  /* :root {
-    color: #213547;
-    background-color: #ffffff;
-  } */
+  body {
+    background-color: #f8f8f8;
+
+  }
 
 }

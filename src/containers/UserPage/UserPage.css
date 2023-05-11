@@ -182,3 +182,25 @@
         margin-left: .6rem;
     }
 }
+
+@media (prefers-color-scheme: light) {
+
+    .activity-info{
+        border-color: #e5e7eb;
+    }
+    .follow-num{
+        color: #4b5563;
+    }
+    .follower{
+        color: #6b7280;
+    }
+    .about-user__title{
+        color: #4b5563;
+    }
+    .user-tabs__tab{
+        color: #9ca3af;
+    }
+    .about-user__dis{
+        color: #6b7280  !important;
+    }
+}

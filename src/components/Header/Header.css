@@ -68,3 +68,9 @@
     }
 
 }
+
+@media (prefers-color-scheme: light) {
+    .header{
+        background-color: #fff;
+    }
+}

@@ -133,9 +133,11 @@
 .author-prfile__fullName {
     font-family: "yekan", sans-serif;
     font-size: 2.2rem;
-color: #fff;
+    color: #fff;
     transition: all .3s;
     cursor: pointer;
+    margin-bottom: .3rem;
+    display: block;
 }
 
 .author-prfile__fullName:hover {
@@ -151,7 +153,9 @@ color: #fff;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.author-dis{
+    margin-bottom: 2.5rem;
+}
 .btn-follow {
     all: unset;
     font: inherit;
@@ -163,6 +167,7 @@ color: #fff;
     cursor: pointer;
     border: 1px solid transparent;
     transition: all .3s;
+    white-space: nowrap;
 }
 
 .btn-follow:hover {
@@ -283,6 +288,9 @@ color: #fff;
     flex-direction: column;
     gap: 1.5rem;
 }
+.author-profile--wrapper{
+    padding: 1.2rem 1.5rem;
+}
 
 
 @media screen and (min-width:720px) {
@@ -299,7 +307,7 @@ color: #fff;
 
     .author-profile--3 {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         justify-content: space-between;
         width: 97%;
     }
@@ -310,7 +318,48 @@ color: #fff;
         gap: unset;
     }
 
+    .btn-medium {
+        padding: .9rem 2rem;
+    }
+
     .post-comment {
         padding: 1rem 1.7rem;
+    }
+  
+}
+
+@media (prefers-color-scheme: light) {
+    .post__title {
+        color: #475466;
+    }
+
+    .post-content--box p {
+        color: #6b7280;
+    }
+
+    .post-content--box h2 {
+        color: #4b5563;
+    }
+
+    .rate-post--box, .tag-items {
+        background-color: #f3f4f6;
+    }
+
+    .tag-items p {
+        color: #6b7280;
+    }
+
+    .rate-post--box p, .share-post {
+        color: #374151;
+    }
+
+    .post-footer {
+        border-color: #e5e7eb;
+    }
+    .author-prfile__fullName{
+        color: #475466;
+    }
+    .author-prfile__dis,.author-dis{
+        color: #6b7280;
     }
 }

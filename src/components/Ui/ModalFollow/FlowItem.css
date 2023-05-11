@@ -36,3 +36,11 @@
     direction: ltr;
     text-align: right;
 }
+@media (prefers-color-scheme: light) {
+    .follow-name{
+        color: #6b7280;
+    }
+    .follow-username{
+        color: #9ca3af;
+    }
+}

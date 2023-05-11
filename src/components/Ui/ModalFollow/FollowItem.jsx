@@ -17,7 +17,7 @@ const FollowItem = ({ firstName, lastName,username }) => {
             </div>
 
 
-            <button className="btn btn-follow">دنبال کردن</button>
+            <button className="btn btn-follow btn-medium ">دنبال کردن</button>
         </div>
     );
 };

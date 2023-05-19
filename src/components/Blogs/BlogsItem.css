@@ -241,4 +241,8 @@
         color: rgb(156, 166, 180);
 
     }
+    .blog-save__btn:hover,.save--active{
+        background-color: #6366f1;
+        color: #fff;
+    }
 }

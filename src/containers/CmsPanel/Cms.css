@@ -22,3 +22,12 @@
 .main-panel::-webkit-scrollbar{
     display: none;
 }
+@media (prefers-color-scheme: light) {
+    .cms{
+        background-color: #fff;
+    }
+     
+.main-panel{
+    background-color: #f1f5f9;
+}
+}

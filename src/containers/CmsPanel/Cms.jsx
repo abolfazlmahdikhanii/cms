@@ -131,13 +131,15 @@ const Cms = ({ session }) => {
 
                 <section className="center-panel">
                     <Header fullName={`${firstName} ${lastName}`}>
-                        <p className="header-right__title  header-right__txt">
+                    <div className="header--row">
+                    <p className="header-right__title  header-right__txt">
                             {userName || session?.user?.email} عزیز; خوش آمدی. 👋
                         </p>
                         <i className="header-right__border"></i>
                         <p className="header-right__date header-right__txt">
                             {date}
                         </p>
+                    </div>
                     </Header>
 
 

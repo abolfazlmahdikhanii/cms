@@ -16,3 +16,12 @@ background-color: var(--bg-dark-hover);
     width: 2.4rem;
     height: 2.4rem;
 }
+
+@media (prefers-color-scheme: light) {
+    .them-btn{
+        background-color: #94a3b8;
+    }
+    .them-btn:hover{
+        background-color: #64748b;
+    }
+}

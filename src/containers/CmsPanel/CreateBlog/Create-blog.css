@@ -234,3 +234,51 @@
     display: grid;
     place-items: center;
 }
+
+
+@media (prefers-color-scheme: light) {
+    .btn-item{
+        background-color: #f3f5ff;
+        color: #6b7280;
+    }
+    .btn-item:hover {
+
+        box-shadow: none;
+    }
+    .drowp-down-status{
+        background-color: #f3f5ff;
+        color: #6b7280;
+    }
+    .option-control-select{
+        background-color: #f3f4f6;
+        border-color: #e5e7eb;
+    }
+    .option-control-select svg{
+        color: #6b7280;
+    }
+    .option-control__select{
+        background-color: #f3f4f6;
+        color: #6b7280;
+    }
+    .option-control_tag{
+        background-color: #f3f4f6;
+    }
+    .option-control__tag-item{
+        background-color: #d7dce6;
+    }
+    .option-control__tag-txt{
+        color: #374151;
+    }
+    .option-control__tag-item button > svg{
+        stroke: #6b7280;
+    }
+    .tag-btn{
+        color: #6b7280;
+    }
+    .option-control__switch{
+        background-color: #f3f4f6;
+    }
+    .option-control__switch-span{
+        background-color: #94a3b8;
+    }
+}

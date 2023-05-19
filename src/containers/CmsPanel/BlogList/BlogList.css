@@ -132,3 +132,25 @@
 .diactive-container {
     display: none;
 }
+
+
+@media (prefers-color-scheme: light) {
+    .blog-list--tab{
+        border-color: #f3f4f6;
+    }
+    .btn-edit{
+        color: #fff;
+    }
+    .blog-list--info{
+        border-color: #e5e7eb;
+    }
+    .blog-list__title{
+        color:#475569 ;
+    }
+    .blog-list__dis {
+        color: #4b5563;
+    }
+    .blog-list--date{
+        color: #6b7280;
+    }
+}

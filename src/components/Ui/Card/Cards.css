@@ -5,3 +5,9 @@
     padding: 1.5rem .7rem;
    
 }
+
+@media (prefers-color-scheme: light) {
+    .cards{
+        column-rule-color: #e5e7eb;
+    }
+}

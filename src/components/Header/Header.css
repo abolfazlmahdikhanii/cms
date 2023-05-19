@@ -73,4 +73,22 @@
     .header{
         background-color: #fff;
     }
+
+    .header-right__date {
+ 
+        color:#9ca3af;
+    
+    }
+    
+    .header-right__border {
+    
+       
+        border-left: 1px solid rgba(152, 163, 184, 0.3);
+       
+    }
+    
+    .header-right__title {
+        
+        color: #6b7280;
+    }
 }

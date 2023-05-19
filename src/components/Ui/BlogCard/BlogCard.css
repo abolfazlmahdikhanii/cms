@@ -11,3 +11,14 @@
 
 
 }
+
+
+@media (prefers-color-scheme: light) {
+    .blog-card {
+        background-color: #fff;
+
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+     
+    }
+
+}

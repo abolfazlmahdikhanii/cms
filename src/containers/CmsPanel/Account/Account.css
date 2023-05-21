@@ -1,5 +1,5 @@
-.account-container{
-   margin-top: 4rem;
+.account-container {
+    margin-top: 4rem;
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
@@ -16,21 +16,25 @@
     border-radius: .5rem;
 
 }
-.col-grid{
+
+.col-grid {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
 }
-.col-grid--2{
+
+.col-grid--2 {
     display: grid;
     grid-template-columns: 1fr 40rem;
     gap: 1.5rem;
 }
-.col-grid--3{
+
+.col-grid--3 {
     display: grid;
-    grid-template-columns:  40rem 1fr;
+    grid-template-columns: 40rem 1fr;
     gap: 1.5rem;
 }
+
 .form-control__row {
     display: flex;
     align-items: center;
@@ -57,7 +61,7 @@
 
 }
 
-.form-control__input, .form-control__input--2,input {
+.form-control__input, .form-control__input--2, input {
     all: unset;
     width: 100%;
     font: inherit;
@@ -65,15 +69,19 @@
     box-sizing: border-box;
 
 }
-.form-control__txt-area{
+
+.form-control__txt-area {
     height: 10rem;
 }
-.form-control__row--2{
+
+.form-control__row--2 {
     direction: ltr;
 }
-.form-control__row-txt{
+
+.form-control__row-txt {
     font-size: 1.5rem;
 }
+
 .form-control__input::placeholder {
     font-size: 1.3rem;
     text-transform: capitalize;
@@ -90,7 +98,7 @@
     display: block;
 }
 
-.btn-action{
+.btn-action {
     background-color: #4f46e5;
     transition: all .3s;
     margin-top: 4.5rem;
@@ -98,17 +106,46 @@
     align-items: center;
     justify-content: center;
 }
-.btn-action:hover{
+
+.btn-action:hover {
     background-color: #6366f1;
 }
-.account-subtitle__txt{
-    font-family: 'yekan',sans-serif;
-   margin-top: 2rem;
+
+.account-subtitle__txt {
+    font-family: 'yekan', sans-serif;
+    margin-top: 2rem;
     font-size: 2.8rem;
 }
-.from-control__select{
-  
+
+.from-control__select {
+
     appearance: none;
     background-color: #334155;
     padding: 0 1.2rem;
+}
+
+@media (prefers-color-scheme: light) {
+    .form-control {
+        background-color: #f8fafc;
+        border-color: #e5e7eb;
+    }
+
+    .form-control__txt {
+        color: #6b7280;
+    }
+    .form-control__input, .form-control__input--2, input{
+        color: #374151;
+    }
+    .from-control__select{
+        background-color: #f8fafc;
+    }
+    .form-control svg{
+        color: #475569;
+    }
+    .btn-action{
+        color: #fff;
+    }
+    .avatar-img{
+        border-color: #6b7280;
+    }
 }

@@ -64,3 +64,14 @@
     align-items: center;
     justify-content: space-between;
 }
+
+
+@media (prefers-color-scheme: light) {
+    .post-card{
+        background-color: #ffff;
+        
+    }
+    .post-card--dis__title{
+        color:#4b5563
+    }
+}

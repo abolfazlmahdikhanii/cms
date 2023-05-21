@@ -2,6 +2,12 @@
     background-color: var(--bg-dark-primary);
     padding: 2rem 1.5rem;
     border-radius: .5rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 26rem;
+    transform: translateX(100%);
 }
 .logo{
 padding:0 .5rem 2rem .5rem;
@@ -10,5 +16,18 @@ padding:0 .5rem 2rem .5rem;
     .navigation{
         background-color: #fff;
 
+    }
+}
+
+@media screen and (min-width:950px){
+    .navigation{
+        background-color: var(--bg-dark-primary);
+        padding: 2rem 1.5rem;
+        border-radius: .5rem;
+        position: static;
+
+       
+        width:unset;
+        transform: translateX(0);
     }
 }

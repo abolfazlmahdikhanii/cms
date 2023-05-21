@@ -30,3 +30,9 @@
 .loader--hidden {
     transform: scale(0);
 }
+
+@media (prefers-color-scheme: light) {
+    .loader-box{
+        background-color: #fff;
+    }
+}

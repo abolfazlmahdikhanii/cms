@@ -1,8 +1,7 @@
 .cms{
     width: 100%;
     height: 100vh;
-    display: grid;
-    grid-template-columns:  25rem 1fr;
+
     overflow: hidden;
     background-color: var(--bg-dark-primary);
 }
@@ -22,6 +21,21 @@
 .main-panel::-webkit-scrollbar{
     display: none;
 }
+
+
+@media screen and (min-width:950px){
+    .cms{
+        width: 100%;
+        height: 100vh;
+        display: grid;
+        grid-template-columns:  25rem 1fr;
+        overflow: hidden;
+        background-color: var(--bg-dark-primary);
+    }
+}
+
+
+
 @media (prefers-color-scheme: light) {
     .cms{
         background-color: #fff;

@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
+    overflow: hidden;
 }
 
 .form-control {
@@ -19,19 +20,20 @@
 
 .col-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
 }
 
 .col-grid--2 {
-    display: grid;
-    grid-template-columns: 1fr 40rem;
+    display: flex;
+
+    flex-direction: column;
     gap: 1.5rem;
 }
 
 .col-grid--3 {
     display: grid;
-    grid-template-columns: 40rem 1fr;
+    grid-template-columns: 1fr;
     gap: 1.5rem;
 }
 
@@ -72,6 +74,8 @@
 
 .form-control__txt-area {
     height: 10rem;
+    line-height: 1.8;
+    font-size: 1.3rem;
 }
 
 .form-control__row--2 {
@@ -123,7 +127,29 @@
     background-color: #334155;
     padding: 0 1.2rem;
 }
+@media screen and (min-width:750px){
+    .col-grid {
+       
+        grid-template-columns: repeat(2, 1fr);
+   
+    }
+    
+    .col-grid--2 {
 
+        display: grid;
+        grid-template-columns: 1fr 40rem;
+     
+    }
+    
+    .col-grid--3 {
+ 
+        grid-template-columns: 40rem 1fr;
+      
+    }
+    .form-control__txt-area {
+        font-size: 1.6rem;
+    }
+}
 @media (prefers-color-scheme: light) {
     .form-control {
         background-color: #f8fafc;

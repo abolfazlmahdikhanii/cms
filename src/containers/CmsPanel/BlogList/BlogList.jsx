@@ -55,7 +55,7 @@ const BlogList = ({ session }) => {
                 <div className={`blog-list__tab ${blogType === "draft" ? 'active' : ''}`} onClick={() => setBlogType("draft")}>پیش نویس ها</div>
                 <div
                     className={`blog-list__tab ${blogType === "share" ? 'active' : ''}`}
-                    onClick={() => setBlogType("share")}>پست های منتشر شده</div>
+                    onClick={() => setBlogType("share")}>منتشر شده ها</div>
             </div>
             <Loader show={loading} />
 

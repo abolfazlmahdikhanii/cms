@@ -71,10 +71,12 @@
 
 .share-blog__btn {
 
-    position: absolute;
-    top: 0;
-    left: 2rem;
+  position: sticky;
+  width: max-content;
     z-index: 20;
+    align-self: flex-end;
+    background-color: #334155;
+
 
 }
 
@@ -85,8 +87,8 @@
 .btn-item__status {
     all: unset;
     justify-content: space-between;
-    gap: 1rem;
-    width: 20rem;
+    gap: 1.2rem;
+    width: 14rem;
 }
 
 .btn-item__status-row {
@@ -162,6 +164,7 @@
     background-color: #334155;
     border-radius: .8rem;
     width: 30%;
+    min-width: max-content;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -187,8 +190,9 @@
     border-radius: .7rem;
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: 1rem;
     background-color: #334155;
+    flex-wrap: wrap;
 }
 
 .option-control_tag-box {
@@ -224,6 +228,7 @@
 .option-control__tag-input {
     all: unset;
     font: inherit;
+    display: contents;
 
 }
 
@@ -234,7 +239,11 @@
     display: grid;
     place-items: center;
 }
-
+@media screen and (min-width:750px){
+    .option-control__tag-input{
+        display: flex;
+    }
+}
 
 @media (prefers-color-scheme: light) {
     .btn-item{

@@ -1,13 +1,13 @@
 .card{
     display: flex;
-    gap: 1.7rem;
+    gap:2.5rem;
     padding: 0 2.2rem;
     cursor: pointer;
 
 }
 .card-icon{
-  width: 4.2rem;
-  height: 4.2rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 1.2rem;
   display: grid;
   place-items: center;
@@ -17,7 +17,7 @@
 .card-info{
 display: flex;
 flex-direction: column;
-gap: .4rem;
+gap: .3rem;
 }
 .card-info__title,
 .card-info__sub-title{
@@ -25,12 +25,23 @@ gap: .4rem;
 }
 .card-info__title{
 
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: rgba(182,190,205,1);
 }
 .card-info__sub-title{
-font-size: 2.5rem;
+font-size: 2.2rem;
 font-weight: bold;
+}
+@media screen and (min-width:950px){
+    .card-info__title{
+
+        font-size: 1.8rem;
+        
+    }
+    .card-info__sub-title{
+        font-size: 2.5rem;
+        font-weight: bold;
+        }
 }
 
 

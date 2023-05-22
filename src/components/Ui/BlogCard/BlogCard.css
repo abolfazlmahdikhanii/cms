@@ -6,12 +6,17 @@
     border-radius: 1.2rem;
 
 
-    width: fit-content;
-    min-width: 90rem;
+   
 
 
 }
-
+@media screen and (min-width:950px){
+    .blog-card{
+        
+    width: fit-content;
+    min-width: 70rem;
+    }
+}
 
 @media (prefers-color-scheme: light) {
     .blog-card {

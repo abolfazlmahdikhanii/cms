@@ -1,19 +1,20 @@
 .blog-list--row {
     display: flex;
-    max-width: 90rem;
+    flex-direction: column;
+    /* max-width: 90rem; */
     /* align-items: baseline; */
     gap: 2rem;
     padding: 1rem 0;
     overflow: hidden;
- 
+
 }
 
 .blog-list--info {
-    width: 70%;
+
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    border-left: 2px dashed #4b5563;
+
     padding: 0 1.5rem;
 }
 
@@ -38,11 +39,16 @@
 }
 
 .blog-list--action {
-    width: 30%;
+
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: 3rem;
+
+    align-items: flex-end;
+    gap: 2rem;
+    padding: 2rem;
+
+    border-top: 2px dashed #4b5563;
 }
 
 .blog-list--date {
@@ -93,20 +99,27 @@
 .blog-list--tab {
 
     margin-bottom: 3rem;
-    padding: 0 1rem 1rem 1rem;
+    padding: 1rem .5rem;
     display: flex;
     align-items: center;
     border-bottom: 2px solid #475569;
-    gap: 1rem;
+    gap: 1.3rem;
+    overflow: auto;
+    scrollbar-width: none;
 
+}
+
+.blog-list--tab::-webkit-scrollbar {
+    display: none;
 }
 
 .blog-list__tab {
     color: #d1d5db;
-    padding: 1.5rem 3rem;
+    padding: 1.2rem 2.2rem;
     border-radius: 1.2rem;
     transition: all .3s;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .blog-list__tab:hover {
@@ -133,24 +146,55 @@
     display: none;
 }
 
+@media screen and (min-width:750px) {
+    .blog-list__tab {
+        padding: 1.5rem 2.7rem;
+    }
+
+    .blog-list--row {
+        flex-direction: row;
+        max-width: 90rem;
+    }
+
+    .blog-list--info {
+        width: 70%;
+        border-left: 2px dashed #4b5563;
+    }
+
+    .blog-list--action {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 3rem;
+        padding: 0;
+        border-top: none;
+        align-items: unset;
+    }
+}
 
 @media (prefers-color-scheme: light) {
-    .blog-list--tab{
+    .blog-list--tab {
         border-color: #f3f4f6;
     }
-    .btn-edit{
+
+    .btn-edit {
         color: #fff;
     }
-    .blog-list--info{
+
+    .blog-list--info {
         border-color: #e5e7eb;
     }
-    .blog-list__title{
-        color:#475569 ;
+
+    .blog-list__title {
+        color: #475569;
     }
+
     .blog-list__dis {
         color: #4b5563;
     }
-    .blog-list--date{
+
+    .blog-list--date {
         color: #6b7280;
     }
 }

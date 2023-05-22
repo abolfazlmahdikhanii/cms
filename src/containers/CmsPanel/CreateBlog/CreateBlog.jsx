@@ -30,13 +30,13 @@ const CreateBlog = (props) => {
 
     const data = [];
     const newData = [];
-    const toastOption={
+    const toastOption = {
         position: "bottom-right",
-        autoClose:1000,
-         hideProgressBar: true,
-         theme:"colored",
-         style:{fontFamily:"shabnam,sans-serif"}
-    }
+        autoClose: 1000,
+        hideProgressBar: true,
+        theme: "colored",
+        style: { fontFamily: "shabnam,sans-serif" }
+    };
 
     const match = useParams();
     const history = useLocation();
@@ -44,27 +44,27 @@ const CreateBlog = (props) => {
 
     useEffect(() => {
 
-      
 
-       
-       
+
+
+
         if (match?.id) {
             getBLogData(match?.id);
         }
-       
-        return(()=>{
-            setElement([])
-        //     setTitle("")
-            setTag([])
-            setType("")
-            setContent([])
-        })
+
+        return (() => {
+            setElement([]);
+            //     setTitle("")
+            setTag([]);
+            setType("");
+            setContent([]);
+        });
 
 
 
 
 
-    }, [history.pathname,title]);
+    }, [history.pathname, title]);
 
 
     const getBLogData = async (id) => {
@@ -73,7 +73,7 @@ const CreateBlog = (props) => {
 
             const { data, err } = await supabase.from("blogs").select(" post_title,post_content, post_status,  post_tags, comment_status, post_type")
                 .eq("id", id)
-                .single()
+                .single();
 
 
             if (err) throw err;
@@ -112,7 +112,7 @@ const CreateBlog = (props) => {
 
         });
         const newStr = clean.split(" ").find((item) => item.includes("src=")).slice(5, -1);
-        
+
 
         return newStr;
 
@@ -123,7 +123,7 @@ const CreateBlog = (props) => {
         for (const item of arr) {
 
 
-           
+
 
             if (item.contentTag.includes("<h2")) {
                 newData.push({
@@ -155,7 +155,7 @@ const CreateBlog = (props) => {
         }
         const unique = [...new Set(newData.map(item => item))];
         console.log(unique);
-        
+
         setElement(unique);
     };
 
@@ -234,16 +234,16 @@ const CreateBlog = (props) => {
 
             setContent(unique);
             const { user } = props.user;
-            if(!title||!unique)throw error
-            
+            if (!title || !unique) throw error;
+
             const { error } = await supabase.from("blogs").insert({ post_title: title, post_content: unique, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type });
 
             if (error) throw error;
-            toast.success("پست شما با موفقیت ایجاد شد ",toastOption)
+            toast.success("پست شما با موفقیت ایجاد شد ", toastOption);
             setContent([]);
 
         } catch (error) {
-            toast.error("ایجاد پست جدید با مشکل مواجه شد",toastOption)
+            toast.error("ایجاد پست جدید با مشکل مواجه شد", toastOption);
 
             setLoading(false);
         }
@@ -264,13 +264,13 @@ const CreateBlog = (props) => {
 
             if (error) throw error;
 
-            toast.success("پست شما با موفقیت ویرایش شد ",toastOption)
+            toast.success("پست شما با موفقیت ویرایش شد ", toastOption);
 
 
 
         } catch (error) {
             setLoading(false);
-            toast.success("ویرایش پست شما با خطا مواجه شد",toastOption)
+            toast.success("ویرایش پست شما با خطا مواجه شد", toastOption);
 
 
         }
@@ -356,7 +356,27 @@ const CreateBlog = (props) => {
         <>
             <Loader show={loading} />
             <div action="#" className="form-blog" >
+                <div className="share-blog__btn btn-item">
+                    <button className=" btn-item__status "
+                        onClick={submitFormHandler}
+                    >
+                     
+                            <p className="btn-item__txt">{status === "share" ? "انتشار مقاله" : "ذخیره در پیش نویس"}</p>
+                    </button>
+                    <p className="btn-status__svg" onClick={() => setshowMenu(!showMenu)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={20} height={20}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
 
+
+                    </p>
+                    <StatusBlogMenu
+                        show={showMenu}
+                        changeStatus={(e) => changeStatusHanlder(e)}
+                        close={() => setshowMenu(false)}
+                    />
+                </div>
                 <Box>
                     <input type="text" placeholder="عنوان مقاله را وارد نمایید" className="form-control__input form-control__input-title"
                         onChange={(e) => setTitle(e.target.value)}
@@ -381,7 +401,6 @@ const CreateBlog = (props) => {
                                         </g>
                                     </g>
                                 </svg>
-                                <p className="btn-item__txt">افزودن تصویر</p>
                             </div>
                             <div className="btn-item" onClick={() => changElementHandler("title")}>
 
@@ -397,7 +416,6 @@ const CreateBlog = (props) => {
                                     </g>
                                 </svg>
 
-                                <p className="btn-item__txt">افزودن عنوان</p>
                             </div>
                             <div className="btn-item" onClick={() => changElementHandler("txt")}>
 
@@ -413,7 +431,6 @@ const CreateBlog = (props) => {
                                     </g>
                                 </svg>
 
-                                <p className="btn-item__txt">افزودن متن</p>
                             </div>
                             <div className="btn-item" onClick={() => changElementHandler("link")}>
 
@@ -427,56 +444,9 @@ const CreateBlog = (props) => {
                                         </g>
                                     </g>
                                 </svg>
-
-
-
-
-
-
-                                <p className="btn-item__txt">افزودن لینک</p>
                             </div>
 
-                            <div className="share-blog__btn btn-item"
 
-
-                            >
-                                <button className=" btn-item__status "
-                                    onClick={submitFormHandler}
-                                >
-                                    <div className="btn-item__status-row">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                            <g id="vuesax_outline_directbox-send" data-name="vuesax/outline/directbox-send" transform="translate(-300 -188)">
-                                                <g id="directbox-send">
-                                                    <path id="Vector" d="M2.747,7.5A.755.755,0,0,1,2,6.749V2.559l-.72.72a.75.75,0,0,1-1.06-1.06l2-2a.753.753,0,0,1,.82-.16.741.741,0,0,1,.46.69v6A.755.755,0,0,1,2.747,7.5Z" transform="translate(309.253 189.251)" fill="currentColor" />
-                                                    <path id="Vector-2" data-name="Vector" d="M2.747,3.5a.742.742,0,0,1-.53-.22l-2-2A.75.75,0,0,1,1.277.218l2,2a.754.754,0,0,1,0,1.06A.742.742,0,0,1,2.747,3.5Z" transform="translate(311.253 189.253)" fill="currentColor" />
-                                                    <path id="Vector-3" data-name="Vector" d="M13.75,11.5h-8C0,11.5,0,8.45,0,5.75v-1C0,2.52,0,0,4.75,0A3.112,3.112,0,0,1,7,.75a.812.812,0,0,1,.1.09L8.12,1.92a2.312,2.312,0,0,0,3.28,0L12.42.84a.9.9,0,0,1,.1-.09A3.069,3.069,0,0,1,14.77,0c4.75,0,4.75,2.52,4.75,4.75v1C19.5,9.57,17.57,11.5,13.75,11.5Zm-9-10C1.5,1.5,1.5,2.52,1.5,4.75v1C1.5,8.49,1.5,10,5.75,10h8C16.73,10,18,8.73,18,5.75v-1c0-2.23,0-3.25-3.25-3.25a1.638,1.638,0,0,0-1.3.41l-.97,1.03a3.748,3.748,0,0,1-5.46,0L6.05,1.91A1.638,1.638,0,0,0,4.75,1.5Z" transform="translate(302.25 199.25)" fill="currentColor" />
-                                                    <path id="Vector-4" data-name="Vector" d="M.75,7.455A.755.755,0,0,1,0,6.705v-2c0-1.94,0-4.35,3.68-4.7a.753.753,0,1,1,.14,1.5c-2.32.21-2.32,1.15-2.32,3.2v2A.755.755,0,0,1,.75,7.455Z" transform="translate(304.25 193.295)" fill="currentColor" />
-                                                    <path id="Vector-5" data-name="Vector" d="M3.744,7.455a.755.755,0,0,1-.75-.75v-2c0-2.05,0-2.99-2.32-3.21A.751.751,0,0,1,0,.675a.738.738,0,0,1,.82-.67c3.68.35,3.68,2.76,3.68,4.7v2A.771.771,0,0,1,3.744,7.455Z" transform="translate(315.256 193.295)" fill="currentColor" />
-                                                    <path id="Vector-6" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(300 188)" fill="none" opacity="0" />
-                                                </g>
-                                            </g>
-                                        </svg>
-
-
-                                        <p className="btn-item__txt">{status === "share" ? "انتشار مقاله" : "ذخیره در پیش نویس"}</p>
-                                    </div>
-
-
-                                </button>
-                                <p className="btn-status__svg" onClick={() => setshowMenu(!showMenu)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={20} height={20}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-
-
-                                </p>
-                                <StatusBlogMenu
-                                    show={showMenu}
-                                    changeStatus={(e) => changeStatusHanlder(e)}
-                                    close={() => setshowMenu(false)}
-                                />
-                            </div>
 
                         </section>
                         <form className="content-blog" onSubmit={formHandler}>

@@ -7,7 +7,14 @@
     bottom: 0;
     right: 0;
     width: 26rem;
+    transition: all .3s ;
+    opacity: 0;
     transform: translateX(100%);
+    z-index: 444;
+}
+.show-nav{
+    opacity: 1;
+    transform: translateX(0)
 }
 .logo{
 padding:0 .5rem 2rem .5rem;
@@ -26,8 +33,10 @@ padding:0 .5rem 2rem .5rem;
         border-radius: .5rem;
         position: static;
 
-       
+       opacity: 1;
         width:unset;
         transform: translateX(0);
+        z-index: unset;
     }
+
 }

@@ -28,7 +28,7 @@
 
 .btn-profile {
   gap: .5rem;
-  padding: .8rem 1.2rem;
+  padding: .8rem .7rem;
 }
 
 .btn-profile:hover {
@@ -44,14 +44,20 @@
   .profile-txt {
     display: flex;
   }
+
+  .btn-profile {
+    padding: .8rem 1.2rem;
+
+  }
 }
+
 @media (prefers-color-scheme: light) {
   .profile, .btn-profile {
 
     color: #bfc1c9;
-    border-color:#e5e7eb ;
-    background-color:#e5e7eb;
-  
-  
+    border-color: #e5e7eb;
+    background-color: #e5e7eb;
+
+
   }
 }

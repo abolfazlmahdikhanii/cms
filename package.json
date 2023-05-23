@@ -13,7 +13,6 @@
     "@supabase/supabase-js": "^2.8.0",
     "axios": "^1.3.4",
     "graphql": "^16.6.0",
-    "i18next": "^22.4.13",
     "otp-input-react": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

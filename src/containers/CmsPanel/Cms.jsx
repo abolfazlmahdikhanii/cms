@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { ToastContainer } from 'react-toastify';
+import { BiMenuAltRight } from "react-icons/bi";
 import './Cms.css';
 import Wrapper from "../../hoc/Wrapper.jsx";
 import Navigation from "../../components/Navigation/Navigation.jsx";
@@ -24,6 +25,7 @@ const Cms = ({ session }) => {
     const [lastName, setLastName] = useState("");
     const [avatarUrl, setAvatarUrl] = useState(null);
     const [showAlert, setShowAlert] = useState(false);
+    const [showMenu,setShowMenu]=useState(false)
 
 
     const [date, setDate] = useState(null);
@@ -127,19 +129,24 @@ const Cms = ({ session }) => {
 
 
             <div className="cms">
-                <Navigation />
+                <Navigation show={showMenu} close={()=>setShowMenu(false)} />
 
                 <section className="center-panel">
                     <Header fullName={`${firstName} ${lastName}`}>
-                    <div className="header--row">
+              
+                 <div className="cms-header--row">
+                 <BiMenuAltRight size={33} onClick={()=>setShowMenu(true)}/>
+                 <div className="header--row">
+                    
                     <p className="header-right__title  header-right__txt">
-                            {userName || session?.user?.email} عزیز; خوش آمدی. 👋
+                           سلام  ;  <span className="username-holder">{userName || session?.user?.email}</span> 
                         </p>
                         <i className="header-right__border"></i>
                         <p className="header-right__date header-right__txt">
                             {date}
                         </p>
                     </div>
+                 </div>
                     </Header>
 
 

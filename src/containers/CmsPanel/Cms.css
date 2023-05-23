@@ -21,7 +21,18 @@
 .main-panel::-webkit-scrollbar{
     display: none;
 }
-
+.username-holder{
+    display: inline-flex;
+    max-width: 14rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.cms-header--row{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
 
 @media screen and (min-width:950px){
     .cms{
@@ -31,6 +42,9 @@
         grid-template-columns:  25rem 1fr;
         overflow: hidden;
         background-color: var(--bg-dark-primary);
+    }
+    .cms-header--row svg{
+      display: none;
     }
 }
 

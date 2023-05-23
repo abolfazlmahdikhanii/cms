@@ -1,18 +1,22 @@
 .alert-dialog {
-    width: 45%;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
+
+
     z-index: 400;
-    overflow: hidden;
+
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     transition: all .3s;
-    opacity: 1;
-  
+
+    overflow: hidden;
+    opacity: 1
 }
-.alert-dialog--hidden{
-    transform: translate(-50%, -50%) scale(0);
+
+.alert-dialog--hidden {
     opacity: 0;
+    transform: translateY(20rem) scale(0);
 }
 
 .dialog-title__title {
@@ -45,11 +49,13 @@
     gap: 1.5rem;
     align-self: flex-end;
 }
+
 .outline-btn {
     background-color: transparent;
     border: 1px solid transparent;
     transition: all .3s;
 }
+
 .outline-btn--cancel {
     border-color: #94a3b8;
     color: #94a3b8;
@@ -67,8 +73,38 @@
     background-color: #e11d48;
     color: #fff;
 }
+
 .outline-btn--cancel:hover {
 
     background-color: #94a3b8;
     color: #fff;
+}
+
+@media screen and (min-width:750px) {
+    .alert-dialog {
+        width: 45%;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        z-index: 400;
+        overflow: hidden;
+        transition: all .3s;
+        opacity: 1;
+
+    }
+
+    .alert-dialog--hidden {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .dialog-title__title {
+        color: #1f2937;
+    }
+    .dialog-dis__dis{
+        color: #6b7280;
+    }
 }

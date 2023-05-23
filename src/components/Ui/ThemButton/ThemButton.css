@@ -1,7 +1,7 @@
 .them-btn{
     all: unset;
     font: inherit;
-    padding: 1.2rem 1.5rem;
+    padding: .8rem 1rem;
     border-radius: .8rem;
     display: grid;
     place-items: center;
@@ -15,6 +15,11 @@ background-color: var(--bg-dark-hover);
 .them__svg{
     width: 2.4rem;
     height: 2.4rem;
+}
+@media screen and (min-width:750px) {
+    .them-btn{
+        padding: 1.2rem 1.5rem;
+    }
 }
 
 @media (prefers-color-scheme: light) {

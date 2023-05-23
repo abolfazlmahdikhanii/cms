@@ -3,11 +3,15 @@ import "./Navigation.css";
 import NavItem from "./NavItem.jsx";
 import logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
+import Wrapper from "../../hoc/Wrapper";
+import Backdrop from "../Ui/Backdrop/Backdrop";
 
 
-const Navigation = (props) => {
+const Navigation = ({show,close}) => {
     return (
-        <div className="navigation">
+      <Wrapper>
+        <Backdrop show={show} close={close}/>
+          <div className={`navigation ${show?"show-nav":""}`}>
             <div className="logo">
 
                <Link to="/">
@@ -17,6 +21,7 @@ const Navigation = (props) => {
             </div>
             <NavItem />
         </div>
+      </Wrapper>
     );
 };
 export default Navigation;

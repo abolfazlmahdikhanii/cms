@@ -11,7 +11,7 @@ const Profile=(props)=>{
 
     const [userProfile,setUserProfile]=useState([])
     const [showMenu,setShowMenu]=useState(false)
-    const [email,setEmail]=useState("")
+  
     const wrapperRef = useRef(null);
   
     useEffect(() => {
@@ -28,7 +28,7 @@ const Profile=(props)=>{
              
                
            setUserProfile(user)
-           setEmail(user?.email);
+           
            
            
             
@@ -68,7 +68,7 @@ const Profile=(props)=>{
 
             <TiArrowSortedDown/>
         </button>
-        <MiniProfile show={showMenu}  email={email} fullName={props?.fullName} />
+        <MiniProfile show={showMenu}  session={userProfile} />
             </div>
         :
         <Link to="/auth" className="profile">

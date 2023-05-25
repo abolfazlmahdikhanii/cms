@@ -1,13 +1,46 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 import { Link } from "react-router-dom";
 import "./MiniProfile.css";
 import profileIcon from "../../assets/profile.svg";
 import useSignOut from "../../hooks/useSignOut";
+import usePublicProfile from "../../hooks/usePublicProfile";
 import { supabase } from "../../superbase";
 
 
 const MiniProfile = (props) => {
+    const [userInfo,setUserInfo]=useState([])
+    const publicProfile=usePublicProfile
+    const signOut=useSignOut
+
+    useEffect(()=>{
+       getUserInfo()
+    },[props?.session])
+
+    const getUserInfo=async ()=>{
+       
+        try{
+            const {id}=props?.session
+        
+            
+            const {data,err}=await supabase.from("profiles")
+            .select("*")
+            .eq("id",id)
+            .single()
+         
+
+            if(err)throw err
+
+            setUserInfo(data)
+    
+            
+
+        }
+        catch(err){
+            console.log(err);
+            
+        }
+    }
 
   
 
@@ -16,10 +49,10 @@ const MiniProfile = (props) => {
             <div className="profile-item">
                 <Link to="/panel" className="mini-profile__account ">
                     <div>
-                        <img src={profileIcon} alt="profile" className="mini-profile__img" />
+                        <img src={publicProfile(userInfo?.avatar_url)} alt="profile" className="mini-profile__img" />
                     </div>
                     <div className="mini-profile__account-info">
-                        <p className="mini-profile__txt">{props?.fullName || props?.email}</p>
+                        <p className="mini-profile__txt">{`${userInfo?.firstName} ${userInfo?.lastName}` || userInfo?.email}</p>
                         <p className="mini-profile__svg">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mini-profile__svg-2">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -110,7 +143,7 @@ const MiniProfile = (props) => {
                     </Link>
                 </li>
                 <li className="profile-item">
-                    <div className="profile-item__link" onClick={()=>supabase.auth.signOut()}>
+                    <div className="profile-item__link" onClick={()=>signOut()}>
                         <p className="mini-profile__svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                 <g id="vuesax_outline_task-square" data-name="vuesax/outline/task-square" transform="translate(-492 -316)">
@@ -126,7 +159,7 @@ const MiniProfile = (props) => {
                             </svg>
 
                         </p>
-                        <p className="mini-profile__txt">
+                        <p className="mini-profile__txt" >
                             خروج از حساب کاربری
                         </p>
                     </div>

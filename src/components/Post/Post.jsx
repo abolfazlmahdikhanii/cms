@@ -383,7 +383,7 @@ const Post = ({ session }) => {
     const ScrollHandler = () => {
         const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
 
-        const height = document.querySelector(".post-content--box").scrollHeight - document.querySelector(".post-content--box").clientHeight;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
 
 

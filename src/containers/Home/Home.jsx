@@ -68,13 +68,13 @@ const Home = ({ session }) => {
   return (
     <Wrapper>
       <Header fullName={`${firstName} ${lastName}`}>
-       <Link to="/">
-       <img src={logo} alt="logo" className="main-logo-sm" />
+       <Link to="/" className="main-logo-sm">
+       <img src={logo} alt="logo"  />
        </Link>
          <div className="header--row">
           
-         <Link to="/">
-        <img src={logo} alt="logo" className="main-logo" />
+         <Link to="/" className="main-logo">
+        <img src={logo} alt="logo"  />
         </Link>
         <Search
       

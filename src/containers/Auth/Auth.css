@@ -1,10 +1,9 @@
 .auth-box {
     padding:3.2rem;
-    background-color: var(--bg-dark-primary);
+   
     border-radius: 1.2rem;
-    width: 45%;
-    max-width: 47rem;
-    border: 1px solid #334155;
+    width: 100%;
+  
 }
 
 .auth {
@@ -23,8 +22,10 @@
 }
 .auth-header{
     text-align: center;
-    font-size: 2.8rem;
-    color: #fff;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: .5rem;
 }
 .auth-title{
 font-size: 1.9rem;
@@ -60,4 +61,14 @@ align-items: center;
 justify-content: center;
 font-size: 1.7rem;
 color: #d1d5db;
+}
+@media screen and (min-width:900px) {
+    .auth-box {
+      
+        background-color: var(--bg-dark-primary);
+        border-radius: 1.2rem;
+        width: 45%;
+        max-width: 47rem;
+        border: 1px solid #334155;
+    }
 }

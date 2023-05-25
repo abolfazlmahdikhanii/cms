@@ -2,26 +2,27 @@ import React, { useState } from "react";
 import "./Auth.css";
 
 import Loader from "../../components/Ui/Loader/Loader.jsx";
-
+import { Link } from "react-router-dom";
 
 import { supabase } from "../../superbase.jsx";
 import FormLogin from "../../components/FormLogin/FormLogin";
 import FormOtp from "../../components/FormOtp/FormOtp";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.svg";
 
 
 
 
-  
+
 const Auth = () => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
-    
+
     const [token, setToken] = useState("");
     const [err, setError] = useState("");
 
     const [page, setPage] = useState(false);
-   
+
     const navigate = useNavigate();
 
 
@@ -30,18 +31,18 @@ const Auth = () => {
 
     const submitLoginHandler = (e) => {
         e.preventDefault();
-        sendMailVarification()
-      
-      
+        sendMailVarification();
+
+
     };
     const sendMailVarification = async () => {
         try {
-            setLoading(true)
-           
-         const {data,error} =await supabase.auth.signInWithOtp({email})
-          
+            setLoading(true);
 
-             if(error) throw error
+            const { data, error } = await supabase.auth.signInWithOtp({ email });
+
+
+            if (error) throw error;
             changePageHandler();
             console.log(data);
 
@@ -54,51 +55,51 @@ const Auth = () => {
             setLoading(false);
         }
     };
-    const checkEmailExist=async(emails)=>{
+    const checkEmailExist = async (emails) => {
         try {
-            const {data,err}=supabase.from('profiles').select('(email)').eq('email',emails)
-            if(err) throw err
-            return true
+            const { data, err } = supabase.from('profiles').select('(email)').eq('email', emails);
+            if (err) throw err;
+            return true;
 
         } catch (error) {
             console.log(error);
-            return false
-            
+            return false;
+
         }
-    }
-    const submitOtpHandler =async (e) => {
+    };
+    const submitOtpHandler = async (e) => {
         e.preventDefault();
-     
+
         try {
-            setLoading(true)
+            setLoading(true);
             const formData = [];
             const inputs = [e.target.elements];
             const newInputs = [...inputs[0]];
             newInputs.pop();
             for (const item of newInputs) {
-    
+
                 formData.push(item.value);
             }
             const newToken = formData.join('');
-          
+
             setToken(newToken);
             setLoading(true);
 
-           
 
-                const {data,error}=await supabase.auth.verifyOtp({
-                    email,token:newToken,type:`${checkEmailExist(email)?'magiclink':'signup'}`
-                })
-               
-    
-    
-          if(error) throw error  
-          
-          navigate('/panel');
+
+            const { data, error } = await supabase.auth.verifyOtp({
+                email, token: newToken, type: `${checkEmailExist(email) ? 'magiclink' : 'signup'}`
+            });
+
+
+
+            if (error) throw error;
+
+            navigate('/panel');
 
         }
         catch (error) {
-           
+
             console.log(error.message);
 
 
@@ -106,7 +107,7 @@ const Auth = () => {
         finally {
             setLoading(false);
         }
-    
+
 
 
     };
@@ -120,7 +121,7 @@ const Auth = () => {
     const setEmailHandler = (e) => {
         setEmail(e.target.value);
     };
-  
+
     const emailValidHandler = (e) => {
         e.target.value === "" ? setError(true) : setError(false);
     };
@@ -134,16 +135,17 @@ const Auth = () => {
 
 
 
-                        <h1 className="auth-header">دیجی بلاگ</h1>
-                        {!page ?
+                        <Link to="/" className="auth-header">
+                            <img src={logo} alt="logo" className="" />
+                        </Link>                        {!page ?
                             <FormLogin
                                 submitLogin={submitLoginHandler}
                                 error={err}
                                 email={email}
-                                
+
                                 emailValidHandler={emailValidHandler}
                                 setEmailHandler={setEmailHandler}
-                             
+
                             />
                             : <FormOtp
                                 email={email}

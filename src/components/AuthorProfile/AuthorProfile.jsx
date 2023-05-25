@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import FollowButton from "../FollowButton/FollowButton";
 
 
-const AuthorProfile = ({ avatar_url, username, firstName, lastName, bio, type = null, cls = null }) => {
+const AuthorProfile = ({ avatar_url, username, firstName, lastName, bio, type = null, cls = null,id,session }) => {
+
+  
+    
     return (
 
         <div className={`author-profile ${type==="full"?"author-profile--wrapper":""} `}>
@@ -18,7 +22,8 @@ const AuthorProfile = ({ avatar_url, username, firstName, lastName, bio, type = 
                         {cls === "user-page" ? `@${username}` : bio}
                     </p>
                 </div>
-                <button className={`btn-follow ${cls === "user-page" ? "btn-big" : ""} ${type === "full" ? "btn-medium" : ""}`}>دنبال کردن</button>
+                {/* <button className={`btn-follow ${cls === "user-page" ? "btn-big" : ""} ${type === "full" ? "btn-medium" : ""}`}>دنبال کردن</button> */}
+                <FollowButton id={id} session={session} cls={cls} type={type}/>
             </div>
         </div>
 

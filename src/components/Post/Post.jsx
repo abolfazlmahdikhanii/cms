@@ -118,6 +118,7 @@ const Post = ({ session }) => {
                 .from('blogs')
                 .select(`id,post_date,post_title,post_content,post_tags,post_comment,post_type
                 ,post_author(
+                    id,
                     firstName,
                     lastName,
                     avatar_url,
@@ -489,6 +490,8 @@ const Post = ({ session }) => {
                             lastName={blogContent[0]?.post_author.lastName}
                             bio={blogContent[0]?.post_author.bio}
                             type="full"
+                            id={blogContent[0]?.post_author?.id}
+                            session={session}
                         />
                     </Box>
 
@@ -580,12 +583,14 @@ const Post = ({ session }) => {
 
                     <Box>
                         <AuthorProfile
+                             id={blogContent[0]?.post_author?.id}
+                             session={session}
                             avatar_url={publicProfile(blogContent[0]?.post_author.avatar_url)}
                             username={blogContent[0]?.post_author.username}
                             firstName={blogContent[0]?.post_author.firstName}
                             lastName={blogContent[0]?.post_author.lastName}
                             bio={blogContent[0]?.post_author.bio}
-                          
+                       
                         />
                     </Box>
 

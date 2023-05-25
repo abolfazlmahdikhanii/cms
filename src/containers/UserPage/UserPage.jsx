@@ -15,7 +15,7 @@ const UserPage = ({ session }) => {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(null);
   const [userBlogs, setUserBlogs] = useState([]);
-  const [isFollow, setIsFollow] = useState(false);
+ 
   const [followList, setFollowList] = useState([]);
   const [followingList, setFollowingList] = useState([]);
   const [totalFllower, setTotalFollower] = useState(0);
@@ -30,22 +30,11 @@ const UserPage = ({ session }) => {
   useEffect(() => {
     getUserAbout();
     getUserBlogs();
-    checkFollowUser(userData?.id);
     getFollowerList(userData?.id);
     getFollowingList(userData?.id);
-  }, [session, match, isFollow, totalFllower, totalFllowing]);
+  }, [session, match, totalFllower, totalFllowing]);
 
-  // if author follow =>unfollow  else=>follow
-  const clickFollowHanlder = (id = userData?.id) => {
 
-    if (isFollow) {
-      unfollowHandler(id);
-
-    }
-    else {
-      followHandler(id);
-    }
-  };
   const getUserAbout = async () => {
     try {
 
@@ -93,22 +82,7 @@ const UserPage = ({ session }) => {
     }
   };
 
-  const followHandler = async (id) => {
-
-    try {
-      setLoading(true);
-      const { err } = await supabase.from("follow_list")
-        .insert({ user_follow: id, user_follower: session?.user?.id });
-      if (err) throw err;
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-
-    }
-    finally {
-      setLoading(false);
-    }
-  };
+ 
   const getFollowerList = async (id = userData?.id) => {
     try {
 
@@ -158,43 +132,8 @@ const UserPage = ({ session }) => {
 
   };
 
-  const checkFollowUser = async (id) => {
-    try {
-
-      const { data, err } = await supabase.from("follow_list")
-        .select("*")
-        .eq("user_follow", id)
-        .eq("user_follower", session?.user?.id);
-      if (err) throw err;
-
-      if (data?.length > 0) setIsFollow(true);
-
-    } catch (error) {
-      console.log(error);
-
-    }
-  };
-  const unfollowHandler = async (id) => {
-    try {
-      setLoading(true);
-      const { data, err } = await supabase.from("follow_list")
-        .delete()
-        .eq("user_follow", id)
-        .eq("user_follower", session?.user?.id);
-
-      if (err) throw err;
-      setIsFollow(false);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-
-    }
-    finally {
-      setLoading(false);
-    }
-
-
-  };
+ 
+ 
 
 
 
@@ -209,25 +148,13 @@ const UserPage = ({ session }) => {
           <img src={bannerImg} alt="banner" loading="lazy"/>
         </div>
         <section className="user-info">
-          {/* <div className="user-info--wrapper">
-            <div className="user-info--img">
-              <img src={publicProfile(userData?.avatar_url) || "../../../src/assets/profile.svg"} alt="" />
-            </div>
-            <div className="user-info--info">
-              <h4 className="user-info__name">{userData?.firstName} {userData?.lastName}</h4>
-              <p className="user-info__user" >@{userData?.username}</p>
-            </div>
-          </div> */}
-          {/* button */}
-          {/* <div>
-            <button className={`btn btn-item btn-big btn-follow ${isFollow && "btn-followed"}`}
-              onClick={() => clickFollowHanlder(userData?.id)}
-            >{isFollow ? "دنبال نکردن" : "دنبال کردن"}</button>
-          </div> */}
+          
 
           <AuthorProfile
           
             username={userData?.username}
+            session={session}
+            id={userData?.id}
              avatar_url={publicProfile(userData?.avatar_url)}
             firstName={userData?.firstName}
             lastName={userData?.lastName}

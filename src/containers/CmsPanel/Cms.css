@@ -33,7 +33,15 @@
     align-items: center;
     gap: 1.2rem;
 }
-
+/* Dark */
+.cms.dark{
+    background-color: #fff;
+}
+ 
+.main-panel.dark{
+background-color: #f1f5f9;
+   padding: 4rem 3.7rem;
+}
 @media screen and (min-width:950px){
     .cms{
         width: 100%;

@@ -11,7 +11,7 @@
 
     gap: 1.6rem;
     text-decoration: none;
-    color: #ffffff;
+    color: var(--nav-item);
     border-radius: 1.6rem;
     font-family: inherit;
     transition: all .3s;
@@ -20,11 +20,11 @@
 }
 .nav-item:hover{
     /*background-color:#102945 ;*/
-    color: rgba(81,182,255,1);
+    color: var(--nav-color-hover);
 }
 .nav-item.active{
-    background-color:#102945 ;
-    color: rgba(81,182,255,1);
+    background-color:var(--nav-active) ;
+    color: var(--nav-color-hover);
 }
 .nav-item__txt{
 font-family: inherit;

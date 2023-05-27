@@ -44,7 +44,7 @@
     font-family: 'yekan', sans-serif;
     text-transform: lowercase;
     font-size:2rem;
-    color: #fff;
+    color: var(--h3);
     width: 18rem;
 }
 

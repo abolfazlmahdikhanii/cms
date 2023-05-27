@@ -23,6 +23,7 @@
     font-family: "yekan", sans-serif;
     font-size: 2.6rem;
     padding: .5rem 1rem;
+    color: var(--color-txt-blog);
 }
 
 .post-row {
@@ -58,11 +59,12 @@
     font-family: "yekan", sans-serif;
     font-size: 2.6rem;
     margin-top: 1.3rem;
+    color: var(--h3);
 }
 
 .post-content--box p {
     line-height: 2;
-    color: #cbd5e1;
+    color: var(--blog-dis);
     font-size: 1.6rem;
     text-align: justify;
 }
@@ -70,7 +72,7 @@
 .register-box {
     width: 100%;
     padding: 2.4rem;
-    border: 2px solid #334155;
+    border: 2px solid var(--border-color);
     border-radius: 1.2rem;
     display: flex;
     flex-direction: column;
@@ -81,7 +83,7 @@
 }
 
 .register-box__title {
-    color: #fff;
+    color: var(--h3);
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1.8rem;
@@ -90,7 +92,7 @@
 .register-box__dis {
     font-size: 1.4rem;
     line-height: 2;
-    color: #9ca3af;
+    color: var(--blog-dis);
 
 }
 
@@ -133,7 +135,7 @@
 .author-prfile__fullName {
     font-family: "yekan", sans-serif;
     font-size: 2.2rem;
-    color: #fff;
+    color: var(--h3);
     transition: all .3s;
     cursor: pointer;
     margin-bottom: .3rem;
@@ -148,7 +150,7 @@
     padding: 0.3rem 0 2rem 0;
     margin-bottom: .3rem;
     font-size: 1.3rem;
-    color: #9ca3af;
+    color: var(--date-txt);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -212,18 +214,21 @@
 .post-footer {
     margin-top: 2.5rem;
     padding: 3rem 0.7rem;
-    border-top: 1px solid #334155;
+    border-top: 1px solid var(--border-color);
 }
 
 .tag-items {
     width: fit-content;
     padding: .8rem 1.7rem;
-    background-color: #334155;
+    background-color: var(--bg-dark-tertiary);
     border-radius: .7rem;
     display: flex;
     align-items: center;
     gap: .4rem;
     cursor: pointer;
+}
+.tag-items p{
+    color: var(--date-txt);
 }
 
 .tag-lists {
@@ -268,7 +273,7 @@
 .comment-title__title {
     font-family: "yekan", sans-serif;
     font-size: 2.8rem;
-    color: #fff;
+    color: var(--color-txt-blog);
 
 
 }
@@ -282,7 +287,7 @@
     align-items: center;
 
     margin: 2rem 2rem 3rem 2rem;
-    background-color: var(--bg-dark-secondry);
+    background-color: var(--bg-dark-tertiary);
     padding: 1.8rem 2.3rem;
     border-radius: 1.1rem;
     flex-direction: column;
@@ -291,7 +296,9 @@
 .author-profile--wrapper{
     padding: 1.2rem 1.5rem;
 }
-
+.rate-post--box p, .share-post {
+    color: var(--rate-color);
+}
 
 @media screen and (min-width:720px) {
     .post-cover {

@@ -27,12 +27,13 @@
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    color: var(--alert-dis);
 
 }
 
 .follow-username {
     font-size: 1.4rem;
-    color: #d1d5db;
+    color: var(--blog-dis);
     direction: ltr;
     text-align: right;
 }

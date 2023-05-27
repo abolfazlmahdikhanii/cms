@@ -22,7 +22,7 @@
     font-family: 'yekan', sans-serif;
     font-size: 2.5rem;
     line-height: 1.6;
-    color: #fff;
+    color: var(--h3);
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -36,6 +36,7 @@
     line-height: 2;
     -webkit-box-orient: vertical;
     font-size: 1.3rem;
+    color: var(--blog-dis);
 }
 
 .blog-list--action {
@@ -48,12 +49,12 @@
     gap: 2rem;
     padding: 2rem;
 
-    border-top: 2px dashed #4b5563;
+    border-top: 2px dashed var(--border-color);
 }
 
 .blog-list--date {
     font-size: 1.6rem;
-    color: #d1d5db;
+    color: var(--date-txt);
 }
 
 .btn-flex {
@@ -102,7 +103,7 @@
     padding: 1rem .5rem;
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #475569;
+    border-bottom: 2px solid var(--border-color);
     gap: 1.3rem;
     overflow: auto;
     scrollbar-width: none;
@@ -114,7 +115,7 @@
 }
 
 .blog-list__tab {
-    color: #d1d5db;
+    color: var(--tab-color);
     padding: 1.2rem 2.2rem;
     border-radius: 1.2rem;
     transition: all .3s;
@@ -123,19 +124,20 @@
 }
 
 .blog-list__tab:hover {
-    background-color: rgba(51, 65, 85, 0.5);
+    background-color: var(--tab-hover);
+    color: #fff;
 }
 
 .blog-list__tab.active {
-    background-color: #334155;
-    color: #a5b4fc;
-    outline: 2px solid #334155;
+    background-color:var(--tab-bg);
+    color: var(--tab-active-color);
+    outline: 2px solid var(--tab-bg);
     outline-offset: 2px;
 
 }
 
 .blog-list__tab.active:hover {
-    background-color: rgba(51, 65, 85, 1);
+    background-color: var(--tab-hover);
 }
 
 .active-container {
@@ -158,7 +160,7 @@
 
     .blog-list--info {
         width: 70%;
-        border-left: 2px dashed #4b5563;
+        border-left: 2px dashed var(--border-color);
     }
 
     .blog-list--action {

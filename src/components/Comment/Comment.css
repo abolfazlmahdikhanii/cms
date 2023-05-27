@@ -16,7 +16,7 @@
     display: flex;
 
     flex-direction: column;
-    border-bottom: 1px solid #334155;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 1.2rem;
 }
 
@@ -31,7 +31,7 @@
     font-family: "yekan", sans-serif;
     font-size: 1.7rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--h3);
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -40,7 +40,7 @@
 .comment-date {
     font-size: 1.4rem;
 
-
+color: var(--date-txt);
 }
 
 .comment-box--btns {
@@ -66,7 +66,7 @@
     line-height: 2;
     word-break: break-word;
     word-spacing: .11rem;
-    color: #f9fafb;
+    color: var(--comment-txt);
     white-space: pre-wrap;
     overflow: hidden;
 }

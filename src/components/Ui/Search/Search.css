@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #374151;
+    background-color: var(--bg-dark-tertiary);
     position: relative;
     padding: 1.3rem 1.8rem;
     gap: 1.3rem;
@@ -39,7 +39,7 @@
     z-index: 400;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-bottom: 1px solid #64748b;
+    border-bottom: 1px solid var(--border-color);
 
 
 }

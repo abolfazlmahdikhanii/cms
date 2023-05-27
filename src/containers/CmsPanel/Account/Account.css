@@ -10,8 +10,8 @@
 
     display: flex;
     align-items: center;
-    background-color: #374151;
-    border: 1px solid #475569;
+    background-color: var(--bg-dark-secondry);
+    border: 1px solid var(--border-color);
     padding: 1.2rem 2rem;
     gap: 1.3rem;
     border-radius: .5rem;
@@ -60,6 +60,7 @@
     padding-left: 1.8rem;
     text-transform: capitalize;
     border-left: 2px solid rgb(209, 213, 219);
+    color: var(--date-txt);
 
 }
 
@@ -67,7 +68,7 @@
     all: unset;
     width: 100%;
     font: inherit;
-    color: #fff;
+    color: var(--blog-dis);
     box-sizing: border-box;
 
 }
@@ -84,11 +85,13 @@
 
 .form-control__row-txt {
     font-size: 1.5rem;
+    color: var(--blog-dis);
 }
 
 .form-control__input::placeholder {
     font-size: 1.3rem;
     text-transform: capitalize;
+    color: var(--blog-dis);
 }
 
 .form-err {
@@ -119,13 +122,22 @@
     font-family: 'yekan', sans-serif;
     margin-top: 2rem;
     font-size: 2.8rem;
+    color: var(--h3);
+
 }
 
 .from-control__select {
 
     appearance: none;
-    background-color: #334155;
+    background-color: var(--bg-dark-secondry);
     padding: 0 1.2rem;
+}
+
+.form-control svg{
+    color: var(--blog-dis);
+}
+.avatar-img{
+    border-color: var(--date-txt);
 }
 @media screen and (min-width:750px){
     .col-grid {

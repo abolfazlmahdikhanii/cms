@@ -11,7 +11,7 @@
     overflow: hidden;
     transition: all .1s ease-in;
     padding: 0 2rem;
-    background-color: #374151;
+    background-color: var(--bg-dark-tertiary);
     border-bottom-left-radius: 1.2rem;
     border-bottom-right-radius: 1.2rem;
     height: 100%;
@@ -26,7 +26,7 @@
     width: 100%;
 
     padding: 2rem;
-    background-color: #374151;
+    background-color: var(--bg-dark-tertiary);
 
 
 }

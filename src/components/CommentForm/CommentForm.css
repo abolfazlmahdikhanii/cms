@@ -4,7 +4,7 @@
 
 .comment-box--form {
     background-color: transparent;
-    border: 2px solid #334155
+    border: 2px solid var(--border-color)
 }
 
 .form-coment--active {
@@ -30,12 +30,14 @@
     padding-right: 2rem;
     margin-top: 3rem;
     background-color: transparent;
-    border: 1px solid #64748b;
+    border: 1px solid var(--cancel-btn);
     transition: all .3s;
+    color: var(--cancel-btn);
 }
 
 .comment-cancel__btn:hover {
-    background-color: #64748b;
+    background-color: var(--cancel-btn);
+    color: #fff;
 }
 
 .form-comment__input {
@@ -52,5 +54,6 @@
 .comment-username {
     direction: ltr;
     text-align: right;
+    color: var(--blog-dis);
 
 }

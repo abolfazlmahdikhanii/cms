@@ -12,9 +12,11 @@ import Home from './containers/Home/Home';
 
 
 
+
 function App() {
  
     const [session, setSession] = useState(null)
+
     useEffect(()=>{
         supabase.auth.getSession().then(({data:{session}})=>{
             setSession(session)
@@ -24,6 +26,8 @@ function App() {
             setSession(session)
            
         })
+
+        
     }, []);
 
    

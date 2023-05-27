@@ -6,6 +6,7 @@
     border-radius: 1.2rem;
     transition: all .3s;
     flex-direction: column;
+    box-shadow: var(--box-shadow);
 }
 
 @media screen and (min-width:760px) {
@@ -53,12 +54,12 @@
     font-family: "yekan", sans-serif;
     font-size: 2.6rem;
     white-space: nowrap;
-    color: #fff;
+    color: var(--h3);
 }
 
 .blog-content--dis {
     padding: 1.5rem 0;
-    border-top: 2px dashed #4b5563;
+    border-top: 2px dashed var(--border-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -68,7 +69,7 @@
 
 .blog-content__dis-txt {
     font-size: 1.4rem;
-    color: #d1d5db;
+    color: var(--blog-dis);
     line-height: 2;
     display: -webkit-box;
     overflow: hidden;
@@ -105,7 +106,7 @@
 
 .detail-author--profile__txt {
     font-size: 1.35rem;
-    color: #9ca3af;
+    color: var(--date-txt);
 }
 
 .detail-author--fav {
@@ -151,7 +152,7 @@
 
 .blog-comment__btn {
     background-color: rgba(96, 116, 150, .1);
-    color: rgba(210, 221, 236, 1)
+    color: var(--btn-comment)
 }
 
 .blog-comment__btn:hover {
@@ -161,11 +162,11 @@
 
 .blog-save__btn {
     background-color: rgba(59, 130, 246, .1);
-    color: rgba(63, 108, 175, 1)
+    color: var(--btn-save)
 }
 
 .blog-save__btn:hover, .save--active {
-    background-color: rgba(63, 108, 175, 1);
+    background-color: var(--btn-save);
     stroke: #fff;
 }
 
@@ -175,7 +176,7 @@
     gap: 1rem;
     font-size: 1.3rem;
     padding: .7rem 1.7rem;
-    background-color: rgba(245, 249, 255, .1);
+    background-color: var(--category);
     border-radius: .7rem;
     cursor: pointer;
     transition: all .3s;
@@ -197,7 +198,7 @@
     align-items: center;
     gap: .8rem;
     font-size: 1.3rem;
-    color: #d1d5db;
+    color: var(--blog-dis);
 }
 
 .active-like.blog-like__btn:hover svg {
@@ -209,10 +210,9 @@
     .blog-content {
         background-color: #fff;
 
-        --tw-shadow-colored1:  0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-        box-shadow: var(--tw-ring-offset-shadow1, 0 0 #0000), var(--tw-ring-shadow1, 0 0 #0000), var(--tw-shadow1);
-        --tw-shadow-color1:  rgb(209 213 219 / 0.3);
-        --tw-shadow1:  var(--tw-shadow-colored);
+    
+  
+       
      
     }
     .blog-content--info h3{

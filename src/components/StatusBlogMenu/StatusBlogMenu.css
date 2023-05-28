@@ -13,5 +13,5 @@
 }
 
 .profile-item:not(:last-child) .drowp-down__txt {
-    border-bottom: 1px solid #475569;
+    border-bottom: 1px solid var(--border-color);
 }

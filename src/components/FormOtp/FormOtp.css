@@ -68,5 +68,5 @@
     align-items: center;
     justify-content: center !important;
     margin-top: 3rem;
-    color: #9ca3af;
+    color: var(--blog-dis);
 }

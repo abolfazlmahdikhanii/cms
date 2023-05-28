@@ -49,10 +49,11 @@
     align-items: center;
     gap: 1.1rem;
     padding: 1.4rem 1.5rem;
-    background-color: var(--bg-dark-secondry);
+    background-color: var(--bg-btn-item);
     border-radius: .8rem;
     cursor: pointer;
     transition: all .3s;
+    color: var(--blog-dis);
 }
 
 .btn-item:hover {
@@ -75,7 +76,7 @@
   width: max-content;
 
     align-self: flex-end;
-    background-color: #334155;
+    background-color: var(--bg-dark-tertiary);
 
 
 }
@@ -95,7 +96,7 @@
     display: flex;
     align-items: center;
     gap: .9rem;
-    border-left: 1px solid #94a3b8;
+    border-left: 1px solid var(--border-color);
 
 }
 
@@ -124,7 +125,7 @@
 
 .option-control__switch {
     width: 7.2rem;
-    background-color: #334155;
+    background-color: var(--border-color);
     position: relative;
     border-radius: 2.5rem;
     padding: .5rem .6rem;
@@ -154,21 +155,21 @@
     display: block;
     width: 3rem;
     height: 3rem;
-    background-color: #0f172a;
+    background-color: var(--bg-switch);
     border-radius: 50%;
     transition: all .3s;
 
 }
 
 .option-control-select {
-    background-color: #334155;
+    background-color: var(--bg-dark-tertiary);
     border-radius: .8rem;
     width: 30%;
     min-width: max-content;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: 1px solid #64748b;
+    border: 1px solid var(--border-color);
     overflow: hidden;
     padding: 0 .6rem 0 1.6rem;
 }
@@ -176,14 +177,17 @@
 .option-control__select {
     all: unset;
     appearance: none;
-    background-color: #334155;
+    background-color: var(--bg-dark-tertiary);
     width: 100%;
     font: inherit;
     padding: 1.5rem 1.2rem;
     font-size: 1.5rem;
+    color: var(--blog-dis);
 }
 
-
+.option-control-select svg{
+    color: var(--blog-dis);
+}
 .option-control_tag {
 
     padding: 1.2rem 1rem;
@@ -191,7 +195,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    background-color: #334155;
+    background-color: var(--bg-dark-tertiary);
     flex-wrap: wrap;
 }
 
@@ -202,7 +206,7 @@
 }
 
 .option-control__tag-item {
-    background-color: #4b5563;
+    background-color: var(--tag-item);
     padding: 0 1.2rem;
     display: flex;
     align-items: center;
@@ -214,6 +218,7 @@
 
 .option-control__tag-txt {
     padding: .8rem 1.2rem;
+    color: var(--blog-dis);
 }
 
 .option-control-row {
@@ -229,6 +234,7 @@
     all: unset;
     font: inherit;
     display: contents;
+    color: var(--blog-dis);
 
 }
 
@@ -239,55 +245,14 @@
     display: grid;
     place-items: center;
 }
+.option-control__tag-item button > svg{
+    stroke: var(--blog-dis);
+}
+.tag-btn{
+    color: var(--blog-dis);
+}
 @media screen and (min-width:750px){
     .option-control__tag-input{
         display: flex;
-    }
-}
-
-@media (prefers-color-scheme: light) {
-    .btn-item{
-        background-color: #f3f5ff;
-        color: #6b7280;
-    }
-    .btn-item:hover {
-
-        box-shadow: none;
-    }
-    .drowp-down-status{
-        background-color: #f3f5ff;
-        color: #6b7280;
-    }
-    .option-control-select{
-        background-color: #f3f4f6;
-        border-color: #e5e7eb;
-    }
-    .option-control-select svg{
-        color: #6b7280;
-    }
-    .option-control__select{
-        background-color: #f3f4f6;
-        color: #6b7280;
-    }
-    .option-control_tag{
-        background-color: #f3f4f6;
-    }
-    .option-control__tag-item{
-        background-color: #d7dce6;
-    }
-    .option-control__tag-txt{
-        color: #374151;
-    }
-    .option-control__tag-item button > svg{
-        stroke: #6b7280;
-    }
-    .tag-btn{
-        color: #6b7280;
-    }
-    .option-control__switch{
-        background-color: #f3f4f6;
-    }
-    .option-control__switch-span{
-        background-color: #94a3b8;
     }
 }

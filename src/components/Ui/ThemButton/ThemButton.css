@@ -5,7 +5,7 @@
     border-radius: .8rem;
     display: grid;
     place-items: center;
-    background-color:var(--bg-dark-tertiary);
+    background-color:var(--bg-btn-them);
     transition: all .3s;
     cursor: pointer;
 }
@@ -22,11 +22,3 @@ background-color: var(--bg-dark-hover);
     }
 }
 
-@media (prefers-color-scheme: light) {
-    .them-btn{
-        background-color: #94a3b8;
-    }
-    .them-btn:hover{
-        background-color: #64748b;
-    }
-}

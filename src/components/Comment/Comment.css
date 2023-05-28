@@ -124,23 +124,3 @@ color: var(--date-txt);
         justify-content: flex-start;
     }
 }
-@media (prefers-color-scheme: light) {
-    .comment-box{
-        background-color: #f9fafb;
-    }
-    .comment-box--header{
-        border-color: #e5e7eb;
-    }
-    .comment-prfile__fullName{
-        color: #4b5563;
-    }
-    .comment-date{
-        color: #6b7280;
-    }
-    .comment--txt__txt{
-        color: #1f2937;
-    }
-    .blog-comment__btn{
-        color:#777 !important;
-    }
-}

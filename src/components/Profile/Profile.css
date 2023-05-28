@@ -51,13 +51,3 @@
   }
 }
 
-@media (prefers-color-scheme: light) {
-  .profile, .btn-profile {
-
-    color: #bfc1c9;
-    border-color: #e5e7eb;
-    background-color: #e5e7eb;
-
-
-  }
-}

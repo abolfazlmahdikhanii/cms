@@ -112,6 +112,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #ffff;
 }
 
 .btn-action:hover {
@@ -160,30 +161,5 @@
     }
     .form-control__txt-area {
         font-size: 1.6rem;
-    }
-}
-@media (prefers-color-scheme: light) {
-    .form-control {
-        background-color: #f8fafc;
-        border-color: #e5e7eb;
-    }
-
-    .form-control__txt {
-        color: #6b7280;
-    }
-    .form-control__input, .form-control__input--2, input{
-        color: #374151;
-    }
-    .from-control__select{
-        background-color: #f8fafc;
-    }
-    .form-control svg{
-        color: #475569;
-    }
-    .btn-action{
-        color: #fff;
-    }
-    .avatar-img{
-        border-color: #6b7280;
     }
 }

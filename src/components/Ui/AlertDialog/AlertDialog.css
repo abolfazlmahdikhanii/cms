@@ -101,11 +101,3 @@
     }
 }
 
-@media (prefers-color-scheme: light) {
-    .dialog-title__title {
-        color: #1f2937;
-    }
-    .dialog-dis__dis{
-        color: #6b7280;
-    }
-}

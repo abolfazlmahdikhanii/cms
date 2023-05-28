@@ -58,13 +58,3 @@ background-color: #f1f5f9;
 
 
 
-@media (prefers-color-scheme: light) {
-    .cms{
-        background-color: #fff;
-    }
-     
-.main-panel{
-    background-color: #f1f5f9;
-       padding: 4rem 3.7rem;
-}
-}

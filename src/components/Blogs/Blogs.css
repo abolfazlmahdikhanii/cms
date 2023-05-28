@@ -27,10 +27,3 @@
     color:var(--color-txt-blog)
 }
 
-@media (prefers-color-scheme: light) {
-    .blog-list--title__txt {
-       color:var(--color-txt-blog)
-     
-    }
-
-}

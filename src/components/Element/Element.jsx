@@ -50,13 +50,10 @@ let pic=null
 
     if(str!==null){
     
-        if(str.includes("https")||str.includes("http")){
-            return str
-        }
-        else{
+     
             
           return str?`https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${str}`:"https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png"
-        }
+        
     }
    }
     

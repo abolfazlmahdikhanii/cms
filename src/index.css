@@ -35,9 +35,11 @@
   --color-secondry-dark: #64748b;
   --color-secondry-light: #e2e8f0;
 
-  --tw-shadow-colored: 0 10px 12px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  --tw-shadow-color: rgb(229 231 235 / 0.4);
+  --tw-shadow-color: #f3f4f6;
   --tw-shadow: var(--tw-shadow-colored);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 6px 10px -2px var(--tw-shadow-color),0 2px 4px -4px var(--tw-shadow-color);
   --box-shadow:none;
     /* satrt */
     --bg-img: linear-gradient(to top, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .15), hsla(0, 0%, 100%, 0));
@@ -72,9 +74,12 @@
 --tab-active-color:#a5b4fc;
 
 
---bg-search:#374151
-
-
+--bg-search:#374151;
+--bg-btn-item:#162f48;
+--bg-switch:#0f172a;
+--tag-item:#4b5563;
+--follower-txt:#fff;
+--bg-btn-them:#334155
 }
 
 *,
@@ -116,7 +121,7 @@ a {
   --bg-color: #f8f8f8;
   --color-txt-blog: #334155;
   --bg-dark-primary: #fff;
-  --box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
   --h3:#475466;
   --blog-dis:#636a75;
   --date-txt:#6b7280;
@@ -145,7 +150,12 @@ a {
 --tab-hover:rgba(79, 70, 229,.5);
 --tab-bg:#4f46e5;
 --bg-search:#e5e7eb;
---tab-active-color:#fff
+--tab-active-color:#fff;
+--bg-btn-item:#f3f5ff;
+--bg-switch:#94a3b8;
+--tag-item:#d7dce6;
+--follower-txt:#4b5563;
+--bg-btn-them:#94a3b8;
 }
 
 

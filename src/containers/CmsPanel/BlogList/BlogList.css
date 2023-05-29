@@ -74,6 +74,7 @@
 .btn-edit {
     background-color: #f59e0b;
     border: 1px solid #f59e0b;
+    color: #fff;
     transition: all .3s;
 }
 

@@ -8,6 +8,7 @@ import { supabase } from "../../../superbase";
 import StatusBlogMenu from "../../../components/StatusBlogMenu/StatusBlogMenu";
 import Loader from "../../../components/Ui/Loader/Loader";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import MenuBar from "../../../components/MenuBar/MenuBar";
 
 
 
@@ -390,61 +391,7 @@ const CreateBlog = (props) => {
                     <section className="container-blog">
                         <section className="nav-btn">
 
-                            <div className="btn-item" onClick={() => changElementHandler("img")}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <g id="vuesax_outline_gallery" data-name="vuesax/outline/gallery" transform="translate(-364 -252)">
-                                        <g id="gallery">
-                                            <path id="Vector" d="M13.75,21.5h-6C2.32,21.5,0,19.18,0,13.75v-6C0,2.32,2.32,0,7.75,0h6c5.43,0,7.75,2.32,7.75,7.75v6C21.5,19.18,19.18,21.5,13.75,21.5Zm-6-20C3.14,1.5,1.5,3.14,1.5,7.75v6C1.5,18.36,3.14,20,7.75,20h6C18.36,20,20,18.36,20,13.75v-6c0-4.61-1.64-6.25-6.25-6.25Z" transform="translate(365.25 253.25)" fill="currentColor" />
-                                            <path id="Vector-2" data-name="Vector" d="M2.75,5.5A2.75,2.75,0,1,1,5.5,2.75,2.748,2.748,0,0,1,2.75,5.5Zm0-4A1.25,1.25,0,1,0,4,2.75,1.25,1.25,0,0,0,2.75,1.5Z" transform="translate(370.25 257.25)" fill="currentColor" />
-                                            <path id="Vector-3" data-name="Vector" d="M.747,8.453a.746.746,0,0,1-.41-1.37l4.93-3.31a2.988,2.988,0,0,1,3.55.19l.33.29a1.473,1.473,0,0,0,1.84,0l4.16-3.57a2.986,2.986,0,0,1,3.8,0l1.63,1.4a.752.752,0,0,1-.98,1.14l-1.63-1.4a1.488,1.488,0,0,0-1.85,0l-4.16,3.57a2.986,2.986,0,0,1-3.8,0l-.33-.29a1.487,1.487,0,0,0-1.73-.08l-4.93,3.31A.813.813,0,0,1,.747,8.453Z" transform="translate(365.923 263.247)" fill="currentColor" />
-                                            <path id="Vector-4" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(364 252)" fill="none" opacity="0" />
-                                        </g>
-                                    </g>
-                                </svg>
-                            </div>
-                            <div className="btn-item" onClick={() => changElementHandler("title")}>
-
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <g id="vuesax_outline_document-text" data-name="vuesax/outline/document-text" transform="translate(-172 -188)">
-                                        <g id="document-text">
-                                            <path id="Vector" d="M13.75,21.5h-6C2.32,21.5,0,19.18,0,13.75v-6C0,2.32,2.32,0,7.75,0h5a.755.755,0,0,1,.75.75.755.755,0,0,1-.75.75h-5C3.14,1.5,1.5,3.14,1.5,7.75v6C1.5,18.36,3.14,20,7.75,20h6C18.36,20,20,18.36,20,13.75v-5a.75.75,0,0,1,1.5,0v5C21.5,19.18,19.18,21.5,13.75,21.5Z" transform="translate(173.25 189.25)" fill="currentColor" />
-                                            <path id="Vector-2" data-name="Vector" d="M8.75,9.5h-4C1.33,9.5,0,8.169,0,4.749v-4A.741.741,0,0,1,.46.059a.757.757,0,0,1,.82.16l8,8A.751.751,0,0,1,8.75,9.5ZM1.5,2.559v2.19C1.5,7.329,2.17,8,4.75,8H6.94Z" transform="translate(185.25 189.251)" fill="currentColor" />
-                                            <path id="Vector-3" data-name="Vector" d="M6.75,1.5h-6A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0h6A.755.755,0,0,1,7.5.75.755.755,0,0,1,6.75,1.5Z" transform="translate(178.25 200.25)" fill="currentColor" />
-                                            <path id="Vector-4" data-name="Vector" d="M4.75,1.5h-4A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0h4A.755.755,0,0,1,5.5.75.755.755,0,0,1,4.75,1.5Z" transform="translate(178.25 204.25)" fill="currentColor" />
-                                            <path id="Vector-5" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(172 188)" fill="none" opacity="0" />
-                                        </g>
-                                    </g>
-                                </svg>
-
-                            </div>
-                            <div className="btn-item" onClick={() => changElementHandler("txt")}>
-
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <g id="vuesax_outline_document-text" data-name="vuesax/outline/document-text" transform="translate(-172 -188)">
-                                        <g id="document-text">
-                                            <path id="Vector" d="M13.75,21.5h-6C2.32,21.5,0,19.18,0,13.75v-6C0,2.32,2.32,0,7.75,0h5a.755.755,0,0,1,.75.75.755.755,0,0,1-.75.75h-5C3.14,1.5,1.5,3.14,1.5,7.75v6C1.5,18.36,3.14,20,7.75,20h6C18.36,20,20,18.36,20,13.75v-5a.75.75,0,0,1,1.5,0v5C21.5,19.18,19.18,21.5,13.75,21.5Z" transform="translate(173.25 189.25)" fill="currentColor" />
-                                            <path id="Vector-2" data-name="Vector" d="M8.75,9.5h-4C1.33,9.5,0,8.169,0,4.749v-4A.741.741,0,0,1,.46.059a.757.757,0,0,1,.82.16l8,8A.751.751,0,0,1,8.75,9.5ZM1.5,2.559v2.19C1.5,7.329,2.17,8,4.75,8H6.94Z" transform="translate(185.25 189.251)" fill="currentColor" />
-                                            <path id="Vector-3" data-name="Vector" d="M6.75,1.5h-6A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0h6A.755.755,0,0,1,7.5.75.755.755,0,0,1,6.75,1.5Z" transform="translate(178.25 200.25)" fill="currentColor" />
-                                            <path id="Vector-4" data-name="Vector" d="M4.75,1.5h-4A.755.755,0,0,1,0,.75.755.755,0,0,1,.75,0h4A.755.755,0,0,1,5.5.75.755.755,0,0,1,4.75,1.5Z" transform="translate(178.25 204.25)" fill="currentColor" />
-                                            <path id="Vector-5" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(172 188)" fill="none" opacity="0" />
-                                        </g>
-                                    </g>
-                                </svg>
-
-                            </div>
-                            <div className="btn-item" onClick={() => changElementHandler("link")}>
-
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <g id="vuesax_outline_link-square" data-name="vuesax/outline/link-square" transform="translate(-620 -316)">
-                                        <g id="link-square">
-                                            <path id="Vector" d="M3.83,10.93H3.76A4.044,4.044,0,0,1,1.2,9.67a4.463,4.463,0,0,1,0-6.09l2.19-2.3a4.039,4.039,0,0,1,5.9,0,4.463,4.463,0,0,1,0,6.09L8.2,8.52A.75.75,0,1,1,7.11,7.49L8.2,6.34a2.938,2.938,0,0,0,0-4.02,2.62,2.62,0,0,0-3.73,0L2.28,4.62a2.938,2.938,0,0,0,0,4.02,2.564,2.564,0,0,0,1.62.8.751.751,0,0,1,.67.82A.74.74,0,0,1,3.83,10.93Z" transform="translate(624.35 321.84)" fill="currentColor" />
-                                            <path id="Vector-2" data-name="Vector" d="M4.15,10.935A4.012,4.012,0,0,1,1.2,9.655a4.463,4.463,0,0,1,0-6.09l1.09-1.15a.75.75,0,1,1,1.09,1.03L2.29,4.6a2.938,2.938,0,0,0,0,4.02,2.611,2.611,0,0,0,3.73,0l2.19-2.3a2.938,2.938,0,0,0,0-4.02,2.564,2.564,0,0,0-1.62-.8.751.751,0,0,1-.67-.82.738.738,0,0,1,.82-.67A4.094,4.094,0,0,1,9.3,1.265a4.463,4.463,0,0,1,0,6.09l-2.19,2.3A4.05,4.05,0,0,1,4.15,10.935Z" transform="translate(629.16 323.225)" fill="currentColor" />
-                                            <path id="Vector-3" data-name="Vector" d="M13.75,21.5h-6C2.32,21.5,0,19.18,0,13.75v-6C0,2.32,2.32,0,7.75,0h6c5.43,0,7.75,2.32,7.75,7.75v6C21.5,19.18,19.18,21.5,13.75,21.5Zm-6-20C3.14,1.5,1.5,3.14,1.5,7.75v6C1.5,18.36,3.14,20,7.75,20h6C18.36,20,20,18.36,20,13.75v-6c0-4.61-1.64-6.25-6.25-6.25Z" transform="translate(621.25 317.25)" fill="currentColor" />
-                                            <path id="Vector-4" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(620 316)" fill="none" opacity="0" />
-                                        </g>
-                                    </g>
-                                </svg>
-                            </div>
+                           <MenuBar changeHandler={changElementHandler}/>
 
 
 

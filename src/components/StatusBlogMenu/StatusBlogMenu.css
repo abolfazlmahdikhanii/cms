@@ -1,17 +1,38 @@
-.show-drowp-down {
+.show-drowp-down,.drop-down--typo.show-drowp-down--2 {
 
     display: block;
 }
-.drowp-down-status__list{
+.drop-down--typo{
+    position: absolute;
+    width: 10rem;
+    top: 5.5rem;
+    left: 1rem;
+    background-color: var(--bg-btn-item);
+    overflow: hidden;
+    border-radius: 0.8rem;
+    transition: all .3s;
+    z-index: 300;
+    display: none;
+   
+}
+
+.drowp-down-status__list,.drowp-down-status__list--2{
     display: flex;
     flex-direction: column;
+    background-color: var(--bg-btn-item);
+    width: 30%;
 }
 .drowp-down__txt {
     all: unset;
     padding: 1.5rem 1.2rem;
     cursor: pointer;
 }
+.drowp-down__txt--2{
+    width: 100%;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+}
 
-.profile-item:not(:last-child) .drowp-down__txt {
+.profile-item:not(:last-child) .drowp-down__txt.drowp-down__txt--2:not(:last-child) {
     border-bottom: 1px solid var(--border-color);
 }

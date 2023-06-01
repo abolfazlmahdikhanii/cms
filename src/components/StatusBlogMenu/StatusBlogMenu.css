@@ -1,8 +1,9 @@
-.show-drowp-down,.drop-down--typo.show-drowp-down--2 {
+.show-drowp-down, .drop-down--typo.show-drowp-down--2 {
 
     display: block;
 }
-.drop-down--typo{
+
+.drop-down--typo {
     position: absolute;
     width: 10rem;
     top: 5.5rem;
@@ -13,26 +14,52 @@
     transition: all .3s;
     z-index: 300;
     display: none;
-   
+
 }
 
-.drowp-down-status__list,.drowp-down-status__list--2{
+.drowp-down-status__list, .drowp-down-status__list--2 {
     display: flex;
     flex-direction: column;
     background-color: var(--bg-btn-item);
-    width: 30%;
+
 }
+
 .drowp-down__txt {
     all: unset;
     padding: 1.5rem 1.2rem;
     cursor: pointer;
 }
-.drowp-down__txt--2{
+
+.drowp-down__txt--2 {
     width: 100%;
     padding: 1rem 1.2rem;
     cursor: pointer;
+    text-transform: uppercase;
 }
+.drowp-down__txt--2  h1{
+    font-size: xx-large;
+    color: var(--blog-dis);
+}
+.drowp-down__txt--2  h2{
+    font-size: 2.6rem;
 
+}
+.drowp-down__txt--2  h3{
+    font-size: 2.2rem;
+
+}
+.drowp-down__txt--2  h4{
+    font-size: 2rem;
+
+}
+.drowp-down__txt--2  h5{
+    font-size: 1.8rem;
+
+}
+.drowp-down__txt--2  h6{
+    font-size: 1.6rem;
+
+}
 .profile-item:not(:last-child) .drowp-down__txt.drowp-down__txt--2:not(:last-child) {
     border-bottom: 1px solid var(--border-color);
 }

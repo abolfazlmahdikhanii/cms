@@ -1,52 +1,64 @@
 import React, { useState } from "react";
 import "./MenuBar.css";
-import { FaBold, FaItalic, FaUnderline, FaLink, FaListOl, FaListUl, FaQuoteRight } from "react-icons/fa";
+import { FaBold, FaItalic, FaUnderline, FaLink, FaListOl, FaListUl, FaQuoteRight, FaAlignCenter, FaAlignRight, FaAlignLeft } from "react-icons/fa";
 import { IoImage, IoChevronDownSharp } from "react-icons/io5";
 import BtnBlog from "../BtnBlog/BtnBlog";
 import TypographyBtn from "../TypographyBtn/TypographyBtn";
 const MenuBar = ({ changeHandler }) => {
 
     const [show, setShow] = useState(false);
-    const [changeHeading, setChangeHeading] = useState(false);
+    const [changeHeading, setChangeHeading] = useState("h1");
     const btns = [
         {
-            title: "bold",
-            icon: <FaBold />
+            title: "strong",
+            icon: <FaBold size={16} />
         },
         {
-            title: "italic",
-            icon: <FaItalic />
+            title: "em",
+            icon: <FaItalic size={16}/>
         },
         {
-            title: "underline",
-            icon: <FaUnderline />
+            title: "ins",
+            icon: <FaUnderline size={16}/>
         },
         {
-            title: "link",
-            icon: <FaLink />
+            title: "a",
+            icon: <FaLink size={16}/>
         },
         {
             title: "img",
             icon: <IoImage size={17} />
         },
         {
-            title: "list",
-            icon: <FaListUl />
+            title: "center",
+            icon: <FaAlignCenter size={16}/>
         },
         {
-            title: "number-list",
-            icon: <FaListOl />
+            title: "right",
+            icon: <FaAlignRight size={16}/>
+        },
+        {
+            title: "left",
+            icon: <FaAlignLeft size={16}/>
+        },
+        {
+            title: "ul",
+            icon: <FaListUl size={16}/>
+        },
+        {
+            title: "ol",
+            icon: <FaListOl size={16}/>
         },
         {
             title: "quote",
-            icon: <FaQuoteRight />
+            icon: <FaQuoteRight size={16}/>
         },
     ];
 
 
     return (
         <>
-
+        
             {
                 btns.map((item, i) => {
                     return (
@@ -57,12 +69,12 @@ const MenuBar = ({ changeHandler }) => {
                 })
             }
 
-            {/* heading */}
-            <div className=" btn-item">
+    {/* heading */}
+    <div className=" btn-item">
                 <div className=""
                     onClick={() => changeHandler(changeHeading)}
                 >
-                    <p className="btn-item__txt">{changeHeading || "h1"}</p>
+                    <p style={{textTransform:"uppercase"}} className="btn-item__txt" >{changeHeading}</p>
                 </div>
                 <p className="btn-status__svg" onClick={() => setShow(!show)}>
 

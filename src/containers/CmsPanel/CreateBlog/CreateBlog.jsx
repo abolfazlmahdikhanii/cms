@@ -3,11 +3,12 @@ import sanitizeHtml from 'sanitize-html';
 import { toast } from 'react-toastify';
 import "./Create-blog.css";
 import Box from "../../../components/Ui/Box/Box";
-import EditorContent from "../../../components/EditorContent/EditorContent.jsx";
+import Element from "../../../components/Element/Element.jsx";
 import { supabase } from "../../../superbase";
 import StatusBlogMenu from "../../../components/StatusBlogMenu/StatusBlogMenu";
 import Loader from "../../../components/Ui/Loader/Loader";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import EditorContent from "../../../components/EditorContent/EditorContent";
 import MenuBar from "../../../components/MenuBar/MenuBar";
 
 
@@ -38,8 +39,6 @@ const CreateBlog = (props) => {
         theme: "colored",
         style: { fontFamily: "shabnam,sans-serif" }
     };
-
-    const [article,setArticle]=useState()
 
     const match = useParams();
     const history = useLocation();
@@ -309,27 +308,21 @@ const CreateBlog = (props) => {
 
 
     };
+    const changeInputValueHandler = (e, id, name) => {
+        const values = [...element];
+        const findInput = values.find((item) => item.id === id);
+        if (name === "img") {
+            findInput.value = e;
 
-        const changeInputValueHandler = (e, id, name) => {
-            
-            
-            const values = [...element];
-            const findInput = values.find((item) => item.id === id);
-            if (name === "img") {
-                findInput.value = e;
-    
-    
-            }
-            else {
-                findInput.value = e.target.innerText;
-            }
-            setElement(values);
-    
-    
-        };;
-            
 
-    
+        }
+        else {
+            findInput.value = e.target.value;
+        }
+        setElement(values);
+
+
+    };
 
     const changeStatusHanlder = (e) => {
 
@@ -361,8 +354,6 @@ const CreateBlog = (props) => {
 
 
     };
-  
-    
     return (
         <>
             <Loader show={loading} />
@@ -413,14 +404,13 @@ const CreateBlog = (props) => {
 
 
                                     return (
-                                        <EditorContent type={item.name} key={i} change={(e) => changeInputValueHandler(e, item.id, item.name)}/>
+                                        <EditorContent value={item?.value} type={item.name} key={i} id={item.id} change={(e) => changeInputValueHandler(e, item.id, item.name)} />
                                     );
                                 })
                             }
 
 
                         </form>
-                     
 
                     </section>
                 </Box>

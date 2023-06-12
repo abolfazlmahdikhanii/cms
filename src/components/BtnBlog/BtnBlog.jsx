@@ -1,10 +1,15 @@
 import React from "react";
 
-const BtnBlog = ({title,children,click}) => {
+const BtnBlog = ({title,children,click,onChange,disable}) => {
   return (
-    <div className="btn-item" onClick={() => click(title)}>
+    <button className="btn-item" onClick={() => {
+      click(title)
+      onChange()
+    }}
+
+    >
      {children}
-    </div>
+    </button>
   );
 };
 

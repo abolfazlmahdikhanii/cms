@@ -1,8 +1,8 @@
 import React from "react";
 
-const TypographyBtn = ({ show, changeHeading, close }) => {
+const TypographyBtn = ({ show, changeHeading, close, setHeading }) => {
     const headings = ["h1", "h2", "h3", "h4", "h5", "h6"];
-  
+
 
     return (
         <div className={`drop-down--typo ${show ? 'show-drowp-down--2' : ''}`}>
@@ -14,6 +14,8 @@ const TypographyBtn = ({ show, changeHeading, close }) => {
 
                             <li key={i} className="profile-item drowp-down__txt--2" onClick={() => {
                                 changeHeading(item);
+                                setHeading(i + 1);
+
                                 close();
                             }}>
                                 <Tag>{item} </Tag>

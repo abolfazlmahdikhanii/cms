@@ -10,7 +10,17 @@
    
 
 }
-
+.ProseMirror{
+    margin-top: 3rem;
+    color: var(--blog-dis);
+}
+blockquote {
+    background-color: var(--bg-search);
+    padding: 2rem ;
+    width: 100%;
+    border-radius: .7rem;
+   
+}
 .form-control__input {
     all: unset;
     width: 100%;

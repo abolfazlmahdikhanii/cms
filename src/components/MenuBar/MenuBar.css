@@ -3,3 +3,8 @@
     align-items: center;
     gap: 1rem;
 }
+
+.btn-isActive{
+    background-color: #6366f1;
+    color: #fff;
+}

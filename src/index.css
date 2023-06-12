@@ -150,7 +150,9 @@ a {
   --follower-txt: #4b5563;
   --bg-btn-them: #94a3b8;
 }
-
+:focus-visible {
+  outline: none;
+}
 
 
 @media (prefers-color-scheme: light) {

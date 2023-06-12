@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import sanitizeHtml from 'sanitize-html';
+import { useEditor, EditorContent } from '@tiptap/react'
+import StarterKit from '@tiptap/starter-kit'
+import TextAlign from "@tiptap/extension-text-align";
+import Blockquote from "@tiptap/extension-blockquote";
+
 import { toast } from 'react-toastify';
 import "./Create-blog.css";
 import Box from "../../../components/Ui/Box/Box";
@@ -8,14 +13,18 @@ import { supabase } from "../../../superbase";
 import StatusBlogMenu from "../../../components/StatusBlogMenu/StatusBlogMenu";
 import Loader from "../../../components/Ui/Loader/Loader";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import EditorContent from "../../../components/EditorContent/EditorContent";
+
 import MenuBar from "../../../components/MenuBar/MenuBar";
 
 
 
 
 
+
 const CreateBlog = (props) => {
+
+    
+
     const [loading, setLoading] = useState(false);
     const [element, setElement] = useState([]);
     const [tab, setTab] = useState("category");
@@ -43,6 +52,38 @@ const CreateBlog = (props) => {
     const match = useParams();
     const history = useLocation();
     const navigate = useNavigate();
+
+    const editor = useEditor({
+        extensions: [
+            TextAlign.configure({
+                types: ['heading', 'paragraph'],
+                defaultAlignment: 'right',
+              }),
+              Blockquote.configure({
+                HTMLAttributes: {
+                  className: 'bloqute',
+                },
+              }),
+          StarterKit.configure({
+            bulletList: {
+              keepMarks: true,
+              keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+            },
+            orderedList: {
+              keepMarks: true,
+              keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+            },
+          }),
+        ],
+        content: `
+        `,
+      })
+
+
+
+
+
+
 
     useEffect(() => {
 
@@ -392,13 +433,13 @@ const CreateBlog = (props) => {
                     <section className="container-blog">
                         <section className="nav-btn">
 
-                           <MenuBar changeHandler={changElementHandler}/>
+                           <MenuBar changeHandler={changElementHandler} editor={editor}/>
 
 
 
                         </section>
                         <form className="content-blog" onSubmit={formHandler}>
-                            {
+                            {/* {
                                 element.map((item, i) => {
 
 
@@ -407,7 +448,9 @@ const CreateBlog = (props) => {
                                         <EditorContent value={item?.value} type={item.name} key={i} id={item.id} change={(e) => changeInputValueHandler(e, item.id, item.name)} />
                                     );
                                 })
-                            }
+                            } */}
+
+<EditorContent editor={editor} />
 
 
                         </form>

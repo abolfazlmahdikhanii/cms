@@ -4,22 +4,29 @@ import { FaBold, FaItalic, FaUnderline, FaLink, FaListOl, FaListUl, FaQuoteRight
 import { IoImage, IoChevronDownSharp } from "react-icons/io5";
 import BtnBlog from "../BtnBlog/BtnBlog";
 import TypographyBtn from "../TypographyBtn/TypographyBtn";
-const MenuBar = ({ changeHandler }) => {
+const MenuBar = ({ changeHandler, editor }) => {
 
     const [show, setShow] = useState(false);
     const [changeHeading, setChangeHeading] = useState("h1");
+    const [heading, setHeading] = useState(1);
     const btns = [
         {
             title: "strong",
-            icon: <FaBold size={16} />
+            icon: <FaBold size={16} />,
+            click: () => editor.chain().focus().toggleBold().run(),
+            disable: () => !editor.can().chain().focus().toggleBold().run()
         },
         {
             title: "em",
-            icon: <FaItalic size={16} />
+            icon: <FaItalic size={16} />,
+            click: () => editor.chain().focus().toggleItalic().run(),
+            disable: () => !editor.can().chain().focus().toggleItalic().run()
         },
         {
             title: "ins",
-            icon: <FaUnderline size={16} />
+            icon: <FaUnderline size={16} />,
+            click: () => editor.chain().focus().toggleStrike().run(),
+            disable: () => !editor.can().chain().focus().toggleStrike().run()
         },
         {
             title: "a",
@@ -30,31 +37,45 @@ const MenuBar = ({ changeHandler }) => {
             icon: <IoImage size={17} />
         },
         {
-            title: "center",
-            icon: <FaAlignCenter size={16} />
+            title: "right",
+            icon: <FaAlignRight size={16} />,
+            click: () => editor.commands.setTextAlign('right'),
+            disable: () => editor.commands.unsetTextAlign()
         },
         {
-            title: "right",
-            icon: <FaAlignRight size={16} />
+            title: "center",
+            icon: <FaAlignCenter size={16} />,
+            click: () => editor.commands.setTextAlign('center'),
+            disable: () => editor.commands.unsetTextAlign()
         },
         {
             title: "left",
-            icon: <FaAlignLeft size={16} />
+            icon: <FaAlignLeft size={16} />,
+            click: () => editor.commands.setTextAlign('left'),
+            disable: () => editor.commands.unsetTextAlign()
         },
         {
             title: "ul",
-            icon: <FaListUl size={16} />
+            icon: <FaListUl size={16} />,
+            click: () => editor.chain().focus().toggleBulletList().run()
         },
         {
             title: "ol",
-            icon: <FaListOl size={16} />
+            icon: <FaListOl size={16} />,
+            click: () => editor.chain().focus().toggleOrderedList().run()
         },
         {
             title: "quote",
-            icon: <FaQuoteRight size={16} />
+            icon: <FaQuoteRight size={16} />,
+            click: () => editor.commands.setBlockquote(),
+            disable: () => editor.commands.unsetBlockquote()
+
+
         },
     ];
-
+    if (!editor) {
+        return null;
+    }
 
     return (
         <>
@@ -62,7 +83,7 @@ const MenuBar = ({ changeHandler }) => {
             {
                 btns.map((item, i) => {
                     return (
-                        <BtnBlog key={i} title={item.title} click={changeHandler}>
+                        <BtnBlog key={i} title={item.title} click={changeHandler} onChange={item.click} disable={item.disable}>
                             {item.icon}
                         </BtnBlog>
                     );
@@ -72,7 +93,10 @@ const MenuBar = ({ changeHandler }) => {
             {/* heading */}
             <div className=" btn-item">
                 <div className=""
-                    onClick={() => changeHandler(changeHeading)}
+                    onClick={() => {
+                        changeHandler(changeHeading);
+                        editor.chain().focus().toggleHeading({ level: heading }).run();
+                    }}
                 >
                     <p style={{ textTransform: "uppercase" }} className="btn-item__txt" >{changeHeading}</p>
                 </div>
@@ -82,7 +106,8 @@ const MenuBar = ({ changeHandler }) => {
 
                 </p>
 
-                <TypographyBtn changeHeading={setChangeHeading} close={() => setShow(false)} show={show} />
+                <TypographyBtn changeHeading={setChangeHeading} close={() => setShow(false)} show={show}
+                    setHeading={setHeading} />
 
             </div>
 

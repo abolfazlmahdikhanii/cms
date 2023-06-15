@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState,useCallback } from "react";
 import "./MenuBar.css";
 import { FaBold, FaItalic, FaUnderline, FaLink, FaListOl, FaListUl, FaQuoteRight, FaAlignCenter, FaAlignRight, FaAlignLeft } from "react-icons/fa";
 import { IoImage, IoChevronDownSharp } from "react-icons/io5";
 import BtnBlog from "../BtnBlog/BtnBlog";
 import TypographyBtn from "../TypographyBtn/TypographyBtn";
+import UploadModal from "../Ui/UploadModal/UploadModal";
+import ModalLink from "../Ui/ModalLink/ModalLink";
 const MenuBar = ({ changeHandler, editor }) => {
 
     const [show, setShow] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [imgSrc, setImgSrc] = useState("");
     const [changeHeading, setChangeHeading] = useState("h1");
     const [heading, setHeading] = useState(1);
+    const [showModalLink, setShowModalLink] = useState(false);
+    const [url, setUrl] = useState("");
+
+
     const btns = [
         {
             title: "strong",
@@ -30,11 +38,13 @@ const MenuBar = ({ changeHandler, editor }) => {
         },
         {
             title: "a",
-            icon: <FaLink size={16} />
+            icon: <FaLink size={16} />,
+            click: () => setShowModalLink(true)
         },
         {
             title: "img",
-            icon: <IoImage size={17} />
+            icon: <IoImage size={17} />,
+            click: () => setShowModal(true)
         },
         {
             title: "right",
@@ -76,7 +86,24 @@ const MenuBar = ({ changeHandler, editor }) => {
     if (!editor) {
         return null;
     }
-
+    const setLink = useCallback(() => {
+      
+    
+        // cancelled
+        if (url === null) {
+          return
+        }
+    
+        // empty
+        if (url === '') {
+          editor.chain().focus().extendMarkRange('link').unsetLink()
+            .run()
+    
+          return
+        }
+         editor.chain().focus().extendMarkRange('link').setLink({ href: url })
+      .run()
+  }, [editor])
     return (
         <>
 
@@ -110,7 +137,25 @@ const MenuBar = ({ changeHandler, editor }) => {
                     setHeading={setHeading} />
 
             </div>
+            <UploadModal
+                show={showModal}
+                close={() => setShowModal(false)}
+                url={imgSrc}
+                changeUrl={(url) => {
+                    setImgSrc(url);
+                    editor.chain().focus().setImage({ src: imgSrc }).run();
 
+                }}
+            />
+
+            <ModalLink
+                show={showModalLink}
+                close={() => setShowModalLink(false)}
+                setUrl={setUrl}
+                url={url}
+                click={() => setLink() }
+
+            />
         </>
     );
 };

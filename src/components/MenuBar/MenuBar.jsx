@@ -86,7 +86,7 @@ const MenuBar = ({ changeHandler, editor }) => {
     if (!editor) {
         return null;
     }
-    const setLink = useCallback(() => {
+    const setLink = () => {
       
     
         // cancelled
@@ -103,7 +103,7 @@ const MenuBar = ({ changeHandler, editor }) => {
         }
          editor.chain().focus().extendMarkRange('link').setLink({ href: url })
       .run()
-  }, [editor])
+  }
     return (
         <>
 
@@ -153,7 +153,7 @@ const MenuBar = ({ changeHandler, editor }) => {
                 close={() => setShowModalLink(false)}
                 setUrl={setUrl}
                 url={url}
-                click={() => setLink() }
+                click={ setLink }
 
             />
         </>

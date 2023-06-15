@@ -14,7 +14,7 @@ const UploadModal = (props) => {
 
     useEffect(() => {
         setImgSrc("");
-    }, []);
+    }, [url]);
 
     const submitHandler = () => {
         props.changeUrl(imgSrc, width, height);
@@ -56,26 +56,7 @@ const UploadModal = (props) => {
                                         onChange={(e) => setUrl(e.target.value)}
                                     />
                                 </div>
-                                <div className="form-control">
-                                    <p className="form-control__txt">طول عکس</p>
-                                    <input
-                                        className="form-control__input"
-                                        type="number"
-                                        placeholder="1024px"
-                                        value={height}
-                                        onChange={(e) => setHeight(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-control">
-                                    <p className="form-control__txt">عرض عکس</p>
-                                    <input
-                                        className="form-control__input"
-                                        type="number"
-                                        value={width}
-                                        onChange={(e) => setWidth(e.target.value)}
-                                        placeholder="100%"
-                                    />
-                                </div>
+                          
                                 <div className="nav-btn">
                                     <button className="btn-action btn-item" onClick={submitHandler}>اپلود</button>
                                     <button className="btn-action btn-item" onClick={() => setImgSrc(url)}>پیش نمایش</button>
@@ -95,36 +76,14 @@ const UploadModal = (props) => {
                     {/* image with file */}
                     <section className={`modal-upload--url ${tab === 'file' ? 'modal-upload--show' : ''}`}>
                         <div className="modal-upload--url__row-2">
-                            <div className="modal-upload__form">
+                     
 
-                                <div className="form-control">
-                                    <p className="form-control__txt">طول عکس</p>
-                                    <input
-                                        className="form-control__input"
-                                        type="number"
-                                        placeholder="1024px"
-                                        value={height}
-                                        onChange={(e) => setHeight(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-control">
-                                    <p className="form-control__txt">عرض عکس</p>
-                                    <input
-                                        className="form-control__input"
-                                        type="number"
-                                        placeholder="100%"
-                                        value={width}
-                                        onChange={(e) => setWidth(e.target.value)}
-                                    />
-                                </div>
+                            <div>
+                                <Uploader url={imgSrc} onUpload={(imgSrc) => setImgSrc(imgSrc)} />
                                 <div className="nav-btn">
                                     <button className="btn-action btn-item" onClick={submitHandler}>اپلود</button>
 
                                 </div>
-                            </div>
-
-                            <div>
-                                <Uploader url={imgSrc} onUpload={(imgSrc) => setImgSrc(imgSrc)} />
                             </div>
                         </div>
 

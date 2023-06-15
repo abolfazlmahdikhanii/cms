@@ -1,0 +1,17 @@
+.modal-link {
+    width: 30%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    z-index: 400;
+    overflow: hidden;
+    transition: all .3s;
+    opacity: 1;
+   
+}
+
+.modal-link--hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+}

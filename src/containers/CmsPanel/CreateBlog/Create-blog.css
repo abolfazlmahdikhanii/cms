@@ -31,7 +31,11 @@ blockquote {
 .form-control__input-title {
     font-size: 2rem !important;
 }
-
+.my-link{
+    color: #60a5fa;
+    text-decoration: underline;
+    cursor: pointer;
+}
 .nav-btn {
 
     display: flex;
@@ -54,7 +58,16 @@ blockquote {
 .content-blog::-webkit-scrollbar {
     display: none;
 }
+.post-img{
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1.2rem;
+    margin-bottom: 1rem;
 
+    background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
+    background-position: center;
+}
 .btn-item {
     all: unset;
     display: flex;

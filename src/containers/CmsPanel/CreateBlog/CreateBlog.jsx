@@ -4,17 +4,19 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from "@tiptap/extension-text-align";
 import Blockquote from "@tiptap/extension-blockquote";
-
+import Image from "@tiptap/extension-image";
+import ListItem from '@tiptap/extension-list-item'
+import OrderedList from '@tiptap/extension-ordered-list'
 import { toast } from 'react-toastify';
 import "./Create-blog.css";
 import Box from "../../../components/Ui/Box/Box";
-import Element from "../../../components/Element/Element.jsx";
 import { supabase } from "../../../superbase";
 import StatusBlogMenu from "../../../components/StatusBlogMenu/StatusBlogMenu";
 import Loader from "../../../components/Ui/Loader/Loader";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import MenuBar from "../../../components/MenuBar/MenuBar";
+import Link from "@tiptap/extension-link";
 
 
 
@@ -55,6 +57,12 @@ const CreateBlog = (props) => {
 
     const editor = useEditor({
         extensions: [
+            Image.configure({
+                inline: true,
+                HTMLAttributes: {
+                    class: 'post-img',
+                  },
+              }),
             TextAlign.configure({
                 types: ['heading', 'paragraph'],
                 defaultAlignment: 'right',
@@ -74,6 +82,16 @@ const CreateBlog = (props) => {
               keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
             },
           }),
+          Link.configure({
+            HTMLAttributes: {
+              class: 'my-link',
+            },
+          }),
+          OrderedList.configure({
+            keepMarks: true,
+          }),
+          ListItem
+          
         ],
         content: `
         `,

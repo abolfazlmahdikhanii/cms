@@ -236,42 +236,6 @@ const CreateBlog = (props) => {
 
 
 
-        for (const item of element) {
-            if (item.value !== "" && 'value' in item) {
-
-                if (item.name === "title") {
-                    data.push({
-                        id: item.id,
-                        style: {},
-                        contentTag: `<h2 className="title-posts">${item.value}</h2>`
-                    });
-                }
-                if (item.name === "txt") {
-                    data.push({
-                        id: item.id,
-                        style: {},
-                        contentTag: `<p>${item.value}</p>`
-                    });
-                }
-                if (item.name === "img") {
-                    if (item.value.includes("https") || item.value.includes("http")) {
-                        data.push({
-                            id: item.id,
-                            style: {},
-                            contentTag: `<img loading='lazy' src='${item.value}'>`
-                        });
-                    }
-                    else {
-                        data.push({
-                            id: item.id,
-                            style: {},
-                            contentTag: `<img loading='lazy' src='https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${item.value}'>`
-                        });
-                    }
-                }
-            }
-
-        }
 
 
 
@@ -290,10 +254,11 @@ const CreateBlog = (props) => {
     };
     const setBlogData = async () => {
         try {
+            const html = editor.getHTML()
             setLoading(true);
             const unique = [...new Set(data.map(item => item))];
 
-            setContent(unique);
+            setContent(html);
             const { user } = props.user;
             if (!title || !unique) throw error;
 
@@ -314,12 +279,13 @@ const CreateBlog = (props) => {
     };
     const updateBlogData = async (id, arr) => {
         try {
+            const html = editor.getHTML()
             setLoading(true);
             const unique = [...new Set(arr.map(item => item))];
 
             console.log(unique);
 
-            setContent(unique);
+            setContent(html);
             const { user } = props.user;
             const { data, error } = await supabase.from("blogs").update({ post_title: title, post_content: unique, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type }).eq("id", id);
 
@@ -342,7 +308,7 @@ const CreateBlog = (props) => {
     const submitFormTagHanlder = (e) => {
         e.preventDefault();
 
-        if (tagContent !== "") {
+        if (editor) {
             setTag((prevState) => {
                 return [
                     ...prevState, tagContent

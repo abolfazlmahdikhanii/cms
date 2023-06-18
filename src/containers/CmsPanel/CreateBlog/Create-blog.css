@@ -68,6 +68,13 @@ blockquote {
     background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
     background-position: center;
 }
+.ProseMirror ul, .ProseMirror ol {
+    padding: 0 1rem;
+}
+::marker{
+    color: #2563eb ;
+    list-style-type: disc;
+}
 .btn-item {
     all: unset;
     display: flex;

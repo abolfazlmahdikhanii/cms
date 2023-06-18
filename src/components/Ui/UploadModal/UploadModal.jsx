@@ -14,7 +14,7 @@ const UploadModal = (props) => {
 
     useEffect(() => {
         setImgSrc("");
-    }, [url]);
+    }, [imgSrc]);
 
     const submitHandler = () => {
         props.changeUrl(imgSrc, width, height);

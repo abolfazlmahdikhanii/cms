@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import sanitizeHtml from 'sanitize-html';
+
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from "@tiptap/extension-text-align";
 import Blockquote from "@tiptap/extension-blockquote";
 import Image from "@tiptap/extension-image";
 import ListItem from '@tiptap/extension-list-item'
+import BulletList from '@tiptap/extension-bullet-list'
 import OrderedList from '@tiptap/extension-ordered-list'
 import { toast } from 'react-toastify';
 import "./Create-blog.css";
@@ -35,7 +37,7 @@ const CreateBlog = (props) => {
     const [title, setTitle] = useState("");
 
     const [showMenu, setshowMenu] = useState(false);
-    const [content, setContent] = useState([]);
+    const [content, setContent] = useState("");
     const [tag, setTag] = useState([]);
     const [tagContent, setTagContent] = useState("");
     const [commentStatus, setCommentStatus] = useState(true);
@@ -72,16 +74,7 @@ const CreateBlog = (props) => {
                   className: 'bloqute',
                 },
               }),
-          StarterKit.configure({
-            bulletList: {
-              keepMarks: true,
-              keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-            },
-            orderedList: {
-              keepMarks: true,
-              keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
-            },
-          }),
+          StarterKit,
           Link.configure({
             HTMLAttributes: {
               class: 'my-link',
@@ -90,24 +83,25 @@ const CreateBlog = (props) => {
           OrderedList.configure({
             keepMarks: true,
           }),
+          BulletList.configure({
+            keepMarks: true,
+          }),
           ListItem
           
         ],
-        content: `
+        content: `${content}
         `,
+      
+        onUpdate:({editor})=>{
+            const html = editor.getHTML()
+          setContent(html)
+        },
+       
+        
       })
 
 
-
-
-
-
-
     useEffect(() => {
-
-
-
-
 
         if (match?.id) {
             getBLogData(match?.id);
@@ -118,7 +112,7 @@ const CreateBlog = (props) => {
             //     setTitle("")
             setTag([]);
             setType("");
-            setContent([]);
+            setContent("");
         });
 
 
@@ -126,6 +120,7 @@ const CreateBlog = (props) => {
 
 
     }, [history.pathname, title]);
+
 
 
     const getBLogData = async (id) => {
@@ -144,7 +139,8 @@ const CreateBlog = (props) => {
             setStatus(data.post_status);
             setType(data.post_type);
             setCommentStatus(data.comment_status);
-            splitContent(data?.post_content);
+            setContent(data?.post_content);
+
 
         }
         catch (err) {
@@ -156,93 +152,16 @@ const CreateBlog = (props) => {
         }
     };
 
-    const removeTag = (str) => {
-        if ((str === null) || (str === ''))
-            return false;
-        else
-            str = str.toString();
-
-
-        return str.replace(/(<([^>]+)>)/ig, '');
-    };
-    const removeImgTag = (str) => {
-        const clean = sanitizeHtml(str, {
-            allowedTags: ['img'],
-
-
-
-        });
-        const newStr = clean.split(" ").find((item) => item.includes("src=")).slice(5, -1);
-
-
-        return newStr;
-
-
-
-    };
-    const splitContent = (arr) => {
-        for (const item of arr) {
-
-
-
-
-            if (item.contentTag.includes("<h2")) {
-                newData.push({
-                    id: item.id,
-                    name: "title",
-                    value: removeTag(item.contentTag)
-                });
-            }
-            if (item.contentTag.includes("<p")) {
-                newData.push({
-                    id: item.id,
-                    name: "txt",
-                    value: removeTag(item.contentTag)
-                });
-            }
-            if (item.contentTag.includes("<img")) {
-
-
-                newData.push({
-                    id: item.id,
-                    name: "img",
-                    value: removeImgTag(item.contentTag)
-                });
-
-
-            }
-
-
-        }
-        const unique = [...new Set(newData.map(item => item))];
-        console.log(unique);
-
-        setElement(unique);
-    };
-
-
-
-
-
-
+  
     const formHandler = (e) => {
         e.preventDefault();
     };
 
-
     const submitFormHandler = async (e) => {
         e.preventDefault();
 
-
-
-
-
-
-
-
-
         if (match?.id) {
-            updateBlogData(match?.id, data);
+            updateBlogData(match?.id);
         }
         else {
             setBlogData();
@@ -254,19 +173,21 @@ const CreateBlog = (props) => {
     };
     const setBlogData = async () => {
         try {
-            const html = editor.getHTML()
+         
             setLoading(true);
             const unique = [...new Set(data.map(item => item))];
 
-            setContent(html);
+       
             const { user } = props.user;
             if (!title || !unique) throw error;
 
-            const { error } = await supabase.from("blogs").insert({ post_title: title, post_content: unique, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type });
+            const { error } = await supabase.from("blogs").insert({ post_title: title, post_content: content, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type });
 
             if (error) throw error;
             toast.success("پست شما با موفقیت ایجاد شد ", toastOption);
-            setContent([]);
+            console.log(content);
+            
+            setContent("");
 
         } catch (error) {
             toast.error("ایجاد پست جدید با مشکل مواجه شد", toastOption);
@@ -277,17 +198,15 @@ const CreateBlog = (props) => {
             setLoading(false);
         }
     };
-    const updateBlogData = async (id, arr) => {
+    const updateBlogData = async (id) => {
         try {
-            const html = editor.getHTML()
+  
             setLoading(true);
-            const unique = [...new Set(arr.map(item => item))];
-
-            console.log(unique);
-
-            setContent(html);
+   
+       
             const { user } = props.user;
-            const { data, error } = await supabase.from("blogs").update({ post_title: title, post_content: unique, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type }).eq("id", id);
+            const { data, error } = await supabase.from("blogs").update({post_title: title,  post_content: content, post_status: status, post_author: user.id, post_tags: tag, comment_status: commentStatus, post_type: type })
+            .eq("id", id);
 
             if (error) throw error;
 
@@ -296,8 +215,10 @@ const CreateBlog = (props) => {
 
 
         } catch (error) {
+            console.log(error.message);
+            
             setLoading(false);
-            toast.success("ویرایش پست شما با خطا مواجه شد", toastOption);
+            toast.error("ویرایش پست شما با خطا مواجه شد", toastOption);
 
 
         }
@@ -333,21 +254,7 @@ const CreateBlog = (props) => {
 
 
     };
-    const changeInputValueHandler = (e, id, name) => {
-        const values = [...element];
-        const findInput = values.find((item) => item.id === id);
-        if (name === "img") {
-            findInput.value = e;
-
-
-        }
-        else {
-            findInput.value = e.target.value;
-        }
-        setElement(values);
-
-
-    };
+   
 
     const changeStatusHanlder = (e) => {
 
@@ -422,19 +329,10 @@ const CreateBlog = (props) => {
 
 
                         </section>
-                        <form className="content-blog" onSubmit={formHandler}>
-                            {/* {
-                                element.map((item, i) => {
+                        <form className="content-blog" onSubmit={formHandler} >
+                         
+                           <EditorContent editor={editor}/>
 
-
-
-                                    return (
-                                        <EditorContent value={item?.value} type={item.name} key={i} id={item.id} change={(e) => changeInputValueHandler(e, item.id, item.name)} />
-                                    );
-                                })
-                            } */}
-
-<EditorContent editor={editor} />
 
 
                         </form>

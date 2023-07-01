@@ -125,7 +125,8 @@ const Post = ({ session }) => {
                     bio,
                     username
                 )`)
-                .eq("id", match?.id);
+                .eq("id", match?.id)
+                
 
 
 
@@ -136,7 +137,8 @@ const Post = ({ session }) => {
 
             setBlogContent(blog);
 
-            filterPosts(blog);
+
+            // filterPosts(blog);
 
 
 
@@ -410,7 +412,7 @@ const Post = ({ session }) => {
 
                 <main className="blog-list blog-post">
 
-                    <div className="post-cover" dangerouslySetInnerHTML={{ __html: firstImage }}>
+                    <div className="post-cover" dangerouslySetInnerHTML={{ __html: filterImage(blogContent[0]?.post_content) }}>
 
                     </div>
                     {/* info */}
@@ -457,7 +459,7 @@ const Post = ({ session }) => {
                     </Box>
                     {/* content */}
                     <Box>
-                        <div className="post-content--box" dangerouslySetInnerHTML={{ __html: content.join('') }}></div>
+                        <div className="post-content--box" dangerouslySetInnerHTML={{ __html: blogContent[0]?.post_content}}></div>
 
                         <div className="rate-post--box">
                             <div>

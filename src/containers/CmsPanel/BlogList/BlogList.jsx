@@ -34,6 +34,7 @@ const BlogList = ({ session }) => {
 
 
             setBlogs(data);
+         console.log(blogs);
          
 
 

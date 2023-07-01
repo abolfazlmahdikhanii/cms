@@ -10,6 +10,8 @@
     overflow: hidden;
     border-radius: 1.2rem;
     margin-bottom: 2rem;
+    background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
+    background-position: center;
 }
 
 .post-cover img {

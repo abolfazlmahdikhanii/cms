@@ -153,12 +153,8 @@ const publicProfile=usePublicProfile
         </Link>
         {/* dis */}
         <div className="blog-content--dis">
-          <p className="blog-content__dis-txt">
-             {props.paragraphs.map((value,i) => {
-               return(
-                <span key={i} dangerouslySetInnerHTML={{ __html:value}}></span>
-               )
-             })}
+          <p className="blog-content__dis-txt" dangerouslySetInnerHTML={{__html:props.paragraphs}}>
+           
           </p>
           <div className="blog-content--detail">
             {/* author */}

@@ -24,9 +24,9 @@
     flex-basis: 30%;
     border-radius: .7rem;
     overflow: hidden;
-    
+    background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
     max-height: 30rem;
-   
+    background-position: center;
 }
 
 .blog-content--img img {

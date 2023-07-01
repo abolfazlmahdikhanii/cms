@@ -7,6 +7,10 @@
   font-family: "shabnam";
   src: url("./assets/fonts/Shabnam-FD.woff2")
 }
+@font-face {
+  font-family: "vazir";
+  src: url("./assets/fonts/Vazirmatn-RD[wght].woff2")
+}
 
 :root {
 
@@ -101,10 +105,13 @@ body {
 }
 
 ul:not(.content-blog ul) {
-  list-style: none;
+  list-style-type: none;
 }
 .content-blog ul{
   list-style-type: disc;
+}
+.content-blog ol{
+  list-style-type: decimal !important;
 }
 a {
   text-decoration: none;

@@ -1,20 +1,19 @@
-const filterPosts = (array) => {
-    let data = [];
-    array.forEach(blog => {
-
-        data.push(blog.contentTag);
-
-    });
-
-    return data;
-
-
-};
 const useFilterImage = (posts) => {
-    const blogPost = filterPosts(posts);
-    const imgFilterd = blogPost.filter(item => item.includes("img"));
+  
+    
 
-    return imgFilterd[0];
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(posts, 'text/html');
+    const imgElement = doc.querySelectorAll('img');
+    
+    if (imgElement) {
+  
+        
+        return imgElement[0]
+        
+    } else {
+      return null;
+    }
 };
 
 export default useFilterImage

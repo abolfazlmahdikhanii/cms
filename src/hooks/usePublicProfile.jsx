@@ -17,6 +17,7 @@ const usePublicProfile = (location) => {
         }
         catch (error) {
             console.log(error.message);
+      
         }
     };
 

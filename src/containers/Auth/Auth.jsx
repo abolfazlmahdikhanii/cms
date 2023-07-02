@@ -58,8 +58,14 @@ const Auth = () => {
     const checkEmailExist = async (emails) => {
         try {
             const { data, err } = supabase.from('profiles').select('(email)').eq('email', emails);
+            
+
+            console.log(data);
+            
             if (err) throw err;
-            return true;
+            
+            
+          if(data) return true;
 
         } catch (error) {
             console.log(error);
@@ -86,14 +92,23 @@ const Auth = () => {
             setLoading(true);
 
 
+            
+   if(checkEmailExist(email)){  
 
             const { data, error } = await supabase.auth.verifyOtp({
-                email, token: newToken, type: `${checkEmailExist(email) ? 'magiclink' : 'signup'}`
+                email, token: newToken, type:'magiclink'
             });
-
-
-
             if (error) throw error;
+ }
+ else if(!checkEmailExist(email)){
+    const { data, error } = await supabase.auth.verifyOtp({
+        email, token: newToken, type: 'signup'
+    });
+    if (error) throw error;
+ }
+
+
+           
 
             navigate('/panel');
 

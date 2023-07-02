@@ -50,10 +50,14 @@
 
 .aside-item--img {
     flex-basis: 30%;
-    height: 100%;
+    max-height: 100%;
     overflow: hidden;
     border-radius: .8rem;
-  
+    background-image: url("https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png");
+    background-position: center;
+    background-size: cover;
+    height: 6.5rem;
+    
 }
 .aside-item--img img{
     width: 100%;

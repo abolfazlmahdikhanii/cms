@@ -11,7 +11,7 @@ const PAGE_SIZE = 10;
 
 const Layout = () => {
     const [blogs, setBlogs] = useState([]);
-    const [mostVistorPost, setMostVistorPost] = useState([]);
+    const [lastBlogs, setLastBlogs] = useState([]);
     const [loading, setLoading] = useState(false);
     const [postContent, setPostContent] = useState([]);
     const [page, setPage] = useState(1);
@@ -20,11 +20,11 @@ const Layout = () => {
     const categoryList = ["art", "tech", "game", "health", "life-style"];
 
     useEffect(() => {
-     
-        getMostVisitor();
+
+        getLastBlogs()
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-
+   
 
     }, []);
     useEffect(() => {
@@ -94,48 +94,33 @@ const Layout = () => {
 
     };
 
-    const getMostVisitor = async () => {
-   
-        const { data, error } = await supabase.from('visitor')
-        .select(`blog_id(
-            id,
-            post_title,
-            post_content,
-            post_author(
-                id,username
-            )
-            )`)
-        
-        
-        
-      
-      if (error) return console.error(error);
 
-   
-      
-      setMostVistorPost(data)
 
-      filterMostVisitor(mostVistorPost)
-            
-  
-  
-    };
-    const filterMostVisitor=(mostVistorPost)=>{
-    //    let size=0
-    //    const newArr=[]
-    //    const arr=mostVistorPost.filter((item)=>item.blog_id.id===item.blog_id.id)
-    //     size=arr.length
-    //     newArr.push({post:[...new Set(arr.blog_id)],size:size})
-
-      
-    
-    //    console.log(newArr);
-       
-        
-    }
     const handleScroll = () => {
         if (window.innerHeight + document.documentElement.scrollHeight === document.documentElement.offsetHeight) {
             getBlogData();
+        }
+    };
+    const getLastBlogs = async () => {
+        try {
+            let { data: blog, error } = await supabase
+                .from('blogs')
+                .select(`id,post_date,post_title,post_content
+                        ,post_author(
+                        firstName,
+                        lastName,
+                        avatar_url,
+                        username
+                        )`)
+
+                .order('post_date', { ascending: false })
+                .limit(5);
+
+            if (error) throw error;
+            setLastBlogs(blog);
+        } catch (err) {
+            console.log(err);
+
         }
     };
 
@@ -160,7 +145,7 @@ const Layout = () => {
 
                     <aside className="blog-aside">
                         {/* <Aside type="viewst" post={mostVistorPost} /> */}
-                        <Aside type="controversial" />
+                        <Aside type="controversial" post={lastBlogs} />
                     </aside>
                 </section>
             </div>

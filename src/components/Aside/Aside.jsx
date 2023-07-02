@@ -53,7 +53,7 @@ const Aside = ({ post, type }) => {
                 {
                     post?.map((item) => {
 
-                        const { id, post_title, post_author, post_content } = item?.blog_id;
+                        const { id, post_title, post_author, post_content } = item;
 
                         return (
                             <Link to={`article/@${post_author?.username}/${id}/${post_title.split(" ").join("-")}`} className="aside-item" key={id}>

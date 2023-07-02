@@ -10,6 +10,7 @@ import { supabase } from "../../superbase";
 
 const MiniProfile = (props) => {
     const [userInfo,setUserInfo]=useState([])
+  
     const publicProfile=usePublicProfile
     const signOut=useSignOut
 
@@ -32,6 +33,8 @@ const MiniProfile = (props) => {
             if(err)throw err
 
             setUserInfo(data)
+            console.log(userInfo);
+            
     
             
 
@@ -41,6 +44,7 @@ const MiniProfile = (props) => {
             
         }
     }
+
 
   
 
@@ -52,7 +56,7 @@ const MiniProfile = (props) => {
                         <img src={publicProfile(userInfo?.avatar_url)} alt="profile" className="mini-profile__img" />
                     </div>
                     <div className="mini-profile__account-info">
-                        <p className="mini-profile__txt">{`${userInfo?.firstName} ${userInfo?.lastName}` || userInfo?.email}</p>
+                        <p className="mini-profile__txt">{userInfo?.firstName ?`${userInfo?.firstName} ${userInfo?.lastName}` : props?.session.email}</p>
                         <p className="mini-profile__svg">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mini-profile__svg-2">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />

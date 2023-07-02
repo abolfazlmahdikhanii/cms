@@ -33,7 +33,7 @@ const MiniProfile = (props) => {
             if(err)throw err
 
             setUserInfo(data)
-            console.log(userInfo);
+         
             
     
             

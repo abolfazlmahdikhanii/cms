@@ -26,6 +26,7 @@
 
     .category {
         width: 95%;
+        z-index: 4;
     }
 
     .category-container {

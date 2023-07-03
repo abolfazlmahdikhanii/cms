@@ -17,7 +17,7 @@ const UploadModal = (props) => {
     }, [imgSrc]);
 
     const submitHandler = () => {
-        props.changeUrl(imgSrc, width, height);
+        props.changeUrl(url, width, height);
         props.close()
     };
 
@@ -51,21 +51,25 @@ const UploadModal = (props) => {
                                     <p className="form-control__txt">آدرس عکس</p>
                                     <input
                                         className="form-control__input"
-                                        type="url"
+                                        type="text"
                                         value={url}
-                                        onChange={(e) => setUrl(e.target.value)}
+                                        onChange={(e) => {
+                                            setUrl(e.target.value)
+                                        
+                                        
+                                        }}
                                     />
                                 </div>
                           
                                 <div className="nav-btn">
                                     <button className="btn-action btn-item" onClick={submitHandler}>اپلود</button>
-                                    <button className="btn-action btn-item" onClick={() => setImgSrc(url)}>پیش نمایش</button>
+                                    <button className="btn-action btn-item" onClick={() => setImgSrc(imgSrc)}>پیش نمایش</button>
                                 </div>
                             </div>
 
                             <div>
                                 <img
-                                    src={imgSrc ? imgSrc : `https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
+                                    src={url ? url : `https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
                                     className="blog-img"
                                     style={{ height: '31rem', width: "100%", objectFit: "cover" }}
                                     alt="" />

@@ -12,12 +12,14 @@ const PAGE_SIZE = 10;
 const Layout = () => {
     const [blogs, setBlogs] = useState([]);
     const [lastBlogs, setLastBlogs] = useState([]);
+    const [sliderBlogs, setSliderBlogs] = useState();
     const [loading, setLoading] = useState(false);
     const [postContent, setPostContent] = useState([]);
     const [page, setPage] = useState(1);
     const match = useParams();
 
     const categoryList = ["art", "tech", "game", "health", "life-style"];
+    const DAY=24 * 60 * 60 * 1000
 
     useEffect(() => {
 
@@ -29,7 +31,14 @@ const Layout = () => {
     }, []);
     useEffect(() => {
         getBlogData();
+        
+        getSliderBlog()
+        const interval=setInterval(getSliderBlog,DAY)
 
+        return()=>{
+
+            clearInterval(interval)
+        }
 
     }, [match]);
     const getBlogData = async () => {
@@ -123,6 +132,28 @@ const Layout = () => {
 
         }
     };
+    const getSliderBlog = async () => {
+        try {
+            let { data: blog, error } = await supabase
+                .from('blogs')
+                .select(`id,post_date,post_title,post_content
+                        ,post_author(
+                        firstName,
+                        lastName
+                        )`)
+
+                .order('post_date', { ascending: false })
+                .limit(1);
+
+            if (error) throw error;
+            if (blog.length > 0) {
+                setSliderBlogs(blog[0]);
+              }
+        } catch (err) {
+            console.log(err);
+
+        }
+    };
 
     return (
         <>
@@ -131,7 +162,7 @@ const Layout = () => {
 
 
             <div>
-                <Slider />
+                <Slider blog={sliderBlogs} />
                 <Category />
 
 

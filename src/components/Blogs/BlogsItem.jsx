@@ -142,8 +142,8 @@ const publicProfile=usePublicProfile
   return (
     <section className="blog-content" >
       {/* img */}
-      <div className="blog-content--img" dangerouslySetInnerHTML={{__html:props.img}}>
-      
+      <div className="blog-content--img" >
+      <img src={props.img} alt="" />
       </div>
       {/* info */}
       <div className="blog-content--info">

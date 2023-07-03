@@ -48,6 +48,7 @@ const Post = ({ session }) => {
         style: { fontFamily: "shabnam,sans-serif" }
     };
 
+  
 
     const match = useParams();
 
@@ -57,9 +58,8 @@ const Post = ({ session }) => {
     const publicProfile = usePublicProfile;
     useEffect(() => {
         Promise.all([
-            getUserIp(),
-            checkExistIp(),
-            setVisitor(ip),
+
+  
             getBlogData(),
             getSameBlogs(),
             getComments(),
@@ -75,39 +75,9 @@ const Post = ({ session }) => {
 
     }, [match, session, blogContent[0]?.post_title]);
 
-    const getUserIp = async () => {
-        const res = await axios.get("https://api.ipify.org/");
-        setIp(res.data);
-    };
-    const checkExistIp = async () => {
-        try {
-            const { data, error } = await supabase.from("visitor").select("*")
-                .eq("blog_id", match.id);
 
-            if (error) throw error;
-
-            setExistIp(data);
-        } catch (error) {
-
-        }
-    };
-    const filterExistIp = (ip) => {
-        return existIp?.filter((item) => item?.user_ip === ip);
-    };
-    const setVisitor = async (ip) => {
-        try {
-
-            if (!filterExistIp(ip)) {
-
-                const { err } = await supabase.from("visitor").insert({ blog_id: match?.id, user_ip: ip });
-
-                if (err) throw err;
-            }
-        } catch (error) {
-            console.log(error);
-
-        }
-    };
+ 
+   
 
     const getBlogData = async () => {
         try {
@@ -356,32 +326,7 @@ const Post = ({ session }) => {
     const getReplyComment = (commentId) => {
         return comment.filter((item) => item.parent_id === commentId);
     };
-    const filterPosts = (array) => {
-        let data = [];
-        let splicedImage = null;
-        const posts = array.map((item) => item?.post_content);
-        posts.forEach(blog => {
-            for (let value of blog) {
-                data.push(value.contentTag);
-
-
-            }
-        });
-
-        const imgIndex = data.findIndex((item) => item.includes("img"));
-
-        if (imgIndex === -1) return;
-        splicedImage = data.splice(imgIndex, 1);
-        setFirstImage(splicedImage);
-
-
-
-        setContent(data);
-
-
-
-
-    };
+ 
 
     const ScrollHandler = () => {
         const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -412,7 +357,8 @@ const Post = ({ session }) => {
 
                 <main className="blog-list blog-post">
 
-                    <div className="post-cover" dangerouslySetInnerHTML={{ __html: filterImage(blogContent[0]?.post_content) }}>
+                    <div className="post-cover">
+                        <img src={filterImage(blogContent[0]?.post_content)} alt="" />
 
                     </div>
                     {/* info */}

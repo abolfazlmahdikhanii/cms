@@ -23,7 +23,7 @@
 }
 
 .slider-info {
-   height: 27rem;
+    height: 27rem;
     display: flex;
     flex-direction: column;
 
@@ -64,7 +64,7 @@
     font-size: 1.3rem;
     position: relative;
     justify-content: flex-end;
-  
+
 }
 
 .slider-info--detail::before {
@@ -103,28 +103,59 @@
     background-color: #f3f4f6;
 
 }
+
 @media screen and (min-width:760px) {
     .slider-info__title {
-        font-size:3rem;
+        font-size: 3rem;
     }
 }
+
 @media screen and (min-width:900px) {
-    .slider-info{
-     height: 24rem;
+    .slider-info {
+        height: 24rem;
     }
 }
+
 @media screen and (min-width:1136px) {
     .slider {
         height: 50.3rem;
-        padding: .2rem 1.2rem;
-
+        padding: 0;
+  position: relative;
         flex-direction: row;
+        overflow: hidden;
+    }
+
+    .slider::before {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        left: 0;
+        width: 70%;
+        background: -webkit-gradient(linear, right top, left top, color-stop(0.35%, rgba(0, 0, 0, 0)), color-stop(53.68%, #000));
+        background: linear-gradient(-90deg, rgba(0, 0, 0, 0) .35%, #000 53.68%);
+    }
+    .slider::after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        left: 80%;
+        width: 20vw;
+        background: -webkit-gradient(linear,left top,right top,color-stop(0.35%,rgba(0,0,0,0)),color-stop(53.68%,#000));
+        background: linear-gradient(90deg,rgba(0,0,0,0) .35%,#000 53.68%);
     }
 
     .slider-img {
-        flex-basis: 60%;
+        flex-basis: 57%;
         height: 100%;
+
     }
+
     .slider-info__title {
         font-size: 4rem;
     }
@@ -135,22 +166,29 @@
         flex-basis: 40%;
         display: flex;
         flex-direction: column;
-
+z-index: 2;
         padding: 4rem 2.4rem;
     }
 
     .slider-info__dis {
-        display: block;
+        display: -webkit-box;
+        overflow: hidden;
+        line-clamp: 2;
+        -webkit-line-clamp: 3;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        ;
     }
+
     .slider-info--detail {
-       justify-content: unset;
-      
+        justify-content: unset;
+
     }
-    
+
     .slider-info--detail::before {
-    
+
         right: 0;
         left: unset;
-    
+
     }
 }

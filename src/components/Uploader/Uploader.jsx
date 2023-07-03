@@ -15,11 +15,11 @@ const Uploader=({url,size,onUpload,id})=>{
         console.log(path);
         
         try{
-            const {data,error}=await supabase.storage.from('uploads').download(path)
+            const {data,error}= supabase.storage.from('uploads').getPublicUrl(path)
             if(error) throw error
 
-            const url=URL.createObjectURL(data)
-            setBlogUrl(url)
+          
+            setBlogUrl(data.publicUrl)
         }
         catch (error) {
             console.log(error.message)

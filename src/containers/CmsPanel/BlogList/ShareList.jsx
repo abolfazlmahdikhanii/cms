@@ -30,6 +30,8 @@ const ShareList = ({ blogs,session,show }) => {
        
             {
                 blogs?.map((item) => {
+              
+                    
                     return (
 
                         <BlogCard

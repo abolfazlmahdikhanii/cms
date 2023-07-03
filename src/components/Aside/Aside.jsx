@@ -58,7 +58,8 @@ const Aside = ({ post, type }) => {
                         return (
                             <Link to={`article/@${post_author?.username}/${id}/${post_title.split(" ").join("-")}`} className="aside-item" key={id}>
 
-                                <div className="aside-item--img" dangerouslySetInnerHTML={{ __html: filterImg(post_content) }}>
+                                <div className="aside-item--img" >
+                                    <img src={ filterImg(post_content)} alt="" />
 
                                 </div>
                                 <div className="aside-item--title">

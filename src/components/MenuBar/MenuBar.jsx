@@ -83,6 +83,16 @@ const MenuBar = ({ changeHandler, editor }) => {
 
         },
     ];
+
+    const addImage = useCallback((url) => {
+      
+    console.log(url);
+    
+        if (url) {
+          editor.chain().focus().setImage({ src: url }).run()
+        }
+      }, [editor])
+    
     if (!editor) {
         return null;
     }
@@ -142,8 +152,11 @@ const MenuBar = ({ changeHandler, editor }) => {
                 close={() => setShowModal(false)}
                 url={imgSrc}
                 changeUrl={(url) => {
-                    setImgSrc(url);
-                    editor.chain().focus().setImage({ src: imgSrc }).run();
+                    setImgSrc(url)
+                    console.log(imgSrc);
+                    
+
+                    addImage(url)
 
                 }}
             />

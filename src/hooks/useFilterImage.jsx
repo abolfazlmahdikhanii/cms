@@ -8,8 +8,10 @@ const useFilterImage = (posts) => {
     
     if (imgElement) {
   
+
+      
         
-        return imgElement[0]
+        return imgElement[0]?.getAttribute("src")
         
     } else {
       return null;

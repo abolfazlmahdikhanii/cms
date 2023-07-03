@@ -60,7 +60,7 @@ const CreateBlog = (props) => {
     const editor = useEditor({
         extensions: [
             Image.configure({
-                inline: true,
+          
                 HTMLAttributes: {
                     class: 'post-img',
                   },

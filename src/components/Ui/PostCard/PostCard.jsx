@@ -2,9 +2,11 @@ import React from "react";
 import "./PostCard.css";
 import useFilterImage from "../../../hooks/useFilterImage"
 import useTranslatetorCategory from "../../../hooks/useTranslatetorCategory"
+import usePublicProfile from "../../../hooks/usePublicProfile";
 
-const PostCard = ({img,title,firstName,lastName,click,type=null,category}) => {
+const PostCard = ({img,title,firstName,lastName,click,type=null,category,avatar}) => {
     const filterImg=useFilterImage
+    const publicImage=usePublicProfile
     const translatorCategory=useTranslatetorCategory
     let icon = null;
     if (type === "fav") {
@@ -32,7 +34,9 @@ const PostCard = ({img,title,firstName,lastName,click,type=null,category}) => {
     return (
         <div className="post-card">
             <div className="post-card--img">
-                <div className="post-card--img__img" dangerouslySetInnerHTML={{__html:filterImg(img)}}></div>
+                <div className="post-card--img__img">
+                    <img src={filterImg(img)} alt="post_img" />
+                </div>
                 <div className="post-card--btn" style={!icon?{display:"none"}:{display:"grid"}} onClick={click}>
                     {icon}
                 </div>
@@ -41,7 +45,7 @@ const PostCard = ({img,title,firstName,lastName,click,type=null,category}) => {
                 <h3 className="post-card--dis__title">{title}</h3>
                 <div className="post-card--author">
                     <div className="detail-author--profile">
-                        <img src="../../../src/assets/profile.svg" alt="profile-icon" className="detail-author--profile__img" />
+                        <img src={publicImage(avatar)} alt="profile-icon" className="detail-author--profile__img" />
                         <p className="detail-author--profile__txt">{firstName} {lastName} </p>
                     </div>
                     <div className="blog-content--category__category">

@@ -3,7 +3,7 @@
     inset: 0;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 2
+    z-index: 10
 }
 
 .overlay {

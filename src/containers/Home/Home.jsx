@@ -85,8 +85,8 @@ const Home = ({ session }) => {
 
       <Routes>
         <Route path="/*" element={<Layout  />} />
-        <Route path="/category/:value" element={<Layout />} />
-        <Route path="/:username/" element={<UserPage session={session}/>} />
+        <Route path="/category/:value/" element={<Layout />} />
+        <Route path="/:username/*" element={<UserPage session={session}/>} />
       
       <Route path="/article/:username/:id/:title" element={<Post session={session} />} />
 

@@ -71,7 +71,7 @@ const Category = () => {
                     {
                         categorItem.map((item) => {
                             return (
-                                <NavLink className="category-box--item" replace  end  key={item.id} to={`/category/${item?.value === "last-news" ? "/category/" : item?.value}`}  activeclassname="active"
+                                <NavLink className="category-box--item" replace  end  key={item.id} to={`${item?.value !== "last-news" ? `/category/${item?.value}`:"/"}`}  activeclassname="active"
                                 data-color={item.bgItem}
                                 >
                                     <CategoryItem

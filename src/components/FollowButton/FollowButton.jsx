@@ -27,9 +27,11 @@ const FollowButton = ({ id, session, cls,type }) => {
     const followHandler = async (id) => {
 
         try {
+            if(id===session?.user?.id) return false
          
             const { err } = await supabase.from("follow_list")
-                .insert({ user_follow: id, user_follower: session?.user?.id });
+                .insert({ user_follow: id, user_follower: session?.user?.id })
+                
             if (err) throw err;
         } catch (error) {
           
@@ -81,6 +83,8 @@ const FollowButton = ({ id, session, cls,type }) => {
         <div>
             <button className={` btn-follow ${cls === "user-page" ? "btn-big" : ""} ${type === "full" ? "btn-medium" : ""} ${isFollow && "btn-followed"}`}
                 onClick={() => clickFollowHanlder(id)}
+
+                disabled={id===session?.user?.id}
             >{isFollow ? "دنبال نکردن" : "دنبال کردن"}</button>
         </div>
 

@@ -28,11 +28,13 @@ const UserPage = ({ session }) => {
   const publicProfile = usePublicProfile;
 
   useEffect(() => {
-    getUserAbout();
-    getUserBlogs();
-    getFollowerList(userData?.id);
-    getFollowingList(userData?.id);
-  }, [session, match, totalFllower, totalFllowing]);
+   Promise.all([
+    getUserAbout(),
+    getUserBlogs(),
+    getFollowerList(userData?.id),
+    getFollowingList(userData?.id),
+   ])
+  }, [session, totalFllower,]);
 
 
   const getUserAbout = async () => {

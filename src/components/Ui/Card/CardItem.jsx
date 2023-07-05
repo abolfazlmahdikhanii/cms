@@ -16,7 +16,7 @@ const CardItem=(props)=>{
                     {props.title} 
                 </p>
                 <p className="card-info__sub-title">
-                     {props.subTitle}
+                     {props.subTitle} 
                  </p>
             </div>
         </div>

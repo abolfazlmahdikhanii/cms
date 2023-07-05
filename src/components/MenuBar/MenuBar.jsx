@@ -86,10 +86,13 @@ const MenuBar = ({ changeHandler, editor }) => {
 
     const addImage = useCallback((url) => {
       
-    console.log(url);
+   
+        let src=null
     
         if (url) {
-          editor.chain().focus().setImage({ src: url }).run()
+
+           src= url.includes("http")||url.includes("https")?`${url}`:`https://ydvgwyanjxqhlluftkwh.supabase.co/storage/v1/object/public/uploads/${url}`
+          editor.chain().focus().setImage({ src: src }).run()
         }
       }, [editor])
     
@@ -153,9 +156,6 @@ const MenuBar = ({ changeHandler, editor }) => {
                 url={imgSrc}
                 changeUrl={(url) => {
                     setImgSrc(url)
-                    console.log(imgSrc);
-                    
-
                     addImage(url)
 
                 }}

@@ -7,38 +7,35 @@ import blogReject from "../../../assets/blogs-reject.svg";
 import star from "../../../assets/star.svg";
 
 
-const Cards = (props) => {
+const Cards = ({starTotal,draftTotal,shareTotal}) => {
 
     const info = [
         {
             icon: blogs,
             title: "مقالات منتشر شده",
-            subTitle: "20 مقاله",
+            subTitle: `${shareTotal} مقاله`,
             iconColor: "#3b82f6"
         },
         {
             icon: blogReject,
             title: "مقالات منتشر نشده",
-            subTitle: "20 مقاله",
+            subTitle: `${draftTotal} مقاله`,
             iconColor: "#ef4444"
         },
         {
             icon: star,
             title: "امتیازات",
-            subTitle: "10 ستاره",
+            subTitle: `${starTotal} ستاره`,
             iconColor: "#f59e0b"
         }
     ];
     return (
-
-
         <div className="cards">
             {
                 info.map((item, i) => {
                     return (
                         <Box key={i}>
                             <CardItem
-
                                 {...item}
                             />
                         </Box>

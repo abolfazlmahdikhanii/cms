@@ -13,7 +13,7 @@ const Loader = (props) => {
 
             <Backdrop show={props.show} />
 
-            <div className={`loader-box ${!props.show ? 'loader--hidden' : ''}`}>
+            <div className={`loader-box ${props.loaderUpload?"loader-upload":""} ${!props.show ? 'loader--hidden' : ''}`}>
                <div>
                <img src={logo} alt="" />
                </div>

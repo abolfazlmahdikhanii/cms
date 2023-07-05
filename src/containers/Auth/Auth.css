@@ -31,7 +31,7 @@
 font-size: 1.9rem;
 margin-top: 1.6rem;
 
-color: #fff;
+color: var(--h3);
 }
 .auth-form__form{
     display: flex;
@@ -46,12 +46,12 @@ color: #fff;
     gap: .7rem;
 }
 .auth-lbl{
-    color: #9ca3af;
+    color: var(--blog-dis);
     font-size: 1.4rem;
     margin-bottom: 1.4rem;
 }
 .inputField{
-    border: 1px solid #4b5563;
+    border: 1px solid var(--border-color);
     padding: 1.1rem 1.2rem;
     border-radius: .7rem;
 }
@@ -60,7 +60,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 font-size: 1.7rem;
-color: #d1d5db;
+color: var(--blog-dis);
 }
 @media screen and (min-width:900px) {
     .auth-box {
@@ -69,6 +69,6 @@ color: #d1d5db;
         border-radius: 1.2rem;
         width: 45%;
         max-width: 47rem;
-        border: 1px solid #334155;
+        border: 1px solid var(--border-color);
     }
 }

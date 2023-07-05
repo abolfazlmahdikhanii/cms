@@ -7,7 +7,7 @@
     right: 1rem;
 
 
-    z-index: 4;
+    z-index: 12;
     overflow: hidden;
     transition: all .1s ease-in;
     padding: 0 2rem;
@@ -38,6 +38,8 @@
     opacity: 1;
     overflow-y: scroll;
     scrollbar-width: none;
+    background-color: var(--bg-dark-tertiary);
+
 
 }
 

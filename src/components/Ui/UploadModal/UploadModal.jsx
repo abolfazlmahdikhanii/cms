@@ -12,12 +12,11 @@ const UploadModal = (props) => {
     const [height, setHeight] = useState("");
     const [tab, setTab] = useState('url');
 
-    useEffect(() => {
-        setImgSrc("");
-    }, [imgSrc]);
+
+  
 
     const submitHandler = () => {
-        props.changeUrl(url, width, height);
+        props.changeUrl(imgSrc||url, width, height);
         props.close()
     };
 
@@ -38,57 +37,63 @@ const UploadModal = (props) => {
                         </div>
                         <div className={`btn-item ${tab === 'file' ? 'tab-modal--active' : ''}`} onClick={() => {
                             setTab('file');
-                            setImgSrc("");
+                            
                         }}>
                             افزودن فایل
                         </div>
                     </div>
                     {/* image with url */}
                     <section className={`modal-upload--url ${tab === 'url' ? 'modal-upload--show' : ''}`}>
-                        <div className="modal-upload--url__row">
+                        <div className="">
                             <div className="modal-upload__form">
                                 <div className="form-control form-control--modal">
                                     <p className="form-control__txt">آدرس عکس</p>
                                     <input
                                         className="form-control__input"
                                         type="text"
-                                        value={url}
+                                        value={imgSrc}
                                         onChange={(e) => {
-                                            setUrl(e.target.value)
+                                            setImgSrc(e.target.value)
                                         
                                         
                                         }}
                                     />
                                 </div>
+                                <div>
+                             {
+                                imgSrc&&(
+                                    <img
+                                    src={imgSrc ? imgSrc : `https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
+                                    className="blog-img"
+                                    style={{ height: '20rem', width: "100%", objectFit: "cover" }}
+                                    alt="" />
+                                )
+                             }
+                            </div>
                           
-                                <div className="nav-btn">
+                            </div>
+                            <div className="nav-btn">
                                     <button className="btn-action btn-item" onClick={submitHandler}>اپلود</button>
                                     <button className="btn-action btn-item" onClick={() => setImgSrc(imgSrc)}>پیش نمایش</button>
                                 </div>
-                            </div>
-
-                            <div>
-                                <img
-                                    src={url ? url : `https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
-                                    className="blog-img"
-                                    style={{ height: '31rem', width: "100%", objectFit: "cover" }}
-                                    alt="" />
-                            </div>
+                           
+                           
                         </div>
 
                     </section>
                     {/* image with file */}
                     <section className={`modal-upload--url ${tab === 'file' ? 'modal-upload--show' : ''}`}>
-                        <div className="modal-upload--url__row-2">
+                        <div className="">
                      
 
-                            <div>
-                                <Uploader url={imgSrc} onUpload={(imgSrc) => setImgSrc(imgSrc)} />
-                                <div className="nav-btn">
-                                    <button className="btn-action btn-item" onClick={submitHandler}>اپلود</button>
+                            <div className="uploader-box">
+                                <Uploader url={url} onUpload={(url) => setUrl(url)} />
+                             
+                            </div>
+                            <div className="nav-btn">
+                                    <button className="btn-action btn-item" onClick={submitHandler}>ثبت تصویر</button>
 
                                 </div>
-                            </div>
                         </div>
 
                     </section>

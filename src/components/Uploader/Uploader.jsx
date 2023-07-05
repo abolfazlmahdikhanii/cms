@@ -1,18 +1,23 @@
 import React,{useState,useEffect} from "react";
 import {supabase} from "../../superbase.jsx";
 import Loader from "../Ui/Loader/Loader.jsx";
+import {AiOutlineCloudUpload} from "react-icons/ai"
 import "./Uploader.css"
 
 const Uploader=({url,size,onUpload,id})=>{
     const [blogUrl, setBlogUrl] = useState(null)
     const [uploading, setUploading] = useState(false)
+
+    
     useEffect(() => {
         if (url) downloadImage(url)
+
+    
     }, [url])
 
     const downloadImage=async (path)=>{
 
-        console.log(path);
+    
         
         try{
             const {data,error}= supabase.storage.from('uploads').getPublicUrl(path)
@@ -50,37 +55,50 @@ const Uploader=({url,size,onUpload,id})=>{
             onUpload(filePath)
             return filePath
         } catch (error) {
-            alert(error.message)
+            alert(error)
+            setUploading(false)
         } finally {
             setUploading(false)
         }
     }
     return(
-        <div style={{ width: "100%" }} className="file-upload">
+        <div  className="file-upload">
 
 
-            <img
-                src={blogUrl ? blogUrl : `https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
-                alt={blogUrl ? 'Avatar' : 'No image'}
-                className="blog-img"
-                style={{ height: size, width: "100%",objectFit:"cover" }}
-            />
+         
             {uploading ? (
-               <Loader show={uploading}/>
+               <Loader show={uploading} loaderUpload={true}/>
             ) : (
                 <>
 
-                <label className="file-upload__lbl" htmlFor={`single${id}`}>
+                <label className="file-upload__lbl" htmlFor={`single`} style={{border:blogUrl?"none":"4px dashed #6366f1"}}>
 
                         <input
                             className="file-upload__input"
                             type="file"
                             multiple
-                            id={`single${id}`}
+                            id={`single`}
                             accept="image/*"
                             onChange={(e)=>uploadBlogImg(e)}
                             disabled={uploading}
                         />
+
+                    <div className="file-upload--box" style={{display:blogUrl?"none":"flex"}}>
+        
+                    <AiOutlineCloudUpload size={115} color="#4f46e5"/>
+                    <p className="file-upload--box__txt">تصویر مورد نظر خود را آپلود کنید</p>
+                    </div>
+                    {
+            blogUrl&&(
+                <img
+                src={blogUrl ? blogUrl : `https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png`}
+                alt={blogUrl ? 'Avatar' : 'No image'}
+                className="blog-img"
+                style={{ width: "100%",objectFit:"cover" }}
+            />
+            )
+         }
+
                 </label>
                 </>
             )}

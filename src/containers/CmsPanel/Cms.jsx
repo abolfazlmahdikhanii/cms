@@ -169,7 +169,7 @@ const Cms = ({ session }) => {
                         </Alert>
 
                         <Routes>
-                            <Route path="/" element={<Dashboard />} />
+                            <Route path="/" element={<Dashboard  session={session}/>} />
                             <Route path="account" element={<Account key={session.user.id} session={session} />} />
                             <Route path="create-blog" element={<CreateBlog user={session} userName={userName} fullName={firstName + lastName} />} />
                             <Route path="edit/:id" element={<CreateBlog user={session} userName={userName} fullName={firstName + lastName} />} />

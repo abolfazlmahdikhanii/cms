@@ -36,6 +36,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+   
 }
 
 .modal-upload--show {
@@ -43,5 +44,10 @@
 }
 
 .tab-modal--active {
-    background-color: #6366f1;
+    background-color: #818cf8;
+    color: #fff;
+}
+
+.uploader-box{
+
 }

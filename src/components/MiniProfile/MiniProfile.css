@@ -47,12 +47,15 @@
     border-bottom: 1px solid var(--border-color);
 }
 
+
 .mini-profile__img {
     width: 3.2rem;
     height: 3.2rem;
     object-fit: cover;
     display: grid;
     place-items: center;
+
+    border-radius: 50%;
 }
 
 .mini-profile__account-info {

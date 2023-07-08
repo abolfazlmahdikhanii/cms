@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Avatar.css'
 import { supabase } from "../../superbase.jsx";
-import profileIcon from "../../assets/profile.svg";
+import profileIcon from "../../../src/assets/profile.svg";
 import usePublicProfile from "../../hooks/usePublicProfile";
 const Avatar = ({ url, size, onUpload }) => {
     const [avatarUrl, setAvatarUrl] = useState(null);

@@ -46,6 +46,7 @@
     font-size:2rem;
     color: var(--h3);
     width: 18rem;
+    display: flex;
 }
 
 @media screen and (min-width:740px) {

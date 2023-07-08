@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+
+
 import { toast } from 'react-toastify';
 import './Account.css';
 import { MdVerifiedUser } from "react-icons/md";
-import { DatePicker } from "zaman";
+
 import { supabase } from "../../../superbase.jsx";
 import Avatar from "../../../components/Avatar/Avatar.jsx";
 import UserContextProvider from "../../../context/User.jsx";
@@ -18,7 +20,7 @@ const Account = ({ session }) => {
     const [avatar_url, setAvatarUrl] = useState(null);
     const [bio, setBio] = useState("");
     const [gender, setGender] = useState("");
-    const [birthDay, setBirthDay] = useState("");
+    const [profession, setProfession] = useState("");
     const [errorFirstName, setErrorFirstName] = useState(false);
     const [errorlastName, setErrorLastName] = useState(false);
     const [errorUserName, setErrorUserName] = useState(false);
@@ -48,25 +50,26 @@ const Account = ({ session }) => {
 
             let { data, error, status } = await supabase
                 .from("profiles")
-                .select(`username,firstName,lastName,avatar_url,gender,bio,birthDay`)
+                .select(`username,firstName,lastName,avatar_url,gender,bio,profession`)
                 .eq('id', user.id)
                 .single();
-            if (error && status !== 406) {
+            if (error  && status !== 406 ) {
                 throw error;
             }
             if (data) {
 
-                setUsername(data.username);
-                setFirstName(data.firstName);
-                setLastName(data.lastName);
-                setAvatarUrl(data.avatar_url);
-                setGender(data.gender);
-                setBirthDay(data.birthDay);
-                setBio(data.bio);
+                setUsername(data?.username);
+                setFirstName(data?.firstName);
+                setLastName(data?.lastName);
+                setAvatarUrl(data?.avatar_url);
+                setGender(data?.gender);
+                setProfession(data?.profession);
+                setBio(data?.bio);
             }
         }
         catch (error) {
-            alert(error.message);
+       
+            toast.error("خطا در نمایش اطلاعات", toastOption);
         }
         finally {
             setLoading(false);
@@ -85,7 +88,7 @@ const Account = ({ session }) => {
                 firstName: firstName,
                 lastName: lastName,
                 gender: gender,
-                birthDay: birthDay,
+                profession: profession,
                 bio: bio,
                 avatar_url,
                 updated_at: new Date(),
@@ -155,7 +158,7 @@ const Account = ({ session }) => {
                                         onChange={(e) => {
                                             validInputHandler(e, setErrorFirstName);
                                             validInputPersianHandler(e, setErrorFirstName);
-                                            setFirstName(e.target.value);
+                                            setFirstName(e.target.value.trim());
                                         }}
                                     />
                                 </div>
@@ -171,7 +174,7 @@ const Account = ({ session }) => {
                                         onChange={(e) => {
                                             validInputHandler(e, setErrorLastName);
                                             validInputPersianHandler(e, setErrorLastName);
-                                            setLastName(e.target.value);
+                                            setLastName(e.target.value.trim());
                                         }}
                                     />
                                 </div>
@@ -187,7 +190,7 @@ const Account = ({ session }) => {
                                         <p
                                             className="form-control__input"
 
-                                        >{session.user.email}</p>
+                                        >{session.user.email.trim()}</p>
                                     </div>
                                     <MdVerifiedUser color="#16a34a" />
                                 </div>
@@ -206,7 +209,7 @@ const Account = ({ session }) => {
                                             onChange={(e) => {
                                                 validInputHandler(e, setErrorUserName);
 
-                                                setUsername(e.target.value);
+                                                setUsername(e.target.value.trim());
                                             }}
                                         />
                                     </div>
@@ -246,12 +249,13 @@ const Account = ({ session }) => {
                             </div>
                             <div>
                                 <div className="form-control">
-                                    <p className="form-control__txt">تاریخ تولد</p>
-                                    <DatePicker round="x2" accentColor="#4f46e5" locale="fa" onChange={(e) => {
-
-                                        setBirthDay(e.value);
-                                      
-                                    }} />
+                                    <p className="form-control__txt">تخصص</p>
+                                    <input
+                                        className="form-control__input"
+                                        type="text"
+                                        value={profession || ''}
+                                        onChange={(e) => setProfession(e.target.value.trim()) }
+                                    />
                                 </div>
                             </div>
 

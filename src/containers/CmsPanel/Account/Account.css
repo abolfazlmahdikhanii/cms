@@ -81,8 +81,12 @@
 
 .form-control__row--2 {
     direction: ltr;
+    width: 100%;
 }
-
+.form-control>input{
+    all: unset;
+    font: inherit;
+}
 .form-control__row-txt {
     font-size: 1.5rem;
     color: var(--blog-dis);
@@ -150,6 +154,26 @@
     .col-grid--2 {
 
         display: grid;
+        grid-template-columns: 1fr 30rem;
+     
+    }
+    
+    .col-grid--3 {
+ 
+        grid-template-columns: 30rem 1fr;
+      
+    }
+    .form-control__txt-area {
+        font-size: 1.6rem;
+    }
+}
+
+@media screen and (min-width:840px){
+  
+    
+    .col-grid--2 {
+
+        display: grid;
         grid-template-columns: 1fr 40rem;
      
     }
@@ -159,7 +183,5 @@
         grid-template-columns: 40rem 1fr;
       
     }
-    .form-control__txt-area {
-        font-size: 1.6rem;
-    }
+  
 }

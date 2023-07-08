@@ -185,7 +185,7 @@ const CreateBlog = (props) => {
 
             if (error) throw error;
             toast.success("پست شما با موفقیت ایجاد شد ", toastOption);
-            console.log(content);
+ 
             
             setContent("");
 

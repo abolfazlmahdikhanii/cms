@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react'
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-
+import { ToastContainer } from 'react-toastify';
 
 import './App.css'
 import Cms from "./containers/CmsPanel/Cms.jsx";
@@ -46,7 +46,7 @@ function App() {
          
           </Routes>
         </Router>
-     
+        <ToastContainer rtl={true} />
     </div>
   )
 }

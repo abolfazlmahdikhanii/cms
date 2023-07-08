@@ -28,8 +28,7 @@
     "react-responsive": "^9.0.2",
     "react-router-dom": "^6.8.1",
     "react-toastify": "^9.1.2",
-    "sanitize-html": "^2.10.0",
-    "zaman": "^2.0.1"
+    "sanitize-html": "^2.10.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

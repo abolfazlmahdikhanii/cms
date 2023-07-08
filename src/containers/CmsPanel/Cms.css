@@ -22,11 +22,13 @@
     display: none;
 }
 .username-holder{
-    display: inline-flex;
-    max-width: 14rem;
+
+    width: 10rem;
+
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    direction: ltr;
 }
 .cms-header--row{
     display: flex;

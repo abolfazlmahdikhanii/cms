@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ToastContainer } from 'react-toastify';
+
 import { BiMenuAltRight } from "react-icons/bi";
 import './Cms.css';
 import Wrapper from "../../hoc/Wrapper.jsx";
@@ -181,7 +181,7 @@ const Cms = ({ session }) => {
                 </section>
 
             </div>
-            <ToastContainer rtl={true} />
+            
         </Wrapper>
     );
 };

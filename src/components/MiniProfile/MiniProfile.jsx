@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 
 import { Link } from "react-router-dom";
 import "./MiniProfile.css";
-import profileIcon from "../../assets/profile.svg";
+import profileIcon from "../../../src/assets/profile.svg";
 import useSignOut from "../../hooks/useSignOut";
 import usePublicProfile from "../../hooks/usePublicProfile";
 import { supabase } from "../../superbase";
@@ -52,7 +52,7 @@ const MiniProfile = (props) => {
         <div className={`mini-profile-box ${props.show ? 'show-profile' : ''}`}>
             <div className="profile-item">
                 <Link to="/panel" className="mini-profile__account ">
-                    <div>
+                    <div >
                         <img src={publicProfile(userInfo?.avatar_url)} alt="profile" className="mini-profile__img" />
                     </div>
                     <div className="mini-profile__account-info">

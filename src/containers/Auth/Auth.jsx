@@ -3,7 +3,7 @@ import "./Auth.css";
 
 import Loader from "../../components/Ui/Loader/Loader.jsx";
 import { Link } from "react-router-dom";
-
+import { toast } from 'react-toastify';
 import { supabase } from "../../superbase.jsx";
 import FormLogin from "../../components/FormLogin/FormLogin";
 import FormOtp from "../../components/FormOtp/FormOtp";
@@ -24,7 +24,13 @@ const Auth = () => {
     const [page, setPage] = useState(false);
 
     const navigate = useNavigate();
-
+    const toastOption = {
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        theme: "colored",
+        style: { fontFamily: "shabnam,sans-serif" }
+    };
 
 
 
@@ -40,39 +46,26 @@ const Auth = () => {
             setLoading(true);
 
             const { data, error } = await supabase.auth.signInWithOtp({ email });
+    
+            
 
 
             if (error) throw error;
             changePageHandler();
-            console.log(data);
+      
 
         }
         catch (error) {
-            alert(error);
+            setLoading(false);
+            toast.error("ایمیل خود را به درستی وارد نمایید یا دقایقی دیگر مجدد اقدام کنید", toastOption);
+
 
         }
         finally {
             setLoading(false);
         }
     };
-    const checkEmailExist = async (emails) => {
-        try {
-            const { data, err } = supabase.from('profiles').select('(email)').eq('email', emails);
-            
 
-            console.log(data);
-            
-            if (err) throw err;
-            
-            
-          if(data) return true;
-
-        } catch (error) {
-            console.log(error);
-            return false;
-
-        }
-    };
     const submitOtpHandler = async (e) => {
         e.preventDefault();
 
@@ -92,30 +85,20 @@ const Auth = () => {
             setLoading(true);
 
 
-            
-   if(checkEmailExist(email)){  
+ 
+const { data, error } = await supabase.auth.verifyOtp({
+            email, token: newToken,type:"magiclink"
+        });
 
-            const { data, error } = await supabase.auth.verifyOtp({
-                email, token: newToken, type:'magiclink'
-            });
             if (error) throw error;
- }
- else if(!checkEmailExist(email)){
-    const { data, error } = await supabase.auth.verifyOtp({
-        email, token: newToken, type: 'signup'
-    });
-    if (error) throw error;
- }
-
-
-           
 
             navigate('/panel');
 
         }
         catch (error) {
 
-            console.log(error.message);
+            toast.error("کد یکبار مصرف اشتباه میباشد یا منقضی شده است ", toastOption);
+
 
 
         }

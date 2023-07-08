@@ -86,7 +86,7 @@ const Post = ({ session }) => {
             setLoading(true);
             let { data: blog, error } = await supabase
                 .from('blogs')
-                .select(`id,post_date,post_title,post_content,post_tags,post_comment,post_type
+                .select(`id,post_date,post_title,post_content,post_tags,post_comment,comment_status,post_type
                 ,post_author(
                     id,
                     firstName,
@@ -477,7 +477,10 @@ const Post = ({ session }) => {
                     <Box>
                         <div className="comment-title" id="comments">
                             <h3 className="comment-title__title">دیدگاه و پرسش</h3>
-                            <button className="btn-item btn-action btn-action--comment" onClick={() => setShowForm(true)}>
+                            <button className="btn-item btn-action btn-action--comment" 
+                            onClick={() => setShowForm(true)}
+                            disabled={!blogContent[0]?.comment_status}
+                            >
                                 افزودن دیدگاه و پرسش جدید
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" width={18} height={18}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />

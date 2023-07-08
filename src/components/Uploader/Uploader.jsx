@@ -3,11 +3,17 @@ import {supabase} from "../../superbase.jsx";
 import Loader from "../Ui/Loader/Loader.jsx";
 import {AiOutlineCloudUpload} from "react-icons/ai"
 import "./Uploader.css"
-
+import { toast } from 'react-toastify';
 const Uploader=({url,size,onUpload,id})=>{
     const [blogUrl, setBlogUrl] = useState(null)
     const [uploading, setUploading] = useState(false)
-
+    const toastOption = {
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: true,
+        theme: "colored",
+        style: { fontFamily: "shabnam,sans-serif" }
+    };
     
     useEffect(() => {
         if (url) downloadImage(url)
@@ -55,7 +61,8 @@ const Uploader=({url,size,onUpload,id})=>{
             onUpload(filePath)
             return filePath
         } catch (error) {
-            alert(error)
+            toast.error("آپلود عکس با مشکل مواجه شد ! دوباره امتحان کنید", toastOption);
+
             setUploading(false)
         } finally {
             setUploading(false)

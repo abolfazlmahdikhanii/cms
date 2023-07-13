@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./MiniProfile.css";
 import profileIcon from "../../../src/assets/profile.svg";
 import useSignOut from "../../hooks/useSignOut";
@@ -12,11 +12,18 @@ const MiniProfile = (props) => {
     const [userInfo,setUserInfo]=useState([])
   
     const publicProfile=usePublicProfile
-    const signOut=useSignOut
+
+    const navigate=useNavigate
+    
 
     useEffect(()=>{
        getUserInfo()
     },[props?.session])
+
+    const signOutHanlder=()=>{
+        supabase.auth.signOut()
+        navigate("/")
+    }
 
     const getUserInfo=async ()=>{
        
@@ -147,7 +154,7 @@ const MiniProfile = (props) => {
                     </Link>
                 </li>
                 <li className="profile-item">
-                    <div className="profile-item__link" onClick={()=>signOut()}>
+                    <div className="profile-item__link" onClick={signOutHanlder}>
                         <p className="mini-profile__svg">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
                                 <g id="vuesax_outline_task-square" data-name="vuesax/outline/task-square" transform="translate(-492 -316)">

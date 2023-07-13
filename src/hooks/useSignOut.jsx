@@ -6,7 +6,9 @@ const useSignOut=()=>{
 
     supabase.auth.signOut()
     const navigate=useRoutes()
+
     navigate.push('/')
+    location.reload()
 }
 
 export default useSignOut

@@ -16,7 +16,7 @@ const AuthorProfile = ({ avatar_url, username, firstName, lastName, bio, type = 
             <div className={`author-profile--info ${type === "full" ? "author-profile--3" : ""}`}>
                 <div>
                     <Link to={`/@${username}`} className={`author-prfile__fullName ${cls === "user-page" ? "user-info__name" : ""}`}>
-                        {`${firstName} ${lastName}`}
+                    {!username?`${firstName} ${lastName}`:username}
                     </Link>
                     <p className={`author-dis ${cls === "user-page" ? "user-info__user" : ""}`}>
                         {cls === "user-page" ? `@${username}` : bio}

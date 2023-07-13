@@ -5,7 +5,7 @@ import Wrapper from "../../../hoc/Wrapper";
 import Backdrop from "../../Ui/Backdrop/Backdrop";
 import FollowItem from "./FollowItem";
 
-const ModalFollow = ({ followes, show, activeTab, close, setActiveTab }) => {
+const ModalFollow = ({ followes, show, activeTab, close, setActiveTab,session }) => {
 
 
     return (
@@ -35,6 +35,7 @@ const ModalFollow = ({ followes, show, activeTab, close, setActiveTab }) => {
                                     < FollowItem
                                         key={id}
                                         {...item?.user_follower || item?.user_follow}
+                                        session={session}
                                     />
                                 );
                             })

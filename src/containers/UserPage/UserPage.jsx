@@ -16,8 +16,8 @@ const UserPage = ({ session }) => {
   const [userData, setUserData] = useState(null);
   const [userBlogs, setUserBlogs] = useState([]);
  
-  const [followList, setFollowList] = useState([]);
-  const [followingList, setFollowingList] = useState([]);
+  const [followList, setFollowList] = useState(null);
+  const [followingList, setFollowingList] = useState(null);
 
   const [activeTab, setActiveTab] = useState("follower");
   const [showModal, setShowModal] = useState(false);
@@ -27,13 +27,13 @@ const UserPage = ({ session }) => {
   const publicProfile = usePublicProfile;
 
   useEffect(() => {
-  
-    getUserAbout()
-    getUserBlogs()
     getFollowerList(userData?.id)
     getFollowingList(userData?.id)
+    getUserAbout()
+    getUserBlogs()
   
-  }, [session]);
+  
+  }, [session,match]);
 
 
   const getUserAbout = async () => {

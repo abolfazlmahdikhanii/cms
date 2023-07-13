@@ -8,6 +8,7 @@ import FollowItem from "./FollowItem";
 const ModalFollow = ({ followes, show, activeTab, close, setActiveTab,session }) => {
 
 
+
     return (
         <Wrapper>
 
@@ -34,7 +35,8 @@ const ModalFollow = ({ followes, show, activeTab, close, setActiveTab,session })
                                 return (
                                     < FollowItem
                                         key={id}
-                                        {...item?.user_follower || item?.user_follow}
+                                        {...item?.user_follower  }
+                                        {...item?.user_follow}
                                         session={session}
                                     />
                                 );

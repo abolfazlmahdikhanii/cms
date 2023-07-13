@@ -12,6 +12,21 @@ const FollowButton = ({ id, session, cls,type }) => {
 
     }, [session,isFollow,id]);
 
+    const checkExistUserName=async(id)=>{
+
+        try {
+ 
+            const {data,error}=await supabase.from("profiles").select("username").eq("id",id)
+            if(error) throw error
+            
+            if(data?.length<=0)return true
+            
+        }
+        catch(err){
+ console.log(err);
+ 
+        }
+    }
     // if author follow =>unfollow  else=>follow
     const clickFollowHanlder = (id) => {
 
@@ -27,7 +42,7 @@ const FollowButton = ({ id, session, cls,type }) => {
     const followHandler = async (id) => {
 
         try {
-            if(id===session?.user?.id) return false
+            if(id===session?.user?.id||!checkExistUserName(session?.user?.id)) return false
          
             const { err } = await supabase.from("follow_list")
                 .insert({ user_follow: id, user_follower: session?.user?.id })

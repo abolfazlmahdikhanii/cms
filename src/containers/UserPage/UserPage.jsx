@@ -198,6 +198,7 @@ const UserPage = ({ session }) => {
         setActiveTab={setActiveTab}
         show={showModal}
         close={() => setShowModal(false)}
+        session={session}
       />
     </div>
   );

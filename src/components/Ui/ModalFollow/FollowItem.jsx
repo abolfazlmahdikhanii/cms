@@ -1,24 +1,24 @@
 import React from "react";
 import "./FlowItem.css";
+import AuthorProfile from "../../AuthorProfile/AuthorProfile";
+import usePublicProfile from "../../../hooks/usePublicProfile";
 
-const FollowItem = ({ firstName, lastName,username }) => {
+const FollowItem = ({id, firstName, lastName,username ,avatar_url,session}) => {
+    const publicProfile=usePublicProfile
     return (
-        <div className="follow-item">
-            <div className="follow-item--row">
-                {/* img */}
-                <div className="follow-item--img">
-                    <img src="../../../../src/assets/profile.svg" alt="" className="author-profile--photo" />
-                </div>
-                {/* info */}
-                <div className="follow-info">
-                    <p className="follow-name">{firstName} {lastName}</p>
-                    <p className="follow-username">@{username}</p>
-                </div>
-            </div>
-
-
-            <button className="btn btn-follow btn-medium ">دنبال کردن</button>
-        </div>
+        < >
+                <AuthorProfile
+          
+          username={username}
+          session={session}
+          id={id}
+           avatar_url={publicProfile(avatar_url)}
+          firstName={firstName}
+          lastName={lastName}
+          type="full"
+          cls="user-page"
+        />
+        </>
     );
 };
 

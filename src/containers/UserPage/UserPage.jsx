@@ -18,8 +18,7 @@ const UserPage = ({ session }) => {
  
   const [followList, setFollowList] = useState([]);
   const [followingList, setFollowingList] = useState([]);
-  const [totalFllower, setTotalFollower] = useState(0);
-  const [totalFllowing, setTotalFollowing] = useState(0);
+
   const [activeTab, setActiveTab] = useState("follower");
   const [showModal, setShowModal] = useState(false);
 
@@ -28,13 +27,13 @@ const UserPage = ({ session }) => {
   const publicProfile = usePublicProfile;
 
   useEffect(() => {
-   Promise.all([
-    getUserAbout(),
-    getUserBlogs(),
-    getFollowerList(userData?.id),
-    getFollowingList(userData?.id),
-   ])
-  }, [session, totalFllower,]);
+  
+    getUserAbout()
+    getUserBlogs()
+    getFollowerList(userData?.id)
+    getFollowingList(userData?.id)
+  
+  }, [session]);
 
 
   const getUserAbout = async () => {
@@ -100,7 +99,7 @@ const UserPage = ({ session }) => {
 
       if (err) throw err;
       setFollowList(data);
-      setTotalFollower(data?.length);
+
     }
     catch (err) {
       ;
@@ -124,7 +123,7 @@ const UserPage = ({ session }) => {
 
       if (err) throw err;
       setFollowingList(data);
-      setTotalFollowing(data?.length);
+      
     }
     catch (err) {
 
@@ -168,16 +167,16 @@ const UserPage = ({ session }) => {
         <section className="activity-info">
           <div className="follower-row">
             <p className="follower" onClick={() => {
-              setShowModal(true);
+              setShowModal(followList?.length>0?true:false);
               setActiveTab("follower");
             }}>
-              <span className="follow-num">{totalFllower}</span> دنبال کننده</p>
+              <span className="follow-num">{followList?followList?.length:0}</span> دنبال کننده</p>
             <p className="follower"
               onClick={() => {
-                setShowModal(true);
+                setShowModal(followingList?.length>0?true:false);
                 setActiveTab("following");
               }}
-            ><span className="follow-num">{totalFllowing}</span> دنبال شده</p>
+            ><span className="follow-num">{followingList?followingList?.length:0}</span> دنبال شده</p>
           </div>
 
         </section>

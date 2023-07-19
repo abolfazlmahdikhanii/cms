@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useRoutes } from "react-router-dom";
 import "./MiniProfile.css";
 import profileIcon from "../../../src/assets/profile.svg";
 import useSignOut from "../../hooks/useSignOut";
@@ -13,7 +13,7 @@ const MiniProfile = (props) => {
   
     const publicProfile=usePublicProfile
 
-    const navigate=useNavigate
+    const navigate=useRoutes
     
 
     useEffect(()=>{
@@ -22,7 +22,7 @@ const MiniProfile = (props) => {
 
     const signOutHanlder=()=>{
         supabase.auth.signOut()
-        navigate("/")
+        navigate.push("/")
     }
 
     const getUserInfo=async ()=>{

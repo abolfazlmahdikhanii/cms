@@ -18,11 +18,11 @@ const AlertDialog = ({id,close,session,show}) => {
          style:{fontFamily:"shabnam,sans-serif"}
     }
     
-//    useEffect(()=>{
+   useEffect(()=>{
 
 
-// setBlogId(id)
-//    },[id,blogId])
+setBlogId(id)
+   },[id,blogId])
     
     const removeBlogHandler=async(id)=>{
         try{

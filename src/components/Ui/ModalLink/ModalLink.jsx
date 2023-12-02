@@ -21,7 +21,7 @@ function ModalLink({ show, close, setUrl, url ,click}) {
                     <div className="form-control form-control--modal">
                         <p className="form-control__txt">لینک</p>
                         <input
-                            className="form-control__input"
+                            className="form-control__input form-control__link"
                             type="text"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}

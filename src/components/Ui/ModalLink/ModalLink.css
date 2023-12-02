@@ -15,3 +15,10 @@
     opacity: 0;
     transform: translate(-50%, -50%) scale(0);
 }
+
+@media (prefers-color-scheme: light) {
+    .form-control__input,.form-control__input ,.form-control__link{
+        color:var(--date-txt)!important
+    }
+
+}

@@ -108,7 +108,7 @@ const MenuBar = ({ changeHandler, editor }) => {
         }
     
         // empty
-        if (url === '') {
+        if (url == '') {
           editor.chain().focus().extendMarkRange('link').unsetLink()
             .run()
     
